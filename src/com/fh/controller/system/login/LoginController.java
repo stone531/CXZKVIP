@@ -278,6 +278,113 @@ public class LoginController extends BaseController {
 		mv.addObject("pd",pd);
 		return mv;
 	}
+	/**访问系统首页
+	 * @param changeMenu：切换菜单参数
+	 * @return
+	 */
+	@RequestMapping(value="/mains/{changeMenu}")
+	@SuppressWarnings("unchecked")
+	public ModelAndView logins_index(@PathVariable("changeMenu") String changeMenu){
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		try{
+			Session session = Jurisdiction.getSession();
+			User user = (User)session.getAttribute(Const.SESSION_USER);				//读取session中的用户信息(单独用户信息)
+			if (user != null) {
+				User userr = (User)session.getAttribute(Const.SESSION_USERROL);		//读取session中的用户信息(含角色信息)
+				if(null == userr){
+					user = userService.getUserAndRoleById(user.getUSER_ID());		//通过用户ID读取用户信息和角色信息
+					session.setAttribute(Const.SESSION_USERROL, user);				//存入session	
+				}else{
+					user = userr;
+				}
+				String USERNAME = user.getUSERNAME();
+				//Role role = user.getRole();
+				//获取用户角色
+				Role role = roleService.getRoleById(user.getRole().getROLE_ID());
+				/*********************************START  角色菜单赋权********************************/
+				String roleRights = role!=null ? role.getRIGHTS() : "";				//角色权限(菜单权限)
+				session.setAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS, roleRights); //将角色权限存入session
+				session.setAttribute(Const.SESSION_USERNAME, USERNAME);				//放入用户名到session
+				List<Menu> allmenuList = new ArrayList<Menu>();
+				if(null == session.getAttribute(USERNAME + Const.SESSION_allmenuList)){	
+					allmenuList = menuService.listAllMenuQx("0");					//获取所有菜单
+					if(Tools.notEmpty(roleRights)){
+						allmenuList = this.readMenu(allmenuList, roleRights);		//根据角色权限获取本权限的菜单列表
+					}
+					session.setAttribute(USERNAME + Const.SESSION_allmenuList, allmenuList);//菜单权限放入session中
+				}else{
+					allmenuList = (List<Menu>)session.getAttribute(USERNAME + Const.SESSION_allmenuList);
+				}
+				
+				/********************************* END   角色菜单赋权********************************/
+				/*********************************START  角色组织机构赋权********************************/
+				String roleDepRights = role!=null ? role.getDEPRIGHTS() : "";				//角色权限(菜单权限)
+				session.setAttribute(USERNAME + Const.SESSION_ROLE_DEPRIGHTS, roleDepRights); //将角色权限存入session
+				List<Department> allDepList = new ArrayList<Department>();
+				System.out.println(((User)session.getAttribute(Const.SESSION_USER)).getDepartment_id());
+				Department dep=departmentService.findDepById(((User)session.getAttribute(Const.SESSION_USER)).getDepartment_id());
+				allDepList.add(dep);
+				if(null == session.getAttribute(USERNAME + Const.SESSION_allDepList)){	
+					allDepList = departmentService.listAllDepartment("0");					//获取所有组织机构
+					if(Tools.notEmpty(roleDepRights)){
+						allDepList = this.readDep(allDepList, roleDepRights);		//根据角色权限获取本权限的菜单列表
+					}
+					session.setAttribute(USERNAME + Const.SESSION_allDepList, allDepList);//菜单权限放入session中
+				}else{
+					allDepList = (List<Department>) session.getAttribute(USERNAME + Const.SESSION_allDepList);
+				}
+				
+				/********************************* END   角色组织机构赋权********************************/
+				//切换菜单处理=====start
+				List<Menu> menuList = new ArrayList<Menu>();
+				if(null == session.getAttribute(USERNAME + Const.SESSION_menuList) || ("yes".equals(changeMenu))){
+					List<Menu> menuList1 = new ArrayList<Menu>();
+					List<Menu> menuList2 = new ArrayList<Menu>();
+					//拆分菜单
+					for(int i=0;i<allmenuList.size();i++){
+						Menu menu = allmenuList.get(i);
+						if("1".equals(menu.getMENU_TYPE())){
+							menuList1.add(menu);
+						}else{
+							menuList2.add(menu);
+						}
+					}
+					session.removeAttribute(USERNAME + Const.SESSION_menuList);
+					if("2".equals(session.getAttribute("changeMenu"))){
+						session.setAttribute(USERNAME + Const.SESSION_menuList, menuList1);
+						session.removeAttribute("changeMenu");
+						session.setAttribute("changeMenu", "1");
+						menuList = menuList1;
+					}else{
+						session.setAttribute(USERNAME + Const.SESSION_menuList, menuList2);
+						session.removeAttribute("changeMenu");
+						session.setAttribute("changeMenu", "2");
+						menuList = menuList2;
+					}
+				}else{
+					menuList = (List<Menu>)session.getAttribute(USERNAME + Const.SESSION_menuList);
+				}
+				//切换菜单处理=====end
+				if(null == session.getAttribute(USERNAME + Const.SESSION_QX)){
+					session.setAttribute(USERNAME + Const.SESSION_QX, this.getUQX(USERNAME));	//按钮权限放到session中
+				}
+				this.getRemortIP(USERNAME);	//更新登录IP
+				mv.setViewName("system/index/main");
+				mv.addObject("user", user);
+				mv.addObject("menuList", menuList);
+			}else {
+				mv.setViewName("system/index/login");//session失效后跳转登录页面
+			}
+		} catch(Exception e){
+			mv.setViewName("system/index/login");
+			logger.error(e.getMessage(), e);
+		}
+		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //读取系统名称
+		mv.addObject("pd",pd);
+		return mv;
+	}
 	
 	/**根据角色权限获取本权限的菜单列表(递归处理)
 	 * @param menuList：传入的总菜单
