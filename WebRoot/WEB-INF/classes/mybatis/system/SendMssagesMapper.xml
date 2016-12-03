@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SendMssagesMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		SYS_SENDMSSAGES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		USERNAME, 	
+		PHONE,	
+		MESSAGE,	
+		STARTTIME,	
+		ORDERNO,	
+		ISOK,	
+		OTHER,	
+		ISSEND,	
+		ERRORNOTE,	
+		SENDMSSAGES_ID
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{USERNAME},	
+		#{PHONE},	
+		#{MESSAGE},	
+		#{STARTTIME},	
+		#{ORDERNO},	
+		#{ISOK},	
+		#{OTHER},	
+		#{ISSEND},	
+		#{ERRORNOTE},	
+		#{SENDMSSAGES_ID}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	<!-- 新增集合 -->
+	<insert id="saveListPd" parameterType="java.util.List">
+	insert into 
+	<include refid="tableName"></include>
+		(
+		USERNAME, 	
+		PHONE,	
+		MESSAGE,	
+		STARTTIME,	
+		ORDERNO,	
+		ISOK,	
+		OTHER,	
+		ISSEND,	
+		ERRORNOTE
+		) values
+	 <foreach item="obj" index="index" collection="list" separator="," >
+		(
+		'${obj.USERNAME}',	
+		'${obj.PHONE}',
+		'${obj.MESSAGE}',
+		'${obj.STARTTIME}',
+		'${obj.ORDERNO}',
+		'${obj.ISOK}',
+		'${obj.OTHER}',
+		'${obj.ISSEND}',
+		'${obj.ERRORNOTE}'
+		)
+	</foreach>
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			SENDMSSAGES_ID = #{SENDMSSAGES_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			USERNAME = #{USERNAME},
+			PHONE = #{PHONE},
+			MESSAGE = #{MESSAGE},
+			STARTTIME = #{STARTTIME},
+			ORDERNO = #{ORDERNO},
+			ISOK = #{ISOK},
+			OTHER = #{OTHER},
+			ISSEND = #{ISSEND},
+			ERRORNOTE = #{ERRORNOTE},
+		SENDMSSAGES_ID = SENDMSSAGES_ID
+		where 
+		SENDMSSAGES_ID = #{SENDMSSAGES_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where 
+			SENDMSSAGES_ID = #{SENDMSSAGES_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where 1=1
+		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+			and
+				(
+				PHONE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+				   or 
+				   MESSAGE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			SENDMSSAGES_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>
