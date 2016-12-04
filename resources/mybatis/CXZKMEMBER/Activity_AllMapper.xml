@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Activity_AllMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		MEMBER_ACTIVITY_ALL
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		MAA_NAME,	
+		MAA_TYPE_ID,	
+		MAA_BEGINNING_DATE,	
+		MAA_END_DATE,	
+		MAA_CHARGE_ID,	
+		HOPE_CUSTOMERS_COUNT,	
+		HOPE_COST_AMOUNT,	
+		ACTUAL_COST_AMOUNT,	
+		MAA_ADDRESS,	
+		MAA_DESC,	
+		MAA_STATUS,	
+		COA_ORG_ID,	
+		CREATION_DATE,	
+		CREATED_BY,	
+		LAST_UPDATE_DATE,	
+		LAST_UPDATED_BY,	
+		EXECUTE_ORG_ID,	
+		EXECUTE_DEPT_ID,	
+		SIGN_UP_DATE,	
+		REC_AMOUNT,	
+		MAA_CODE,	
+		TEACHER_ID,	
+		COMBO_ID,	
+		MAA_TYPE_FLAG,	
+		ACTIVITY_ALL_ID
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{MAA_NAME},	
+		#{MAA_TYPE_ID},	
+		#{MAA_BEGINNING_DATE},	
+		#{MAA_END_DATE},	
+		#{MAA_CHARGE_ID},	
+		#{HOPE_CUSTOMERS_COUNT},	
+		#{HOPE_COST_AMOUNT},	
+		#{ACTUAL_COST_AMOUNT},	
+		#{MAA_ADDRESS},	
+		#{MAA_DESC},	
+		#{MAA_STATUS},	
+		#{COA_ORG_ID},	
+		#{CREATION_DATE},	
+		#{CREATED_BY},	
+		#{LAST_UPDATE_DATE},	
+		#{LAST_UPDATED_BY},	
+		#{EXECUTE_ORG_ID},	
+		#{EXECUTE_DEPT_ID},	
+		#{SIGN_UP_DATE},	
+		#{REC_AMOUNT},	
+		#{MAA_CODE},	
+		#{TEACHER_ID},	
+		#{COMBO_ID},	
+		#{MAA_TYPE_FLAG},	
+		#{ACTIVITY_ALL_ID}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			ACTIVITY_ALL_ID = #{ACTIVITY_ALL_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			MAA_NAME = #{MAA_NAME},
+			MAA_TYPE_ID = #{MAA_TYPE_ID},
+			MAA_BEGINNING_DATE = #{MAA_BEGINNING_DATE},
+			MAA_END_DATE = #{MAA_END_DATE},
+			MAA_CHARGE_ID = #{MAA_CHARGE_ID},
+			HOPE_CUSTOMERS_COUNT = #{HOPE_CUSTOMERS_COUNT},
+			HOPE_COST_AMOUNT = #{HOPE_COST_AMOUNT},
+			ACTUAL_COST_AMOUNT = #{ACTUAL_COST_AMOUNT},
+			MAA_ADDRESS = #{MAA_ADDRESS},
+			MAA_DESC = #{MAA_DESC},
+			MAA_STATUS = #{MAA_STATUS},
+			COA_ORG_ID = #{COA_ORG_ID},
+			CREATION_DATE = #{CREATION_DATE},
+			CREATED_BY = #{CREATED_BY},
+			LAST_UPDATE_DATE = #{LAST_UPDATE_DATE},
+			LAST_UPDATED_BY = #{LAST_UPDATED_BY},
+			EXECUTE_ORG_ID = #{EXECUTE_ORG_ID},
+			EXECUTE_DEPT_ID = #{EXECUTE_DEPT_ID},
+			SIGN_UP_DATE = #{SIGN_UP_DATE},
+			REC_AMOUNT = #{REC_AMOUNT},
+			MAA_CODE = #{MAA_CODE},
+			TEACHER_ID = #{TEACHER_ID},
+			COMBO_ID = #{COMBO_ID},
+			MAA_TYPE_FLAG = #{MAA_TYPE_FLAG},
+		ACTIVITY_ALL_ID = ACTIVITY_ALL_ID
+		where 
+		ACTIVITY_ALL_ID = #{ACTIVITY_ALL_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where 
+			ACTIVITY_ALL_ID = #{ACTIVITY_ALL_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		MAA_NAME,	
+		MAA_TYPE_ID,	
+		MAA_BEGINNING_DATE,	
+		MAA_END_DATE,	
+		MAA_CHARGE_ID,	
+		HOPE_CUSTOMERS_COUNT,	
+		HOPE_COST_AMOUNT,	
+		ACTUAL_COST_AMOUNT,	
+		MAA_ADDRESS,	
+		MAA_DESC,	
+		MAA_STATUS,	
+		COA_ORG_ID,	
+		CREATION_DATE,	
+		CREATED_BY,	
+		LAST_UPDATE_DATE,	
+		LAST_UPDATED_BY,	
+		EXECUTE_ORG_ID,	
+		EXECUTE_DEPT_ID,	
+		SIGN_UP_DATE,	
+		REC_AMOUNT,	
+		MAA_CODE,	
+		TEACHER_ID,	
+		COMBO_ID,	
+		MAA_TYPE_FLAG,	
+		ACTIVITY_ALL_ID,
+		d.NAME as COA_ORG_ID_NAME,
+		t.NAME as EXECUTE_DEPT_ID_NAME,
+		s.USERNAME as MAA_CHARGE_ID_NAME,
+		u.USERNAME as TEACHER_ID_NAME
+		from 
+		MEMBER_ACTIVITY_ALL m,sys_department d,
+		sys_department t,sys_user s,sys_user u
+		where 1=1
+		and d.DEPARTMENT_ID=m.COA_ORG_ID
+		and t.DEPARTMENT_ID=m.EXECUTE_DEPT_ID
+		and s.USER_ID=MAA_CHARGE_ID
+		and u.USER_ID=TEACHER_ID
+		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+			and
+				(
+				MAA_NAME like CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				)
+		</if>
+		<if test="pd.lastLoginStart!=null and pd.lastLoginStart!=''"><!-- 登录时间检索 -->
+			and CREATION_DATE &gt;= #{pd.lastLoginStart} 
+		</if>
+		<if test="pd.lastLoginEnd!=null and pd.lastLoginEnd!=''"><!-- 时间检索 -->
+			and CREATION_DATE &lt;= #{pd.lastLoginEnd} 
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			ACTIVITY_ALL_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>
