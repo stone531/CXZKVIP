@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v8.32 
-MySQL - 5.6.24 : Database - cxzkvip
+SQLyog Ultimate v12.09 (64 bit)
+MySQL - 5.1.73-community : Database - cxzkvip
 *********************************************************************
 */
 
@@ -12,6 +12,8 @@ MySQL - 5.6.24 : Database - cxzkvip
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`cxzkvip` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
 USE `cxzkvip`;
 
 /*Table structure for table `ins_business` */
@@ -163,7 +165,7 @@ CREATE TABLE `ins_onlinemsg` (
 
 /*Data for the table `ins_onlinemsg` */
 
-insert  into `ins_onlinemsg`(`ONLINEMSG_ID`,`USERNAME`,`CLIENTMSG`,`CLIENTWRITETIME`,`OPERATIONADMIN`,`REPLYMSG`,`REPLYTIEM`) values ('0a3a2dd94e34497fa0a25b8cff6a83dc','haozi88','xiao tian shi sx','2016-12-03 16:54:41','1111','3333333333333333','2016-08-11'),('1','admin','aaaaaaaaaa','2016-11-27 ','admin1','ok1','2016-11-27'),('1cd36c26e17540d69f00d392b11441df','haozi88','aaaa','2016-08-01 20:10:40',NULL,NULL,NULL),('1ef6553b4093426b91d0ad9693be575d','haozi88','xiaotian sb','2016-08-01 21:31:40',NULL,NULL,NULL),('312a2a69c3fe4564a5d56152e46c879b','haozi88','111','2016-08-01 20:08:37',NULL,NULL,NULL),('722c1881cba94122b2650455eac3856a','haozi','hello wold','2016-12-03 00:49:56','tiandiao','11111111111111111112222222222222','2016-12-03 00:49:56'),('7487257aabd341388f86db63c1dd62b0','haozi88','11','2016-08-01 20:09:34',NULL,NULL,NULL),('8a8921d09380455b8096f6434c1d7f0d','haozi88','xiao tian shi sx','2016-12-03 16:54:15',NULL,NULL,NULL),('9b6eb2a7aa4b40b38a020ce3097e1a63','haozi','hello wold','2016-11-27 22:23:32','tiandiao','i like it','2016-11-27 22:23:32'),('b8a2b5476f1d493d812d66fa41e8a2e1','haozi88','111','2016-08-01 20:08:45',NULL,NULL,NULL),('cf9161e7712942d2ace087a4e406cf89','haozi','aaaaaaaaaaaa','2016-11-26 16:18:05','11','55555555555555','2016-12-28'),('d66f08b74bdb43a6bc3057209156d7e8','haozi88','aaaaaaaaaaa','2016-08-01 21:55:33',NULL,NULL,NULL),('e1f87a5c2d444ce2bb0cdf744ad658a6','haozi1','hello wold','2016-12-02','123','32','2016-12-24'),('fafac07eb52c4126b1165e10d157eaf8','haozi88','1121321321321sadasd asdsa ','2016-08-01 20:09:45',NULL,NULL,NULL);
+insert  into `ins_onlinemsg`(`ONLINEMSG_ID`,`USERNAME`,`CLIENTMSG`,`CLIENTWRITETIME`,`OPERATIONADMIN`,`REPLYMSG`,`REPLYTIEM`) values ('4c48d95e9a8542b4824fc8a60b7254ce','15600199768','hello abc','2016-12-04 17:01:09','admin','ok  good','2016-12-04 20:01:09');
 
 /*Table structure for table `ins_policy` */
 
@@ -608,7 +610,7 @@ CREATE TABLE `sys_user` (
 
 /*Data for the table `sys_user` */
 
-insert  into `sys_user`(`USER_ID`,`USERNAME`,`PASSWORD`,`NAME`,`RIGHTS`,`ROLE_ID`,`LAST_LOGIN`,`IP`,`STATUS`,`BZ`,`SKIN`,`EMAIL`,`NUMBER`,`PHONE`,`BIANMA`,`DEPARTMENT_ID`,`SEX`) values ('1','admin','de41b7fb99201d8334c23c014db35ecd92df81bc','系统管理员','1133671055321055258374707980945218933803269864762743594642571294','1','2016-08-01 21:54:40','127.0.0.1','0','最高统治者','default','QQ313596790@main.com','001','18788888888','fe2567a984b64c838d7313a212e38019','1','WOMAN'),('56d38e4d5e2a4b6993c335fb0a951f45','666666','6ca0a12ed48583f5fc36395510083dce834208a9','周六','','68f8e4a39efe47c7bb869e9d15ab925d','','','0','66666','default','6666@qq.com','666666','18666666666','fe2567a984b64c838d7313a212e38019','2','WOMAN'),('69177258a06e4927b4639ab1684c3320','san','f05ddcd5039c1445bc786e9c1ead8fe86b5f19b4','三','','3264c8e83d0248bb9e3ea6195b4c0216','2016-04-20 13:01:51','127.0.0.1','0','111','default','978336446@qq.com','333','13562202556','fe2567a984b64c838d7313a212e38019','3','WOMAN'),('9991f4d7782a4ccfb8a65bd96ea7aafa','lisi','2612ade71c1e48cd7150b5f4df152faa699cedfe','李四','','3264c8e83d0248bb9e3ea6195b4c0216','2015-07-06 14:43:15','0:0:0:0:0:0:0:1','0','小李','default','313596790@qq.com','1102','13566233663','fe2567a984b64c838d7313a212e38019','4','WOMANWOMAN'),('cb3bbb01b1e644e4a37cf51ec2e522f2','55555','106307afa17dfdd3cfa3c3595fe0a91d0faa6f28','王五1','','68f8e4a39efe47c7bb869e9d15ab925d','2015-07-06 16:53:51','0:0:0:0:0:0:0:1','0','22222233','default','8118888@qq.com','55555','18888888811','1a02c8a6357f473aa1ac74ffa13255bf','5','WOMAN'),('e29149962e944589bb7da23ad18ddeed','zhangsan','f1665429dbb3e6c2af7a461a4f547b82ee9ab233','张三','','3264c8e83d0248bb9e3ea6195b4c0216','2015-07-06 14:12:22','0:0:0:0:0:0:0:1','0','小张','default','zhangsan@www.com','zhangsan','15210670229','6161843112fc4b14b4698dd62b0becc2','','MAN');
+insert  into `sys_user`(`USER_ID`,`USERNAME`,`PASSWORD`,`NAME`,`RIGHTS`,`ROLE_ID`,`LAST_LOGIN`,`IP`,`STATUS`,`BZ`,`SKIN`,`EMAIL`,`NUMBER`,`PHONE`,`BIANMA`,`DEPARTMENT_ID`,`SEX`) values ('1','admin','de41b7fb99201d8334c23c014db35ecd92df81bc','系统管理员','1133671055321055258374707980945218933803269864762743594642571294','1','2016-12-04 17:42:39','127.0.0.1','0','最高统治者','default','QQ313596790@main.com','001','18788888888','fe2567a984b64c838d7313a212e38019','1','WOMAN'),('56d38e4d5e2a4b6993c335fb0a951f45','666666','6ca0a12ed48583f5fc36395510083dce834208a9','周六','','68f8e4a39efe47c7bb869e9d15ab925d','','','0','66666','default','6666@qq.com','666666','18666666666','fe2567a984b64c838d7313a212e38019','2','WOMAN'),('69177258a06e4927b4639ab1684c3320','san','f05ddcd5039c1445bc786e9c1ead8fe86b5f19b4','三','','3264c8e83d0248bb9e3ea6195b4c0216','2016-04-20 13:01:51','127.0.0.1','0','111','default','978336446@qq.com','333','13562202556','fe2567a984b64c838d7313a212e38019','3','WOMAN'),('9991f4d7782a4ccfb8a65bd96ea7aafa','lisi','2612ade71c1e48cd7150b5f4df152faa699cedfe','李四','','3264c8e83d0248bb9e3ea6195b4c0216','2015-07-06 14:43:15','0:0:0:0:0:0:0:1','0','小李','default','313596790@qq.com','1102','13566233663','fe2567a984b64c838d7313a212e38019','4','WOMANWOMAN'),('cb3bbb01b1e644e4a37cf51ec2e522f2','55555','106307afa17dfdd3cfa3c3595fe0a91d0faa6f28','王五1','','68f8e4a39efe47c7bb869e9d15ab925d','2015-07-06 16:53:51','0:0:0:0:0:0:0:1','0','22222233','default','8118888@qq.com','55555','18888888811','1a02c8a6357f473aa1ac74ffa13255bf','5','WOMAN'),('e29149962e944589bb7da23ad18ddeed','zhangsan','f1665429dbb3e6c2af7a461a4f547b82ee9ab233','张三','','3264c8e83d0248bb9e3ea6195b4c0216','2015-07-06 14:12:22','0:0:0:0:0:0:0:1','0','小张','default','zhangsan@www.com','zhangsan','15210670229','6161843112fc4b14b4698dd62b0becc2','','MAN');
 
 /*Table structure for table `tb_pictures` */
 
