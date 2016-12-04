@@ -53,7 +53,7 @@ public interface OnlineMsgManager{
 	 * @param pd
 	 * @throws Exception
 	 */
-	public PageData findByReplyMsg(PageData pd)throws Exception;
+	public PageData findByUserName(PageData pd)throws Exception;
 	
 	
 	/**批量删除

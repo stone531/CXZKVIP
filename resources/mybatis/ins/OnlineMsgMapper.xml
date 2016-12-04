@@ -75,13 +75,13 @@
 	</select>
 	
 		<!-- 通过ID获取数据 -->
-	<select id="findById1" parameterType="pd" resultType="pd">
+	<select id="findByUserName" parameterType="pd" resultType="pd">
 		select 
 		<include refid="Field"></include>
 		from 
 		<include refid="tableName"></include>
 		where 
-			ONLINEMSG_ID = #{ONLINEMSG_ID}
+			USERNAME = #{USERNAME}
 	</select>
 	
 	<!-- 列表 -->

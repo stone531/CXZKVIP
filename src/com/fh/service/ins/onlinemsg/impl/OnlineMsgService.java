@@ -79,9 +79,8 @@ public class OnlineMsgService implements OnlineMsgManager{
 		return (PageData)dao.findForObject("OnlineMsgMapper.findById", pd);
 	}
 	
-	//public PageData findByReplyMsg(PageData pd)throws Exception
-	public PageData findByReplyMsg(PageData pd)throws Exception{
-		return (PageData)dao.findForObject("OnlineMsgMapper.findByReplyMsg", pd);
+	public PageData findByUserName(PageData pd)throws Exception{
+		return (PageData)dao.findForObject("OnlineMsgMapper.findByUserName", pd);
 	}
 	
 	/**批量删除

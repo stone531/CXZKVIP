@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
+import com.fh.entity.system.User;
 import com.fh.util.AppUtil;
 import com.fh.util.Const;
 import com.fh.util.ObjectExcelView;
@@ -56,26 +57,37 @@ public class OnlineMsgController extends BaseController {
 		System.out.println("onlinemsg index");
 		logBefore(logger, Jurisdiction.getUsername()+"列表OnlineMsg");
 		ModelAndView mv = this.getModelAndView();
-		UserData data = this.GetUser();
-		mv.addObject("cUser", data.getMobile());//session 提供的
-		//mv.addObject("cMsg", "clientMsg");
 		
 //-------------------------------------start-------
-		PageData pd = new PageData();
-		pd = this.getPageData();
-		pd.put("ONLINEMSG_ID", this.get32UUID());	//主键		
-		PageData pdResult=new PageData();				
-		//pd.put("ONLINEMSG_ID", "cf9161e7712942d2ace087a4e406cf89");//test
-		pdResult = onlinemsgService.findById(pd);
-		if(pdResult == null)
+		UserData data = this.GetUser();
+		if(data.getMobile().isEmpty())
 		{
 			mv.addObject("msg","error");
-			//mv.setViewName("Ins/onlinemsg/liuyan");
 			return mv;
 		}
+		System.out.println("onlinemsg index:"+data.getMobile());
+		
+				
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		//pd.put("ONLINEMSG_ID", this.get32UUID());	//主键		
+		PageData pdResult=new PageData();				
+		pd.put("USERNAME", data.getMobile());
+
+		pdResult = onlinemsgService.findByUserName(pd);
+		System.out.println("########mobile error  a "+pdResult);
+		if(pdResult == null)
+		{
+			mv.addObject("cUser", data.getMobile());//session 提供的				
+			mv.addObject("msg","success");
+			mv.setViewName("ins/onlinemsg/liuyan");
+			return mv;
+		}
+
 		if(!pdResult.getString("CLIENTMSG").isEmpty())
 		{
-			mv.addObject("cMsg", "clientMsg");	
+			mv.addObject("cUser", pdResult.getString("USERNAME"));
+			mv.addObject("cMsg", pdResult.getString("CLIENTMSG"));	
 			mv.addObject("cState", "1");
 			System.out.println("########cState  1");
 		}
@@ -85,10 +97,10 @@ public class OnlineMsgController extends BaseController {
 			System.out.println("cState  0");
 		}		
 		
-		if(!pdResult.getString("CLIENTMSG").isEmpty() && !pdResult.getString("REPLYMSG").isEmpty())
+		if(!pdResult.getString("CLIENTMSG").isEmpty() && pdResult.getString("REPLYMSG") != null)
 		{		
-			mv.addObject("sUser", data.getMobile());
-			mv.addObject("sMsg", "ok123");
+			mv.addObject("sUser", pdResult.getString("OPERATIONADMIN"));
+			mv.addObject("sMsg", pdResult.getString("REPLYMSG"));
 			mv.addObject("sState", "1");
 			System.out.println("########sState  1");
 		}
@@ -127,15 +139,19 @@ public class OnlineMsgController extends BaseController {
 		mv.addObject("msg","success");
 
 //---------------------------start
+		UserData data = this.GetUser();
+		if(data.getMobile().isEmpty())
+		{
+			mv.addObject("msg","error");
+			return mv;
+		}
 		pd.put("ONLINEMSG_ID", this.get32UUID());	//主键		
 		PageData pdResult=new PageData();	
-		//pd.put("ONLINEMSG_ID", "cf9161e7712942d2ace087a4e406cf89");//test
-		//pdResult = onlinemsgService.findById(pd);
 		
 		if(!pd.getString("LIUYAN").isEmpty())
 		{
 			pd.put("ONLINEMSG_ID", this.get32UUID());	//主键
-			pd.put("USERNAME", "haozi88");	//主键
+			pd.put("USERNAME",  data.getMobile());	//主键
 			pd.put("CLIENTMSG", pd.getString("LIUYAN"));	//主键
 			pd.put("CLIENTWRITETIME", DateUtil.getTime());	//主键
 		}		
@@ -261,6 +277,30 @@ public class OnlineMsgController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = onlinemsgService.findById(pd);	//根据ID读取
+		 //------------------------start
+		Session session = Jurisdiction.getSession();
+		User user = (User)session.getAttribute(Const.SESSION_USER);				//读取session中的用户信息(单独用户信息)
+		
+		if (user != null) {
+			User userr = (User)session.getAttribute(Const.SESSION_USERROL);		//读取session中的用户信息(含角色信息)
+			if(null == userr){
+				//user = userService.getUserAndRoleById(user.getUSER_ID());		//通过用户ID读取用户信息和角色信息
+				session.setAttribute(Const.SESSION_USERROL, user);				//存入session	
+			}else{
+				user = userr;
+			}
+			System.out.println("aaaaaaaaa>>>  get current login id:"+user.getUSERNAME());
+		}
+
+		if(!user.getUSERNAME().isEmpty())
+		{		
+			if(pd.getString("REPLYMSG")== null)
+			{//增加当前登录的用户名到数据库
+				pd.put("OPERATIONADMIN", user.getUSERNAME());
+				pd.put("REPLYTIEM", DateUtil.getTime());
+			}
+		}
+		//------------------------end
 		mv.setViewName("ins/onlinemsg/onlinemsg_edit");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
