@@ -12,7 +12,7 @@
 	<div class="navbar_wrapInner">
 		<div class="navbar_logo_img">
 			<img src="static/ace/images/logo.png" class="img-responsive">
-			<span>惠保永泽</span>
+			<!--  span>惠保永泽</span -->
 		</div>
 		<div class="navbar_bottom">
 			<ul>

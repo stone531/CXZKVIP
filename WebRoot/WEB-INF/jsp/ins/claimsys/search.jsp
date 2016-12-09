@@ -20,9 +20,11 @@
 <script type="text/javascript" src="static/ace/js/claim/jquery.validate.js"></script>
 <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+ <%@ include file="../../ht.jsp"%>
 </head>
 
-<body>   
+<body>  
+<%@ include file="../../head.jsp"%> 
     <div class="section">
       <div class="container">
         <div class="row">
@@ -216,7 +218,8 @@
         	}, "填写不正确");
 		});
     </script>
-    
+ 
+<%@ include file="../../tail.jsp"%>
 </body>
 </html>
 
