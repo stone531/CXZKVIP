@@ -3,14 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
 
 <div class="navbar">
 	<div class="navbar_wrapInner">
 		<div class="navbar_logo_img">
-			<span>惠保永泽</span>
+			<img src="static/ace/images/logo.png" class="img-responsive">
+			<!--  span>惠保永泽</span -->
 		</div>
 		<div class="navbar_bottom">
 			<ul>

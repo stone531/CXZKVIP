@@ -20,7 +20,7 @@
     <title>用户登陆</title>
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta http-equiv="Cache-Control" content="no-siteapp">
-
+	<%@ include file="../../ht.jsp"%>
 
 	<script src="static/usermanage/js/jquery.min.js" type="text/javascript"></script>
     <script src="static/usermanage/js/jquery.base64.min.js" type="text/javascript"></script>
@@ -31,20 +31,22 @@
     <script type="text/javascript" src="static/usermanage/js/formValidate.min.js"></script>
    
     <link rel="stylesheet" type="text/css" href="static/usermanage/css/register.css">
-    	<link rel="stylesheet" href="static/usermanage/css/base.css">
-	<link rel="stylesheet" href="static/usermanage/css/index.css">
+    <!--  link rel="stylesheet" href="static/usermanage/css/base.css">
+	<link rel="stylesheet" href="static/usermanage/css/index.css"-->
 
 	<link rel="stylesheet" href="static/usermanage/css/swiper.min.css">
     
 <style id="placeholder__">.placeholder-wrap{position: relative;display: inline-block;}.placeholder-text{position: absolute; }.placeholder-input{position: relative;background-color: transparent; z-index: 1;}</style></head>
-<body>        
-    <div class="login-register-header pt25 pb25">
+<body>     
+
+	<%@ include file="../../head.jsp"%>   
+    <!--  div class="login-register-header pt25 pb25">
     <div class="layout">
     <div class="inline-block header-text f24 pl20 ml20 ">
-        <%@ include file="../main/header.jsp"%>
+        
         </div>
     </div>
-</div>
+	</div-->
 
 <div class="login-register-wrap login-wrap" style="height:560px;overflow:hidden;">
     <div class="layout pt40 clearfix">
@@ -86,9 +88,11 @@
         </form>
     </div>
 </div>
- <div class="hz-copyright tac">
+
+<%@ include file="../../tail.jsp"%>
+ <!--  div class="hz-copyright tac">
 <div class="footer_copy"><span>&copy;Matrix Cube 2015 北京中正陆人网络科技有限公司版权所有 - 京ICP备15000365号-2</span></div>
-</div>
+</div-->
 <script src="static/usermanage/js/hm.js"></script>
 <script async src="static/usermanage/js/analytics.js"></script>
 <script src="static/usermanage/js/jquery-placeholder.js"></script>
