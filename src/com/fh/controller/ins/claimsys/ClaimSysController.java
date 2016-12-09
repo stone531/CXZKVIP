@@ -28,6 +28,9 @@ import com.fh.util.Jurisdiction;
 import com.fh.service.ins.claimsys.ClaimSysManager;
 import com.fh.util.DateUtil;
 import net.sf.json.JSONObject;
+
+import com.fh.service.ins.policy.PolicyManager;
+import com.fh.service.ins.cardinfo.CardInfoManager;
 /** 
  * 说明：ICS
  * 创建人：FH Q313596790
@@ -40,6 +43,10 @@ public class ClaimSysController extends BaseController {
 	String menuUrl = "claimsys/list.do"; //菜单地址(权限用)
 	@Resource(name="claimsysService")
 	private ClaimSysManager claimsysService;
+	@Resource(name="policyService")
+	private PolicyManager policyService;
+	@Resource(name="cardinfoService")
+	private CardInfoManager cardinfoService;
 	
 	/**保存
 	 * @param
@@ -276,6 +283,27 @@ public class ClaimSysController extends BaseController {
 		//mv.addObject("varList", varList);
 		//mv.addObject("pd", pd);
 		//return mv;
+		
+		//查询卡号密码
+		PageData pdmysql = new PageData();
+		PageData pd = new PageData();
+		pd.put("CARDID","15212161991");
+		pdmysql=cardinfoService.findByCardId(pd);
+		//get username and password from mysql
+		String desId =pdmysql.getString("CARDID");
+		String despw = pdmysql.getString("PASSWORD");
+		System.out.println("------"+desId+"------"+despw);
+		
+		//根据卡号查询保单
+		PageData param = new PageData();
+		param.put("CARDNO","15212161991");
+		List<PageData>	varListPN = policyService.findByCardId(param);
+		List<PageData> varList = new ArrayList<PageData>();
+		//根据身份证号查询
+		//PageData param = new PageData();
+		//param.put("POLICYNO","431225199008277732");
+		//List<PageData>	varList=policyService.findByPaperNo(param);
+/*		
 		List<String> varListPolyNo = new ArrayList<String>();
 		varListPolyNo.add("10000");
 		varListPolyNo.add("10001");
@@ -295,6 +323,21 @@ public class ClaimSysController extends BaseController {
 				pdNew.put("POLICYNO", varListPolyNo.get(i));
 			}
 			varList.add(pdNew);
+		}
+*/
+		for(int i=0;i<varListPN.size();i++){
+			PageData pdIn = new PageData();
+			pdIn.put("POLICYNO", varListPN.get(i).getString("POLICY_ID"));
+			PageData pdOut = claimsysService.findStateByPolicyNo(pdIn);	//列出ClaimSys列表
+			if(pdOut != null){
+				pdOut.put("IsOrNo", "1");
+				varList.add(pdOut);
+			}
+			else{
+				pdIn.put("IsOrNo", "0");
+				varList.add(pdIn);
+			}
+			
 		}
 		mv.setViewName("ins/claimsys/search");
 		mv.addObject("varList", varList);
