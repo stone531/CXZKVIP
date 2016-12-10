@@ -29,6 +29,8 @@
   </head><body>
  <%@ include file="../../head.jsp"%>
  
+ 
+ 
     <div class="section" style="margin-bottom:100px; ">
       <div class="container">
         <div class="row">
@@ -166,6 +168,11 @@
         </div>
       </div>
     </div>
+    
+<div id=floater style="Z-INDEX: 100; RIGHT: 10px; VISIBILITY: visible; WIDTH: 100px; POSITION: fixed; TOP: 60%; left: 92%;" >   
+	<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=963396570&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:963396570:53" alt="点击这里给我发消息" title="点击这里给我发消息"></a>
+</div>
+    
     <div class="col-md-12 text-center">
       <hr>
     </div>
