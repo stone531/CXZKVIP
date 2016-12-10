@@ -83,7 +83,7 @@ public class CardInfoController extends BaseController {
 		String cardstate = pdmysql.get("STATE").toString();
 		//step 1: check state , get ServiceContext
 		
-		if (!cardstate.equals("1")){
+		if (!cardstate.equals("2")){
 			//do something
 			System.out.println("card state is Unavailable");
 			mv.addObject("msg","此服务卡无效");
