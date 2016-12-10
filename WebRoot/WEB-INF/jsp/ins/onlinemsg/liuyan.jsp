@@ -52,7 +52,7 @@
             <form action="sendmsg">
 	            <div class="row">
 	              <div class="col-md-12">
-	                <textarea id="LIUYAN" name="LIUYAN" class="form-control" rows="15"></textarea>
+	                <textarea id="LIUYAN" name="LIUYAN" class="form-control" rows="10"></textarea>
 	              </div>
 	            </div>
 	            <br>

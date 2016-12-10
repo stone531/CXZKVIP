@@ -60,8 +60,9 @@ public class OnlineMsgController extends BaseController {
 		
 //-------------------------------------start-------
 		UserData data = this.GetUser();
-		if(data.getMobile().isEmpty())
+		if(data== null)
 		{
+			System.out.println("index  error");
 			mv.addObject("msg","error");
 			return mv;
 		}
@@ -120,6 +121,11 @@ public class OnlineMsgController extends BaseController {
 		Subject currentUser = SecurityUtils.getSubject(); 
 		Session session = currentUser.getSession();	
 		UserData user = (UserData)session.getAttribute(Const.SESSION_USERDATA);
+		if(user == null)
+		{
+			System.out.println("client  not login");
+			return null;
+		}
 		return user;
 	}
 	
@@ -140,8 +146,9 @@ public class OnlineMsgController extends BaseController {
 
 //---------------------------start
 		UserData data = this.GetUser();
-		if(data.getMobile().isEmpty())
+		if(data== null)
 		{
+			System.out.println("sendmsg  error");
 			mv.addObject("msg","error");
 			return mv;
 		}
