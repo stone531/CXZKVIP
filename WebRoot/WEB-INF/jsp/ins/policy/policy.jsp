@@ -31,10 +31,10 @@
 	
 	
 	<!-- 业务类型选择-->	
-		  <div class="section middle">
+	<div id="business"  class="section middle"  style="padding-top:100px;padding-bottom:18%;">
       <div class="container">
         <div class="row">
-          		<div id="business"  >
+          		<div>
           					<tbody>
 							<!-- 开始循环 -->	
 							<c:choose>
@@ -82,110 +82,118 @@
   
   
   <!-- 投保信息清单 -->	        		
-   <div id="PolicyInfo" class="middle" style="display: none;">
+   <div id="PolicyInfo" class="middle" style="display: none;padding-top:4%;">
       <div class="section ">
         <div class="container">
           <div class="row">
-            <div class="col-md-12">
-              <div class=" form-group  has-warning" style="margin-bottom:10%; margin-left:20%">
-                <div class="col-sm-2 text-left">
+            <div class="col-md-12" style="margin-left:24%;">
+              <div class=" form-group  has-warning" >
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保人姓名:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" maxlength="255" style="width:50%;" id="iename" class="form-control"
                   placeholder="投保人姓名">
                 </div>
-                <div class="col-sm-2 text-left">
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保人身份证号:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" maxlength="255" style="width:50%;" id="iepaperno" class="form-control"
                   placeholder="投保人身份证号" onblur="paperNOBlur(this);">
                 </div>
-                <div class="col-sm-2 text-left">
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保人手机号:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" maxlength="255" style="width:50%;" id="iephone" class="form-control"
                   placeholder="投保人手机号">
                 </div>
               </div>
-              <div class="center-block form-group has-success" style="margin-bottom: 10%; margin-left: 20%;">
-                <div class="col-sm-2 text-left">
+	          <div class="col-md-6" style="margin-left:0.5%;">
+	            <hr>
+	          </div>
+              <div class="center-block form-group has-success" >
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人姓名:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" id="ianame" maxlength="255" style="width:50%;" class="form-control"
                   placeholder="被保险人姓名">
                 </div>
-                <div class="col-sm-2 text-left">
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人证件号:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" id="iapaperno" maxlength="255" style="width:50%;" class="form-control"
                   placeholder="被保险人证件号" onblur="paperNOBlur(this);">
                 </div>
-                <div class="col-sm-2 text-left">
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人职业:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" id="iaprofession" maxlength="255" style="width:50%;"
                   class="form-control" placeholder="被保险人职业">
                 </div>
-                <div class="col-sm-2 text-left">
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">与被保险人关系:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" id="iarelation" maxlength="255" style="width:50%;"
                   class="form-control" placeholder="与被保险人关系">
                 </div>
                 <br>
-                <div class="col-sm-2 text-left">
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人年龄:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" id="iaage" maxlength="32" style="width:50%;" disabled="disabled" class="form-control"
                   placeholder="被保险人年龄" >
                 </div>
                 <br>
               </div>
-              <div class="center-block  form-group has-warning" style="margin-bottom:10%; margin-top:12%; margin-left:20%">
-                <div class="col-sm-2 text-left">
+              
+              <div class="col-md-6" style="margin-left:0.5%;">
+	            <hr>
+	          </div>
+	          
+              <div class="center-block  form-group has-warning" >
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">受益人姓名:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" id="bname" maxlength="255" style="width:50%; " class="form-control"
                   placeholder="受益人姓名">
                 </div>
                 <br>
-                <div class="col-sm-2 text-left">
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">受益人证件号码:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" id="bpaperno" maxlength="255" style="width:50%;" class="form-control"
                   placeholder="受益人证件号">
                 </div>
                 <br>
-                <div class="col-sm-2 text-left">
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">服务人员姓名:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" id="sname" maxlength="255" style="width:50%;" class="form-control"
                   placeholder="服务人员姓名">
                 </div>
                 <br>
-                <div class="col-sm-2 text-left">
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">服务人员手机号:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" id="sphone" maxlength="255" style="width:50%;" class="form-control"
                   placeholder="服务人员手机号">
                 </div>
                 <br>
-                <div class="col-sm-2 text-left">
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">是否发送短信:</label>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" id="ismessage" maxlength="255" style="width:50%;" class="form-control"
                   placeholder="是否发送短信">
                 </div>
@@ -478,7 +486,7 @@
 			//var name = inp.value;
 			//alert(name);
 			document.getElementById("BUSINESSID").value=inp.value;
-			alert(document.getElementById("BUSINESSID").value);
+			//alert(document.getElementById("BUSINESSID").value);
 			return ;
 		}
 

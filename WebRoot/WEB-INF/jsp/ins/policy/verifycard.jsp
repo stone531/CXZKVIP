@@ -37,8 +37,8 @@
         </div>
       </div>
     </div>
-	  
-	 <div class="section middle">
+<div class=" middle">	  
+	 <div class="section">
       <div class="container">
         <div class="row">
           <div class="col-md-4"></div>
@@ -59,10 +59,11 @@
           </div>
           <div class="col-md-4"></div>
         </div>
+                
       </div>
     </div>
 
-    <div class="section middle" style="display: ${display};">
+    <div class="section" style="display: ${display};padding-top:60px;">
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
@@ -72,6 +73,7 @@
         </div>
       </div>
     </div>
+ </div> 
 	  <!--div class="section">
       <div class="container">
         <div class="row">

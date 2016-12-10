@@ -1776,11 +1776,13 @@ input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-
 	background: 0 no-repeat #faebcc;
 	/*height:591px;*/
 	margin-top:4%;
+	margin-bottom:4.5%;
 }
 .register-wrap {
 	height:606px;
 	background: 0 no-repeat #faebcc;
 	margin-top:3.5%;
+	margin-bottom:3.5%;
 }
 #login-register-page .login-wrap,#login-register-page .register-wrap {
 	min-width:1190px;

@@ -30,7 +30,9 @@
 		}
 		
 		.middle {
-			margin-bottom:120px ;
+			/*margin-bottom:120px ;*/
+			margin-top:8%;
+			margin-bottom:18%;
 		}
 		
 		#table_report {
@@ -45,6 +47,7 @@
 		    margin-left: 0%;
     		transform: translate(0%, 0%);
 		}
+		
 		
 		
 	</style>

@@ -15,13 +15,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
- 	 <%@ include file="../../ins/policy/ht.jsp"%>
-	<script src="static/main/js/jquery.js"></script>
+
+	<!--  script src="static/main/js/jquery.js"></script -->
 	<script src="static/main/js/index.js"></script>
 	<script src="static/main/js/swiper.min.js"></script>
+	<script type="text/javascript" src="static/js/jquery-1.7.2.js" ></script>
+	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
+	<%@ include file="../../ht.jsp"%>
   </head><body>
  <%@ include file="../../head.jsp"%>
  
@@ -117,7 +121,7 @@
           </div>
           <div class="col-md-3">
             <div class="row" style="margin:2%;">
-              <form action="${action}" name="Form" id="Form" method="post" class="center-block text-center">
+              <form action="cardinfo/verifycard" name="Form" id="Form" method="post" class="center-block text-center">
                 <h3 class="form-signin-heading text-center text-warning">服务卡激活</h3>
                 <p class="center-block">
                   <input type="text" name="CARDID" id="CARDID" maxlength="255" class="form-control center-block" placeholder="输入服务卡号" title="服务卡号" style="width:100%;">
@@ -313,5 +317,34 @@
       </div>
     </div>
   <%@ include file="../../tail.jsp"%>
+  
+  	<script type="text/javascript">		
+			function save(){
+				if($("#CARDID").val()==""){
+					$("#CARDID").tips({
+						side:3,
+			            msg:'请输入服务卡号',
+			            bg:'#AE81FF',
+			            time:2
+			        });
+					$("#CARDID").focus();
+				return false;
+				}
+			
+				if($("#PASSWORD").val()==""){
+						$("#PASSWORD").tips({
+							side:3,
+				            msg:'请输入密码',
+				            bg:'#AE81FF',
+				            time:2
+				        });
+						$("#PASSWORD").focus();
+					return false;
+				}
+			
+				$("#Form").submit();
+			}
+	
+	</script>
 
 </body></html>

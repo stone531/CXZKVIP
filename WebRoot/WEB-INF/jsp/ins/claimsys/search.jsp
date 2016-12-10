@@ -37,7 +37,7 @@
         <div class="col-md-12">
           <div class="col-md-4">
             <div class="page-header text-center text-success">
-              <h4 class="">查询方式</h4>
+              <h3 class="">查询方式</h3>
             </div>
           </div>
           <div class="col-md-8">
@@ -153,7 +153,7 @@
         	liNo.setAttribute("class", "");
         	$("#byCard").show();
         	$("#byNo").hide();
-        	return false;
+        	//return false;
         }
         //function serch(){
         //	if($("#"))
