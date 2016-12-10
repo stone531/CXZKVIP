@@ -154,7 +154,7 @@
                       <div class="row text-center">
                         <a href="usermanage/personal/show"><i class="fa fa-3x fa-angellist fa-fw text-warning"></i></a>
                         <h6>个人中心</h6>
-                        <a href="onlinemsg/index"><i class="fa fa-3x fa-camera fa-fw text-warning"></i></a>
+                        <a href="onlinemsg/index" target="view_window"><i class="fa fa-3x fa-camera fa-fw text-warning"></i></a>
                         <h6>在线留言</h6>
                       </div>
                     </div>
