@@ -8,20 +8,31 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
 import com.fh.util.AppUtil;
+import com.fh.util.Const;
+import com.fh.util.FileDownload;
+import com.fh.util.FileUpload;
+import com.fh.util.ObjectExcelRead;
 import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
+import com.fh.util.PathUtil;
 import com.fh.service.ins.cardtype.CardTypeManager;
 
 /** 
@@ -141,6 +152,14 @@ public class CardTypeController extends BaseController {
 		mv.addObject("pd", pd);
 		return mv;
 	}	
+	/**下载模版
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/downExcel")
+	public void downExcel(HttpServletResponse response)throws Exception{
+		FileDownload.fileDownload(response, PathUtil.getClasspath() + Const.FILEPATHFILE + "卡录入模板.xls", "卡录入模板.xls");
+	}
 	
 	 /**批量删除
 	 * @param
@@ -166,6 +185,67 @@ public class CardTypeController extends BaseController {
 		pdList.add(pd);
 		map.put("list", pdList);
 		return AppUtil.returnObject(pd, map);
+	}
+	/**导入
+	 * @param
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/readExcel")
+	public ModelAndView readExcel(
+			@RequestParam(value="excel",required=false) MultipartFile file
+			) throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		System.out.println(file);
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;}
+			String filePath = PathUtil.getClasspath() + Const.FILEPATHFILE;								//文件上传路径
+			String fileName =  FileUpload.fileUp(file, filePath, "userexcel");							//执行上传
+			
+			List<PageData> listPd = (List)ObjectExcelRead.readExcel(filePath,fileName, 2, 0, 0);	//执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
+			String isnum="^[0-9]*[1-9][0-9]*$";
+			/**
+			 * var0 :NAME:姓名
+			 * var1 :LIMITAMOUNT:限制金额
+			 * var2 :AMOUNT:面值
+			 * var3 :MINAGE：最小年纪
+			 * var4 :MAXAGE：最大使用年龄
+			 * var5:PROFESSION:限制使用的职业列表
+			 */
+			for(int i=0;i<listPd.size();i++){
+				PageData pageData= new PageData();
+				pageData.put("NAME", listPd.get(i).getString("var0"));	//1
+				if(isNumeric(listPd.get(i).get("var1").toString())){
+					pageData.put("LIMITAMOUNT", listPd.get(i).get("var1").toString());	//2
+				}
+				if(isNumeric(listPd.get(i).get("var2").toString())){
+				pageData.put("AMOUNT", listPd.get(i).get("var2").toString());	//3
+				}
+				if(isNumeric(listPd.get(i).get("var3").toString())){
+				pageData.put("MINAGE", listPd.get(i).get("var3").toString());	//4
+				}
+				if(isNumeric(listPd.get(i).get("var4").toString())){
+				pageData.put("MAXAGE", listPd.get(i).get("var4").toString());	//5
+				}
+				pageData.put("PROFESSION", listPd.get(i).getString("var5"));	//6
+				cardtypeService.save(pageData);
+				}
+				
+			/*存入数据库操作======================================*/
+			
+			mv.addObject("msg","success");
+		
+		mv.setViewName("save_result");
+		return mv;
+	}
+	public static boolean isNumeric(String str)
+	{
+	  try{
+	   Integer.parseInt(str);
+	   return true;
+	  }catch(NumberFormatException e)
+	  {
+	 System.out.println("异常：\"" + str + "\"不是数字/整数...");
+	 return false;
+	  }
 	}
 	
 	 /**导出到excel

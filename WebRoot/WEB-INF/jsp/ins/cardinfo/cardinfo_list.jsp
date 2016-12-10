@@ -47,7 +47,7 @@
 								<td style="vertical-align:top;padding-left:2px;">
 								 	<select class="chosen-select form-control" name="name" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
 									<option value=""></option>
-									<option value="">全部</option>
+									<option value="">全部1</option>
 									<option value="">1</option>
 									<option value="">2</option>
 								  	</select>
@@ -55,6 +55,10 @@
 								<c:if test="${QX.cha == 1 }">
 								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
 								</c:if>
+								<td><a class="btn btn-sm btn-success" onclick="toExcel();">导出到EXCEL</a></td>
+								<td><a class="btn btn-sm btn-success" onclick="readExcel();">导入到数据库</a></td>
+								<td><a class="btn btn-sm btn-success" onclick="window.location.href='<%=basePath%>/cardinfo/downExcel.do'">下载模版</a></td>
+								
 							</tr>
 						</table>
 						<!-- 检索  -->
@@ -263,7 +267,28 @@
 				});
 			});
 		});
-		
+		//新增
+		function readExcel(){
+			 top.jzts();
+			 var diag = new top.Dialog();
+			 diag.Drag=true;
+			 diag.Title ="新增";
+			 diag.URL = '<%=basePath%>cardinfo/goreadExcel.do';
+			 diag.Width = 450;
+			 diag.Height = 355;
+			 diag.CancelEvent = function(){ //关闭事件
+				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+					 if('${page.currentPage}' == '0'){
+						 top.jzts();
+						 setTimeout("self.location=self.location",100);
+					 }else{
+						 nextPage(${page.currentPage});
+					 }
+				}
+				diag.close();
+			 };
+			 diag.show();
+		}
 		//新增
 		function add(){
 			 top.jzts();

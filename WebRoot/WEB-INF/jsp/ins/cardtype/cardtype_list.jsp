@@ -55,8 +55,10 @@
 								<c:if test="${QX.cha == 1 }">
 								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
 								</c:if>
+								<td><a class="btn btn-sm btn-success" onclick="window.location.href='<%=basePath%>/cardtype/downExcel.do'">下载模版</a></td>
 							</tr>
 						</table>
+						</form>
 						<!-- 检索  -->
 					
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-top:5px;">	
@@ -156,7 +158,9 @@
 							</c:choose>
 							</tbody>
 						</table>
+						<form  id="excelform" name="excelform" method="post" action="cardtype/readExcel.do" enctype="multipart/form-data">
 						<div class="page-header position-relative">
+						
 						<table style="width:100%;">
 							<tr>
 								<td style="vertical-align:top;">
@@ -166,12 +170,18 @@
 									<c:if test="${QX.del == 1 }">
 									<a class="btn btn-sm btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120'></i></a>
 									</c:if>
+									<%-- <a class="btn btn-sm btn-success" onclick="window.location.href='<%=basePath%>/cardinfo/downExcel.do'">下载模版</a> --%>
+									
+									<input type="file" name="excel" id="excel" onchange="readfile(this)">
+									
 								</td>
 								<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
 							</tr>
 						</table>
+					
 						</div>
-						</form>
+							</form>
+						
 					
 						</div>
 						<!-- /.col -->
@@ -257,6 +267,10 @@
 				});
 			});
 		});
+		function readfile(obj){
+			alert($("#excelform").attr("action"));
+			$("#excelform").submit();
+		}
 		
 		//新增
 		function add(){

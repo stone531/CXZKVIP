@@ -98,10 +98,20 @@
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select
-		<include refid="Field"></include>
+		CARDID,	
+		STATE,	
+		c.NAME as TYPEID,	
+		EXPIRYTIME,	
+		POLICYNO,	
+		IANTNAME,	
+		IANTPAPERNO,	
+		IANTPHONE,	
+		PASSWORD,	
+		CARDINFO_ID
 		from 
-		<include refid="tableName"></include>
-		where 1=1
+		INS_CARDINFO i,ins_cardtype c
+		where c.CARDTYPE_ID=i.TYPEID
+		and 1=1
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
 				(
@@ -117,9 +127,19 @@
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
 		select
-		<include refid="Field"></include>
+		CARDID,	
+		STATE,	
+		c.NAME as TYPEID,	
+		EXPIRYTIME,	
+		POLICYNO,	
+		IANTNAME,	
+		IANTPAPERNO,	
+		IANTPHONE,	
+		PASSWORD,	
+		CARDINFO_ID
 		from 
-		<include refid="tableName"></include>
+		INS_CARDINFO i,ins_cardtype c
+		where c.CARDTYPE_ID=i.TYPEID
 	</select>
 	
 	<!-- 批量删除 -->

@@ -10,22 +10,31 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
 import com.fh.util.AppUtil;
+import com.fh.util.Const;
+import com.fh.util.FileDownload;
+import com.fh.util.FileUpload;
+import com.fh.util.ObjectExcelRead;
 import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
+import com.fh.util.PathUtil;
 import com.fh.service.ins.cardinfo.CardInfoManager;
+import com.fh.service.ins.cardtype.CardTypeManager;
 import com.fh.service.ins.relation.RelationManager;
 import com.fh.service.ins.business.BusinessManager;
 
@@ -51,6 +60,9 @@ public class CardInfoController extends BaseController {
 	//业务服务
 	@Resource(name="businessService")
 	private BusinessManager businessService;
+	//卡类型
+	@Resource
+	private CardTypeManager cardtypeservice;
 	
 	
 	
@@ -83,7 +95,7 @@ public class CardInfoController extends BaseController {
 		String cardstate = pdmysql.get("STATE").toString();
 		//step 1: check state , get ServiceContext
 		
-		if (!cardstate.equals("2")){
+		if (!cardstate.equals("1")){
 			//do something
 			System.out.println("card state is Unavailable");
 			mv.addObject("msg","此服务卡无效");
@@ -106,7 +118,6 @@ public class CardInfoController extends BaseController {
 		//mv.addObject("Service",ServiceText)
 		
 		System.out.println(srcId+","+srcpw+","+desId+","+despw);
-		System.out.println("*******************card state is Unavailable****************");
 		
 		//step 2: check username and password
 		if (srcId.equals(desId) && srcpw.equals(despw)){
@@ -314,6 +325,87 @@ public class CardInfoController extends BaseController {
 		pdList.add(pd);
 		map.put("list", pdList);
 		return AppUtil.returnObject(pd, map);
+	}
+	@RequestMapping(value="goreadExcel")
+	public ModelAndView goreadExcel() throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		List<PageData> varList=cardtypeservice.listAll(pd);
+		mv.setViewName("ins/cardinfo/readExcel");
+		mv.addObject("msg", "readExcel");
+		mv.addObject("varList",varList);
+		mv.addObject("pd", pd);
+		return mv;
+	}
+	/**导入修改数据库字段
+	 * @param
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/readExcel")
+	public ModelAndView readExcel(
+			@RequestParam(value="cardexcel",required=false) MultipartFile file,@RequestParam(value="card_type") String card_type
+			) throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		System.out.println(file);
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;}
+			String filePath = PathUtil.getClasspath() + Const.FILEPATHFILE;								//文件上传路径
+			String fileName =  FileUpload.fileUp(file, filePath, "cardexcel");	//执行上传
+			PageData pd=this.getPageData();
+			
+			List<PageData> listPd = (List)ObjectExcelRead.readExcel(filePath,fileName, 2, 0, 0);	//执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
+			/**
+			 * var0 :CARDID:卡号
+			 * var1 :EXPIRYTIME：有效时间
+			 * var2 :POLICYNO：保单号
+			 * var3:IANTNAME:被投保人姓名或者投保人姓名
+			 * var4:IANTPAPERNO:投保人数
+			 * var5:IANTPHONE：投保电话
+			 * var6:PASSWORD：密码
+			 * 
+			 */
+			for(int i=0;i<listPd.size();i++){
+				PageData pageData= new PageData();
+				pageData.put("CARDID", listPd.get(i).getString("var0"));	//1
+				pageData.put("EXPIRYTIME", listPd.get(i).get("var1").toString());	//2
+				pageData.put("POLICYNO", listPd.get(i).get("var2").toString());	//3
+				pageData.put("IANTNAME", listPd.get(i).get("var3").toString());	//4
+				if(isNumeric(listPd.get(i).get("var4").toString())){
+				pageData.put("IANTPAPERNO", listPd.get(i).get("var4").toString());	//5
+				}
+				pageData.put("IANTPHONE", listPd.get(i).getString("var5"));	//6
+				pageData.put("PASSWORD", listPd.get(i).getString("var6"));	//6
+				pageData.put("STATE", "1");
+				pageData.put("TYPEID", card_type);
+				pageData.put("CARDINFO_ID", this.get32UUID());
+				cardinfoService.save(pageData);
+				}
+				
+			/*存入数据库操作======================================*/
+			
+			mv.addObject("msg","success");
+		
+		mv.setViewName("save_result");
+		return mv;
+	}
+	public static boolean isNumeric(String str)
+	{
+	  try{
+	   Integer.parseInt(str);
+	   return true;
+	  }catch(NumberFormatException e)
+	  {
+	 System.out.println("异常：\"" + str + "\"不是数字/整数...");
+	 return false;
+	  }
+	}
+	/**下载模版
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/downExcel")
+	public void downExcel(HttpServletResponse response)throws Exception{
+		FileDownload.fileDownload(response, PathUtil.getClasspath() + Const.FILEPATHFILE + "卡单录入模板.xls", "卡单录入模板.xls");
 	}
 	
 	 /**导出到excel

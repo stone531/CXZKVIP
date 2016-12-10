@@ -27,11 +27,11 @@ public class ObjectExcelRead {
 	 * @param sheetnum //sheet
 	 * @return list
 	 */
-	public static List<Object> readExcel(String filepath, int startrow, int startcol, int sheetnum) {
+	public static List<Object> readExcel(String filepath,String filename, int startrow, int startcol, int sheetnum) {
 		List<Object> varList = new ArrayList<Object>();
 
 		try {
-			File target = new File(filepath);
+			File target = new File(filepath,filename);
 			FileInputStream fi = new FileInputStream(target);
 			HSSFWorkbook wb = new HSSFWorkbook(fi);
 			HSSFSheet sheet = wb.getSheetAt(sheetnum); 					//sheet 从0开始
