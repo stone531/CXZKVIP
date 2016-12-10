@@ -16,6 +16,17 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`cxzkvip` /*!40100 DEFAULT CHARACTER SET
 
 USE `cxzkvip`;
 
+
+
+/*!40101 SET NAMES utf8 */;
+
+DROP TABLE IF EXISTS `ins_warning`;
+CREATE TABLE `ins_warning` (
+	`ID` int (11),
+	`WARNING` varchar (1536)
+); 
+
+
 /*Table structure for table `ins_business` */
 
 DROP TABLE IF EXISTS `ins_business`;
@@ -65,12 +76,15 @@ CREATE TABLE `ins_cardtype` (
   `MINAGE` int(11) DEFAULT NULL,
   `MAXAGE` int(11) DEFAULT NULL,
   `PROFESSION` varchar(765) DEFAULT NULL,
-  `COMPANYNAME` varchar(300) DEFAULT NULL
+  `COMPANYNAME` varchar(300) DEFAULT NULL，
+  `SERVICECONTEXT` varchar(2048) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 /*Data for the table `ins_cardtype` */
 
-insert  into `ins_cardtype`(`CARDTYPE_ID`,`NAME`,`LIMITAMOUNT`,`AMOUNT`,`MINAGE`,`MAXAGE`,`PROFESSION`,`COMPANYNAME`) values ('a730e23733254f1d99771fecc08ab326','1',100000,5000,18,65,'诗人；老师；程序员',NULL),('e60c4dca6cb44a3696cfff2992d6f6b1','2',100,10,1,100,'工程师；乞丐',NULL);
+insert  into `ins_cardtype`(`CARDTYPE_ID`,`NAME`,`LIMITAMOUNT`,`AMOUNT`,`MINAGE`,`MAXAGE`,`PROFESSION`,`COMPANYNAME`,`SERVICECONTEXT`) values ('a730e23733254f1d99771fecc08ab326','1',100000,5000,18,65,'诗人；老师；程序员',NULL,NULL),('e60c4dca6cb44a3696cfff2992d6f6b1','2',100,10,1,100,'工程师；乞丐',NULL,NULL);
 
 /*Table structure for table `ins_claimstates` */
 
