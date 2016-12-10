@@ -106,6 +106,7 @@ public class CardInfoController extends BaseController {
 		//mv.addObject("Service",ServiceText)
 		
 		System.out.println(srcId+","+srcpw+","+desId+","+despw);
+		System.out.println("*******************card state is Unavailable****************");
 		
 		//step 2: check username and password
 		if (srcId.equals(desId) && srcpw.equals(despw)){

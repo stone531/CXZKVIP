@@ -265,12 +265,13 @@ public class ClaimSysController extends BaseController {
 		return mv;
 	}*/
 	
-	 /**去理赔查询页面
+	/**搜索
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/goSearch")
-	public ModelAndView goSearch(Page page)throws Exception{
+	@RequestMapping(value="/search")
+	public ModelAndView search(PrintWriter out)throws Exception{
+
 		ModelAndView mv = this.getModelAndView();
 		//PageData pd = new PageData();
 		//pd = this.getPageData();
@@ -293,6 +294,7 @@ public class ClaimSysController extends BaseController {
 		String desId =pdmysql.getString("CARDID");
 		String despw = pdmysql.getString("PASSWORD");
 		System.out.println("------"+desId+"------"+despw);
+		System.out.println("11111111111111111111111111111------"+desId+"------"+despw);
 		
 		//根据卡号查询保单
 		PageData param = new PageData();
@@ -341,7 +343,25 @@ public class ClaimSysController extends BaseController {
 		}
 		mv.setViewName("ins/claimsys/search");
 		mv.addObject("varList", varList);
+		mv.addObject("msg", "search");
 		//mv.addObject("pd", pd);
+		return mv;
+	}
+	
+	/**去搜索页面
+	 * @param
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/goSearch")
+	public ModelAndView goSearch()throws Exception{	
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		
+		//mv.setViewName("ins/claimsys/myclaim");
+		mv.setViewName("ins/claimsys/search");
+		mv.addObject("msg", "search");
+		mv.addObject("pd", pd);
 		return mv;
 	}	
 	

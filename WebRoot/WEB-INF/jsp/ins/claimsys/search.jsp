@@ -37,7 +37,7 @@
         <div class="col-md-12">
           <div class="col-md-4">
             <div class="page-header text-center text-success">
-              <h3 class="">查询方式</h3>
+              <h4 class="">查询方式</h4>
             </div>
           </div>
           <div class="col-md-8">
@@ -56,39 +56,39 @@
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-8">
-			<form action="claimsys/${msg }.do" id="formSearch" method="post" >
+			<form action="claimsys/${msg }.do" name="formSearch" id="formSearch" method="post" >
 			
                 <div class="panel-body" id="byCard">
 				    <div class="form-group">
                       <div class="col-sm-2">
-                        <label for="inputEmail3" class="control-label">卡号：</label>
+                        <label for="CARDNO" class="control-label">卡号：</label>
                       </div>
                       <div class="col-sm-9">
-                        <input type="email" class="form-control" id="CARDNO" name="CARDNO" placeholder="请输入服务卡号" onfocus="CnOnFocus(this)" onblur="CnOnBlur(this)" >
+                        <input type="text" class="form-control" id="CARDNO" name="CARDNO" placeholder="请输入服务卡号">
                       </div>
 				    </div>
                     <div class="form-group">
                       <div class="col-sm-2">
-                        <label for="inputPassword3" class="control-label" >密码：</label>
+                        <label for="CARDPASSWD" class="control-label" >密码：</label>
                       </div>
                       <div class="col-sm-9">
-                        <input type="password" class="form-control" id="CARDPASSWD" name="CARDPASSWD" placeholder="请输入服务卡密码" onfocus="CpOnFocus(this)" onblur="CpOnBlur(this)" >
+                        <input type="password" class="form-control" id="CARDPASSWD" name="CARDPASSWD" placeholder="请输入服务卡密码">
                       </div>
                     </div>
 				</div>
 				<div class="panel-body" id="byNo" style="display: none;">
                     <div class="form-group">
                       <div class="col-sm-2">
-                        <label for="inputPassword3" class="control-label">身份证号：</label>
+                        <label for="PersonNo" class="control-label">身份证号：</label>
                       </div>
                       <div class="col-sm-9">
-                        <input type="email" class="form-control" id="No" name="No" placeholder="请输入被投保人身份证号" onfocus="PnOnFocus(this)" onblur="PnOnBlur(this)" >
+                        <input type="text" class="form-control" id="PersonNo" name="PersonNo" placeholder="请输入被投保人身份证号" value="412728198904303231">
                       </div>
 					</div>
                 </div>
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-sm-10 btn-success" onclick="searchClaimschedule()" >查询</button>
+                    <button type="button" class="btn btn-sm-10 btn-success" onclick="goSearch()" >查询</button>
                   </div>
                 </div>						
 			</form>
@@ -100,7 +100,7 @@
             <hr>
           </div>
         </div>
-        <div class="row">
+        <div class="row" id="showPolicy" style="display:none">
           <div class="col-md-12 " style="border-top:groove ;border-color: beige; margin-top:30px;padding-left:15%;">
             <table class="table">
               <thead>
@@ -153,7 +153,7 @@
         	liNo.setAttribute("class", "");
         	$("#byCard").show();
         	$("#byNo").hide();
-        	//return false;
+        	return false;
         }
         //function serch(){
         //	if($("#"))
@@ -173,50 +173,44 @@
         	 window.location.href="<%=basePath%>claimsys/goAdd.do?POLICYNO="+Id;
         }
     </script>
+    <script type="text/javascript" src="static/js/jquery.tips.js"></script>
     <script type="text/javascript">
-		$(document).ready(function() {
-			$("#formSearch").validate({
-				rules:{
-					CARDNO: {
-						required:true,
-						rangelength:[5,20],
-						regex:/[^\u4e00-\u9fa5]/g
-					},
-					CARDPASSWD: {
-						required:true,
-						rangelength:[8,16]
-					},
-					NO: {
-						required:true,
-						rangelength:[17,18]
-					}
-				},
-				messages: {
-					CARDNO: {
-						required: "请输入卡号",
-						rangelength: "长度必须为5-20个字符",
-						regex:"不允许为汉字"
-					},
-					CARDPASSWD: {
-						required: "请输入密码",
-						rangelength: "长度必须为8-16个字符"
-					},
-                    NO: {
-						required: "请输入有效身份证号码",
-						rangelength: "长度必须为17-18个字符"
-					}
-				},
-                errorPlacement:function(error,element){
-                    error.appendTo(element.parent().next());
-                }
-			});
-			
-			// 自定义方法支持正则 ，例如手机号验证/^1([3578]\d|4[57])\d{8}$/ 
-        	jQuery.validator.addMethod("regex", function(value, element, param) {   
-            	var r = param;
-            	return r.test(value);
-        	}, "填写不正确");
-		});
+		function goSearch(){
+			if(document.getElementById("byNo").style.display =="none"){
+				if($("#CARDNO").val()==""){
+				    $("#CARDNO").tips({
+				    	side:3,
+		                msg:'请输入服务卡号',
+		                bg:'#AE81FF',
+		                time:2
+		            });
+				    $("#CARDNO").focus();
+				return false;
+			    }
+			    if($("#CARDPASSWD").val()==""){
+			    	$("#CARDPASSWD").tips({
+			    		side:3,
+		                msg:'请输入密码',
+		                bg:'#AE81FF',
+		                time:2
+		            });
+			    	$("#CARDPASSWD").focus();
+			    return false;
+			    }				
+			} else {
+			    if($("#PersonNo").val()==""){
+			    	$("#PersonNo").tips({
+			    		side:3,
+		                msg:'请输入身份证号',
+		                bg:'#AE81FF',
+		                time:2
+		            });
+			    	$("#PersonNo").focus();
+			    return false;
+				}	
+			}
+			$("#formSearch").submit();
+		}
     </script>
  
 <%@ include file="../../tail.jsp"%>
