@@ -33,22 +33,25 @@
     <script src="static/usermanage/js/jquery.validate.unobtrusive.js" type="text/javascript"></script>
     <script src="static/usermanage/js/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="static/usermanage/js/formValidate.min.js"></script>
+    
+    <%@ include file="../../ht.jsp"%>
    
     <link rel="stylesheet" type="text/css" href="static/usermanage/css/register.css">
     <link rel="stylesheet" href="static/usermanage/css/base.css">
-	<link rel="stylesheet" href="static/usermanage/css/index.css">
+	<!--  link rel="stylesheet" href="static/usermanage/css/index.css" -->
 
 	<link rel="stylesheet" href="static/usermanage/css/swiper.min.css">
     
 <style id="placeholder__">.placeholder-wrap{position: relative;display: inline-block;}.placeholder-text{position: absolute; }.placeholder-input{position: relative;background-color: transparent; z-index: 1;}</style></head>
-<body>        
-    <div class="login-register-header pt25 pb25">
+<body>  
+ 	<%@ include file="../../head.jsp"%>       
+    <!--  div class="login-register-header pt25 pb25">
     <div class="layout">
         <div class="inline-block header-text f24 pl20 ml20 ">
-        	 <%@ include file="../main/header.jsp"%>
+        	
         </div>
     </div>
-</div>
+</div-->
     <div class="login-register-wrap register-wrap">
     <div class="layout pt20 clearfix">
         <form class="login-register-form bgfw">
@@ -142,10 +145,10 @@
 		</div>
 		</div>
 
-
-    <div class="hz-copyright tac">
+<%@ include file="../../tail.jsp"%>
+    <!--  div class="hz-copyright tac">
 <div class="footer_copy"><span>&copy;Matrix Cube 2015 北京中正陆人网络科技有限公司版权所有 - 京ICP备15000365号-2</span></div>
-</div>
+</div -->
 <script src="static/usermanage/js/hm.js"></script>
 <script async src="static/usermanage/js/analytics.js"></script>
 
