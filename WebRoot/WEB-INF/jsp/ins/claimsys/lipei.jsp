@@ -54,7 +54,7 @@
                         <div></div>
                     </div>
                     <div class="form-group">
-                        <label for="INFORNAME" class="col-sm-3 control-label">报案人姓名</label>
+                        <label for="INFORNAME" class="col-sm-3 control-label" style="display:block;">报案人姓名</label>
                         <div class="col-sm-6">
                           <input type="text" class="form-control" id="INFORNAME" name="INFORNAME" placeholder="请填写您的真实姓名，以便理赔" value="张三">
                         </div>
@@ -130,7 +130,7 @@
                           <label for="inputEmail3" class="col-sm-3 control-label">出险经过及现状</label>
                           <div class="col-sm-8">
                             <!--input type="email" class="form-control" id="inputEmail3" placeholder="Email"-->
-                            <textarea class="form-control" rows="15" id="POLICEACCIDENT" name="POLICEACCIDENT" placeholder="请描述具体经过，以便理赔">郑浩被李治杀了</textarea>
+                            <textarea class="form-control" rows="10" id="POLICEACCIDENT" name="POLICEACCIDENT" placeholder="请描述具体经过，以便理赔">郑浩被李治杀了</textarea>
                           </div>
                           <div></div>
                       </div>
@@ -237,12 +237,13 @@
                 diag.show();
             }
         };
-		$(document).ready(function() {
-			$("#claimForm").validate({
+		
+		function validForm(){
+			return $("#claimForm").validate({
 				rules:{
 					POLICYNO: {
 						required:true,
-						rangelength:[5,20],
+						rangelength:[5,50],
 						regex:/[^\u4e00-\u9fa5]/g
 					},
 					INFORNAME: {
@@ -284,16 +285,16 @@
 				messages: {
 					POLICYNO: {
 						required: "请输入保单号",
-						rangelength: "长度必须为5-20个字符",
+						rangelength: "长度必须为5-50个字符",
 						regex:"不允许为汉字"
 					},
 					INFORNAME: {
-						required: "请填写您的真实姓名，以便理赔",
-						rangelength: "长度必须大于2个中文或4个英文字母",
-                        regex: "姓名只能为汉字和英文字母组成"
+						required: "请填写您的真实姓名",
+						rangelength: "长度必须为2-4个字符",
+                        regex: "姓名只能为汉字或英文"
 					},
                     CLAIMERTEL: {
-						required: "建议填写您的手机号码，以便及时取得联系",
+						required: "建议填写您的手机号码",
 						rangelength: "长度必须为5-20个字符",
 						regex:"只能为数字及破折号"
 					},
@@ -305,16 +306,16 @@
 						required: "请输入出险时间"
 					},
                     OCCURPLACE: {
-						required: "请尽量填写详细地址以方便理赔",
+						required: "请填写详细地址以便理赔",
                         rangelength: "长度必须为6-30个字符",
 					},
                     POLICYNAME: {
-                        required: "请填写您的真实姓名，以便理赔",
-                        rangelength: "长度必须大于2个中文或4个英文字母",
-                        regex: "姓名只能为汉字和英文字母组成"
+                        required: "请填写您的真实姓名",
+                        rangelength: "长度必须为2-4个字符",
+                        regex: "姓名只能为汉字或英文"
                     },
                     POLICERTEL: {
-                        required: "建议填写您的手机号码，以便及时取得联系",
+                        required: "建议填写您的手机号码",
                          rangelength: "长度必须为5-20个字符",
                          regex:"只能为数字及破折号"
 					},
@@ -326,7 +327,12 @@
                 errorPlacement:function(error,element){
                     error.appendTo(element.parent().next());
                 }
-			});
+			});	
+		}
+		
+		
+		$(document).ready(function() {
+			$(validForm());
 		});
 		
 		//检测用户姓名是否为汉字
@@ -343,6 +349,10 @@
         }, "填写不正确");
         
         function mysubmit(){
+			//if(!$("#claimForm").validationEngine("validate"))
+			//	return ;
+			if(!validForm().form())
+				return;
             $.ajax({
                 url: "claimsys/${msg }.do",    //请求的url地址
                 dataType: "json",   //返回格式为json
@@ -362,7 +372,7 @@
 
                     if (data.IsSuccess == true) {
                         //yuyueActivity.OpenSuccessDiag();
-                        var txt=  "报险成功,\n保险公司：中国人寿\n联系电话：010-110110";
+                        var txt=  "报险成功!<br/>保险公司：中国人寿<br/>联系电话：010-110110";
 						window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
                         $("input").attr("value", "");
                     }

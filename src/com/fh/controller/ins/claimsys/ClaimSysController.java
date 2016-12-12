@@ -60,34 +60,18 @@ public class ClaimSysController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd.put("CLAIMSYS_ID", this.get32UUID());	//主键
-		//System.out.println(pd.toString());
 		//判断此保单号是否存在，外界提供接口
 		pd.put("CLAIMSSTATES", 0);
-		//String occurtime = pd.getString("OCCURTIME");
 		pd.put("LASTUPDATE", DateUtil.getTime());
 		pd.put("ISREMIND", "0");
 		PageData pdRet = new PageData();
-		if(true){
-			//很据保单号查询是否已经报案
-			System.out.println("111111111111111");
-			if(null == claimsysService.findByPolicyNo(pd)){
-				claimsysService.save(pd); 					//执行保存
-				pdRet.put("IsSuccess", true);
-				//pdRet.put("Message", "保单报险成功");
-				//mv.addObject("msg","success");
-				//out.write("success");
-			}else{
-				//mv.addObject("msg","failed");
-				pdRet.put("IsSuccess", false);
-				//pdRet.put("Message", "该保单已经申请理赔，详情请进行理赔进度查询");
-				//pdRet.put("Message", "ffffffffffff");
-				//out.write("success");
-			}			
+
+		//很据保单号查询是否已经报案
+		if(null == claimsysService.findByPolicyNo(pd)){
+			claimsysService.save(pd); 					//执行保存
+			pdRet.put("IsSuccess", true);
 		}else{
-			//mv.addObject("msg","failed");	
 			pdRet.put("IsSuccess", false);
-			//pdRet.put("Message", "保单不存在，请联系客服");
-			//out.write("success");
 		}
 		JSONObject js = JSONObject.fromObject(pdRet);
 		out.write(js.toString());
@@ -193,7 +177,6 @@ public class ClaimSysController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		
-		//mv.setViewName("ins/claimsys/myclaim");
 		mv.setViewName("ins/claimsys/lipei");
 		mv.addObject("msg", "save");
 		mv.addObject("pd", pd);
@@ -210,16 +193,9 @@ public class ClaimSysController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = claimsysService.findById(pd);	//根据ID读取
-		//获取理赔以后的状态值
-		//List<PageData> varList = new ArrayList<PageData>();
+
 		List<PageData>	varList = claimsysService.listStates(pd);	//列出ClaimSys列表
-		//for(int i=0;i<5;i++){
-		//	PageData pdNew = new PageData();
-		//	pdNew.put("CLAIM_INDEX", i);
-		//	pdNew.put("STATE_CONTENT", "快来投保吧"+i);
-		//	varList.add(pdNew);
-		//}
-		
+	
 		mv.setViewName("ins/claimsys/claimsys_edit");
 		mv.addObject("msg", "edit");
 		mv.addObject("varList", varList);
@@ -288,11 +264,8 @@ public class ClaimSysController extends BaseController {
 				result = 1;  //未查到card信息
 			}else{
 				//get username and password from mysql
-				String desId =pdmysql.getString("CARDID");
-				
+				String desId =pdmysql.getString("CARDID");				
 				String desPW = pdmysql.getString("PASSWORD");
-				//System.out.println("------"+desId+"------"+desPW);
-				//System.out.println("11111111111111111------"+desId+"------"+desPW);
 				if(!srcId.equals(desId) || !srcPW.equals(desPW)){
 					result = 2;//卡号密码不正确
 				}
