@@ -81,7 +81,7 @@
 										<c:choose>
 								            <c:when test="${not empty varList}">
 								            	<c:forEach items="${varList}" var="var" varStatus="vs">
-								            	<option value="${var.CLAIM_INDEX}">${var.STATE_CONTENT}</option>						
+								            	<option value="${var.CLAIMSSTATES}">${var.STATE_CONTENT}</option>						
 								            	</c:forEach>
 								            </c:when>
 								            <c:otherwise>

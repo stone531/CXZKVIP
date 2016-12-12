@@ -313,7 +313,7 @@
 		
 		//修改
 		function edit(Id){
-			 //window.location.href="<%=basePath%>claimsys/goEdit.do?CLAIMSYS_ID="+Id;
+			 window.location.href="<%=basePath%>claimsys/goEdit.do?CLAIMSYS_ID="+Id;
 			 //top.jzts();
 			 //var diag = new top.Dialog();
 			 //diag.Drag=true;
