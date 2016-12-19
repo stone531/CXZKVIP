@@ -120,7 +120,7 @@
                           <input type="text" class="form-control" id="POLICYNO1" name="POLICYNO1" value="">
                         </div>
                         <div class="col-sm-4">
-							<label for="COURIERCOMPANY" class="control-label">公司名称：</label>
+							<label for="COURIERCOMPANY" class="control-label">快递公司：</label>
                         </div>
                         <div class="col-sm-6">
  						  <select class="form-control"  id="COURIERCOMPANY" name="COURIERCOMPANY" title="请选择快递公司">
