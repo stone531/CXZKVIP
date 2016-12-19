@@ -1,1 +1,1 @@
-smtp.qq.com,fh,25,fh,itfather@1b23.com,fh,123
+smtp.qq.com,25,1050496465@qq.com,z890430h

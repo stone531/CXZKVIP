@@ -97,6 +97,14 @@
                                 </td>
 							</tr>
 							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">快递公司:</td>
+								<td><input type="text" name="COURIERCOMPANY" id="COURIERCOMPANY" value="${pd.COURIERCOMPANY}" maxlength="255" readonly="readonly" placeholder="这里输入快递公司" title="快递公司" style="width:98%;"/></td>
+							</tr>
+							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">快递单号:</td>
+								<td><input type="text" name="COURIERNO" id="COURIERNO" value="${pd.COURIERNO}" maxlength="255" readonly="readonly" placeholder="这里输入快递单还" title="快递单号" style="width:98%;"/></td>
+							</tr>
+							<tr>
 								<td style="text-align: center;" colspan="10">
 									<a class="btn btn-mini btn-primary" onclick="save();">保存</a>
 									<a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>

@@ -78,6 +78,8 @@
 									<th class="center">出险经过</th>
 									<th class="center">理赔状态</th>
 									<th class="center">逾期提醒</th>
+									<th class="center">快递公司</th>
+									<th class="center">快递单号</th>
 									<th class="center">操作</th>
 								</tr>
 							</thead>
@@ -109,6 +111,8 @@
 													<img src="static/ace/img/claim/remind.jpg" alt="理赔流程" width="60" height="40" style="opacity:0.3;"/>
 												</c:if>
 											</td>
+											<td class='center'>${var.COURIERCOMPANY}</td>
+											<td class='center'>${var.COURIERNO}</td>										
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>

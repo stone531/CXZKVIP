@@ -73,6 +73,12 @@ public interface ClaimSysManager{
 	 */
 	public void updateSetRemind(PageData pd)throws Exception;
 	
+	/**添加快递单号
+	 * @param pd
+	 * @throws Exception
+	 */
+	public void addCourierNo(PageData pd)throws Exception;
+	
 	/**批量删除
 	 * @param ArrayDATA_IDS
 	 * @throws Exception

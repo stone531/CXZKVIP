@@ -31,6 +31,8 @@ import net.sf.json.JSONObject;
 
 import com.fh.service.ins.policy.PolicyManager;
 import com.fh.service.ins.cardinfo.CardInfoManager;
+import com.fh.service.ins.claimcompany.ClaimCompanyManager;
+
 /** 
  * 说明：ICS
  * 创建人：FH Q313596790
@@ -47,7 +49,8 @@ public class ClaimSysController extends BaseController {
 	private PolicyManager policyService;
 	@Resource(name="cardinfoService")
 	private CardInfoManager cardinfoService;
-	
+	@Resource(name="claimcompanyService")
+	private ClaimCompanyManager claimcompanyService;
 	/**保存
 	 * @param
 	 * @throws Exception
@@ -69,6 +72,9 @@ public class ClaimSysController extends BaseController {
 		//很据保单号查询是否已经报案
 		if(null == claimsysService.findByPolicyNo(pd)){
 			claimsysService.save(pd); 					//执行保存
+			//查询保险公司电话
+			pdRet.put("COMPANY_NAME", "中国平安");
+			pdRet = claimcompanyService.findByName(pdRet);
 			pdRet.put("IsSuccess", true);
 		}else{
 			pdRet.put("IsSuccess", false);
@@ -351,6 +357,32 @@ public class ClaimSysController extends BaseController {
 		pdList.add(pd);
 		map.put("list", pdList);
 		return AppUtil.returnObject(pd, map);
+	}
+	
+	/**增加快递单号
+	 * @param out
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/addCourier")
+	public void addCourier(PrintWriter out) throws Exception{
+		logBefore(logger, Jurisdiction.getUsername()+"修改ClaimSys");
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return;} //校验权限
+
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		pd.put("POLICYNO", pd.getString("POLICYNO1"));
+		PageData pdRet = new PageData();		
+		
+		//很据保单号查询是否已经报案
+		if(null == claimsysService.findByPolicyNo(pd)){
+			pdRet.put("IsSuccess", false);
+		}else{
+			claimsysService.addCourierNo(pd);
+			pdRet.put("IsSuccess", true);
+		}
+		JSONObject js = JSONObject.fromObject(pdRet);
+		out.write(js.toString());
+		out.close();
 	}
 	
 	 /**导出到excel

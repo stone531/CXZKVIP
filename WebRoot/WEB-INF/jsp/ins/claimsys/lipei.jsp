@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label for="POLICYNO" class="col-sm-3 control-label">保单号</label>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="POLICYNO" name="POLICYNO" placeholder="请输入保单号" value="${pd.POLICYNO}">
+                          <input type="text" class="form-control" id="POLICYNO" name="POLICYNO" readonly="readonly" placeholder="请输入保单号" value="${pd.POLICYNO}">
                         </div>
                         <div></div>
                     </div>
@@ -215,6 +215,8 @@
       </div>
     </div>
     <script language="javascript" type="text/javascript" src="static/ace/js/claim/lightbox.js" ></script>
+    <script type="text/javascript" src="static/ace/js/claim/zDrag.js"></script>
+	<script type="text/javascript" src="static/ace/js/claim/zDialog.js"></script>
 	<script type="text/javascript">
         var yuyueActivity =
         {
@@ -330,6 +332,15 @@
 			});	
 		}
 		
+		function showDialog(text){
+	        var diag = new Dialog();
+	        diag.Width = 400;
+	        diag.Height = 180;
+	        diag.Title = "请输入快递单号";
+	        diag.URL = "<%=basePath%>claimcompany/goAdd.do";
+			diag.OKEvent = function(){diag.close();};//点击确定后调用的方法
+			diag.show();
+		}
 		
 		$(document).ready(function() {
 			$(validForm());
@@ -372,9 +383,11 @@
 
                     if (data.IsSuccess == true) {
                         //yuyueActivity.OpenSuccessDiag();
-                        var txt=  "报险成功!<br/>保险公司：中国人寿<br/>联系电话：010-110110";
+                        var txt=  "报险成功!<br/>保险公司："+data.COMPANY_NAME+"<br/>联系电话："+data.COMPANY_TEL+"<br/>";
 						window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+						//showDialog(txt);
                         $("input").attr("value", "");
+                        $("#POLICEACCIDENT").val('');
                     }
                 },
                 complete: function() {
