@@ -86,6 +86,21 @@ CREATE TABLE `ins_cardtype` (
 
 insert  into `ins_cardtype`(`CARDTYPE_ID`,`NAME`,`LIMITAMOUNT`,`AMOUNT`,`MINAGE`,`MAXAGE`,`PROFESSION`,`COMPANYNAME`,`SERVICECONTEXT`) values ('a730e23733254f1d99771fecc08ab326','1',100000,5000,18,65,'诗人；老师；程序员',NULL,NULL),('e60c4dca6cb44a3696cfff2992d6f6b1','2',100,10,1,100,'工程师；乞丐',NULL,NULL);
 
+/*Table structure for table `ins_claimcompany` */
+
+DROP TABLE IF EXISTS `ins_claimcompany`;
+
+CREATE TABLE `ins_claimcompany` (
+  `CLAIMCOMPANY_ID` varchar(100) NOT NULL,
+  `COMPANY_NAME` varchar(255) DEFAULT NULL COMMENT 'æŠ¥é™©å…¬å¸',
+  `COMPANY_TEL` varchar(255) DEFAULT NULL COMMENT 'ä¿é™©å…¬å¸ç”µè¯',
+  PRIMARY KEY (`CLAIMCOMPANY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `ins_claimcompany` */
+
+insert  into `ins_claimcompany`(`CLAIMCOMPANY_ID`,`COMPANY_NAME`,`COMPANY_TEL`) values ('2a82c24a1b8d48c39eb44e1083251c28','中国平安','010-333334'),('9981878852b24b809eb975ed512351e5','中国太平洋保险有限公司','010-1111111'),('bee9c847d55d476ca75b0cf46de9f108','中国人寿北京朝阳区北辰世纪分部','010-110110');
+
 /*Table structure for table `ins_claimstates` */
 
 DROP TABLE IF EXISTS `ins_claimstates`;
