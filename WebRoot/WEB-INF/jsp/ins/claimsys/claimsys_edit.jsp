@@ -81,7 +81,7 @@
 										<c:choose>
 								            <c:when test="${not empty varList}">
 								            	<c:forEach items="${varList}" var="var" varStatus="vs">
-								            	<option value="${var.CLAIM_INDEX}">${var.STATE_CONTENT}</option>						
+								            	<option value="${var.CLAIMSSTATES}">${var.STATE_CONTENT}</option>						
 								            	</c:forEach>
 								            </c:when>
 								            <c:otherwise>
@@ -95,6 +95,14 @@
 										</c:choose>
                                     </select>
                                 </td>
+							</tr>
+							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">快递公司:</td>
+								<td><input type="text" name="COURIERCOMPANY" id="COURIERCOMPANY" value="${pd.COURIERCOMPANY}" maxlength="255" readonly="readonly" placeholder="这里输入快递公司" title="快递公司" style="width:98%;"/></td>
+							</tr>
+							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">快递单号:</td>
+								<td><input type="text" name="COURIERNO" id="COURIERNO" value="${pd.COURIERNO}" maxlength="255" readonly="readonly" placeholder="这里输入快递单还" title="快递单号" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="text-align: center;" colspan="10">

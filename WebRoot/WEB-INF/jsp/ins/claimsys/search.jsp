@@ -16,7 +16,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="static/ace/js/claim/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="static/ace/js/claim/jquery.validate.js"></script>
-
+<link rel="Stylesheet" type="text/css" href="static/ace/css/claim/loginDialog.css" />
+<!-- jsp文件头和头部 -->
  <%@ include file="../../ht.jsp"%>
 </head>
 
@@ -79,7 +80,7 @@
                         <label for="PersonNo" class="control-label">身份证号：</label>
                       </div>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="IANTPAPERNO" name="IANTPAPERNO" placeholder="请输入被投保人身份证号" value="412728198904303231">
+                        <input type="text" class="form-control" id="IANTPAPERNO" name="IANTPAPERNO" placeholder="请输入被投保人身份证号" value="341225199008277732">
                       </div>
 					</div>
                 </div>
@@ -105,6 +106,48 @@
           <div class="col-md-12">                                              
           </div>
         </div>
+		
+		<!--   测试对话框 -->
+        <div id="LoginBox">
+			<form class="form-horizontal" role="form" id="CourierForm">
+				<div class="panel-body">
+				    <div class="row" style="background:#f7f7f7;padding:0px 20px;line-height:50px;height:50px;font-weight:bold;color:#666;font-size:20px;">
+						添加快递单号窗口<a href="javascript:void(0)" title="关闭窗口" class="close_btn" style="font-family:arial;font-size:30px;font-weight:700;color:#999;text-decoration:none;float:right;padding-right:4px;" id="closeBtn">×</a>
+					</div>
+										
+					<div class="form-group row" style="margin:30px 30px 10px">
+                        <div class="col-sm-6" style="display:none">
+                          <input type="text" class="form-control" id="POLICYNO1" name="POLICYNO1" value="">
+                        </div>
+                        <div class="col-sm-4">
+							<label for="COURIERCOMPANY" class="control-label">快递公司：</label>
+                        </div>
+                        <div class="col-sm-6">
+ 						  <select class="form-control"  id="COURIERCOMPANY" name="COURIERCOMPANY" title="请选择快递公司">
+							<option value="申通快递">申通快递</option>
+                            <option value="顺丰速运">顺丰速运</option>
+                            <option value="圆通速递">圆通速递</option>
+                            <option value="韵达速递">韵达速递</option>
+                            <option value="中通快递">中通快递</option>
+                            <option value="天天快递">天天快递</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin:10px 30px 10px">
+                        <div class="col-sm-4">
+							<label for="COURIERNO" class="control-label">快递单号：</label>
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="COURIERNO" name="COURIERNO" placeholder="请输入快递单号" value="${pd.POLICYNO}">
+                        </div>
+                    </div>
+					<div class="form-group row" style="margin:20px 150px">
+						<a href="javascript:void(0)" class="btn btn-success" id="addCourierNo">添加</a>
+					</div>
+				</div>
+			</form>
+        </div>		
+		
         <!-- 开始循环 -->
 		<c:choose>
         <c:when test="${not empty varList}">
@@ -126,14 +169,19 @@
                           <td class="center">
 						  	<c:if test="${var.IsOrNo == 0 }">
 	                            <div class="hidden-sm hidden-xs btn-group">
-									<a class="btn btn-sm btn-success" onclick="goClaim('${var.POLICYNO}');">报险</a>
+									<a class="btn btn-sm btn-success" onclick="goClaim('${var.POLICYNO}');">点击报险</a>
 								</div>
 							</c:if>
 							<c:if test="${var.IsOrNo == 1 }">
                                 <div class="hidden-sm hidden-xs btn-group">
-                                  <a class="btn btn-sm btn-success" >${var.STATE_CONTENT}</a>
+                                  <label class="control-label">${var.STATE_CONTENT}</label>
                                 </div>
-							</c:if>							
+								<c:if test="${var.CLAIMSSTATES == 2 }">
+									<div class="hidden-sm hidden-xs btn-group">
+										<a class="btn btn-sm btn-success" onclick="goCourierW('${var.POLICYNO}');">点我</a>
+									</div>
+								</c:if>	
+							</c:if>								
                           </td>
                         </tr>
 					</c:forEach>
@@ -173,13 +221,102 @@
 	        	searchByNo();
 	        }
         });
-        		//修改
+        //修改
         function goClaim(Id){
         	 window.location.href="<%=basePath%>claimsys/goAdd.do?POLICYNO="+Id;
         }
     </script>
     <script type="text/javascript" src="static/js/jquery.tips.js"></script>
     <script type="text/javascript">
+	    function goCourierW(txt){
+        	 	$("body").append("<div id='mask'></div>");
+	    		$("#mask").addClass("mask").fadeIn("slow");
+	    		$("#LoginBox").fadeIn("slow");
+				$("#POLICYNO1").val(txt);
+        }
+	    $(function ($) {
+	    	//弹出登录
+	    	$("#goCourierW").hover(function () {
+	    		$(this).stop().animate({
+	    			opacity: '1'
+	    		}, 600);
+	    	}, function () {
+	    		$(this).stop().animate({
+	    			opacity: '0.6'
+	    		}, 1000);
+	    	}).on('click', function () {
+
+	    	});
+	    	//
+	    	//按钮的透明度
+	    	$("#loginbtn").hover(function () {
+	    		$(this).stop().animate({
+	    			opacity: '1'
+	    		}, 600);
+	    	}, function () {
+	    		$(this).stop().animate({
+	    			opacity: '0.8'
+	    		}, 1000);
+	    	});
+			
+	    	$("#addCourierNo").on('click', function () {	
+			    if($("#COURIERCOMPANY").val()==""){
+			    	$("#COURIERCOMPANY").tips({
+			    		side:3,
+		                msg:'请输入快递公司',
+		                bg:'#AE81FF',
+		                time:2
+		            });
+			    	$("#COURIERCOMPANY").focus();
+			    return false;
+				}
+				if($("#COURIERNO").val()==""){
+			    	$("#COURIERNO").tips({
+			    		side:3,
+		                msg:'请输入快递单号',
+		                bg:'#AE81FF',
+		                time:2
+		            });
+			    	$("#COURIERNO").focus();
+			    return false;
+				}
+				//$("#CourierForm").submit();
+
+                $.ajax({
+                    url: "claimsys/addCourier.do",    //请求的url地址
+                    dataType: "json",   //返回格式为json
+                    async: false, //请求是否异步，默认为异步，这也是ajax重要特性
+                    data: $('#CourierForm').serialize(),   //参数值
+                    type: "POST",   //请求方式
+                    beforeSend: function() {
+                        //请求前的处理
+                    },
+                    success: function(data) {
+                        if (data.IsSuccess == false) {
+                            alert("添加失败!");           
+                        }                
+                        if (data.IsSuccess == true) {
+							$("#COURIERNO").val("");
+							$('#COURIERCOMPANY')[0].selectedIndex = 0;
+							$("#LoginBox").fadeOut("fast");
+							$("#mask").css({ display: 'none' });
+                        }
+                    },
+                    complete: function() {
+                        //请求完成的处理
+                    },
+                    error: function() {
+                        //请求出错处理
+                    }
+                });
+	    	});
+	    	//关闭
+	    	$(".close_btn").hover(function () { $(this).css({ color: 'black' }) }, function () { $(this).css({ color: '#999' }) }).on('click', function () {
+	    		$("#LoginBox").fadeOut("fast");
+	    		$("#mask").css({ display: 'none' });
+	    	});
+	    });
+		
 		function goSearch(){
 			if(document.getElementById("byNo").style.display =="none"){
 				if($("#CARDID").val()==""){

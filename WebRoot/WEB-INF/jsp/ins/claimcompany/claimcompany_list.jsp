@@ -31,7 +31,7 @@
 						<div class="col-xs-12">
 							
 						<!-- 检索  -->
-						<form action="claimsys/list.do" method="post" name="Form" id="Form">
+						<form action="claimcompany/list.do" method="post" name="Form" id="Form">
 						<table style="margin-top:5px;">
 							<tr>
 								<td>
@@ -66,20 +66,8 @@
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
 									</th>
 									<th class="center" style="width:50px;">序号</th>
-									<th class="center">保单号</th>
-									<th class="center">报案人</th>
-									<th class="center">与被保人关系</th>
-									<th class="center">电子邮箱</th>
-									<th class="center">报险人电话</th>
-									<th class="center">出险时间</th>
-									<th class="center">出险地点</th>
-									<th class="center">出险人</th>
-									<th class="center">出险人电话</th>
-									<th class="center">出险经过</th>
-									<th class="center">理赔状态</th>
-									<th class="center">逾期提醒</th>
-									<th class="center">快递公司</th>
-									<th class="center">快递单号</th>
+									<th class="center">报险公司</th>
+									<th class="center">保险公司电话</th>
 									<th class="center">操作</th>
 								</tr>
 							</thead>
@@ -92,39 +80,23 @@
 									<c:forEach items="${varList}" var="var" varStatus="vs">
 										<tr>
 											<td class='center'>
-												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.CLAIMSYS_ID}" class="ace" /><span class="lbl"></span></label>
+												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.CLAIMCOMPANY_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.POLICYNO}</td>
-											<td class='center'>${var.INFORNAME}</td>
-											<td class='center'>${var.RELATION}</td>
-											<td class='center'>${var.EMAIL}</td>
-											<td class='center'>${var.CLAIMERTEL}</td>
-											<td class='center'>${var.OCCURTIME}</td>
-											<td class='center'>${var.OCCURPLACE}</td>
-											<td class='center'>${var.POLICYNAME}</td>
-											<td class='center'>${var.POLICERTEL}</td>
-											<td class='center'>${var.POLICEACCIDENT}</td>
-											<td class='center'>${var.CLAIMSSTATES}</td>
-											<td class='center'>
-												<c:if test="${var.ISREMIND == 1 }">
-													<img src="static/ace/img/claim/remind.jpg" alt="理赔流程" width="60" height="40" style="opacity:0.3;"/>
-												</c:if>
-											</td>
-											<td class='center'>${var.COURIERCOMPANY}</td>
-											<td class='center'>${var.COURIERNO}</td>										
+											<td class='center'>${var.COMPANY_NAME}</td>
+											<td class='center'>${var.COMPANY_TEL}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
 												</c:if>
 												<div class="hidden-sm hidden-xs btn-group">
 													<c:if test="${QX.edit == 1 }">
-													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.CLAIMSYS_ID}');">
+													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.CLAIMCOMPANY_ID}');">
 														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
 													</a>
 													</c:if>
 													<c:if test="${QX.del == 1 }">
-													<a class="btn btn-xs btn-danger" onclick="del('${var.CLAIMSYS_ID}');">
+													<a class="btn btn-xs btn-danger" onclick="del('${var.CLAIMCOMPANY_ID}');">
 														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
 													</a>
 													</c:if>
@@ -138,7 +110,7 @@
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 															<c:if test="${QX.edit == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="edit('${var.CLAIMSYS_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
+																<a style="cursor:pointer;" onclick="edit('${var.CLAIMCOMPANY_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
 																	<span class="green">
 																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																	</span>
@@ -147,7 +119,7 @@
 															</c:if>
 															<c:if test="${QX.del == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="del('${var.CLAIMSYS_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
+																<a style="cursor:pointer;" onclick="del('${var.CLAIMCOMPANY_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
 																	<span class="red">
 																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																	</span>
@@ -284,7 +256,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="新增";
-			 diag.URL = '<%=basePath%>claimsys/goAdd.do';
+			 diag.URL = '<%=basePath%>claimcompany/goAdd.do';
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
@@ -299,7 +271,6 @@
 				diag.close();
 			 };
 			 diag.show();
-
 		}
 		
 		//删除
@@ -307,7 +278,7 @@
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
-					var url = "<%=basePath%>claimsys/delete.do?CLAIMSYS_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>claimcompany/delete.do?CLAIMCOMPANY_ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						nextPage(${page.currentPage});
 					});
@@ -317,21 +288,20 @@
 		
 		//修改
 		function edit(Id){
-			 window.location.href="<%=basePath%>claimsys/goEdit.do?CLAIMSYS_ID="+Id;
-			 //top.jzts();
-			 //var diag = new top.Dialog();
-			 //diag.Drag=true;
-			 //diag.Title ="编辑";
-			 //diag.URL = '<%=basePath%>claimsys/goEdit.do?CLAIMSYS_ID='+Id;
-			 //diag.Width = 450;
-			 //diag.Height = 355;
-			 //diag.CancelEvent = function(){ //关闭事件
-			 //	 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-			 //		 nextPage(${page.currentPage});
-			 //	}
-			 //	diag.close();
-			 //};
-			 //diag.show();
+			 top.jzts();
+			 var diag = new top.Dialog();
+			 diag.Drag=true;
+			 diag.Title ="编辑";
+			 diag.URL = '<%=basePath%>claimcompany/goEdit.do?CLAIMCOMPANY_ID='+Id;
+			 diag.Width = 450;
+			 diag.Height = 355;
+			 diag.CancelEvent = function(){ //关闭事件
+				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+					 nextPage(${page.currentPage});
+				}
+				diag.close();
+			 };
+			 diag.show();
 		}
 		
 		//批量操作
@@ -363,7 +333,7 @@
 							top.jzts();
 							$.ajax({
 								type: "POST",
-								url: '<%=basePath%>claimsys/deleteAll.do?tm='+new Date().getTime(),
+								url: '<%=basePath%>claimcompany/deleteAll.do?tm='+new Date().getTime(),
 						    	data: {DATA_IDS:str},
 								dataType:'json',
 								//beforeSend: validateData,
@@ -382,7 +352,7 @@
 		
 		//导出excel
 		function toExcel(){
-			window.location.href='<%=basePath%>claimsys/excel.do';
+			window.location.href='<%=basePath%>claimcompany/excel.do';
 		}
 	</script>
 

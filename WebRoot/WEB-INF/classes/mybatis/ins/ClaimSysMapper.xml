@@ -25,7 +25,9 @@
 		POLICEACCIDENT,	
 		CLAIMSSTATES,	
 		ISREMIND,
-		LASTUPDATE,	
+		LASTUPDATE,
+		COURIERCOMPANY,
+		COURIERNO,
 		CLAIMSYS_ID
 	</sql>
 	
@@ -48,7 +50,9 @@
 		#{POLICEACCIDENT},	
 		#{CLAIMSSTATES},	
 		#{ISREMIND},
-		#{LASTUPDATE},	
+		#{LASTUPDATE},
+		#{COURIERCOMPANY},
+		#{COURIERNO},
 		#{CLAIMSYS_ID}
 	</sql>
 	
@@ -156,6 +160,7 @@
 	<!-- 通过PolicyNo获取理赔状态 -->
 	<select id="findStateByPolicyNo" parameterType="pd" resultType="pd">
 		select a.POLICYNO,
+			   a.CLAIMSSTATES,
 		       b.STATE_CONTENT
 		from 
 		<include refid="tableName"></include> a,
@@ -163,6 +168,17 @@
 		where 
 			a.POLICYNO = #{POLICYNO} AND a.CLAIMSSTATES = b.CLAIMSSTATES
 	</select>
+	
+	<!-- 增加快递单号 -->
+	<update id="addCourierNo" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			COURIERCOMPANY = #{COURIERCOMPANY},
+			COURIERNO = #{COURIERNO}
+		where 
+		POLICYNO = #{POLICYNO}
+	</update>
 	
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">

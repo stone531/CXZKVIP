@@ -115,6 +115,14 @@ public class ClaimSysService implements ClaimSysManager{
 		dao.findForObject("ClaimSysMapper.updateSetRemind", pd);
 	}
 	
+	/**添加快递单号
+	 * @param pd
+	 * @throws Exception
+	 */
+	public void addCourierNo(PageData pd)throws Exception{
+		dao.findForObject("ClaimSysMapper.addCourierNo", pd);
+	}
+	
 	/**批量删除
 	 * @param ArrayDATA_IDS
 	 * @throws Exception
