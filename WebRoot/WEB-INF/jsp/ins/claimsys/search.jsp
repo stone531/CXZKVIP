@@ -108,7 +108,7 @@
         </div>
 		
 		<!--   测试对话框 -->
-        <div id="LoginBox">
+        <div id="LoginBox" style="position:fixed;left:35%;top:30%;background:white;width:426px;height:282px;border:3px solid #444;border-radius:7px;z-index:10000;display:none;">
 			<form class="form-horizontal" role="form" id="CourierForm">
 				<div class="panel-body">
 				    <div class="row" style="background:#f7f7f7;padding:0px 20px;line-height:50px;height:50px;font-weight:bold;color:#666;font-size:20px;">
@@ -120,7 +120,7 @@
                           <input type="text" class="form-control" id="POLICYNO1" name="POLICYNO1" value="">
                         </div>
                         <div class="col-sm-4">
-							<label for="COURIERCOMPANY" class="control-label">快递公司：</label>
+							<label for="COURIERCOMPANY" class="control-label">公司名称：</label>
                         </div>
                         <div class="col-sm-6">
  						  <select class="form-control"  id="COURIERCOMPANY" name="COURIERCOMPANY" title="请选择快递公司">
