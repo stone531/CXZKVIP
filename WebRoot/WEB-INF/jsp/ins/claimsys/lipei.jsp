@@ -10,11 +10,10 @@
 %>
 <html>
 <head>
-
 	<base href="<%=basePath%>">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 	<script type="text/javascript" src="static/ace/js/claim/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="static/ace/js/claim/jquery.validate.js"></script>
 	<style>
