@@ -15,6 +15,7 @@
 <html>
 	<head>
 		<base href="<%=basePath%>">
+		<script src="static/main/js/index.js"></script>
 		<script type="text/javascript" src="static/js/jquery-1.7.2.js" ></script>
 		<script type="text/javascript" src="static/js/jquery.tips.js"></script>
 		 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">		
@@ -149,6 +150,14 @@
                 <div class="col-sm-12">
                   <input type="text" id="iaage" maxlength="32" style="width:50%;" disabled="disabled" class="form-control"
                   placeholder="被保险人年龄" >
+                </div>
+                <br>
+                 <div class="col-sm-12 text-left">
+                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保份数:</label>
+                </div>
+                <div class="col-sm-12">
+                  <input type="text" id="iacopy" maxlength="32" style="width:50%;"  class="form-control"
+                  placeholder="份数" >
                 </div>
                 <br>
               </div>
@@ -313,6 +322,10 @@
                   <input type="text" name="IANTRELATION" id="IANTRELATION" maxlength="255"
                   value="${pd.IANTRELATION}" style="background: border-box;border:hidden;" class="text-right">
                 </h5>
+                <h5 class="text-info text-justify">投保份数:
+                  <input type="text" name="IANTCOPY" id="IANTCOPY" maxlength="255"
+                  value="${pd.IANTCOPY}" style="background: border-box;border:hidden;" class="text-right">
+                </h5>
                 <h5 class="text-info text-justify">被保险人年龄:
                   <input type="text" name="IANAGE" id="IANAGE" maxlength="255" value="${pd.IANAGE}"
                   style="background: border-box;border:hidden;" class="text-right">
@@ -366,6 +379,16 @@
 
 <!--javascript 脚本分割线********************************************************************************************************************  -->			
 <script type="text/javascript">
+
+		//馋看数组是否包含指定的元素
+		function contains(a, obj) {
+		    for (var i = 0; i < a.length; i++) {
+		        if (a[i] === obj) {
+		            return true;
+		         }
+		    }       
+		     return false;
+		}
 
 		var curbusinessId = 1;
 		var div = document.getElementById("1");
@@ -629,6 +652,32 @@
 			return false;
 			}
 			
+			//limit age
+			//alert($("#iaage").val());
+			if($("#iaage").val()<18 || $("#iaage").val()>45){
+				$("#iaage").tips({
+					side:3,
+		            msg:'年龄不符合',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				return false;
+			}
+			
+			//limit 职业
+			var professions=["警察","土匪","教师","学生"];
+			//alert(professions);
+			if(!contains(professions,$("#iaprofession").val())){
+				//alert(professions);
+				$("#iaprofession").tips({
+					side:3,
+		            msg:'职业不符合要求',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				return false;
+			}
+			
 			$("#PolicyInfo").hide();
 			$("#SERVICETEXT").show();
 			return ;
@@ -670,6 +719,9 @@
 			
 			var iantage=$("#iaage").val();
 			document.getElementById("IANAGE").value= iantage;
+			
+			var iantage=$("#iacopy").val();
+			document.getElementById("IANTCOPY").value= iantage;
 			
 			var benname=$("#bname").val();
 			document.getElementById("BENNAME").value= benname;
