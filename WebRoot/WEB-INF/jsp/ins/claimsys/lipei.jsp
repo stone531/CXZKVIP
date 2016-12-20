@@ -10,16 +10,29 @@
 %>
 <html>
 <head>
-
 	<base href="<%=basePath%>">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 	<script type="text/javascript" src="static/ace/js/claim/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="static/ace/js/claim/jquery.validate.js"></script>
-	<script type="text/javascript" src="static/ace/js/claim/xcConfirm.js"></script>
-
-    <link href="static/ace/css/claim/xcConfirm.css" rel="stylesheet" type="text/css"/>
+	<style>
+		.mask{
+			margin:0;
+			padding:0;
+			border:none;
+			width:100%;
+			height:100%;
+			background:#333;
+			opacity:0.6;
+			filter:alpha(opacity=60);
+			z-index:9999;
+			position:fixed;
+			top:0;
+			left:0;
+			display:none;
+		}
+	</style>
     
      <%@ include file="../../ht.jsp"%>
 </head>
@@ -157,6 +170,7 @@
 		  
 		  
           <div class="col-md-3">
+			<br>
             <br>
             <p class="text-primary">Lorem ipsum dolor sit amet, consectetur adipisici elit,
               <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
@@ -169,28 +183,28 @@
               <br>Ut enim ad minim veniam, quis nostrud</p>
             <br>
             <br>
+			<br>
             <p class="text-success">Lorem ipsum dolor sit amet, consectetur adipisici elit,
               <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               <br>Ut enim ad minim veniam, quis nostrud</p>
             <br>
             <br>
+			<br>
             <p class="text-info">Lorem ipsum dolor sit amet, consectetur adipisici elit,
               <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               <br>Ut enim ad minim veniam, quis nostrud</p>
             <br>
             <br>
+			<br>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisici elit,
               <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               <br>Ut enim ad minim veniam, quis nostrud</p>
             <br>
             <br>
+			<br>
             <p class="text-success">Lorem ipsum dolor sit amet, consectetur adipisici elit,
               <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               <br>Ut enim ad minim veniam, quis nostrud</p>
-            <br>
-            <br>
-            <br>
-            <br>
             <br>
             <br>
             <br>
@@ -200,45 +214,48 @@
           </div>
         </div>
       </div>
-           <div id="successDiag" class="successDiag" width="640" height="360" style="display: none; width: 580px; height: 280px;padding: 40px 30px;">
-          <div class="oh" style="zoom:1;">
-          <span class="fl mr20">
-              <img src="static/ace/img/claim/check.jpg">
-          </span>
-              <div class="tl oh" style="zoom: 1;">
-                  <div class="f16 fb mt20">您的报案我们已经受理,我们将尽快为您处理，谢谢！</div>
-              </div>
-          </div>
-          <div class="f14 tl pt20" style="padding-left:60px;">
-              <div class="pic-item"><img src="static/ace/img/claim/wxlogo.jpg" alt=""></div>
-          </div>
-      </div>
+
+		<!--   测试对话框 -->
+        <div id="successDiag" style="position:fixed;left:35%;top:30%;background:white;width:426px;height:282px;border:3px solid #444;border-radius:7px;z-index:10000;display:none;">
+			<div class="panel-body">
+			    <div class="row" style="background:#f7f7f7;padding:0px 20px;line-height:50px;height:50px;font-weight:bold;color:#666;font-size:20px;">
+					申请理赔结果窗口<a href="javascript:void(0)" title="关闭窗口" class="close_btn" style="font-family:arial;font-size:30px;font-weight:700;color:#999;text-decoration:none;float:right;padding-right:4px;" id="closeBtn">×</a>
+				</div>
+									
+				<div class="form-group row" style="margin:15px 30px 10px">
+					<div class="row">您的报案我们已经受理,我们将尽快为您处理，谢谢！<br><br>&nbsp;&nbsp;&nbsp;详情请联系：<br></div>
+                </div>
+                <div class="form-group row" id="showMesg" style="margin:10px 100px 10px;">
+                </div>
+				<div style="margin: 30px 60px 10px">
+					<button class="btn btn-block btn-sm btn-warning center-block" style="width:30%;" id="sureBtn">确定</button>
+				</div>
+			</div>
+        </div>			
     </div>
-    <script language="javascript" type="text/javascript" src="static/ace/js/claim/lightbox.js" ></script>
-    <script type="text/javascript" src="static/ace/js/claim/zDrag.js"></script>
-	<script type="text/javascript" src="static/ace/js/claim/zDialog.js"></script>
 	<script type="text/javascript">
-        var yuyueActivity =
-        {
-            Iint: function () { },
-            CheckFrom: function () {
-            },
-            OpenSuccessDiag: function () {
-                var diag = new Dialog();
-                var diagDiv = $("#successDiag");
-                var width = (diagDiv.attr("width") != null ? diagDiv.attr("width") : 550);
-                var height = (diagDiv.attr("height") != null ? diagDiv.attr("height") : 110);
-
-                diag.Width = parseInt(width);
-                diag.Height = parseInt(height);
-                diag.InvokeElementId = "successDiag";
-                diag.CancelEvent = function(){ //关闭事件
-
-                    diag.close();
-                };
-                diag.show();
-            }
+	    var flag = 0;
+	    function goCourierW(txt){
+           	 	$("body").append("<div id='mask'></div>");
+	       		$("#mask").addClass("mask").fadeIn("slow");
+	       		$("#successDiag").fadeIn("slow");
+				document.getElementById('showMesg').innerHTML = txt;
         };
+	    
+	    $("#sureBtn").on('click', function () {
+	    	$("#successDiag").fadeOut("fast");
+	    	$("#mask").css({ display: 'none' });
+			if (1 == flag)
+				window.location.href="main/index"; 
+	    });
+	    
+	    //关闭
+	    $(".close_btn").hover(function () { $(this).css({ color: 'black' }) }, function () { $(this).css({ color: '#999' }) }).on('click', function () {
+	       	$("#successDiag").fadeOut("fast");
+	       	$("#mask").css({ display: 'none' });
+			if (1 == flag)
+				window.location.href="main/index";
+	    });	
 		
 		function validForm(){
 			return $("#claimForm").validate({
@@ -375,17 +392,14 @@
                 },
                 success: function(data) {
                     if (data.IsSuccess == false) {
-                        //alert("报险失败！！！");
                         var txt=  "啊呀呀呀丫丫，失败了呢！";
-						window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.info);
- 
+						flag = 0;
+						goCourierW(txt);
                     }
-
-                    if (data.IsSuccess == true) {
-                        //yuyueActivity.OpenSuccessDiag();
-                        var txt=  "报险成功!<br/>保险公司："+data.COMPANY_NAME+"<br/>联系电话："+data.COMPANY_TEL+"<br/>";
-						window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
-						//showDialog(txt);
+                    if (data.IsSuccess == true) { 
+                        var txt=  "保险公司："+data.COMPANY_NAME+"<br/>联系电话："+data.COMPANY_TEL+"<br/>";
+						flag = 1;
+						goCourierW(txt);
                         $("input").attr("value", "");
                         $("#POLICEACCIDENT").val('');
                     }

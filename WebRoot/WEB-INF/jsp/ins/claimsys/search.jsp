@@ -12,11 +12,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml" class="new-w-950">
 <head>
 <base href="<%=basePath%>">
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="static/ace/js/claim/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="static/ace/js/claim/jquery.validate.js"></script>
-<link rel="Stylesheet" type="text/css" href="static/ace/css/claim/loginDialog.css" />
+<style>
+	.mask{
+		margin:0;
+		padding:0;
+		border:none;
+		width:100%;
+		height:100%;
+		background:#333;
+		opacity:0.6;
+		filter:alpha(opacity=60);
+		z-index:9999;
+		position:fixed;
+		top:0;
+		left:0;
+		display:none;
+	}
+</style>
 <!-- jsp文件头和头部 -->
  <%@ include file="../../ht.jsp"%>
 </head>
@@ -138,11 +155,11 @@
 							<label for="COURIERNO" class="control-label">快递单号：</label>
                         </div>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="COURIERNO" name="COURIERNO" placeholder="请输入快递单号" value="${pd.POLICYNO}">
+                          <input type="text" class="form-control" id="COURIERNO" name="COURIERNO" placeholder="请输入快递单号">
                         </div>
                     </div>
-					<div class="form-group row" style="margin:20px 150px">
-						<a href="javascript:void(0)" class="btn btn-success" id="addCourierNo">添加</a>
+					<div style="margin:30px 60px 10px">
+						<a href="javascript:void(0)" class="btn btn-block btn-sm btn-warning center-block" style="width:30%;" id="addCourierNo">添加</a>
 					</div>
 				</div>
 			</form>
@@ -178,7 +195,7 @@
                                 </div>
 								<c:if test="${var.CLAIMSSTATES == 2 }">
 									<div class="hidden-sm hidden-xs btn-group">
-										<a class="btn btn-sm btn-success" onclick="goCourierW('${var.POLICYNO}');">点我</a>
+										<a class="btn btn-sm btn-warning" onclick="goCourierW('${var.POLICYNO}');">点我</a>
 									</div>
 								</c:if>	
 							</c:if>								
@@ -193,8 +210,7 @@
 		</c:choose>
       </div>
     </div>
-    <script type="text/javascript">
-    
+    <script type="text/javascript">   
         var liCard = document.getElementById("card");
         var liNo = document.getElementById("no");
         function searchByCardNo(){
@@ -230,12 +246,12 @@
     <script type="text/javascript">
 	    function goCourierW(txt){
         	 	$("body").append("<div id='mask'></div>");
-	    		$("#mask").addClass("mask").fadeIn("slow");
+			$("#mask").addClass("mask").fadeIn("slow");
 	    		$("#LoginBox").fadeIn("slow");
-				$("#POLICYNO1").val(txt);
+			$("#POLICYNO1").val(txt);
         }
 	    $(function ($) {
-	    	//弹出登录
+	    	//弹出对话框
 	    	$("#goCourierW").hover(function () {
 	    		$(this).stop().animate({
 	    			opacity: '1'
@@ -248,16 +264,6 @@
 
 	    	});
 	    	//
-	    	//按钮的透明度
-	    	$("#loginbtn").hover(function () {
-	    		$(this).stop().animate({
-	    			opacity: '1'
-	    		}, 600);
-	    	}, function () {
-	    		$(this).stop().animate({
-	    			opacity: '0.8'
-	    		}, 1000);
-	    	});
 			
 	    	$("#addCourierNo").on('click', function () {	
 			    if($("#COURIERCOMPANY").val()==""){
@@ -281,7 +287,6 @@
 			    return false;
 				}
 				//$("#CourierForm").submit();
-
                 $.ajax({
                     url: "claimsys/addCourier.do",    //请求的url地址
                     dataType: "json",   //返回格式为json
@@ -296,10 +301,10 @@
                             alert("添加失败!");           
                         }                
                         if (data.IsSuccess == true) {
-							$("#COURIERNO").val("");
-							$('#COURIERCOMPANY')[0].selectedIndex = 0;
 							$("#LoginBox").fadeOut("fast");
 							$("#mask").css({ display: 'none' });
+							$("#COURIERNO").val("");
+							$('#COURIERCOMPANY')[0].selectedIndex = 0;
                         }
                     },
                     complete: function() {
