@@ -16,6 +16,17 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`cxzkvip` /*!40100 DEFAULT CHARACTER SET
 
 USE `cxzkvip`;
 
+
+
+/*!40101 SET NAMES utf8 */;
+
+DROP TABLE IF EXISTS `ins_warning`;
+CREATE TABLE `ins_warning` (
+	`ID` int (11),
+	`WARNING` varchar (1536)
+); 
+
+
 /*Table structure for table `ins_business` */
 
 DROP TABLE IF EXISTS `ins_business`;
@@ -65,12 +76,30 @@ CREATE TABLE `ins_cardtype` (
   `MINAGE` int(11) DEFAULT NULL,
   `MAXAGE` int(11) DEFAULT NULL,
   `PROFESSION` varchar(765) DEFAULT NULL,
-  `COMPANYNAME` varchar(300) DEFAULT NULL
+  `COMPANYNAME` varchar(300) DEFAULT NULL,
+  `SERVICECONTEXT` varchar(2048) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 /*Data for the table `ins_cardtype` */
 
-insert  into `ins_cardtype`(`CARDTYPE_ID`,`NAME`,`LIMITAMOUNT`,`AMOUNT`,`MINAGE`,`MAXAGE`,`PROFESSION`,`COMPANYNAME`) values ('a730e23733254f1d99771fecc08ab326','1',100000,5000,18,65,'诗人；老师；程序员',NULL),('e60c4dca6cb44a3696cfff2992d6f6b1','2',100,10,1,100,'工程师；乞丐',NULL);
+insert  into `ins_cardtype`(`CARDTYPE_ID`,`NAME`,`LIMITAMOUNT`,`AMOUNT`,`MINAGE`,`MAXAGE`,`PROFESSION`,`COMPANYNAME`,`SERVICECONTEXT`) values ('a730e23733254f1d99771fecc08ab326','1',100000,5000,18,65,'诗人；老师；程序员',NULL,NULL),('e60c4dca6cb44a3696cfff2992d6f6b1','2',100,10,1,100,'工程师；乞丐',NULL,NULL);
+
+/*Table structure for table `ins_claimcompany` */
+
+DROP TABLE IF EXISTS `ins_claimcompany`;
+
+CREATE TABLE `ins_claimcompany` (
+  `CLAIMCOMPANY_ID` varchar(100) NOT NULL,
+  `COMPANY_NAME` varchar(255) DEFAULT NULL COMMENT 'æŠ¥é™©å…¬å¸',
+  `COMPANY_TEL` varchar(255) DEFAULT NULL COMMENT 'ä¿é™©å…¬å¸ç”µè¯',
+  PRIMARY KEY (`CLAIMCOMPANY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `ins_claimcompany` */
+
+insert  into `ins_claimcompany`(`CLAIMCOMPANY_ID`,`COMPANY_NAME`,`COMPANY_TEL`) values ('2a82c24a1b8d48c39eb44e1083251c28','中国平安','010-333334'),('9981878852b24b809eb975ed512351e5','中国太平洋保险有限公司','010-1111111'),('bee9c847d55d476ca75b0cf46de9f108','中国人寿北京朝阳区北辰世纪分部','010-110110');
 
 /*Table structure for table `ins_claimstates` */
 
@@ -85,7 +114,7 @@ CREATE TABLE `ins_claimstates` (
 
 /*Data for the table `ins_claimstates` */
 
-insert  into `ins_claimstates`(`CLAIMSTATE_ID`,`CLAIMSSTATES`,`STATE_CONTENT`) values ('100000','0','报险'),('100001','1','预审'),('100002','2','待邮寄资料'),('100003','3','收到资料'),('100004','4','保险公司处理中'),('100005','5','理赔完毕');
+insert  into `ins_claimstates`(`CLAIMSTATE_ID`,`CLAIMSSTATES`,`STATE_CONTENT`) values ('100000','0','已报险'),('100001','1','预审'),('100002','2','待邮寄资料'),('100003','3','收到资料'),('100004','4','保险公司处理中'),('100005','5','理赔完毕');
 
 /*Table structure for table `ins_claimsys` */
 
@@ -106,12 +135,12 @@ CREATE TABLE `ins_claimsys` (
   `CLAIMSSTATES` varchar(255) DEFAULT NULL COMMENT 'ç†èµ”çŠ¶æ€',
   `ISREMIND` int(4) DEFAULT NULL COMMENT 'æ˜¯å¦æé†’',
   `LASTUPDATE` date DEFAULT NULL,
+  `COURIERCOMPANY` varchar(255) DEFAULT NULL,
+  `COURIERNO` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`CLAIMSYS_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `ins_claimsys` */
-
-insert  into `ins_claimsys`(`CLAIMSYS_ID`,`POLICYNO`,`INFORNAME`,`RELATION`,`EMAIL`,`CLAIMERTEL`,`OCCURTIME`,`OCCURPLACE`,`POLICYNAME`,`POLICERTEL`,`POLICEACCIDENT`,`CLAIMSSTATES`,`ISREMIND`,`LASTUPDATE`) values ('18f7c53ba85a4bf19ed1bc53a0f7eb41','10001','张三','1','mayun@qq.com','010-6666666','2016-11-30','北京市海淀区清华大学','李四','010-6666666','郑浩被李治杀了','0',0,'2016-08-01'),('f9ec7976da48475e9218d80ee53d255d','10000','张三','1','zhangsan@qq.com','010-666666','2016-10-11','北京市海淀区清华大学','李四','010-888888','张三把李四杀了','2',0,'2016-12-03');
 
 /*Table structure for table `ins_insnum` */
 
@@ -519,7 +548,7 @@ CREATE TABLE `sys_menu` (
 
 /*Data for the table `sys_menu` */
 
-insert  into `sys_menu`(`MENU_ID`,`MENU_NAME`,`MENU_URL`,`PARENT_ID`,`MENU_ORDER`,`MENU_ICON`,`MENU_TYPE`,`MENU_STATE`) values (1,'系统管理','#','0','1','menu-icon fa fa-desktop blue','2',1),(2,'权限管理','#','1','1','menu-icon fa fa-lock black','1',1),(6,'信息管理','#','0','5','menu-icon fa fa-credit-card green','2',1),(7,'图片管理','pictures/list.do','6','1','menu-icon fa fa-folder-o pink','2',1),(8,'性能监控','druid/index.html','9','1','menu-icon fa fa-tachometer red','1',1),(9,'系统工具','#','0','3','menu-icon fa fa-cog black','2',1),(10,'接口测试','tool/interfaceTest.do','9','2','menu-icon fa fa-exchange green','1',1),(11,'发送邮件','tool/goSendEmail.do','9','3','menu-icon fa fa-envelope-o green','1',1),(12,'置二维码','tool/goTwoDimensionCode.do','9','4','menu-icon fa fa-barcode green','1',1),(14,'地图工具','tool/map.do','9','6','menu-icon fa fa-globe black','1',1),(15,'微信管理','#','0','4','menu-icon fa fa-comments purple','2',1),(16,'文本回复','textmsg/list.do','15','2','menu-icon fa fa-comment green','2',1),(17,'应用命令','command/list.do','15','4','menu-icon fa fa-comment grey','2',1),(18,'图文回复','imgmsg/list.do','15','3','menu-icon fa fa-comment pink','2',1),(19,'关注回复','textmsg/goSubscribe.do','15','1','menu-icon fa fa-comment orange','2',1),(20,'在线管理','onlinemanager/list.do','1','6','menu-icon fa fa-laptop green','1',1),(21,'打印测试','tool/printTest.do','9','7','menu-icon fa fa-hdd-o grey','1',1),(22,'一级菜单','#','0','6','menu-icon fa fa-fire orange','2',1),(23,'二级菜单','#','22','1','menu-icon fa fa-leaf black','1',1),(24,'三级菜单','#','23','1','menu-icon fa fa-leaf black','1',1),(30,'四级菜单','#','24','1','menu-icon fa fa-leaf black','1',1),(31,'五级菜单1','#','30','1','menu-icon fa fa-leaf black','1',1),(32,'五级菜单2','#','30','2','menu-icon fa fa-leaf black','1',1),(33,'六级菜单','#','31','1','menu-icon fa fa-leaf black','1',1),(34,'六级菜单2','login_default.do','31','2','menu-icon fa fa-leaf black','1',1),(35,'四级菜单2','login_default.do','24','2','menu-icon fa fa-leaf black','1',1),(36,'角色(基础权限)','role.do','2','1','menu-icon fa fa-key orange','1',1),(37,'按钮权限','buttonrights/list.do','2','2','menu-icon fa fa-key green','1',1),(38,'菜单管理','menu/listAllMenu.do','1','3','menu-icon fa fa-folder-open-o brown','1',1),(39,'按钮管理','fhbutton/list.do','1','2','menu-icon fa fa-download orange','1',1),(40,'用户管理','#','0','2','menu-icon fa fa-users blue','2',1),(41,'系统用户','user/listUsers.do','40','1','menu-icon fa fa-users green','1',1),(42,'会员管理','happuser/listUsers.do','40','2','menu-icon fa fa-users orange','1',1),(43,'数据字典','dictionaries/listAllDict.do?DICTIONARIES_ID=0','1','4','menu-icon fa fa-book purple','1',1),(44,'代码生成','createCode/list.do','9','0','menu-icon fa fa-cogs brown','1',1),(45,'七级菜单1','#','33','1','menu-icon fa fa-leaf black','1',1),(46,'七级菜单2','#','33','2','menu-icon fa fa-leaf black','1',1),(47,'八级菜单','login_default.do','45','1','menu-icon fa fa-leaf black','1',1),(48,'图表报表',' tool/fusionchartsdemo.do','9','5','menu-icon fa fa-bar-chart-o black','1',1),(49,'组织机构','department/listAllDepartment.do?DEPARTMENT_ID=0','1','5','menu-icon fa fa-users blue','1',1),(50,'站内信','fhsms/list.do','6','2','menu-icon fa fa-envelope green','1',1),(51,'表单构建','tool/goFormbuilder.do','9','0','menu-icon fa fa-cogs brown','1',1),(52,'图片爬虫','pictures/goImageCrawler.do','6','1','menu-icon fa fa-folder-o pink','2',1),(53,'会员管理','#','0','7','menu-icon fa fa-users orange','2',1),(54,'会员管理','customer/list.do','53','1','menu-icon fa fa-pencil-square-o black','1',1),(55,'发送短信','tool/goSendMessages.do','9','8','menu-icon fa fa-leaf black','1',1),(56,'短信状态','sendmssages/list.do','9','9','menu-icon fa fa-leaf black','1',1),(57,'订单管理','#','0','8','menu-icon fa fa-leaf black','2',1),(58,'订单管理','order/list.do','57','1','menu-icon fa fa-leaf black','1',1),(59,'活动管理','#','0','9','menu-icon fa fa-leaf black','2',1),(60,'活动管理','activity_all/list.do','59','1','menu-icon fa fa-leaf black','1',1),(61,'分组','sign/list.do','1','7','menu-icon fa fa-leaf black','1',1),(62,'新闻管理','#','0','10','menu-icon fa fa-leaf black','2',1),(63,'新闻管理','news/list.do','62','1','menu-icon fa fa-leaf black','1',1),(64,'卡与卡单管理','#','0','11','menu-icon fa fa-leaf black','2',1),(65,'卡单管理','insnum/list.do','64','1','menu-icon fa fa-leaf black','1',1),(66,'卡管理','cardinfo/list.do','64','2','menu-icon fa fa-leaf black','1',1),(67,'在线留言','#','0','123','menu-icon fa fa-leaf black','2',1),(68,'查看','onlinemsg/list.do','67','1','menu-icon fa fa-leaf black','1',1);
+insert  into `sys_menu`(`MENU_ID`,`MENU_NAME`,`MENU_URL`,`PARENT_ID`,`MENU_ORDER`,`MENU_ICON`,`MENU_TYPE`,`MENU_STATE`) values (1,'系统管理','#','0','1','menu-icon fa fa-desktop blue','2',1),(2,'权限管理','#','1','1','menu-icon fa fa-lock black','1',1),(6,'信息管理','#','0','5','menu-icon fa fa-credit-card green','2',1),(7,'图片管理','pictures/list.do','6','1','menu-icon fa fa-folder-o pink','2',1),(8,'性能监控','druid/index.html','9','1','menu-icon fa fa-tachometer red','1',1),(9,'系统工具','#','0','3','menu-icon fa fa-cog black','2',1),(10,'接口测试','tool/interfaceTest.do','9','2','menu-icon fa fa-exchange green','1',1),(11,'发送邮件','tool/goSendEmail.do','9','3','menu-icon fa fa-envelope-o green','1',1),(12,'置二维码','tool/goTwoDimensionCode.do','9','4','menu-icon fa fa-barcode green','1',1),(14,'地图工具','tool/map.do','9','6','menu-icon fa fa-globe black','1',1),(15,'微信管理','#','0','4','menu-icon fa fa-comments purple','2',1),(16,'文本回复','textmsg/list.do','15','2','menu-icon fa fa-comment green','2',1),(17,'应用命令','command/list.do','15','4','menu-icon fa fa-comment grey','2',1),(18,'图文回复','imgmsg/list.do','15','3','menu-icon fa fa-comment pink','2',1),(19,'关注回复','textmsg/goSubscribe.do','15','1','menu-icon fa fa-comment orange','2',1),(20,'在线管理','onlinemanager/list.do','1','6','menu-icon fa fa-laptop green','1',1),(21,'打印测试','tool/printTest.do','9','7','menu-icon fa fa-hdd-o grey','1',1),(22,'一级菜单','#','0','6','menu-icon fa fa-fire orange','2',1),(23,'二级菜单','#','22','1','menu-icon fa fa-leaf black','1',1),(24,'三级菜单','#','23','1','menu-icon fa fa-leaf black','1',1),(30,'四级菜单','#','24','1','menu-icon fa fa-leaf black','1',1),(31,'五级菜单1','#','30','1','menu-icon fa fa-leaf black','1',1),(32,'五级菜单2','#','30','2','menu-icon fa fa-leaf black','1',1),(33,'六级菜单','#','31','1','menu-icon fa fa-leaf black','1',1),(34,'六级菜单2','login_default.do','31','2','menu-icon fa fa-leaf black','1',1),(35,'四级菜单2','login_default.do','24','2','menu-icon fa fa-leaf black','1',1),(36,'角色(基础权限)','role.do','2','1','menu-icon fa fa-key orange','1',1),(37,'按钮权限','buttonrights/list.do','2','2','menu-icon fa fa-key green','1',1),(38,'菜单管理','menu/listAllMenu.do','1','3','menu-icon fa fa-folder-open-o brown','1',1),(39,'按钮管理','fhbutton/list.do','1','2','menu-icon fa fa-download orange','1',1),(40,'用户管理','#','0','2','menu-icon fa fa-users blue','2',1),(41,'系统用户','user/listUsers.do','40','1','menu-icon fa fa-users green','1',1),(42,'会员管理','happuser/listUsers.do','40','2','menu-icon fa fa-users orange','1',1),(43,'数据字典','dictionaries/listAllDict.do?DICTIONARIES_ID=0','1','4','menu-icon fa fa-book purple','1',1),(44,'代码生成','createCode/list.do','9','0','menu-icon fa fa-cogs brown','1',1),(45,'七级菜单1','#','33','1','menu-icon fa fa-leaf black','1',1),(46,'七级菜单2','#','33','2','menu-icon fa fa-leaf black','1',1),(47,'八级菜单','login_default.do','45','1','menu-icon fa fa-leaf black','1',1),(48,'图表报表',' tool/fusionchartsdemo.do','9','5','menu-icon fa fa-bar-chart-o black','1',1),(49,'组织机构','department/listAllDepartment.do?DEPARTMENT_ID=0','1','5','menu-icon fa fa-users blue','1',1),(50,'站内信','fhsms/list.do','6','2','menu-icon fa fa-envelope green','1',1),(51,'表单构建','tool/goFormbuilder.do','9','0','menu-icon fa fa-cogs brown','1',1),(52,'图片爬虫','pictures/goImageCrawler.do','6','1','menu-icon fa fa-folder-o pink','2',1),(53,'会员管理','#','0','7','menu-icon fa fa-users orange','2',1),(54,'会员管理','customer/list.do','53','1','menu-icon fa fa-pencil-square-o black','1',1),(55,'发送短信','tool/goSendMessages.do','9','8','menu-icon fa fa-leaf black','1',1),(56,'短信状态','sendmssages/list.do','9','9','menu-icon fa fa-leaf black','1',1),(57,'订单管理','#','0','8','menu-icon fa fa-leaf black','2',1),(58,'订单管理','order/list.do','57','1','menu-icon fa fa-leaf black','1',1),(59,'活动管理','#','0','9','menu-icon fa fa-leaf black','2',1),(60,'活动管理','activity_all/list.do','59','1','menu-icon fa fa-leaf black','1',1),(61,'分组','sign/list.do','1','7','menu-icon fa fa-leaf black','1',1),(62,'新闻管理','#','0','10','menu-icon fa fa-leaf black','2',1),(63,'新闻管理','news/list.do','62','1','menu-icon fa fa-leaf black','1',1),(64,'卡与卡单管理','#','0','11','menu-icon fa fa-leaf black','2',1),(65,'卡单管理','insnum/list.do','64','1','menu-icon fa fa-leaf black','1',1),(66,'卡管理','cardinfo/list.do','64','2','menu-icon fa fa-leaf black','1',1),(67,'在线留言','#','0','123','menu-icon fa fa-leaf black','2',1),(68,'查看','onlinemsg/list.do','67','1','menu-icon fa fa-leaf black','1',1),(69,'理赔管理','#','0','13','menu-icon fa fa-leaf black','2',1),(70,'理赔查询','claimsys/list.do','69','1','menu-icon fa fa-leaf black','1',1),(71,'保险公司','#','0','14','menu-icon fa fa-leaf black','2',1),(72,'公司录入与查询','claimcompany/list.do','71','1','menu-icon fa fa-leaf black','1',1);
 
 /*Table structure for table `sys_role` */
 

@@ -29,6 +29,8 @@
   </head><body>
  <%@ include file="../../head.jsp"%>
  
+ 
+ 
     <div class="section" style="margin-bottom:100px; ">
       <div class="container">
         <div class="row">
@@ -154,7 +156,7 @@
                       <div class="row text-center">
                         <a href="usermanage/personal/show"><i class="fa fa-3x fa-angellist fa-fw text-warning"></i></a>
                         <h6>个人中心</h6>
-                        <a href="onlinemsg/index"><i class="fa fa-3x fa-camera fa-fw text-warning"></i></a>
+                        <a href="onlinemsg/index" target="view_window"><i class="fa fa-3x fa-camera fa-fw text-warning"></i></a>
                         <h6>在线留言</h6>
                       </div>
                     </div>
@@ -166,6 +168,11 @@
         </div>
       </div>
     </div>
+    
+<div id=floater style="Z-INDEX: 100; RIGHT: 10px; VISIBILITY: visible; WIDTH: 100px; POSITION: fixed; TOP: 60%; left: 92%;" >   
+	<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=963396570&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:963396570:53" alt="点击这里给我发消息" title="点击这里给我发消息"></a>
+</div>
+    
     <div class="col-md-12 text-center">
       <hr>
     </div>

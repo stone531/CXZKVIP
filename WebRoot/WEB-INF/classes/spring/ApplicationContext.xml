@@ -127,6 +127,9 @@
 				/static/js/** 				= anon
 				/uploadFiles/uploadImgs/** 	= anon
 	           	/code.do 					= anon
+	           	/static/**                  = anon
+	           	/policy/index               = anon
+	           	/jsp/ins/policy/**          = anon
 	           	/login_login	 			= anon
 	           	/app**/** 					= anon
 	           	/weixin/** 					= anon
