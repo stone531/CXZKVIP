@@ -21,6 +21,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.mail.*;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -30,18 +31,38 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
 import com.fh.util.AppUtil;
 import com.fh.util.Const;
+import com.fh.util.FileUpload;
 import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
+import com.fh.util.PathUtil;
 import com.fh.service.ins.usermanage.UserManageManager;
 import com.fh.controller.ins.userdata.UserData;
+
+import java.security.Security;
+import java.util.Properties;
+ 
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
+
+
 
 
 /** 
@@ -235,7 +256,9 @@ public class UserManageController extends BaseController {
 		pd = this.getPageData();
 		
 		PageData rtpd = new PageData();
+		
 		rtpd = usermanageService.getByName(pd);
+		
 		if(rtpd == null) {
 			jspd.put("IsSuccess", false);
 
@@ -290,6 +313,75 @@ public class UserManageController extends BaseController {
 		return ;
 	}
 	
+	@RequestMapping(value="/register/do_sendEmail")
+	public void sendmail(PrintWriter out) throws Exception{
+		PageData pd = new PageData();
+		Subject currentUser = SecurityUtils.getSubject(); 
+		Session session = currentUser.getSession();
+		pd = this.getPageData();
+		String sMail = pd.getString("EMAIL");
+		//TODO:send sms interface
+		Random random = new Random();  
+		String sRand = "";
+		for(int i = 0; i < 4; i++){  
+	        String rand = String.valueOf(random.nextInt(10));  
+	        sRand  += rand;  
+		}
+		 // 创建Properties 类用于记录邮箱的一些属性
+        final Properties props = new Properties();
+        // 表示SMTP发送邮件，必须进行身份验证
+        props.put("mail.smtp.auth", "true");
+        //此处填写SMTP服务器
+        props.put("mail.smtp.host", "smtp.qq.com");
+        //端口号，QQ邮箱给出了两个端口，但是另一个我一直使用不了，所以就给出这一个587
+        props.put("mail.smtp.port", "587");
+        // 此处填写你的账号
+        props.put("mail.user", "1027350999@qq.com");
+        // 此处的密码就是前面说的16位STMP口令
+        props.put("mail.password", "zshswgbacpiebceh");
+
+        // 构建授权信息，用于进行SMTP进行身份验证
+        Authenticator authenticator = new Authenticator() {
+
+            protected PasswordAuthentication getPasswordAuthentication() {
+                // 用户名、密码
+                String userName = props.getProperty("mail.user");
+                String password = props.getProperty("mail.password");
+                return new PasswordAuthentication(userName, password);
+            }
+        };
+        // 使用环境属性和授权信息，创建邮件会话
+        javax.mail.Session mailSession = javax.mail.Session.getInstance(props, authenticator);
+        // 创建邮件消息
+        MimeMessage message = new MimeMessage(mailSession);
+        // 设置发件人
+        InternetAddress form = new InternetAddress(
+                props.getProperty("mail.user"));
+        message.setFrom(form);
+
+        // 设置收件人的邮箱
+        InternetAddress to = new InternetAddress(sMail);
+        message.setRecipient(RecipientType.TO, to);
+
+        // 设置邮件标题
+        message.setSubject("邮件验证码");
+
+        // 设置邮件的内容体
+        message.setContent(sRand, "text/html;charset=UTF-8");
+
+        // 最后当然就是发送邮件啦
+        Transport.send(message);
+		
+		
+		session.setAttribute("smsCode", sRand);
+		pd.put("IsSuccess", true);
+		
+		Object js = JSONObject.fromObject(pd);
+		out.write(js.toString());
+		out.close();
+		return;
+	}
+	
 	@RequestMapping(value="/register/do_sendsms")
 	public void sendsms(PrintWriter out) throws Exception{
 		//logBefore (logger,Jurisdiction.getUsername()+"sendsms");
@@ -323,9 +415,15 @@ public class UserManageController extends BaseController {
 		Session session = currentUser.getSession();
 		String smsCode = session.getAttribute("smsCode").toString();
 		String newPass = pd.getString("PASSWORD");
+		String type = pd.getString("type");
 		
 		if (smsCode.equals(psmsCode)){
-			pd = usermanageService.getByName(pd);
+			if (type.equals("1")) {
+				pd = usermanageService.getByEmail(pd);	
+			}else {
+				pd = usermanageService.getByName(pd);
+			}
+		
 			
 			PageData upd = new PageData();
 			upd.put("USERMANAGE_ID", pd.getString("USERMANAGE_ID"));
@@ -361,6 +459,8 @@ public class UserManageController extends BaseController {
 			String UserId = this.get32UUID();
 			pd.put("USERMANAGE_ID", UserId);	//主键
 			pd.put("CREATETIME", new Date());
+			pd.put("USERTYPE","0");
+			pd.put("SCORE", 0);
 			usermanageService.save(pd);	
 			UserData user = new UserData();
 			user.setMobile(pd.getString("MOBILE"));
@@ -583,14 +683,55 @@ public class UserManageController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/personal/edit")
-	public ModelAndView goedit() throws Exception{
+	public ModelAndView goedit(
+			@RequestParam(value="PIC",required=true) MultipartFile[] files,
+			@RequestParam(value="MOBILE") String Mobile,
+			@RequestParam(value="SCORE") String SCORE,
+			@RequestParam(value="NICKNAME") String NICKNAME,
+			@RequestParam(value="COMPNAME") String COMPNAME,
+			@RequestParam(value="COMPNUM") String COMPNUM,
+			@RequestParam(value="ADDRESS") String ADDRESS,
+			@RequestParam(value="PHONE") String PHONE,
+			@RequestParam(value="REALNAME") String REALNAME,
+			@RequestParam(value="USERTYPE") String USERTYPE,
+			@RequestParam(value="EMAIL") String EMAIL,
+			@RequestParam(value="USERMANAGE_ID") String USERMANAGE_ID,
+			@RequestParam(value="CARDID") String CARDID,
+			@RequestParam(value="BANKCARD") String BANKCARD,
+			@RequestParam(value="WECHAT") String WECHAT,
+			@RequestParam(value="PICWECHAT") String PICWECHAT
+			) throws Exception{
 		//logBefore(logger, Jurisdiction.getUsername()+"修改UserManage");
 	//	if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
+		String Pic = "PIC";
+		String filePath = PathUtil.getClasspath() + Const.FILEPATHIMG;								//文件上传路径
+		for (int i = 0; i < files.length; i++) {
+			String fileName =  FileUpload.fileUp(files[i], filePath, this.get32UUID());
+			String picName = Pic + (1+i);
+			pd.put(picName,Const.FILEPATHIMG+fileName);
+			System.out.println(filePath);
+		}
+		pd.put("MOBILE", Mobile);
+		pd.put("NICKNAME",NICKNAME);
+		pd.put("SCORE", SCORE);
+		pd.put("COMPNAME",COMPNAME);
+		pd.put("COMPNUM", COMPNUM);
+		pd.put("ADDRESS", ADDRESS);
+		pd.put("PHONE", PHONE);
+		pd.put("REALNAME", REALNAME);
+		pd.put("USERTYPE", USERTYPE);
+		pd.put("EMAIL", EMAIL);
+		pd.put("USERMANAGE_ID", USERMANAGE_ID);
 		
-		pd = this.getPageData();
 		usermanageService.edit(pd);
+		
+		UserData user = new UserData();
+		user = this.setUDFromPD(pd);
+		Subject currentUser = SecurityUtils.getSubject(); 
+		Session session = currentUser.getSession();
+		session.setAttribute(Const.SESSION_USERDATA, user);
 		
 		mv.addObject("IsSuccess","1");
 		mv.setViewName("ins/usermanage/result");
@@ -700,8 +841,8 @@ public class UserManageController extends BaseController {
 		user.setUpdateTime(pd.getString("UPDATETIME"));
 		user.setRealName(pd.getString("REALNAME"));
 		user.setPic1(pd.getString("PIC1"));
-		user.setPic1(pd.getString("PIC2"));
-		user.setPic1(pd.getString("PIC3"));
+		user.setPic2(pd.getString("PIC2"));
+		user.setPic3(pd.getString("PIC3"));
 		return user;
 	}
 	
