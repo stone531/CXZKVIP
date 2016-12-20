@@ -72,7 +72,7 @@
                    <label class="control-label">公司名称</label>
                  </div>
                  <div class="col-sm-10">
-                <input class="form-control" id="COMPNAME" value="${COMPNAME}" placeholder="公司名称" type="text" required="">
+                <input class="form-control" id="COMPNAME" value="${pd.COMPNAME}" placeholder="公司名称" type="text" required="">
                 </div>
               </div>
               <div class="form-group">
@@ -80,7 +80,7 @@
                    <label class="control-label">营业执照号码</label>
                  </div>
                  <div class="col-sm-10">
-                <input class="form-control" id="COMNUM" value="${COMNUM}" placeholder="营业执照号码" type="text" required="">
+                <input class="form-control" id="COMPNUM" value="${pd.COMPNUM}" placeholder="营业执照号码" type="text" required="">
                 </div>
               </div>
               <div class="form-group">
@@ -88,7 +88,7 @@
                    <label class="control-label">联系地址</label>
                  </div>
                  <div class="col-sm-10">
-                <input class="form-control" id="ADDRESS" value="${ADDRESS}" placeholder="联系地址" type="text" required="">
+                <input class="form-control" id="ADDRESS" value="${pd.ADDRESS}" placeholder="联系地址" type="text" required="">
                 </div>
               </div>
               <div class="form-group">
@@ -96,7 +96,7 @@
                    <label class="control-label">办公电话</label>
                  </div>
                  <div class="col-sm-10">
-                <input class="form-control" id="PHONE" value="${PHONE}" placeholder="办公电话" type="digits">
+                <input class="form-control" id="PHONE" value="${pd.PHONE}" placeholder="办公电话" type="digits">
                 </div>
               </div>
               <div class="form-group">
@@ -104,7 +104,7 @@
                    <label class="control-label">负责人姓名</label>
                  </div>
                  <div class="col-sm-10">
-                <input class="form-control" id="REALNAME" value="${REALNAME}" placeholder="负责人姓名" type="text" required="">
+                <input class="form-control" id="REALNAME" value="${pd.REALNAME}" placeholder="负责人姓名" type="text" required="">
                 </div>
               </div>
               <div class="form-group">
@@ -112,7 +112,7 @@
                    <label class="control-label">邮箱</label>
                  </div>
                  <div class="col-sm-10">
-                <input class="form-control" id="EMAIL" value="${EMAIL}" placeholder="邮箱" type="email" required="">
+                <input class="form-control" id="EMAIL" value="${pd.EMAIL}" placeholder="邮箱" type="email" required="">
                 </div>
               </div>
               <div class="form-group">

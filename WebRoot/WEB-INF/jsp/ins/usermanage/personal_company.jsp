@@ -48,7 +48,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12" id="company-redit">
-            <form role="form" action="usermanage/personal/edit" method="post" id="company-valid-form" class="form-horizontal">
+            <form role="form" action="usermanage/personal/edit" method="post" id="company-valid-form" class="form-horizontal" enctype="multipart/form-data">
               <div class="form-group">
               	 <div class="col-sm-2">
                    <label class="control-label">手机号</label>
@@ -86,7 +86,7 @@
                    <label class="control-label">营业执照</label>
                  </div>
                  <div class="col-sm-10">
-                <input class="form-control" id="COMPNUM" name="COMPNUM" value="${pd.COMNUM}" placeholder="营业执照" type="text"  required="">
+                <input class="form-control" id="COMPNUM" name="COMPNUM" value="${pd.COMPNUM}" placeholder="营业执照" type="text"  required="">
                 </div>
               </div>
               <div class="form-group">
@@ -125,15 +125,15 @@
               </div>
               <div class="form-group">
                 <label class="control-label" for="exampleInputPassword1">营业执照</label>
-                <input id="PIC1" name="PIC1" placeholder="营业执照" type="file" accept="image/*" class="form-control" required="">
+                <input id="PIC1" name="PIC" placeholder="营业执照" type="file" accept="image/*" class="form-control" required="">
               </div>
               <div class="form-group">
                 <label class="control-label" for="exampleInputPassword1">税务登记证</label>
-                <input class="form-control" id="PIC2" name="PIC2" placeholder="税务登记证" accept="image/*" type="file" required="">
+                <input class="form-control" id="PIC2" name="PIC" placeholder="税务登记证" accept="image/*" type="file" required="">
               </div>
               <div class="form-group">
                 <label class="control-label" for="exampleInputPassword1">组织结构代码证</label>
-                <input class="form-control" id="PIC3" name="PIC3" placeholder="组织结构代码证" accept="image/*" type="file" required="">
+                <input class="form-control" id="PIC3" name="PIC" placeholder="组织结构代码证" accept="image/*" type="file" required="">
               </div>
               <a class="btn btn-primary" id="comp-sub" type="submit">提交材料</a>
             </form>
