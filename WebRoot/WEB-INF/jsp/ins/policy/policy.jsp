@@ -601,6 +601,17 @@
 				$("#iaage").focus();
 			return false;
 			}
+			if($("#iacopy").val()==""){
+				$("#iacopy").tips({
+					side:3,
+		            msg:'请输入投保份数',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#iacopy").focus();
+			return false;
+			}
+			
 			if($("#bname").val()==""){
 				$("#bname").tips({
 					side:3,
@@ -676,6 +687,18 @@
 		            time:2
 		        });
 				return false;
+			}
+			
+			//limit份数
+			if($("#iacopy").val()>5){
+				$("#iacopy").tips({
+					side:3,
+		            msg:'超过卡种份数上限',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#iacopy").focus();
+			return false;
 			}
 			
 			$("#PolicyInfo").hide();
