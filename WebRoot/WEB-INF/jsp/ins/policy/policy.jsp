@@ -674,7 +674,7 @@
 			
 			//limit age
 			//alert($("#iaage").val());
-			if($("#iaage").val()<18 || $("#iaage").val()>45){
+			if($("#iaage").val()<${minage} || $("#iaage").val()>${maxage}){
 				$("#iaage").tips({
 					side:3,
 		            msg:'年龄不符合',
@@ -685,7 +685,8 @@
 			}
 			
 			//limit 职业
-			var professions=["警察","土匪","教师","学生"];
+			var professions=${PROFESSIONS};
+			//["警察","土匪","教师","学生"];
 			//alert(professions);
 			if(!contains(professions,$("#iaprofession").val())){
 				//alert(professions);
