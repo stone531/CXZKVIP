@@ -35,6 +35,14 @@ public interface CardInfoManager{
 	 */
 	public void edit(PageData pd)throws Exception;
 	
+	
+	/**修改
+	 * @param pd
+	 * @throws Exception
+	 */
+	public void updatestate(PageData pd)throws Exception;
+	
+	
 	/**列表
 	 * @param page
 	 * @throws Exception

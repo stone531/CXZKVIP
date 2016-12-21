@@ -64,7 +64,17 @@
 		where 
 			CARDINFO_ID = #{CARDINFO_ID}
 	</delete>
-	
+
+	<!-- 更新呢服务卡状态 -->
+	<update id="updatestate" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			STATE = #{STATE}
+		where
+			CARDID = #{CARDID}		
+	</update>
+		
 	<!-- 修改 -->
 	<update id="edit" parameterType="pd">
 		update

@@ -203,14 +203,19 @@
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">是否发送短信:</label>
                 </div>
                 <div class="col-sm-12">
-                  <input type="text" id="ismessage" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="是否发送短信">
+                  <!-- input type="text" id="ismessage" maxlength="255" style="width:50%;" class="form-control"
+                  placeholder="是否发送短信"-->
+                  <select id="ismessage" maxlength="255" style="width:50%;" class="form-control">
+				  <option value ="是">是</option>
+				  <option value ="否" selected="selected">否</option>
+				</select>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <hr>
       <div class="section">
         <div class="container">
           <div class="row">
@@ -291,21 +296,24 @@
           <div class="col-md-4"></div>
           <div class="col-md-4">
 
-              <h3 class="text-center text-warning">
+              <h3 class="text-center  text-warning">
                 <strong>信息确认</strong>
               </h3>
               <form action="policy/${action}" name="Form" id="Form" method="post">
+              	<div style="margin-left:20%;">
                 <h5 class="text-info text-justify">投保人姓名:
-                  <input type="text" name="IERNAME" id="IERNAME" maxlength="255" style="background: border-box;border:hidden;" class="text-right">
-                </h5>
+               </h5>
+                 <input type="text" name="IERNAME" id="IERNAME" maxlength="255" style="background: border-box;border:hidden;" class="text-right">
+ 
                 <h5 class="text-info text-justify">投保人证件号码:
-                  <input type="text" name="IERPAPERNO" id="IERPAPERNO" maxlength="255"
+                </h5>
+                 <input type="text" name="IERPAPERNO" id="IERPAPERNO" maxlength="255"
                   value="${pd.IERPAPERNO}" style="background: border-box;border:hidden;" class="text-right">
-                </h5>
                 <h5 class="text-info text-justify">投保人手机号:
-                  <input type="text" name="IERPHONE" id="IERPHONE" maxlength="255"
-                  value="${pd.IERPHONE}" style="background: border-box;border:hidden;" class="text-right">
+
                 </h5>
+                                  <input type="text" name="IERPHONE" id="IERPHONE" maxlength="255"
+                  value="${pd.IERPHONE}" style="background: border-box;border:hidden;" class="text-right">
                 <h5 class="text-info text-justify">被保险人姓名:
                   <input type="text" name="IANTNAME" id="IANTNAME" maxlength="255"
                   value="${pd.IANTNAME}" style="background: border-box;border:hidden;" class="text-right">
@@ -358,6 +366,7 @@
                   value="" style="display:none;" class="text-right">
                 <br>
                 <br>
+                </div>
                 <div class="col-md-4"></div>
                 <button type="button" class="btn btn-success btn-lg" onclick="FormPrev();">返回</button>
                 <button type="submit" class="btn btn-success btn-lg">提交</button>
@@ -686,6 +695,7 @@
 		            bg:'#AE81FF',
 		            time:2
 		        });
+				$("#iaprofession").focus();
 				return false;
 			}
 			
@@ -700,6 +710,8 @@
 				$("#iacopy").focus();
 			return false;
 			}
+			
+			alert($("#ismessage").val())
 			
 			$("#PolicyInfo").hide();
 			$("#SERVICETEXT").show();

@@ -1,8 +1,11 @@
 package com.fh.service.ins.cardinfo.impl;
 
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+
 import com.fh.dao.DaoSupport;
 import com.fh.entity.Page;
 import com.fh.util.PageData;
@@ -56,6 +59,16 @@ public class CardInfoService implements CardInfoManager{
 	@Override
 	public void edit(PageData pd)throws Exception{
 		dao.update("CardInfoMapper.edit", pd);
+	}
+	
+	/**修改
+	 * @param pd
+	 * @throws Exception
+	 */
+	@Override
+	public void updatestate(PageData pd)throws Exception{
+		System.out.println("in updatestate");
+		dao.update("CardInfoMapper.updatestate", pd);
 	}
 	
 	/**列表

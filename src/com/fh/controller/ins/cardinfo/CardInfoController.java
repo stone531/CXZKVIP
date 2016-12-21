@@ -95,13 +95,25 @@ public class CardInfoController extends BaseController {
 		String cardstate = pdmysql.get("STATE").toString();
 		//step 1: check state , get ServiceContext
 		
-		if (!cardstate.equals("1")){
+		if (cardstate.equals("3")){
 			//do something
 			System.out.println("card state is Unavailable");
 			mv.addObject("msg","此服务卡无效");
 			mv.addObject("display", "block");
 			mv.setViewName("ins/policy/verifycard");
 			return mv;
+		}else if(cardstate.equals("2")){
+			System.out.println("card state is Unavailable");
+			mv.addObject("msg","此卡已经被激活");
+			mv.addObject("display", "block");
+			mv.setViewName("ins/policy/verifycard");
+			return mv;
+		}else if(!cardstate.equals("1")){
+			System.out.println("card state is Unavailable");
+			mv.addObject("msg","未知的卡错误");
+			mv.addObject("display", "block");
+			mv.setViewName("ins/policy/verifycard");
+			return mv;			
 		}	
 		
 		//get username and password from web

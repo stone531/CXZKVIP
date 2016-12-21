@@ -26,6 +26,7 @@ import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
 import com.fh.service.ins.policy.PolicyManager;
+import com.fh.service.ins.cardinfo.CardInfoManager;
 
 /** 
  * 说明：保单系统
@@ -39,6 +40,9 @@ public class PolicyController extends BaseController {
 	String menuUrl = "policy/list.do"; //菜单地址(权限用)
 	@Resource(name="policyService")
 	private PolicyManager policyService;
+	
+	@Resource(name="cardinfoService")
+	private CardInfoManager cardinfoService;
 	
 	/**保存
 	 * @param
@@ -119,6 +123,12 @@ public class PolicyController extends BaseController {
 		pd.put("CARDTYPE",1);
 		pd.put("IERPAPERTYPE", 1);
 		policyService.save(pd);
+		
+		PageData cardpd = new PageData();
+		cardpd.put("STATE", 2);
+		cardpd.put("CARDID",pd.getString("CARDNO"));
+
+		cardinfoService.updatestate(cardpd);
 		
 		
 
