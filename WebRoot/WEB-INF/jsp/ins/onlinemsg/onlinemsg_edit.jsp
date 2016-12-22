@@ -32,29 +32,28 @@
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">用户名:</td>
-								<td><input type="text" name="USERNAME" id="USERNAME" value="${pd.USERNAME}" maxlength="255" placeholder="这里输入用户名" title="用户名" readonly="readonly"
- style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">消息id:</td>
+								<td><input type="number" name="MSGID" id="MSGID" value="${pd.MSGID}" maxlength="32" placeholder="这里输入消息id" title="消息id" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">客户端发送的消息:</td>
-								<td><input type="text" name="CLIENTMSG" id="CLIENTMSG" value="${pd.CLIENTMSG}" maxlength="2048" placeholder="这里输入客户端发送的消息" title="客户端发送的消息" readonly="readonly" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">用户id:</td>
+								<td><input type="text" name="CLIENTUSER" id="CLIENTUSER" value="${pd.CLIENTUSER}" maxlength="255" placeholder="这里输入用户id" title="用户id" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">客户发送消息时间:</td>
-								<td><input  name="CLIENTWRITETIME" id="CLIENTWRITETIME" value="${pd.CLIENTWRITETIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="客户发送消息时间" title="客户发送消息时间" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">管理员id:</td>
+								<td><input type="text" name="ADMINUSER" id="ADMINUSER" value="${pd.ADMINUSER}" maxlength="255" placeholder="这里输入管理员id" title="管理员id" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">操作管理员名称:</td>
-								<td><input type="text" name="OPERATIONADMIN" id="OPERATIONADMIN" value="${pd.OPERATIONADMIN}" maxlength="255" placeholder="这里输入操作管理员名称" title="操作管理员名称" readonly="readonly" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">聊天内容:</td>
+								<td><input type="text" name="CONTENT" id="CONTENT" value="${pd.CONTENT}" maxlength="2048" placeholder="这里输入聊天内容" title="聊天内容" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">管理员回复消息:</td>
-								<td><input type="text" name="REPLYMSG" id="REPLYMSG" value="${pd.REPLYMSG}" maxlength="2048" placeholder="这里输入管理员回复消息" title="管理员回复消息" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">操作时间:</td>
+								<td><input class="span10 date-picker" name="OPTIME" id="OPTIME" value="${pd.OPTIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="操作时间" title="操作时间" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">管理员回复时间:</td>
-								<td><input class="span10 date-picker" name="REPLYTIEM" id="REPLYTIEM" value="${pd.REPLYTIEM}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="管理员回复时间" title="管理员回复时间" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">回复msgid:</td>
+								<td><input type="number" name="REPLYID" id="REPLYID" value="${pd.REPLYID}" maxlength="32" placeholder="这里输入回复msgid" title="回复msgid" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="text-align: center;" colspan="10">
@@ -95,64 +94,64 @@
 		$(top.hangge());
 		//保存
 		function save(){
-			if($("#USERNAME").val()==""){
-				$("#USERNAME").tips({
+			if($("#MSGID").val()==""){
+				$("#MSGID").tips({
 					side:3,
-		            msg:'请输入用户名',
+		            msg:'请输入消息id',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#USERNAME").focus();
+				$("#MSGID").focus();
 			return false;
 			}
-			if($("#CLIENTMSG").val()==""){
-				$("#CLIENTMSG").tips({
+			if($("#CLIENTUSER").val()==""){
+				$("#CLIENTUSER").tips({
 					side:3,
-		            msg:'请输入客户端发送的消息',
+		            msg:'请输入用户id',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#CLIENTMSG").focus();
+				$("#CLIENTUSER").focus();
 			return false;
 			}
-			if($("#CLIENTWRITETIME").val()==""){
-				$("#CLIENTWRITETIME").tips({
+			if($("#ADMINUSER").val()==""){
+				$("#ADMINUSER").tips({
 					side:3,
-		            msg:'请输入客户发送消息时间',
+		            msg:'请输入管理员id',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#CLIENTWRITETIME").focus();
+				$("#ADMINUSER").focus();
 			return false;
 			}
-			if($("#OPERATIONADMIN").val()==""){
-				$("#OPERATIONADMIN").tips({
+			if($("#CONTENT").val()==""){
+				$("#CONTENT").tips({
 					side:3,
-		            msg:'请输入操作管理员名称',
+		            msg:'请输入聊天内容',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#OPERATIONADMIN").focus();
+				$("#CONTENT").focus();
 			return false;
 			}
-			if($("#REPLYMSG").val()==""){
-				$("#REPLYMSG").tips({
+			if($("#OPTIME").val()==""){
+				$("#OPTIME").tips({
 					side:3,
-		            msg:'请输入管理员回复消息',
+		            msg:'请输入操作时间',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#REPLYMSG").focus();
+				$("#OPTIME").focus();
 			return false;
 			}
-			if($("#REPLYTIEM").val()==""){
-				$("#REPLYTIEM").tips({
+			if($("#REPLYID").val()==""){
+				$("#REPLYID").tips({
 					side:3,
-		            msg:'请输入管理员回复时间',
+		            msg:'请输入回复msgid',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#REPLYTIEM").focus();
+				$("#REPLYID").focus();
 			return false;
 			}
 			$("#Form").submit();

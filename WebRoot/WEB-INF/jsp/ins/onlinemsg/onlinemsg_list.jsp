@@ -66,12 +66,12 @@
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
 									</th>
 									<th class="center" style="width:50px;">序号</th>
-									<th class="center">用户名</th>
-									<th class="center">客户端发送的消息</th>
-									<th class="center">客户发送消息时间</th>
-									<th class="center">操作管理员名称</th>
-									<th class="center">管理员回复消息</th>
-									<th class="center">管理员回复时间</th>
+									<th class="center">消息id</th>
+									<th class="center">用户id</th>
+									<th class="center">管理员id</th>
+									<th class="center">聊天内容</th>
+									<th class="center">操作时间</th>
+									<th class="center">回复msgid</th>
 									<th class="center">操作</th>
 								</tr>
 							</thead>
@@ -87,12 +87,12 @@
 												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.ONLINEMSG_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.USERNAME}</td>
-											<td class='center'>${var.CLIENTMSG}</td>
-											<td class='center'>${var.CLIENTWRITETIME}</td>
-											<td class='center'>${var.OPERATIONADMIN}</td>
-											<td class='center'>${var.REPLYMSG}</td>
-											<td class='center'>${var.REPLYTIEM}</td>
+											<td class='center'>${var.MSGID}</td>
+											<td class='center'>${var.CLIENTUSER}</td>
+											<td class='center'>${var.ADMINUSER}</td>
+											<td class='center'>${var.CONTENT}</td>
+											<td class='center'>${var.OPTIME}</td>
+											<td class='center'>${var.REPLYID}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
@@ -106,6 +106,11 @@
 													<c:if test="${QX.del == 1 }">
 													<a class="btn btn-xs btn-danger" onclick="del('${var.ONLINEMSG_ID}');">
 														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
+													</a>
+													</c:if>
+													<c:if test="${QX.edit == 1 }">
+													<a class="btn btn-xs btn-success" title="回复" onclick="reply('${var.ONLINEMSG_ID}');">
+														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="回复"></i>
 													</a>
 													</c:if>
 												</div>
@@ -130,6 +135,15 @@
 																<a style="cursor:pointer;" onclick="del('${var.ONLINEMSG_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
 																	<span class="red">
 																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																	</span>
+																</a>
+															</li>
+															</c:if>
+															<c:if test="${QX.edit == 1 }">
+															<li>
+																<a style="cursor:pointer;" onclick="reply('${var.ONLINEMSG_ID}');" class="tooltip-success" data-rel="tooltip" title="回复">
+																	<span class="green">
+																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																	</span>
 																</a>
 															</li>
@@ -309,6 +323,25 @@
 				}
 				diag.close();
 			 };
+			 diag.show();
+		}
+		
+		//reply
+		function reply(Id){
+			 //top.jzts();
+			 var diag = new top.Dialog();
+			 diag.Drag=true;
+			 diag.Title ="编辑";
+			 diag.URL = '<%=basePath%>onlinemsg/goReplyMsg.do?ONLINEMSG_ID='+Id;
+			 diag.Width = 800;
+			 diag.Height = 800;
+			  nextPage(${page.currentPage});
+			 //diag.CancelEvent = function(){ //关闭事件
+			//	 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+			//		 nextPage(${page.currentPage});
+			//	}
+			//	diag.close();
+			 //};
 			 diag.show();
 		}
 		
