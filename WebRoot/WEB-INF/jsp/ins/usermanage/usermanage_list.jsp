@@ -14,6 +14,7 @@
 <base href="<%=basePath%>">
 <!-- 下拉框 -->
 <link rel="stylesheet" href="static/ace/css/chosen.css" />
+<script src="static/ace/js/ace-extra.js"></script>
 <!-- jsp文件头和头部 -->
 <%@ include file="../../system/index/top.jsp"%>
 <!-- 日期框 -->
@@ -66,8 +67,8 @@
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
 									</th>
 									<th class="center" style="width:50px;">序号</th>
-									<th class="center">username</th>
-									<th class="center">密码</th>
+									<th class="center">手机号</th>
+									<th class="center">真实姓名</th>
 									<th class="center">积分</th>
 									<th class="center">用户类型</th>
 									<th class="center">昵称</th>
@@ -75,15 +76,14 @@
 									<th class="center">身份证信息</th>
 									<th class="center">银行卡</th>
 									<th class="center">微信号</th>
-									<th class="center">微信号二维码</th>
 									<th class="center">公司名</th>
 									<th class="center">公司执照号码</th>
 									<th class="center">公司地址</th>
 									<th class="center">电话号码</th>
+									<th class="center">营业执照</th>
+									<th class="center">税务登记证</th>
+									<th class="center">组织结构代码证</th>
 									<th class="center">备注</th>
-									<th class="center">最后登录时间</th>
-									<th class="center">创建时间</th>
-									<th class="center">更新时间</th>
 									<th class="center">操作</th>
 								</tr>
 							</thead>
@@ -100,23 +100,41 @@
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>${var.MOBILE}</td>
-											<td class='center'>${var.PASSWORD}</td>
+											<td class='center'>${var.REALNAME}</td>
 											<td class='center'>${var.SCORE}</td>
-											<td class='center'>${var.USERTYPE}</td>
+											<td class='center'>
+											<c:if test = "${var.USERTYPE == 0}">
+											<div>普通用户</div>
+											</c:if>
+											<c:if test = "${var.USERTYPE == 1}">
+											<div>企业用户</div>
+											</c:if>
+											<c:if test = "${var.USERTYPE == 3}">
+											<div style="color:#F00">待审核</div>
+											</c:if>
+											<c:if test = "${var.USERTYPE == 2}">
+											<div>被拒绝</div>
+											</c:if>
+											</td>
 											<td class='center'>${var.NICKNAME}</td>
 											<td class='center'>${var.EMAIL}</td>
 											<td class='center'>${var.CARDID}</td>
 											<td class='center'>${var.BANKCARD}</td>
 											<td class='center'>${var.WECHAT}</td>
-											<td class='center'>${var.PICWECHAT}</td>
 											<td class='center'>${var.COMPNAME}</td>
 											<td class='center'>${var.COMPNUM}</td>
 											<td class='center'>${var.ADDRESS}</td>
-											<td class='center'>${var.PHONE}</td>
+											<td class='center'>${var.PHONE}</td>	
+											<td class='center'>
+											<a href="<%=basePath%>${var.PIC1}" class="bwGal"><img src="<%=basePath%>${var.PIC1}" width="100" height="100"></a>
+											</td>
+											<td class='center'>
+											<a href="<%=basePath%>${var.PIC2}" class="bwGal"><img src="<%=basePath%>${var.PIC2}" width="100" height="100"></a>
+											</td>
+											<td class='center'>
+											<a href="<%=basePath%>${var.PIC3}" class="bwGal"><img src="<%=basePath%>${var.PIC3}" width="100" height="100"></a>
+											</td>
 											<td class='center'>${var.REMARK}</td>
-											<td class='center'>${var.LASTLOGINTIME}</td>
-											<td class='center'>${var.CREATETIME}</td>
-											<td class='center'>${var.UPDATETIME}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
@@ -185,7 +203,7 @@
 							<tr>
 								<td style="vertical-align:top;">
 									<c:if test="${QX.add == 1 }">
-									<a class="btn btn-sm btn-success" onclick="add();">新增</a>
+									<a class="btn btn-sm btn-success" onclick="add();" style="display:none;">新增</a>
 									</c:if>
 									<c:if test="${QX.del == 1 }">
 									<a class="btn btn-sm btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120'></i></a>
@@ -319,18 +337,18 @@
 		}
 		
 		//修改
-		function edit(Id){
-			 top.jzts();
+		function edit(Id){ 
+			//top.jzts();
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
 			 diag.URL = '<%=basePath%>usermanage/goEdit.do?USERMANAGE_ID='+Id;
-			 diag.Width = 450;
-			 diag.Height = 355;
+			 diag.Width = 600;
+			 diag.Height = 465;
 			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-					 nextPage(${page.currentPage});
-				}
+				 //if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+				 //nextPage(${page.currentPage});
+				//}
 				diag.close();
 			 };
 			 diag.show();

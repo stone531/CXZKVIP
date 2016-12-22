@@ -50,6 +50,15 @@ public class UserManageService implements UserManageManager{
 		dao.update("UserManageMapper.edit", pd);
 	}
 	
+	/**修改
+	 * @param pd
+	 * @throws Exception
+	 */
+	@Override
+	public void editype(PageData pd)throws Exception{
+		dao.update("UserManageMapper.editype", pd);
+	}
+	
 	/**列表
 	 * @param page
 	 * @throws Exception

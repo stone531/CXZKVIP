@@ -27,83 +27,24 @@
 				<div class="row">
 					<div class="col-xs-12">
 					
-					<form action="usermanage/${msg }.do" name="Form" id="Form" method="post">
+					<form action="usermanage/editype" name="Form" id="Form" method="post">
 						<input type="hidden" name="USERMANAGE_ID" id="USERMANAGE_ID" value="${pd.USERMANAGE_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
-						<table id="table_report" class="table table-striped table-bordered table-hover">
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">用户名:</td>
-								<td><input type="text" name="MOBILE" id="MOBILE" value="${pd.MOBILE}" maxlength="32" placeholder="这里输入username" title="username" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">密码:</td>
-								<td><input type="text" name="PASSWORD" id="PASSWORD" value="${pd.PASSWORD}" maxlength="64" placeholder="这里输入密码" title="密码" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">积分:</td>
-								<td><input type="number" name="SCORE" id="SCORE" value="${pd.SCORE}" maxlength="32" placeholder="这里输入积分" title="积分" style="width:98%;"/></td>
-							</tr>
+						<table id="table_report" class="table table-striped table-bordered table-hover">						
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">用户类型:</td>
-								<td><input type="number" name="USERTYPE" id="USERTYPE" value="${pd.USERTYPE}" maxlength="32" placeholder="这里输入用户类型" title="用户类型" style="width:98%;"/></td>
+								<td>
+								<select class="form-control"  id="USERTYPE" name="USERTYPE" title="是否通过申请">
+									  <option value="1">通过企业申请</option>
+                                      <option value="2">拒绝企业申请</option>
+                          </select>
+								</td>
 							</tr>
+							
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">昵称:</td>
-								<td><input type="text" name="NICKNAME" id="NICKNAME" value="${pd.NICKNAME}" maxlength="255" placeholder="这里输入昵称" title="昵称" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">邮箱:</td>
-								<td><input type="text" name="EMAIL" id="EMAIL" value="${pd.EMAIL}" maxlength="128" placeholder="这里输入邮箱" title="邮箱" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">身份证信息:</td>
-								<td><input type="text" name="CARDID" id="CARDID" value="${pd.CARDID}" maxlength="255" placeholder="这里输入身份证信息" title="身份证信息" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">银行卡:</td>
-								<td><input type="text" name="BANKCARD" id="BANKCARD" value="${pd.BANKCARD}" maxlength="255" placeholder="这里输入银行卡" title="银行卡" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">微信号:</td>
-								<td><input type="text" name="WECHAT" id="WECHAT" value="${pd.WECHAT}" maxlength="255" placeholder="这里输入微信号" title="微信号" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">微信号二维码:</td>
-								<td><input type="text" name="PICWECHAT" id="PICWECHAT" value="${pd.PICWECHAT}" maxlength="255" placeholder="这里输入微信号二维码" title="微信号二维码" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">公司名:</td>
-								<td><input type="text" name="COMPNAME" id="COMPNAME" value="${pd.COMPNAME}" maxlength="255" placeholder="这里输入公司名" title="公司名" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">公司执照号码:</td>
-								<td><input type="text" name="COMPNUM" id="COMPNUM" value="${pd.COMPNUM}" maxlength="255" placeholder="这里输入公司执照号码" title="公司执照号码" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">公司地址:</td>
-								<td><input type="text" name="ADDRESS" id="ADDRESS" value="${pd.ADDRESS}" maxlength="255" placeholder="这里输入公司地址" title="公司地址" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">电话号码:</td>
-								<td><input type="text" name="PHONE" id="PHONE" value="${pd.PHONE}" maxlength="255" placeholder="这里输入电话号码" title="电话号码" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">备注:</td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">拒绝原因:</td>
 								<td><input type="text" name="REMARK" id="REMARK" value="${pd.REMARK}" maxlength="255" placeholder="这里输入备注" title="备注" style="width:98%;"/></td>
 							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">最后登录时间:</td>
-								<td><input class="span10 date-picker" name="LASTLOGINTIME" id="LASTLOGINTIME" value="${pd.LASTLOGINTIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="最后登录时间" title="最后登录时间" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">创建时间:</td>
-								<td><input class="span10 date-picker" name="CREATETIME" id="CREATETIME" value="${pd.CREATETIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="创建时间" title="创建时间" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">更新时间:</td>
-								<td><input class="span10 date-picker" name="UPDATETIME" id="UPDATETIME" value="${pd.UPDATETIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="更新时间" title="更新时间" style="width:98%;"/></td>
-							</tr>
-							<tr>
 								<td style="text-align: center;" colspan="10">
 									<a class="btn btn-mini btn-primary" onclick="save();">保存</a>
 									<a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>

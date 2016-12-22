@@ -952,7 +952,7 @@ public class UserManageController extends BaseController {
 	@RequestMapping(value="/save")
 	public ModelAndView save() throws Exception{
 		//logBefore(logger, Jurisdiction.getUsername()+"新增UserManage");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
@@ -969,7 +969,7 @@ public class UserManageController extends BaseController {
 	@RequestMapping(value="/delete")
 	public void delete(PrintWriter out) throws Exception{
 	//	logBefore(logger, Jurisdiction.getUsername()+"删除UserManage");
-	//	if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return;} //校验权限
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return;} //校验权限
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		usermanageService.delete(pd);
@@ -984,11 +984,28 @@ public class UserManageController extends BaseController {
 	@RequestMapping(value="/edit")
 	public ModelAndView edit() throws Exception{
 		//logBefore(logger, Jurisdiction.getUsername()+"修改UserManage");
-	//	if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		usermanageService.edit(pd);
+		mv.addObject("msg","success");
+		mv.setViewName("save_result");
+		return mv;
+	}
+	
+	/**修改
+	 * @param
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/editype")
+	public ModelAndView editype() throws Exception{
+		//logBefore(logger, Jurisdiction.getUsername()+"修改UserManage");
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		usermanageService.editype(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;
@@ -1014,7 +1031,7 @@ public class UserManageController extends BaseController {
 		mv.setViewName("ins/usermanage/usermanage_list");
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
-		//mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
 		return mv;
 	}
 	

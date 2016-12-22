@@ -58,6 +58,8 @@ function showCompnay(){
 	setCompnayReadOnly();
 	if ($("#Comp-UserType").val()=="3") {
 		$("#notify-msg").text("资料审核中");
+	}else if ($("#Comp-UserType").val() == "2") {
+		$("#notify-msg").text("资料不合格，已被拒绝");
 	}
 }
 

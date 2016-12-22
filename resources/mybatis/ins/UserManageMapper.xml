@@ -111,6 +111,18 @@
 		USERMANAGE_ID = #{USERMANAGE_ID}
 	</update>
 	
+	<!-- 修改 -->
+	<update id="editype" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			REMARK = #{REMARK},
+			USERTYPE = #{USERTYPE},
+		USERMANAGE_ID = USERMANAGE_ID
+		where 
+		USERMANAGE_ID = #{USERMANAGE_ID}
+	</update>
+	
 	<!-- 通过ID获取数据 -->
 	<select id="findById" parameterType="pd" resultType="pd">
 		select 
