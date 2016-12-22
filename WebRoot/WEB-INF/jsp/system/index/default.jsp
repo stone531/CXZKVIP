@@ -35,10 +35,10 @@
 									<i class="ace-icon fa fa-times"></i>
 								</button>
 								<i class="ace-icon fa fa-check green"></i>
-								欢迎使用 创享会员 系统&nbsp;&nbsp;
+								欢迎使用 惠泽保险后台管理 系统&nbsp;&nbsp;
 								<strong class="green">
 									&nbsp;官网网站：
-									<a href="http://www.cxzhiku.com" target="_blank"><small>(&nbsp;www.cxzhiku.com&nbsp;)</small></a>
+									<a href="http://" target="_blank"><small>(&nbsp;&nbsp;)</small></a>
 								</strong>
 							</div>
 							

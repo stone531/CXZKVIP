@@ -61,7 +61,7 @@
 							<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
 								<li class="dropdown-header">
 									<i class="ace-icon fa fa-bell-o"></i>
-									创享智库 即时通讯
+									即时通讯
 								</li>
 							</ul>
 						</li>
