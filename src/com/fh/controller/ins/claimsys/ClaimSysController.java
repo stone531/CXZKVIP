@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,7 @@ import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
 import com.fh.service.ins.claimsys.ClaimSysManager;
 import com.fh.util.DateUtil;
+
 import net.sf.json.JSONObject;
 
 import com.fh.service.ins.policy.PolicyManager;
@@ -56,9 +59,12 @@ public class ClaimSysController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/save")
-	public ModelAndView save(PrintWriter out) throws Exception{
+	public ModelAndView save(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"新增ClaimSys");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
+        response.setContentType("text/html");  
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();

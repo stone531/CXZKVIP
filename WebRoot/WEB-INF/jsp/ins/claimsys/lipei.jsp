@@ -8,11 +8,11 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<base href="<%=basePath%>">
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="static/ace/js/claim/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="static/ace/js/claim/jquery.validate.js"></script>
@@ -69,7 +69,7 @@
                     <div class="form-group">
                         <label for="INFORNAME" class="col-sm-3 control-label" style="display:block;">报案人姓名</label>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="INFORNAME" name="INFORNAME" placeholder="请填写您的真实姓名，以便理赔" value="张三">
+                          <input type="text" class="form-control" id="INFORNAME" name="INFORNAME" placeholder="请填写您的真实姓名，以便理赔">
                         </div>
                         <div></div>
                     </div>
@@ -89,14 +89,14 @@
                     <div class="form-group">
                         <label for="CLAIMERTEL" class="col-sm-3 control-label">联系电话</label>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="CLAIMERTEL" name="CLAIMERTEL" placeholder="建议填写您的手机号码，以便及时取得联系" value="010-6666666">
+                          <input type="text" class="form-control" id="CLAIMERTEL" name="CLAIMERTEL" placeholder="建议填写您的手机号码，以便及时取得联系">
                         </div>
                         <div></div>
                     </div>
                     <div class="form-group">
                           <label for="EMAIL" class="col-sm-3 control-label">Email</label>
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" id="EMAIL" name="EMAIL" placeholder="请输入电子邮箱" value="mayun@qq.com">
+                            <input type="text" class="form-control" id="EMAIL" name="EMAIL" placeholder="请输入电子邮箱">
                           </div>
                           <div></div>
                     </div>
@@ -114,28 +114,28 @@
                       <div class="form-group">
                           <label for="OCCURTIME" class="col-sm-3 control-label">出现时间</label>
                           <div class="col-sm-6">
-                            <input type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" id="OCCURTIME" name="OCCURTIME" placeholder="请选择出险时间" value="2016-11-30">
+                            <input type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" id="OCCURTIME" name="OCCURTIME" placeholder="请选择出险时间">
                           </div>
                           <div></div>
                       </div>
                       <div class="form-group">
                           <label for="OCCURPLACE" class="col-sm-3 control-label">出险地点</label>
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" id="OCCURPLACE" name="OCCURPLACE" placeholder="请尽量填写详细地址以方便理赔" value="北京市海淀区清华大学">
+                            <input type="text" class="form-control" id="OCCURPLACE" name="OCCURPLACE" placeholder="请尽量填写详细地址以方便理赔">
                           </div>
                           <div></div>
                       </div>
                       <div class="form-group">
                           <label for="POLICYNAME" class="col-sm-3 control-label">出险人姓名</label>
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" id="POLICYNAME" name="POLICYNAME" placeholder="请填写您的真实姓名，以便理赔" value="李四">
+                            <input type="text" class="form-control" id="POLICYNAME" name="POLICYNAME" placeholder="请填写您的真实姓名，以便理赔">
                           </div>
                           <div></div>
                       </div>
                       <div class="form-group">
                           <label for="POLICERTEL" class="col-sm-3 control-label">联系电话</label>
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" id="POLICERTEL" name="POLICERTEL" placeholder="建议填写您的手机号码，以便及时取得联系" value="010-6666666">
+                            <input type="text" class="form-control" id="POLICERTEL" name="POLICERTEL" placeholder="建议填写您的手机号码，以便及时取得联系">
                           </div>
                           <div></div>
                       </div>
@@ -143,7 +143,7 @@
                           <label for="inputEmail3" class="col-sm-3 control-label">出险经过及现状</label>
                           <div class="col-sm-8">
                             <!--input type="email" class="form-control" id="inputEmail3" placeholder="Email"-->
-                            <textarea class="form-control" rows="10" id="POLICEACCIDENT" name="POLICEACCIDENT" placeholder="请描述具体经过，以便理赔">郑浩被李治杀了</textarea>
+                            <textarea class="form-control" rows="10" id="POLICEACCIDENT" name="POLICEACCIDENT" placeholder="请描述具体经过，以便理赔"></textarea>
                           </div>
                           <div></div>
                       </div>

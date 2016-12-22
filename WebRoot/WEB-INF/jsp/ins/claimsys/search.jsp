@@ -8,12 +8,11 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" class="new-w-950">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="static/ace/js/claim/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="static/ace/js/claim/jquery.validate.js"></script>
@@ -40,11 +39,15 @@
 
 <body>  
 <%@ include file="../../head.jsp"%> 
-    <div class="section" style="margin-bottom:10%;">
+    <div class="section" style="margin-bottom:4%;">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h2 class="text-primary">理赔查询</h2>
+            <div class="btn-link panel panel-warning">
+              <div class="panel-heading">
+                <h1 class="panel-title text-danger">理赔查询</h1>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -169,7 +172,7 @@
 		<c:choose>
         <c:when test="${not empty varList}">
         <div class="row" id="showPolicy">
-          <div class="col-md-12 " style="border-top:groove ;border-color: beige; margin-top:30px;padding-left:15%;">
+          <div class="col-md-12 " style="border-top:groove ;border-color: beige; margin-top:30px;padding-left:10%;">
             <table class="table">
               <thead>
                 <tr>
@@ -210,6 +213,62 @@
 		</c:choose>
       </div>
     </div>
+	
+    <div class="section" style="margin-bottom:2%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="btn-link panel panel-warning">
+              <div class="panel-heading">
+                <h1 class="panel-title text-danger">理赔流程</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:2%;margin-left:8%;">
+          <div class="col-md-1">
+            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_03.jpg" class="img-responsive"></a>
+            <h6 class="text-center text-danger">已报险</h6>
+          </div>
+          <div class="col-md-1">
+            <a href="#"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
+          </div>
+          <div class="col-md-1">
+            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_02.jpg" class="img-responsive"></a>
+            <h6 class="text-center text-danger">预审</h6>
+          </div>
+          <div class="col-md-1">
+            <a href="#"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
+          </div>
+          <div class="col-md-1">
+            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_01.jpg" class="img-responsive"></a>
+            <h6 class="text-center text-danger">待邮寄资料</h6>
+          </div>
+          <div class="col-md-1">
+            <a href="#"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
+          </div>
+          <div class="col-md-1">
+            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_04.jpg" class="img-responsive"></a>
+            <h6 class="text-center text-danger">收到资料</h6>
+          </div>
+          <div class="col-md-1">
+            <a href="#"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
+          </div>
+          <div class="col-md-1">
+            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_01.jpg" class="img-responsive"></a>
+            <h6 class="text-center text-danger">保险公司处理中</h6>
+          </div>
+          <div class="col-md-1">
+            <a href="#"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
+          </div>
+          <div class="col-md-1">
+            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_04.jpg" class="img-responsive"></a>
+            <h6 class="text-center text-danger">理赔完毕</h6>
+          </div>
+        </div>
+      </div>
+    </div>		
+	
     <script type="text/javascript">   
         var liCard = document.getElementById("card");
         var liNo = document.getElementById("no");
