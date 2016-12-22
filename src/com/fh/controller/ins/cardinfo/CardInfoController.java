@@ -61,7 +61,7 @@ public class CardInfoController extends BaseController {
 	@Resource(name="businessService")
 	private BusinessManager businessService;
 	//卡类型
-	@Resource
+	@Resource(name="cardtypeService")
 	private CardTypeManager cardtypeservice;
 	
 	
@@ -79,6 +79,8 @@ public class CardInfoController extends BaseController {
 		//sql for cardinfo
 		PageData pd = new PageData();
 		PageData pdmysql = new PageData();
+		PageData pdcardtype = new PageData();
+		
 		pd = this.getPageData();
 		
 		System.out.println(pd);
@@ -95,13 +97,25 @@ public class CardInfoController extends BaseController {
 		String cardstate = pdmysql.get("STATE").toString();
 		//step 1: check state , get ServiceContext
 		
-		if (!cardstate.equals("1")){
+		if (cardstate.equals("3")){
 			//do something
 			System.out.println("card state is Unavailable");
 			mv.addObject("msg","此服务卡无效");
 			mv.addObject("display", "block");
 			mv.setViewName("ins/policy/verifycard");
 			return mv;
+		}else if(cardstate.equals("2")){
+			System.out.println("card state is Unavailable");
+			mv.addObject("msg","此卡已经被激活");
+			mv.addObject("display", "block");
+			mv.setViewName("ins/policy/verifycard");
+			return mv;
+		}else if(!cardstate.equals("1")){
+			System.out.println("card state is Unavailable");
+			mv.addObject("msg","未知的卡错误");
+			mv.addObject("display", "block");
+			mv.setViewName("ins/policy/verifycard");
+			return mv;			
 		}	
 		
 		//get username and password from web
@@ -163,6 +177,42 @@ public class CardInfoController extends BaseController {
 					businesslist.add(business);
 				}
 			}
+			
+			pd.put("CARDTYPE_ID", typeid);
+			pdcardtype=cardtypeservice.findById(pd);
+			if (pdcardtype==null){
+				mv.addObject("msg","获取卡类型异常，请联系管理员");
+				mv.addObject("display", "block");
+				mv.setViewName("ins/policy/verifycard");
+				return mv;
+			}
+			
+			mv.addObject("minage", pdcardtype.get("MINAGE").toString());
+			mv.addObject("maxage", pdcardtype.get("MAXAGE").toString());
+
+		
+			
+			//parse professions
+			String profession="";
+			String[] professions=pdcardtype.getString("PROFESSION").split(";");
+			for(int i=0;i<professions.length;i++){
+				//var professions=["警察","土匪","教师","学生"];
+				String mate="";
+				if (i==0){
+					mate="[\""+professions[i]+"\""+",";
+				}else if(i==professions.length-1){
+					mate="\""+professions[i]+"\"]";
+				}else {
+					mate="\""+professions[i]+"\",";
+				}
+				
+				System.out.println(mate);
+				
+				profession+=mate;
+				
+			}
+			System.out.println(profession);
+			mv.addObject("PROFESSIONS", profession);
 			
 			System.out.println(businesslist.size());
 			

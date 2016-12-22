@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="static/js/jquery-1.7.2.js" ></script>
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
 	
-	 <%@ include file="ht.jsp"%>
+	 <%@ include file="../../ht.jsp"%>
 	
 	</head>
 	

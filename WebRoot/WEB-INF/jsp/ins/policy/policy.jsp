@@ -15,6 +15,7 @@
 <html>
 	<head>
 		<base href="<%=basePath%>">
+		<script src="static/main/js/index.js"></script>
 		<script type="text/javascript" src="static/js/jquery-1.7.2.js" ></script>
 		<script type="text/javascript" src="static/js/jquery.tips.js"></script>
 		 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">		
@@ -151,6 +152,14 @@
                   placeholder="被保险人年龄" >
                 </div>
                 <br>
+                 <div class="col-sm-12 text-left">
+                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保份数:</label>
+                </div>
+                <div class="col-sm-12">
+                  <input type="text" id="iacopy" maxlength="32" style="width:50%;"  class="form-control"
+                  placeholder="份数" >
+                </div>
+                <br>
               </div>
               
               <div class="col-md-6" style="margin-left:0.5%;">
@@ -194,14 +203,19 @@
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">是否发送短信:</label>
                 </div>
                 <div class="col-sm-12">
-                  <input type="text" id="ismessage" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="是否发送短信">
+                  <!-- input type="text" id="ismessage" maxlength="255" style="width:50%;" class="form-control"
+                  placeholder="是否发送短信"-->
+                  <select id="ismessage" maxlength="255" style="width:50%;" class="form-control">
+				  <option value ="是">是</option>
+				  <option value ="否" selected="selected">否</option>
+				</select>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <hr>
       <div class="section">
         <div class="container">
           <div class="row">
@@ -282,21 +296,24 @@
           <div class="col-md-4"></div>
           <div class="col-md-4">
 
-              <h3 class="text-center text-warning">
+              <h3 class="text-center  text-warning">
                 <strong>信息确认</strong>
               </h3>
               <form action="policy/${action}" name="Form" id="Form" method="post">
+              	<div style="margin-left:20%;">
                 <h5 class="text-info text-justify">投保人姓名:
-                  <input type="text" name="IERNAME" id="IERNAME" maxlength="255" style="background: border-box;border:hidden;" class="text-right">
-                </h5>
+               </h5>
+                 <input type="text" name="IERNAME" id="IERNAME" maxlength="255" style="background: border-box;border:hidden;" class="text-right">
+ 
                 <h5 class="text-info text-justify">投保人证件号码:
-                  <input type="text" name="IERPAPERNO" id="IERPAPERNO" maxlength="255"
+                </h5>
+                 <input type="text" name="IERPAPERNO" id="IERPAPERNO" maxlength="255"
                   value="${pd.IERPAPERNO}" style="background: border-box;border:hidden;" class="text-right">
-                </h5>
                 <h5 class="text-info text-justify">投保人手机号:
-                  <input type="text" name="IERPHONE" id="IERPHONE" maxlength="255"
-                  value="${pd.IERPHONE}" style="background: border-box;border:hidden;" class="text-right">
+
                 </h5>
+                                  <input type="text" name="IERPHONE" id="IERPHONE" maxlength="255"
+                  value="${pd.IERPHONE}" style="background: border-box;border:hidden;" class="text-right">
                 <h5 class="text-info text-justify">被保险人姓名:
                   <input type="text" name="IANTNAME" id="IANTNAME" maxlength="255"
                   value="${pd.IANTNAME}" style="background: border-box;border:hidden;" class="text-right">
@@ -312,6 +329,10 @@
                 <h5 class="text-info text-justify">与被保险人关系:
                   <input type="text" name="IANTRELATION" id="IANTRELATION" maxlength="255"
                   value="${pd.IANTRELATION}" style="background: border-box;border:hidden;" class="text-right">
+                </h5>
+                <h5 class="text-info text-justify">投保份数:
+                  <input type="text" name="IANTCOPY" id="IANTCOPY" maxlength="255"
+                  value="${pd.IANTCOPY}" style="background: border-box;border:hidden;" class="text-right">
                 </h5>
                 <h5 class="text-info text-justify">被保险人年龄:
                   <input type="text" name="IANAGE" id="IANAGE" maxlength="255" value="${pd.IANAGE}"
@@ -345,6 +366,7 @@
                   value="" style="display:none;" class="text-right">
                 <br>
                 <br>
+                </div>
                 <div class="col-md-4"></div>
                 <button type="button" class="btn btn-success btn-lg" onclick="FormPrev();">返回</button>
                 <button type="submit" class="btn btn-success btn-lg">提交</button>
@@ -366,6 +388,16 @@
 
 <!--javascript 脚本分割线********************************************************************************************************************  -->			
 <script type="text/javascript">
+
+		//馋看数组是否包含指定的元素
+		function contains(a, obj) {
+		    for (var i = 0; i < a.length; i++) {
+		        if (a[i] === obj) {
+		            return true;
+		         }
+		    }       
+		     return false;
+		}
 
 		var curbusinessId = 1;
 		var div = document.getElementById("1");
@@ -578,6 +610,17 @@
 				$("#iaage").focus();
 			return false;
 			}
+			if($("#iacopy").val()==""){
+				$("#iacopy").tips({
+					side:3,
+		            msg:'请输入投保份数',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#iacopy").focus();
+			return false;
+			}
+			
 			if($("#bname").val()==""){
 				$("#bname").tips({
 					side:3,
@@ -629,6 +672,48 @@
 			return false;
 			}
 			
+			//limit age
+			//alert($("#iaage").val());
+			if($("#iaage").val()<${minage} || $("#iaage").val()>${maxage}){
+				$("#iaage").tips({
+					side:3,
+		            msg:'年龄不符合',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				return false;
+			}
+			
+			//limit 职业
+			var professions=${PROFESSIONS};
+			//["警察","土匪","教师","学生"];
+			//alert(professions);
+			if(!contains(professions,$("#iaprofession").val())){
+				//alert(professions);
+				$("#iaprofession").tips({
+					side:3,
+		            msg:'职业不符合要求',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#iaprofession").focus();
+				return false;
+			}
+			
+			//limit份数
+			if($("#iacopy").val()>5){
+				$("#iacopy").tips({
+					side:3,
+		            msg:'超过卡种份数上限',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#iacopy").focus();
+			return false;
+			}
+			
+			alert($("#ismessage").val())
+			
 			$("#PolicyInfo").hide();
 			$("#SERVICETEXT").show();
 			return ;
@@ -670,6 +755,9 @@
 			
 			var iantage=$("#iaage").val();
 			document.getElementById("IANAGE").value= iantage;
+			
+			var iantage=$("#iacopy").val();
+			document.getElementById("IANTCOPY").value= iantage;
 			
 			var benname=$("#bname").val();
 			document.getElementById("BENNAME").value= benname;
