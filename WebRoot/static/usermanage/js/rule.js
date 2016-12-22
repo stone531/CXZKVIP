@@ -1,6 +1,7 @@
 $().ready(function(){
 	
-	$("#user_detail_info").validate();
+	$(validForm());
+	$(validPassForm());
 	
 	initHide();
 	
@@ -15,10 +16,22 @@ $().ready(function(){
 		showUpdatePass();
 	});
 	$("#save").click(function(){
+		if(!validForm().form())
+			return;
 		$("#user_detail_info").submit();
 	});
 	
+	$("#cancel").click(function(){
+		if ($("#Comp-UserType").val()=="0"){
+			showPersonal();
+		}else {
+			showCompnay();
+		}
+	});
+	
 	$("#btn-pass-update").click(function(){
+		if(!validPassForm().form())
+			return;
 		updatepass();
 	}
 	);
@@ -72,21 +85,23 @@ function setPersonReadOnly(){
 };
 
 function setCompnayReadOnly(){
-	$("#CMOBILE,#BANKCARD,#CARDID,#EMAIL,#COMPNAME,#COMNUM,#PHONE,#NICKNAME,#SCORE,#WECHAT,#ADDRESS,#REALNAME").attr("readonly","readonly");
+	$("#CMOBILE,#BANKCARD,#CARDID,#EMAIL,#COMPNAME,#COMPNUM,#PHONE,#NICKNAME,#SCORE,#WECHAT,#ADDRESS,#REALNAME").attr("readonly","readonly");
 };
 
 function updatepass(){
 	
-	if ($("#PASS").val()!=$("#RePASS").val()){
-		 $("#memberErrMsg").text("两次密码输入不一致");
-		 return;
-	}
+	var uid = getCookie('id');
 	
+	if (uid==''){
+		alert("cookies 超时");
+		return;
+	}
+		
 	$.ajax({
         type: "POST",
         async:false,
         url: "/CXZKVIP/usermanage/personal/do_updatepass",
-        data: {USERMANAGE_ID:getCookie('id'), PREPASSWORD:$("#PrePASS").val(),PASSWORD:$("#RePASS").val()},
+        data: {USERMANAGE_ID:uid, PREPASSWORD:$("#PrePASS").val(),PASSWORD:$("#PASS").val()},
         dataType: "json",
         success: function(data){
                    if (data.IsSuccess == 1){
@@ -112,3 +127,98 @@ function getCookie(objName){
     }     
     return "";  
 }    
+
+jQuery.validator.addMethod("regex", function(value, element, param) {   
+    var r = param;
+    return r.test(value);
+}, "填写不正确");
+
+function validForm(){
+	return $("#user_detail_info").validate({
+		rules:{
+			NICKNAME: {
+				required:true,
+				rangelength:[3,8],
+			},
+			REALNAME:{
+				required:true,
+				rangelength:[2,8],
+				regex:/[^\u0000-\u00FF]/,
+			},
+			EMAIL:{
+				email:true
+			},
+			CARDID:{
+				required:true,
+				rangelength:[15,18],
+				regex:/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+			},
+			BANKCARD:{
+				required:true,
+				minlength:10,
+				regex:/[0-9]$/,
+			}
+		},
+		messages: {
+			NICKNAME: {
+				required: "请输入昵称",
+				rangelength: "长度必须为3-8位字符",
+			},
+			REALNAME:{
+				required:"请输入真实姓名",
+				rangelength:"长度不正确",
+				regex:"格式不正确"
+			},
+			EMAIL:{
+				email:"邮箱格式不正确"
+			},
+			CARDID:{
+				required:"请输入证件号",
+				rangelength:"长度不正确",
+				regex:"身份证格式不正确",
+			},
+			BANKCARD:{
+				required:"请输入银行卡号",
+				minlength:"长度不正确",
+				regex:"格式不正确",
+			}
+			
+		},
+		errorElement: "em"
+	});
+}
+
+function validPassForm(){
+	return $("#pass_form").validate({
+		rules:{
+			PrePASS:{
+				required:true,
+				minlength:6
+			},
+			PASS:{
+				required:true,
+				minlength:6
+			},
+			RePASS:{
+				required:true,
+				equalTo:"#PASS"
+			}
+		},
+		messages: {
+			PrePASS:{
+				required:"请输入原密码",
+				minlength:"密码长度不少于6"
+			},
+			PASS:{
+				required:"请输入原密码",
+				minlength:"密码长度不少于6"
+			},
+			RePASS:{
+				required:"请输入确认密码",
+				equalTo:"两次密码不同"
+			}
+		},
+		errorElement: "em"
+	});
+}
+

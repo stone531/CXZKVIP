@@ -58,6 +58,7 @@
 
         <ul class="hz-tab-menu hz-tab-style01 login-register-tab-menu">
             <li class="hz-tab-menu-item active" registertype="1"><a href="javascript:;" title="手机号注册">手机号注册</a></li>
+            <!-- <li class="hz-tab-menu-item " style="display:hidden"><a href="javascript:;" title="邮箱注册">邮箱注册</a></li> -->
         </ul>
         <div class="tab-container">
             <div class="tab-pane" registertype="1" id="divMobile">

@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.mail.*;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -51,6 +52,7 @@ import com.fh.controller.ins.userdata.UserData;
 import java.security.Security;
 import java.util.Properties;
  
+
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -390,9 +392,16 @@ public class UserManageController extends BaseController {
 		Session session = currentUser.getSession();
 		pd = this.getPageData();
 		String sMobile = pd.getString("MOBILE");
-		//TODO:send sms interface
-		session.setAttribute("smsCode", "123456");
-		pd.put("IsSuccess", true);
+		
+		String rand = pd.getString("rand");
+		
+		if (jadgeRand(rand)) {
+			//TODO:send sms interface
+			session.setAttribute("smsCode", "1234");
+			pd.put("IsSuccess", true);
+		}else{
+			pd.put("IsSuccess", false);
+		}
 		
 		Object js = JSONObject.fromObject(pd);
 		out.write(js.toString());
@@ -423,13 +432,18 @@ public class UserManageController extends BaseController {
 			}else {
 				pd = usermanageService.getByName(pd);
 			}
-		
 			
-			PageData upd = new PageData();
-			upd.put("USERMANAGE_ID", pd.getString("USERMANAGE_ID"));
-			upd.put("PASSWORD", newPass);
-			usermanageService.updatePass(upd);
-			pd.put("IsSuccess", 1);	
+			if (pd != null){
+				PageData upd = new PageData();
+				upd.put("USERMANAGE_ID", pd.getString("USERMANAGE_ID"));
+				upd.put("PASSWORD", newPass);
+				usermanageService.updatePass(upd);
+				pd.put("IsSuccess", 1);	
+			}else{
+				pd = new PageData();
+				pd.put("IsSuccess",0);	
+			}
+			
 		}else{
 			pd.put("IsSuccess",0);	
 		}
@@ -677,13 +691,52 @@ public class UserManageController extends BaseController {
 		mv.setViewName("ins/usermanage/result");
 		return mv;
 	}
-	
 	/**个人页面修改
 	 * @param
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/personal/edit")
-	public ModelAndView goedit(
+	public ModelAndView personal_goedit(
+			@RequestParam(value="MOBILE") String Mobile,
+			@RequestParam(value="SCORE") String SCORE,
+			@RequestParam(value="NICKNAME") String NICKNAME,
+			@RequestParam(value="ADDRESS") String ADDRESS,
+			@RequestParam(value="REALNAME") String REALNAME,
+			@RequestParam(value="USERTYPE") String USERTYPE,
+			@RequestParam(value="EMAIL") String EMAIL,
+			@RequestParam(value="USERMANAGE_ID") String USERMANAGE_ID,
+			@RequestParam(value="CARDID") String CARDID,
+			@RequestParam(value="BANKCARD") String BANKCARD,
+			@RequestParam(value="WECHAT") String WECHAT
+			) throws Exception{
+		//logBefore(logger, Jurisdiction.getUsername()+"修改UserManage");
+	//	if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		
+		pd.put("MOBILE", Mobile);
+		pd.put("NICKNAME",NICKNAME);
+		pd.put("SCORE", SCORE);
+		pd.put("ADDRESS", ADDRESS);
+		pd.put("REALNAME", REALNAME);
+		pd.put("USERTYPE", USERTYPE);
+		pd.put("EMAIL", EMAIL);
+		pd.put("USERMANAGE_ID", USERMANAGE_ID);
+		
+		usermanageService.edit(pd);
+		
+		
+		mv.addObject("IsSuccess","1");
+		mv.setViewName("ins/usermanage/result");
+		return mv;
+	}
+	
+	/**公司页面修改
+	 * @param
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/company/edit")
+	public ModelAndView company_goedit(
 			@RequestParam(value="PIC",required=true) MultipartFile[] files,
 			@RequestParam(value="MOBILE") String Mobile,
 			@RequestParam(value="SCORE") String SCORE,
@@ -695,11 +748,7 @@ public class UserManageController extends BaseController {
 			@RequestParam(value="REALNAME") String REALNAME,
 			@RequestParam(value="USERTYPE") String USERTYPE,
 			@RequestParam(value="EMAIL") String EMAIL,
-			@RequestParam(value="USERMANAGE_ID") String USERMANAGE_ID,
-			@RequestParam(value="CARDID") String CARDID,
-			@RequestParam(value="BANKCARD") String BANKCARD,
-			@RequestParam(value="WECHAT") String WECHAT,
-			@RequestParam(value="PICWECHAT") String PICWECHAT
+			@RequestParam(value="USERMANAGE_ID") String USERMANAGE_ID
 			) throws Exception{
 		//logBefore(logger, Jurisdiction.getUsername()+"修改UserManage");
 	//	if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
@@ -726,12 +775,6 @@ public class UserManageController extends BaseController {
 		pd.put("USERMANAGE_ID", USERMANAGE_ID);
 		
 		usermanageService.edit(pd);
-		
-		UserData user = new UserData();
-		user = this.setUDFromPD(pd);
-		Subject currentUser = SecurityUtils.getSubject(); 
-		Session session = currentUser.getSession();
-		session.setAttribute(Const.SESSION_USERDATA, user);
 		
 		mv.addObject("IsSuccess","1");
 		mv.setViewName("ins/usermanage/result");
@@ -793,7 +836,8 @@ public class UserManageController extends BaseController {
 		UserData ud = new UserData();
 		ud = (UserData)obs;
 		String pass = ud.getPass();
-		
+		System.out.println(ud.getPass()+ud.getMobile());
+		System.out.println(pd.getString("PREPASSWORD"));
 		do {
 			if (!pass.equals(pd.getString("PREPASSWORD"))) {
 				rtpd.put("IsSuccess", 2);

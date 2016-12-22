@@ -13,15 +13,28 @@
     <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+ <script src="static/usermanage/js/json2.js" type="text/javascript"></script>
+    <script src="static/usermanage/js/jquery.base64.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="static/usermanage/js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="static/usermanage/js/jquery.validate.js"></script>
+
+	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
+	
+	<script src="static/usermanage/js/jquery-placeholder.js"></script>
     <script type="text/javascript" src="static/usermanage/js/rule.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
-  </head><body>
+    
+    <!--    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script> 
+        -->
+        
+ <%@ include file="../../ht.jsp"%>
+</head>
+<body>
+	<%@ include file="../../head.jsp"%>
     <div class="section">
       <div class="container">
         <div class="row">
@@ -141,23 +154,22 @@
             </form>
           </div>
             <div id="pass-update">
-           
-              <form role="form">
+              <form role="form" id="pass_form">
                 <div class="form-group">
-                  <input class="form-control" id="PrePASS" placeholder="原密码" type="password">
+                  <input class="form-control" id="PrePASS" name="PrePASS"  placeholder="原密码" type="password">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" id="PASS" placeholder="新密码" type="password">
+                  <input class="form-control" id="PASS" name="PASS" placeholder="新密码" type="password">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" id="RePASS" placeholder="确认新密码" type="password">
+                  <input class="form-control" id="RePASS" name="RePASS" placeholder="确认新密码" type="password">
                 </div>
                 <a class="btn btn-primary" id="btn-pass-update">确认修改</a>
               </form>
             </div>
             <div id="personal_info">
               
-              <form  action="usermanage/personal/edit" method="post" role="form" class="form-horizontal" id="user_detail_info">
+              <form  action="usermanage/personal/edit" method="post" role="form" class="form-horizontal" id="user_detail_info" enctype="multipart/form-data">
                 <div class="form-group">
                  <div class="col-sm-2">
                    <label class="control-label">手机号</label>
@@ -179,7 +191,7 @@
                    <label class="control-label">用户名</label>
                  </div>
                  <div class="col-sm-10">
-                  <input class="form-control" id="NICKNAME" name="NICKNAME" value="${pd.NICKNAME}" placeholder="用户名" type="text" required="">
+                  <input class="form-control" id="NICKNAME" name="NICKNAME" value="${pd.NICKNAME}" placeholder="用户名" type="text" >
                  </div>
                 </div>
                 <div class="form-group">
@@ -187,7 +199,7 @@
                    <label class="control-label">真实姓名</label>
                  </div>
                  <div class="col-sm-10">
-                  <input class="form-control" id="REALNAME" name="REALNAME" value="${pd.REALNAME }" placeholder="真实姓名" type="text" required="">
+                  <input class="form-control" id="REALNAME" name="REALNAME" value="${pd.REALNAME }" placeholder="真实姓名" type="text" >
                 </div>
                 </div>
                 <div class="form-group">
@@ -195,7 +207,7 @@
                    <label class="control-label">邮箱</label>
                  </div>
                  <div class="col-sm-10">
-                  <input class="form-control" id="EMAIL" name="EMAIL" placeholder="邮箱" value="${pd.EMAIL}" type="email" required="">
+                  <input class="form-control" id="EMAIL" name="EMAIL" placeholder="邮箱" value="${pd.EMAIL}" type="email" >
                 </div>
                 </div>
                 <div class="form-group">
@@ -203,7 +215,7 @@
                    <label class="control-label">身份证件号</label>
                  </div>
                  <div class="col-sm-10">
-                  <input class="form-control" id="CARDID" name="CARDID" placeholder="身份证件号" value="${pd.CARDID }" type="text" required="">
+                  <input class="form-control" id="CARDID" name="CARDID" placeholder="身份证件号" value="${pd.CARDID }" type="text">
                 </div>
                 </div>
                 <div class="form-group">
@@ -211,7 +223,7 @@
                    <label class="control-label">银行卡</label>
                  </div>
                  <div class="col-sm-10">
-                  <input class="form-control" id="BANKCARD" name="BANKCARD" placeholder="银行卡" value="${pd.BANKCARD}"type="text">
+                  <input class="form-control" id="BANKCARD" name="BANKCARD" placeholder="银行卡" value="${pd.BANKCARD}" type="text">
                 </div>
                 </div>
                 <div class="form-group">
@@ -258,5 +270,5 @@
       </div>
     </div>
   
-
+<%@ include file="../../tail.jsp"%>
 </body></html>
