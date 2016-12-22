@@ -16,17 +16,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`cxzkvip` /*!40100 DEFAULT CHARACTER SET
 
 USE `cxzkvip`;
 
-
-
-/*!40101 SET NAMES utf8 */;
-
-DROP TABLE IF EXISTS `ins_warning`;
-CREATE TABLE `ins_warning` (
-	`ID` int (11),
-	`WARNING` varchar (1536)
-); 
-
-
 /*Table structure for table `ins_business` */
 
 DROP TABLE IF EXISTS `ins_business`;
@@ -79,8 +68,6 @@ CREATE TABLE `ins_cardtype` (
   `COMPANYNAME` varchar(300) DEFAULT NULL,
   `SERVICECONTEXT` varchar(2048) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 
 /*Data for the table `ins_cardtype` */
 
@@ -183,18 +170,17 @@ DROP TABLE IF EXISTS `ins_onlinemsg`;
 
 CREATE TABLE `ins_onlinemsg` (
   `ONLINEMSG_ID` varchar(100) NOT NULL,
-  `USERNAME` varchar(255) DEFAULT NULL COMMENT '用户名',
-  `CLIENTMSG` varchar(2048) DEFAULT NULL COMMENT '客户端发送的消息',
-  `CLIENTWRITETIME` varchar(32) DEFAULT NULL COMMENT '客户发送消息时间',
-  `OPERATIONADMIN` varchar(255) DEFAULT NULL COMMENT '操作管理员名称',
-  `REPLYMSG` varchar(2048) DEFAULT NULL COMMENT '管理员回复消息',
-  `REPLYTIEM` varchar(32) DEFAULT NULL COMMENT '管理员回复时间',
-  PRIMARY KEY (`ONLINEMSG_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `MSGID` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '消息id',
+  `CLIENTUSER` varchar(255) DEFAULT NULL COMMENT '用户id',
+  `ADMINUSER` varchar(255) DEFAULT NULL COMMENT '管理员id',
+  `CONTENT` varchar(2048) DEFAULT NULL COMMENT '聊天内容',
+  `OPTIME` varchar(32) DEFAULT NULL COMMENT '操作时间',
+  `REPLYID` int(11) NOT NULL COMMENT '回复msgid',
+  PRIMARY KEY (`ONLINEMSG_ID`),
+  KEY `MSGID` (`MSGID`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 /*Data for the table `ins_onlinemsg` */
-
-insert  into `ins_onlinemsg`(`ONLINEMSG_ID`,`USERNAME`,`CLIENTMSG`,`CLIENTWRITETIME`,`OPERATIONADMIN`,`REPLYMSG`,`REPLYTIEM`) values ('4c48d95e9a8542b4824fc8a60b7254ce','15600199768','hello abc','2016-12-04 17:01:09','admin','ok  good','2016-12-04 20:01:09');
 
 /*Table structure for table `ins_policy` */
 
@@ -279,6 +265,17 @@ CREATE TABLE `ins_usermanage` (
 /*Data for the table `ins_usermanage` */
 
 insert  into `ins_usermanage`(`USERMANAGE_ID`,`MOBILE`,`PASSWORD`,`SCORE`,`USERTYPE`,`NICKNAME`,`EMAIL`,`CARDID`,`BANKCARD`,`WECHAT`,`PICWECHAT`,`COMPNAME`,`COMPNUM`,`ADDRESS`,`PHONE`,`REMARK`,`LASTLOGINTIME`,`CREATETIME`,`UPDATETIME`,`PIC1`,`PIC2`,`PIC3`,`REALNAME`) values ('c2e809e133f14bdba760dea94b4d490b','15600199768','123',0,'3','123','12@qq.com',NULL,NULL,NULL,NULL,'123','12','12','12',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'12');
+
+/*Table structure for table `ins_warning` */
+
+DROP TABLE IF EXISTS `ins_warning`;
+
+CREATE TABLE `ins_warning` (
+  `ID` int(11) DEFAULT NULL,
+  `WARNING` varchar(1536) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `ins_warning` */
 
 /*Table structure for table `member_activity_all` */
 

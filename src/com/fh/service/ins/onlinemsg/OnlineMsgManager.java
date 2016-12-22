@@ -5,16 +5,15 @@ import com.fh.entity.Page;
 import com.fh.util.PageData;
 
 /** 
- * 说明： 在线留言1接口
+ * 说明： 在线留言接口
  * 创建人：FH Q313596790
- * 创建时间：2016-11-26
+ * 创建时间：2016-12-21
  * @version
  */
-public interface OnlineMsgManager{
+public interface OnlinemsgManager{
 
 	/**新增
 	 * @param pd
-	 * @return 
 	 * @throws Exception
 	 */
 	public void save(PageData pd)throws Exception;
@@ -49,12 +48,17 @@ public interface OnlineMsgManager{
 	 */
 	public PageData findById(PageData pd)throws Exception;
 	
-	/**通过id获取数据
+	/**列表
 	 * @param pd
 	 * @throws Exception
 	 */
-	public PageData findByUserName(PageData pd)throws Exception;
+	public List<PageData> findByName(PageData pd)throws Exception;
 	
+	/**通过username获取数据
+	 * @param pd
+	 * @throws Exception
+	 */
+	public PageData getMaxMsgId(PageData pd)throws Exception;
 	
 	/**批量删除
 	 * @param ArrayDATA_IDS

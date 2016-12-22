@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="OnlineMsgMapper">
+<mapper namespace="OnlinemsgMapper">
 	
 	<!--表名 -->
 	<sql id="tableName">
@@ -9,23 +9,23 @@
 	
 	<!-- 字段 -->
 	<sql id="Field">
-		USERNAME,	
-		CLIENTMSG,	
-		CLIENTWRITETIME,	
-		OPERATIONADMIN,	
-		REPLYMSG,	
-		REPLYTIEM,	
+		MSGID,	
+		CLIENTUSER,	
+		ADMINUSER,	
+		CONTENT,	
+		OPTIME,	
+		REPLYID,	
 		ONLINEMSG_ID
 	</sql>
 	
 	<!-- 字段值 -->
 	<sql id="FieldValue">
-		#{USERNAME},	
-		#{CLIENTMSG},	
-		#{CLIENTWRITETIME},	
-		#{OPERATIONADMIN},	
-		#{REPLYMSG},	
-		#{REPLYTIEM},	
+		#{MSGID},	
+		#{CLIENTUSER},	
+		#{ADMINUSER},	
+		#{CONTENT},	
+		#{OPTIME},	
+		#{REPLYID},	
 		#{ONLINEMSG_ID}
 	</sql>
 	
@@ -53,12 +53,12 @@
 		update
 		<include refid="tableName"></include>
 		set 
-			USERNAME = #{USERNAME},
-			CLIENTMSG = #{CLIENTMSG},
-			CLIENTWRITETIME = #{CLIENTWRITETIME},
-			OPERATIONADMIN = #{OPERATIONADMIN},
-			REPLYMSG = #{REPLYMSG},
-			REPLYTIEM = #{REPLYTIEM},
+			MSGID = #{MSGID},
+			CLIENTUSER = #{CLIENTUSER},
+			ADMINUSER = #{ADMINUSER},
+			CONTENT = #{CONTENT},
+			OPTIME = #{OPTIME},
+			REPLYID = #{REPLYID},
 		ONLINEMSG_ID = ONLINEMSG_ID
 		where 
 		ONLINEMSG_ID = #{ONLINEMSG_ID}
@@ -74,15 +74,28 @@
 			ONLINEMSG_ID = #{ONLINEMSG_ID}
 	</select>
 	
-		<!-- 通过ID获取数据 -->
-	<select id="findByUserName" parameterType="pd" resultType="pd">
+	<!-- 通过ID获取数据 -->
+	<select id="getMaxMsgId" parameterType="pd" resultType="pd">
+		select 
+		MAX(MSGID) AS MSGID
+		from 
+		<include refid="tableName"></include>
+		where 
+			CLIENTUSER = #{CLIENTUSER}
+	</select>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findByName" parameterType="pd" resultType="pd">
 		select 
 		<include refid="Field"></include>
 		from 
 		<include refid="tableName"></include>
 		where 
-			USERNAME = #{USERNAME}
+			CLIENTUSER = #{CLIENTUSER}
+			GROUP BY OPTIME 
 	</select>
+	
+
 	
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
