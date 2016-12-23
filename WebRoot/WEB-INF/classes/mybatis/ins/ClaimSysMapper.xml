@@ -168,7 +168,7 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			POLICYNO = #{POLICYNO}
+			POLICYNO = #{POLICYNO} AND UPDATEFLAG = #{UPDATEFLAG}
 	</select>
 	
 	<!-- 通过PolicyNo获取理赔状态 -->

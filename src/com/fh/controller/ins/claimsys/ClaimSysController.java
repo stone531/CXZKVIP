@@ -421,10 +421,9 @@ public class ClaimSysController extends BaseController {
 		
 		if(null != pdSession){
 			//用户登录，则查询该用户的保单
-			/*
 			PageData param = new PageData();
-			param.put("IANTPAPERNO","412728198904303231");
-			List<PageData>	varListPN = policyService.findByPaperNo(param);
+			param.put("USERID", pdSession.getString("USERMANAGE_ID"));
+			List<PageData>	varListPN = policyService.findByUserID(param);			
 			if(varListPN.size() == 0){
 				pdRet.put("IsPrompt", false);//该卡还没有投保
 			}else{
@@ -432,6 +431,7 @@ public class ClaimSysController extends BaseController {
 				for(int i=0;i<varListPN.size();i++){
 					PageData pdIn = new PageData();
 					pdIn.put("POLICYNO", varListPN.get(i).getString("POLICY_ID"));
+					pdIn.put("UPDATEFLAG", 1);
 					PageData pdOut = claimsysService.findUpdateFlag(pdIn);	//查询是否更新
 					if(pdOut != null){
 						nUpdate += 1;
@@ -444,9 +444,6 @@ public class ClaimSysController extends BaseController {
 					pdRet.put("nUpdate", nUpdate);
 				}								
 			}
-			*/
-			pdRet.put("IsPrompt", true);
-			pdRet.put("nUpdate", 6);
 		}else{
 			pdRet.put("IsPrompt", false);			
 		}
