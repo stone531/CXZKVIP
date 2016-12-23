@@ -15,13 +15,14 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/CXZKVIP/static/ace/css/bootstrap.css" rel="stylesheet" type="text/css">
     <style>
     body
 	{
 		background-color:#d0e4fe;
 		padding-left:-200px;
 		text-align:center;
+		background:url(http://www.wallpapersking.com/top/class18/176/97f84048c5990dd4.htm) no-repeat 10px 10px;
 	}
 	h1
 	{
@@ -33,6 +34,15 @@
 		font-family:"Times New Roman";
 		font-size:20px;
 	}
+	textarea
+	{
+		width:1135px;//初始宽度
+		max-width:100px;//最大宽度
+		height:20px;//初始高度
+		max-height:30px;//最大高度
+		overflow-y:auto;//让滚动条自适应，保证兼容性
+		margin: 250px;
+    }
 	.div{ margin:0 auto; width:400px; height:100px; border:1px solid #F00}
     </style>
     
@@ -41,10 +51,14 @@
 	<div class="section">
       <div class="container">
         <div class="row">
+        <DIV class="div1"></div>
+
+        <embed src="d:\a.mp3" hidden="true" autostart="true" loop="true">
+          <p align=left style="margin-left:10px;">显示所有消息列表:</p>
           <div class="col-md-4"></div>
 	        <div class="col-md-8 text-right">
 				<c:forEach items="${varList}" var="var" varStatus="vs">
-				    <div class="row" style="margin:10pt">
+				    <div class="row" style="margin-left:-400px ;" >
 				      <div class="col-md-12" >
 						<c:if test="${var.ADMINUSER == null }">
 				            <div class="well">
@@ -64,9 +78,10 @@
 			</div>
          <hr>  
 		    <form action="sendmsg">
-		        <div class="row">
-		          <div class="col-md-12 text-right">
-		            <textarea id="LIUYAN" name="LIUYAN" class="form-control" rows="20"></textarea>
+		        <div class="row1" style="margin-left:2200px -400px;">
+		         <p align=left style="margin-left:10px;">请输入您的所有疑虑:</p>
+		          <div class="col-md-12 text-left" >		         
+		            <textarea id="LIUYAN" name="LIUYAN" class="form-contro50" rows="10" cols="10"></textarea>
 		          </div>
 		        </div>
 		        <br>

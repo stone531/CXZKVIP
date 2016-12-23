@@ -331,10 +331,10 @@
 			 //top.jzts();
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
-			 diag.Title ="编辑";
+			 diag.Title ="请慎重回复每一条消息";
 			 diag.URL = '<%=basePath%>onlinemsg/goReplyMsg.do?ONLINEMSG_ID='+Id;
 			 diag.Width = 800;
-			 diag.Height = 800;
+			 diag.Height = 600;
 			  nextPage(${page.currentPage});
 			 //diag.CancelEvent = function(){ //关闭事件
 			//	 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
