@@ -88,6 +88,15 @@ public class ClaimSysService implements ClaimSysManager{
 		return (PageData)dao.findForObject("ClaimSysMapper.findByPolicyNo", pd);
 	}
 	
+	/**通过PolicyNo查询是否提示用户
+	 * @param pd
+	 * @throws Exception
+	 */
+	@Override
+	public PageData findUpdateFlag(PageData pd)throws Exception{
+		return (PageData)dao.findForObject("ClaimSysMapper.findUpdateFlag", pd);
+	}
+	
 	/**通过PolicyNo获取理赔状态
 	 * @param pd
 	 * @throws Exception

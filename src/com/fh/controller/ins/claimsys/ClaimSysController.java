@@ -35,6 +35,7 @@ import net.sf.json.JSONObject;
 import com.fh.service.ins.policy.PolicyManager;
 import com.fh.service.ins.cardinfo.CardInfoManager;
 import com.fh.service.ins.claimcompany.ClaimCompanyManager;
+import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 
  * 说明：ICS
@@ -54,6 +55,7 @@ public class ClaimSysController extends BaseController {
 	private CardInfoManager cardinfoService;
 	@Resource(name="claimcompanyService")
 	private ClaimCompanyManager claimcompanyService;
+
 	/**保存
 	 * @param
 	 * @throws Exception
@@ -70,9 +72,10 @@ public class ClaimSysController extends BaseController {
 		pd = this.getPageData();
 		pd.put("CLAIMSYS_ID", this.get32UUID());	//主键
 		//判断此保单号是否存在，外界提供接口
-		pd.put("CLAIMSSTATES", 0);
+		pd.put("CLAIMSSTATES", "0");
 		pd.put("LASTUPDATE", DateUtil.getTime());
 		pd.put("ISREMIND", "0");
+		pd.put("UPDATEFLAG", "0");
 		PageData pdRet = new PageData();
 
 		//很据保单号查询是否已经报案
@@ -140,8 +143,21 @@ public class ClaimSysController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("LASTUPDATE",DateUtil.getTime());
-		pd.put("ISREMIND", "0");
+		int update = 0;
+		//查看状态表单理赔状态与数据库中是否一致，一致则标记未更新
+		PageData pdNew = claimsysService.findStateByPolicyNo(pd);
+		if(null != pdNew){
+			String stateForm = pd.getString("CLAIMSSTATES");
+			String stateSql = pdNew.getString("CLAIMSSTATES");
+			if(null != stateSql && !"".equals(stateSql) && !stateForm.equals(stateSql)){
+				update = 1;//更新
+			}
+		}
+		if(update == 1){
+			pd.put("LASTUPDATE",DateUtil.getTime());
+			pd.put("ISREMIND", "0");
+			pd.put("UPDATEFLAG", "1");
+		}
 		claimsysService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -285,7 +301,7 @@ public class ClaimSysController extends BaseController {
 		
 		if (0 == result){
 			PageData param = new PageData();
-			List<PageData>	varListPN = policyService.findByCardId(param);
+			List<PageData>	varListPN = new ArrayList<PageData>();
 			if(pd.getString("searchtype").equals("1")){
 				//卡号查询
 				param.put("CARDNO",pd.getString("CARDID"));
@@ -370,7 +386,7 @@ public class ClaimSysController extends BaseController {
 	 */
 	@RequestMapping(value="/addCourier")
 	public void addCourier(PrintWriter out) throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"修改ClaimSys");
+		logBefore(logger, Jurisdiction.getUsername()+"更新ClaimSys");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return;} //校验权限
 
 		PageData pd = new PageData();
@@ -385,6 +401,53 @@ public class ClaimSysController extends BaseController {
 			claimsysService.addCourierNo(pd);
 			pdRet.put("IsSuccess", true);
 		}
+		JSONObject js = JSONObject.fromObject(pdRet);
+		out.write(js.toString());
+		out.close();
+	}
+	
+	/**提示用户理赔状态是否有更新
+	 * @param out
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/promptUpdate")
+	public void promptUpdate(PrintWriter out) throws Exception{
+		logBefore(logger, Jurisdiction.getUsername()+"查询ClaimSys");
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return;} //校验权限
+		
+		PageData pdRet = new PageData();
+		//获取用户登录session
+		PageData pdSession = UserManageController.GetUserData();
+		
+		if(null != pdSession){
+			//用户登录，则查询该用户的保单
+			PageData param = new PageData();
+			param.put("USERID", pdSession.getString("USERMANAGE_ID"));
+			List<PageData>	varListPN = policyService.findByUserID(param);			
+			if(varListPN.size() == 0){
+				pdRet.put("IsPrompt", false);//该卡还没有投保
+			}else{
+				int nUpdate = 0;
+				for(int i=0;i<varListPN.size();i++){
+					PageData pdIn = new PageData();
+					pdIn.put("POLICYNO", varListPN.get(i).getString("POLICY_ID"));
+					pdIn.put("UPDATEFLAG", 1);
+					PageData pdOut = claimsysService.findUpdateFlag(pdIn);	//查询是否更新
+					if(pdOut != null){
+						nUpdate += 1;
+					}		
+				}
+				if(0 == nUpdate){//没有更新
+					pdRet.put("IsPrompt", false);
+				}else{//有更新
+					pdRet.put("IsPrompt", true);
+					pdRet.put("nUpdate", nUpdate);
+				}								
+			}
+		}else{
+			pdRet.put("IsPrompt", false);			
+		}
+		
 		JSONObject js = JSONObject.fromObject(pdRet);
 		out.write(js.toString());
 		out.close();

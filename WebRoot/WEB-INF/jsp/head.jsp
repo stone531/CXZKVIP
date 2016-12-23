@@ -21,16 +21,18 @@
 				<li class="head_navigation_link isIndex" style="border-right: 1.5px solid #7f868b;width: 16%;"><a href="main/index">首页</a></li>
 			</ul>
 		</div>
-		<div class="navbar_bottom_right">
-			<ul class="unlogin">
+		<div class="navbar_bottom_right" >
+			<ul class="unlogin" style="margin-top:-1.1%;">
 				<li><a href="usermanage/login/show">登录</a></li><span style="color: #7a8186">|</span>
 				<li><a href="usermanage/register/show">注册</a></li><span>&nbsp;&nbsp;</span>
 			</ul>
-			<ul class="welcom" style="display:none">
-				<li><a id="mobile"></a></li>
+			<ul class="welcom" style="display:none;padding-bottom:2%;margin-top:-5%;">
+				<li><a id="mobile"></a></span></li>
 				<li><a id="logout">退出</a></li>
 			</ul>
-
+			<ul id="REMIND" style="display:none;margin-top:5%;">
+				<li><marquee id="REMINDMSG" style="color:red; font-size:small"></marquee></li>
+			</ul>
 		</div>
 	</div>
 </div>

@@ -26,6 +26,7 @@
 		CLAIMSSTATES,	
 		ISREMIND,
 		LASTUPDATE,
+		UPDATEFLAG,
 		COURIERCOMPANY,
 		COURIERNO,
 		CLAIMSYS_ID
@@ -51,6 +52,7 @@
 		#{CLAIMSSTATES},	
 		#{ISREMIND},
 		#{LASTUPDATE},
+		#{UPDATEFLAG},
 		#{COURIERCOMPANY},
 		#{COURIERNO},
 		#{CLAIMSYS_ID}
@@ -109,6 +111,7 @@
 			CLAIMSSTATES = #{CLAIMSSTATES},
 			ISREMIND = #{ISREMIND},
 			LASTUPDATE = #{LASTUPDATE},
+			UPDATEFLAG = #{UPDATEFLAG},
 		CLAIMSYS_ID = CLAIMSYS_ID
 		where 
 		CLAIMSYS_ID = #{CLAIMSYS_ID}
@@ -155,6 +158,17 @@
 		<include refid="tableName"></include>
 		where 
 			POLICYNO = #{POLICYNO}
+	</select>
+	
+	<!-- 通过PolicyNo查询是否提示用户 -->
+	<select id="findUpdateFlag" parameterType="pd" resultType="pd">
+		select 
+			POLICYNO,
+			UPDATEFLAG
+		from 
+		<include refid="tableName"></include>
+		where 
+			POLICYNO = #{POLICYNO} AND UPDATEFLAG = #{UPDATEFLAG}
 	</select>
 	
 	<!-- 通过PolicyNo获取理赔状态 -->
