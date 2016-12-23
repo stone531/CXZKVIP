@@ -89,7 +89,6 @@ public class ClaimSysController extends BaseController {
 		out.write(js.toString());
 		out.close();
 
-		//mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;
 	}
