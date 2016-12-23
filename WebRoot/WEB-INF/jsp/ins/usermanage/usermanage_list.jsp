@@ -110,10 +110,10 @@
 											<div>企业用户</div>
 											</c:if>
 											<c:if test = "${var.USERTYPE == 3}">
-											<div style="color:#F00">待审核</div>
+											<div style="color:#F00">企业用户申请</div>
 											</c:if>
 											<c:if test = "${var.USERTYPE == 2}">
-											<div>被拒绝</div>
+											<div>企业用户申请被拒绝</div>
 											</c:if>
 											</td>
 											<td class='center'>${var.NICKNAME}</td>
@@ -126,13 +126,28 @@
 											<td class='center'>${var.ADDRESS}</td>
 											<td class='center'>${var.PHONE}</td>	
 											<td class='center'>
+											<c:if test = "${var.USERTYPE == 0}">
+											<div></div>
+											</c:if>
+											<c:if test = "${var.USERTYPE != 0}">
 											<a href="<%=basePath%>${var.PIC1}" class="bwGal"><img src="<%=basePath%>${var.PIC1}" width="100" height="100"></a>
+											</c:if>
 											</td>
 											<td class='center'>
+											<c:if test = "${var.USERTYPE == 0}">
+											<div></div>
+											</c:if>
+											<c:if test = "${var.USERTYPE != 0}">
 											<a href="<%=basePath%>${var.PIC2}" class="bwGal"><img src="<%=basePath%>${var.PIC2}" width="100" height="100"></a>
+											</c:if>
 											</td>
 											<td class='center'>
+											<c:if test = "${var.USERTYPE == 0}">
+											<div></div>
+											</c:if>
+											<c:if test = "${var.USERTYPE != 0}">
 											<a href="<%=basePath%>${var.PIC3}" class="bwGal"><img src="<%=basePath%>${var.PIC3}" width="100" height="100"></a>
+											</c:if>
 											</td>
 											<td class='center'>${var.REMARK}</td>
 											<td class="center">

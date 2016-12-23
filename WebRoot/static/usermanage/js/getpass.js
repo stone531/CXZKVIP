@@ -215,7 +215,7 @@ function mobile_update(){
         dataType: "json",
         success: function(data){
                    if (data.IsSuccess){
-                	   window.location.href="/CXZKVIP/main/index?rnd="+Math.random(); 
+                	   window.location.href="/CXZKVIP/usermanage/show/result?IsSuccess=1"; 
                    }else{
                 	   $("#mobileErrMsg").text("短信验证码不正确");
                    }
@@ -236,7 +236,7 @@ function mail_update(){
         dataType: "json",
         success: function(data){
                    if (data.IsSuccess){
-                	   window.location.href="/CXZKVIP/main/index?rnd="+Math.random(); 
+                	   window.location.href="/CXZKVIP/usermanage/show/result?IsSuccess=1"; 
                    }else{
                 	   $("#mailErrMsg").text("邮箱验证码不正确");
                    }

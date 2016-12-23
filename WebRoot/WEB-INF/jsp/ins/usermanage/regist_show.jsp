@@ -94,7 +94,7 @@
 
                 <!-- <div class="mt10">  注册即表示同意 《<a href="" target="_blank">会员协议</a>》</div> -->
 
-                <div class="mt20 login-action">
+                <div class="login-action mt20">
                     <a class="hz-button hz-button-block hz-button-primary" href="javascript:;">立即注册</a>
                 </div>
 
