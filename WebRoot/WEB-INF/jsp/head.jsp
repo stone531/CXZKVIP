@@ -30,7 +30,9 @@
 				<li><a id="mobile"></a></li>
 				<li><a id="logout">退出</a></li>
 			</ul>
-
+			<ul id="REMIND" style="display:none;">
+				<li><marquee id="REMINDMSG" style="color:red; font-size:large"></marquee></li>
+			</ul>
 		</div>
 	</div>
 </div>

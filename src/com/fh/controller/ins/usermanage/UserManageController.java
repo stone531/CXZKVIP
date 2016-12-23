@@ -891,7 +891,7 @@ public class UserManageController extends BaseController {
 		return user;
 	}
 	
-	public PageData setPDFromUD(UserData ud){
+	public static PageData setPDFromUD(UserData ud){
 		PageData pd = new PageData();
 		pd.put("USERMANAGE_ID", ud.getId());
 		pd.put("ADDRESS", ud.getAddress());
@@ -1161,7 +1161,7 @@ public class UserManageController extends BaseController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(format,true));
 	}
 	
-	public PageData GetUserData(){
+	public static PageData GetUserData(){
 		Subject currentUser = SecurityUtils.getSubject(); 
 		Session session = currentUser.getSession();	
 		UserData user = (UserData)session.getAttribute(Const.SESSION_USERDATA);
@@ -1170,7 +1170,7 @@ public class UserManageController extends BaseController {
 			System.out.println("client  not login");
 			return null;
 		}
-		return this.setPDFromUD(user);
+		return UserManageController.setPDFromUD(user);
 	}
 }
 

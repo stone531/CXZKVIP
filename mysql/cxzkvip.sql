@@ -125,12 +125,11 @@ CREATE TABLE `ins_claimsys` (
   `LASTUPDATE` date DEFAULT NULL,
   `COURIERCOMPANY` varchar(255) DEFAULT NULL,
   `COURIERNO` varchar(255) DEFAULT NULL,
+  `UPDATEFLAG` int(4) DEFAULT NULL,
   PRIMARY KEY (`CLAIMSYS_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `ins_claimsys` */
-
-insert  into `ins_claimsys`(`CLAIMSYS_ID`,`POLICYNO`,`INFORNAME`,`RELATION`,`EMAIL`,`CLAIMERTEL`,`OCCURTIME`,`OCCURPLACE`,`POLICYNAME`,`POLICERTEL`,`POLICEACCIDENT`,`CLAIMSSTATES`,`ISREMIND`,`LASTUPDATE`,`COURIERCOMPANY`,`COURIERNO`) values ('6c6aee7a8fc64977bf6597ca9ac08b49','777b002537ae4651b1d55680c604ff34','张三','1','mayun@qq.com','010-6666666','2016-12-09','北京市海淀区清华大学','李四','010-6666666','郑浩被李治杀了','0',0,'2016-12-21',NULL,NULL);
 
 /*Table structure for table `ins_insnum` */
 

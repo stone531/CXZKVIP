@@ -49,6 +49,12 @@ public interface ClaimSysManager{
 	 */
 	public PageData findById(PageData pd)throws Exception;
 	
+	/**通过PolicyNo查询是否提示用户
+	 * @param pd
+	 * @throws Exception
+	 */
+	public PageData findUpdateFlag(PageData pd)throws Exception;
+	
 	/**通过PolicyNo获取理赔数据
 	 * @param pd
 	 * @throws Exception

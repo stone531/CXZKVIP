@@ -106,16 +106,29 @@ $(function(){
 		        url: "/CXZKVIP/usermanage/login/check",
 		        dataType: "json",
 		        success: function(data){
-		                   if (data.IsSuccess == true){
-		                	   $(".unlogin").hide();
-		                	   $(".welcom").show();
-		                	   $("#mobile").text("欢迎："+data.mobile);
-		                   }else if (data.IsSuccess == false){
-		                	   $(".unlogin").show();
-		                	   $(".welcom").hide();
-		                   }
-		                 }
+		            if (data.IsSuccess == true){
+		                $(".unlogin").hide();
+		                $(".welcom").show();
+		                $("#mobile").text("欢迎："+data.mobile);
+			            $.ajax({
+		                    type: "POST",
+		                    async:false,
+		                    url: "/CXZKVIP/claimsys/promptUpdate",
+		                    dataType: "json",
+		                    success: function(recMsg){
+		                        if (recMsg.IsPrompt == true){
+									$("#REMINDMSG").text("您有 "+recMsg.nUpdate+" 条理赔进度更新");
+		                            $("#REMIND").show();		                            	
+		                        }else if (recMsg.IsPrompt == false){
+		                            $("#REMIND").hide();
+		                        }
+		                    }
+		                });												
+		            }else if (data.IsSuccess == false){
+		                $(".unlogin").show();
+		                $(".welcom").hide();
+		            }
+		        }
 		    });
 		};
-
-		});
+});
