@@ -885,7 +885,7 @@ public class UserManageController extends BaseController {
 		user.setCreatTime(pd.getString("CREATETIME"));
 		user.setUpdateTime(pd.getString("UPDATETIME"));
 		user.setRealName(pd.getString("REALNAME"));
-		user.setIsAdd(pd.getString("ISADD"));
+		//user.setIsAdd(pd.getString("ISADD"));
 		user.setPic1(pd.getString("PIC1"));
 		user.setPic2(pd.getString("PIC2"));
 		user.setPic3(pd.getString("PIC3"));
@@ -917,7 +917,7 @@ public class UserManageController extends BaseController {
 		pd.put("PIC1",ud.getPic1());
 		pd.put("PIC2",ud.getPic2());
 		pd.put("PIC3",ud.getPic3());
-		pd.put("ISADD", ud.getIsAdd());
+		//pd.put("ISADD", ud.getIsAdd());
 		return pd;
 	}
 	
