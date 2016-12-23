@@ -54,6 +54,7 @@ import java.util.Properties;
  
 
 
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -1159,4 +1160,18 @@ public class UserManageController extends BaseController {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(format,true));
 	}
+	
+	public PageData GetUserData(){
+		Subject currentUser = SecurityUtils.getSubject(); 
+		Session session = currentUser.getSession();	
+		UserData user = (UserData)session.getAttribute(Const.SESSION_USERDATA);
+		if(user == null)
+		{
+			System.out.println("client  not login");
+			return null;
+		}
+		return this.setPDFromUD(user);
+	}
 }
+
+

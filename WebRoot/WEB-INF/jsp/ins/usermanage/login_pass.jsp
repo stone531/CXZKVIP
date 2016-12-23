@@ -170,14 +170,6 @@
         </div>
       </div>
     </div>
-     <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <hr>
-          </div>
-        </div>
-      </div>
-    </div>
+     
     <%@ include file="../../tail.jsp"%>
     </body></html>

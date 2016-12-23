@@ -32,6 +32,7 @@ public interface UserManageManager{
 	public void edit(PageData pd)throws Exception;
 	
 	/**修改
+	 *类型
 	 * @param pd
 	 * @throws Exception
 	 */
