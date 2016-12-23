@@ -24,6 +24,7 @@ public class UserData {
 	private String PIC1;
 	private String PIC2;
 	private String PIC3;
+	private String ISADD;
 	
 	public void setId(String id){
 		this.USERMANAGE_ID = id;
@@ -163,5 +164,10 @@ public class UserData {
 	public void setPic3(String pic1){
 		this.PIC3 = pic1;
 	}
-	
+	public String getIsAdd(){
+		return this.ISADD;
+	}
+	public void setIsAdd(String isadd){
+		this.ISADD = isadd;
+	}
 };

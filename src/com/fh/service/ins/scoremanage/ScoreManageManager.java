@@ -1,17 +1,16 @@
-package com.fh.service.ins.usermanage;
+package com.fh.service.ins.scoremanage;
 
 import java.util.List;
-
 import com.fh.entity.Page;
 import com.fh.util.PageData;
 
 /** 
- * 说明： user system接口
+ * 说明： 积分管理接口
  * 创建人：FH Q313596790
- * 创建时间：2016-09-24
+ * 创建时间：2016-12-23
  * @version
  */
-public interface UserManageManager{
+public interface ScoreManageManager{
 
 	/**新增
 	 * @param pd
@@ -30,13 +29,6 @@ public interface UserManageManager{
 	 * @throws Exception
 	 */
 	public void edit(PageData pd)throws Exception;
-	
-	/**修改
-	 *类型
-	 * @param pd
-	 * @throws Exception
-	 */
-	public void editype(PageData pd)throws Exception;
 	
 	/**列表
 	 * @param page
@@ -61,13 +53,6 @@ public interface UserManageManager{
 	 * @throws Exception
 	 */
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception;
-	
-	public PageData getByName(PageData pd)throws Exception;
-	public PageData getByEmail(PageData pd)throws Exception;
-	public PageData getByNick(PageData pd)throws Exception;
-	public void updatePass(PageData pd)throws Exception;
-	public void updateScore(PageData pd)throws Exception;
-	
 	
 }
 

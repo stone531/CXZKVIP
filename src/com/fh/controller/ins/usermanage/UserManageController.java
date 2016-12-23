@@ -885,13 +885,14 @@ public class UserManageController extends BaseController {
 		user.setCreatTime(pd.getString("CREATETIME"));
 		user.setUpdateTime(pd.getString("UPDATETIME"));
 		user.setRealName(pd.getString("REALNAME"));
+		user.setIsAdd(pd.getString("ISADD"));
 		user.setPic1(pd.getString("PIC1"));
 		user.setPic2(pd.getString("PIC2"));
 		user.setPic3(pd.getString("PIC3"));
 		return user;
 	}
 	
-	public PageData setPDFromUD(UserData ud){
+	public static PageData setPDFromUD(UserData ud){
 		PageData pd = new PageData();
 		pd.put("USERMANAGE_ID", ud.getId());
 		pd.put("ADDRESS", ud.getAddress());
@@ -916,6 +917,7 @@ public class UserManageController extends BaseController {
 		pd.put("PIC1",ud.getPic1());
 		pd.put("PIC2",ud.getPic2());
 		pd.put("PIC3",ud.getPic3());
+		pd.put("ISADD", ud.getIsAdd());
 		return pd;
 	}
 	
@@ -1161,7 +1163,7 @@ public class UserManageController extends BaseController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(format,true));
 	}
 	
-	public PageData GetUserData(){
+	public static PageData GetUserData(){
 		Subject currentUser = SecurityUtils.getSubject(); 
 		Session session = currentUser.getSession();	
 		UserData user = (UserData)session.getAttribute(Const.SESSION_USERDATA);
@@ -1170,7 +1172,7 @@ public class UserManageController extends BaseController {
 			System.out.println("client  not login");
 			return null;
 		}
-		return this.setPDFromUD(user);
+		return UserManageController.setPDFromUD(user);
 	}
 }
 

@@ -7,12 +7,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <div class="footer_wrap"  >
 	<div class="footer">
-		<div class="footer_copy"><span>联系我们</span></div>
+		<div class="footer_copy"><span></span></div>
 		<div class="contact_us">
 			<ul>
-				<li><a href="#" style="margin: 0 10px;">关于我们</a>
+				<li><a href="" style="margin: 0 10px;">关于我们</a>
 				</li><span style="color: #999999">|</span>
-				<li><a href="#" style="margin-left: 10px;">联系我们</a></li>
+				<li><a href="" style="margin-left: 10px;">联系我们</a></li>
 			</ul>
 		</div>
 	</div>

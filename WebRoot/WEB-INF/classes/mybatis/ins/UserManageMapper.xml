@@ -31,7 +31,8 @@
 		REALNAME,
 		PIC1,
 		PIC2,
-		PIC3
+		PIC3,
+		ISADD
 	</sql>
 	
 	<!-- 字段值 -->
@@ -58,7 +59,8 @@
 		#{REALNAME},
 		#{PIC1},
 		#{PIC2},
-		#{PIC3}
+		#{PIC3},
+		#{ISADD}
 	</sql>
 	
 	<!-- 新增-->
@@ -211,4 +213,12 @@
 			USERMANAGE_ID = #{USERMANAGE_ID}
 	</update>
 	
+	<update id="updateScore" parameterType="pd" >
+		update
+		<include refid="tableName"></include>
+		set
+		SCORE = #{SCORE}
+		where
+			USERMANAGE_ID = #{USERMANAGE_ID}
+	</update>
 </mapper>
