@@ -117,6 +117,16 @@
 		CLAIMSYS_ID = #{CLAIMSYS_ID}
 	</update>
 	
+	<!-- 更新提醒用户flag -->
+	<update id="changeUpdateFlag" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			UPDATEFLAG = #{UPDATEFLAG}
+		where 
+		POLICYNO = #{POLICYNO}
+	</update>
+	
 	<!-- 更新理赔状态 -->
 	<update id="updateStateByPolicyNo" parameterType="pd">
 		update

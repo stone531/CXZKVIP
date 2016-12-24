@@ -31,6 +31,12 @@ public interface ClaimSysManager{
 	 */
 	public void edit(PageData pd)throws Exception;
 	
+	/**更新提醒用户flag
+	 * @param pd
+	 * @throws Exception
+	 */
+	public void changeUpdateFlag(PageData pd)throws Exception;	
+	
 	/**列表
 	 * @param page
 	 * @throws Exception

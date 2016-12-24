@@ -318,8 +318,10 @@ public class ClaimSysController extends BaseController {
 				for(int i=0;i<varListPN.size();i++){
 					PageData pdIn = new PageData();
 					pdIn.put("POLICYNO", varListPN.get(i).getString("POLICY_ID"));
+					pdIn.put("UPDATEFLAG", "0");
 					PageData pdOut = claimsysService.findStateByPolicyNo(pdIn);	//列出ClaimSys列表
 					if(pdOut != null){
+						claimsysService.changeUpdateFlag(pdIn);
 						pdOut.put("IsOrNo", "1");
 						varList.add(pdOut);
 					}else{

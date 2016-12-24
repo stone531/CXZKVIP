@@ -100,7 +100,7 @@
                         <label for="PersonNo" class="control-label">身份证号：</label>
                       </div>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="IANTPAPERNO" name="IANTPAPERNO" placeholder="请输入被投保人身份证号" value="341225199008277732">
+                        <input type="text" class="form-control" id="IANTPAPERNO" name="IANTPAPERNO" placeholder="请输入被投保人身份证号">
                       </div>
 					</div>
                 </div>

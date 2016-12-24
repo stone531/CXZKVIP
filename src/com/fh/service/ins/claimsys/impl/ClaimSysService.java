@@ -50,6 +50,15 @@ public class ClaimSysService implements ClaimSysManager{
 		dao.update("ClaimSysMapper.edit", pd);
 	}
 	
+	/**更新提醒用户flag
+	 * @param pd
+	 * @throws Exception
+	 */
+	@Override
+	public void changeUpdateFlag(PageData pd)throws Exception{
+		dao.update("ClaimSysMapper.changeUpdateFlag", pd);
+	}
+	
 	/**列表
 	 * @param page
 	 * @throws Exception
