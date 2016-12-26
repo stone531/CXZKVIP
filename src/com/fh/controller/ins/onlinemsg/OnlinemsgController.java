@@ -59,7 +59,8 @@ public class OnlinemsgController extends BaseController {
 		if(data== null)
 		{
 			System.out.println("index  error");
-			mv.addObject("msg","error");
+			mv.addObject("IsSuccess",2);
+			mv.setViewName("ins/onlinemsg/result");
 			return mv;
 		}
 		System.out.println("onlinemsg index:"+data.getMobile());
