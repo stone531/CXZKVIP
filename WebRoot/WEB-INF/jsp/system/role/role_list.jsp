@@ -193,10 +193,10 @@
 			 diag.Width = 222;
 			 diag.Height = 100;
 			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+				/* if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					top.jzts();
 					setTimeout("self.location.reload()",100);
-				}
+				}*/
 				diag.close();
 			 };
 			 diag.show();
@@ -212,10 +212,10 @@
 			 diag.Width = 222;
 			 diag.Height = 100;
 			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+				/* if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					top.jzts();
 					setTimeout("self.location.reload()",100);
-				}
+				}*/
 				diag.close();
 			 };
 			 diag.show();

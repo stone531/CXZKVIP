@@ -230,54 +230,17 @@ public class ClaimSysController extends BaseController {
 		return mv;
 	}
 	
-	/**显示理赔进度
-	 * @param
-	 * @throws Exception
-	 */
-	/*
-	@RequestMapping(value="/searchState")
-	public ModelAndView searchState() throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"查询ClaimSys");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
-		ModelAndView mv = this.getModelAndView();
-		PageData pd = new PageData();
-		pd = this.getPageData();
-		System.out.println("-----------------------1111");
-		String policyNo = pd.getString("POLICYNO");
-		System.out.println(policyNo);
-		String CLAIMSSTATES = pd.getString("CLAIMSSTATES");
-		System.out.println(CLAIMSSTATES);
-		//根据卡号、密码获取保单号 我ia界提供接口
-		//String cardNo = pd.getString("CARDNO");	
-		//String cardPasswd = pd.getString("CARDPASSWD");	
-		//String policyNo="11111";
-					
-		//pd.put("POLICYNO", policyNo);
-		
-		pd = claimsysService.findStateByPolicyNo(pd);	//根据ID读取
-		String CLAIMSSTATES1 = pd.getString("CLAIMSSTATES");
-		System.out.println(CLAIMSSTATES1);
-		//pd.put("POLICYNO", "9999999");
-		//pd.put("CLAIMSSTATES", "1111111111111");
-		//System.out.println("-------------=="+pd.getString("POLICYNO"));
-		mv.setViewName("ins/claimsys/search");
-		//mv.addObject("msg", "searchState");
-		mv.addObject("pd", pd);
-		mv.addObject("msg", "success");
-		
-		return mv;
-	}*/
-	
 	/**搜索
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/search")
-	public ModelAndView search()throws Exception{
-		ModelAndView mv = this.getModelAndView();		
+	@RequestMapping(value="/searchResult")
+	@ResponseBody
+	public Object searchResult() throws Exception{	
 		//查询卡号密码
 		PageData pdmysql = new PageData();
 		PageData pd = new PageData();
+		Map<String,Object> map = new HashMap<String,Object>();
 		pd = this.getPageData();
 		String srcId =pd.getString("CARDID");
 		String srcPW =pd.getString("PASSWORD");
@@ -293,6 +256,7 @@ public class ClaimSysController extends BaseController {
 				//get username and password from mysql
 				String desId =pdmysql.getString("CARDID");				
 				String desPW = pdmysql.getString("PASSWORD");
+				System.out.println(srcId+":"+desId+"---"+srcPW+":"+desPW);
 				if(!srcId.equals(desId) || !srcPW.equals(desPW)){
 					result = 2;//卡号密码不正确
 				}
@@ -329,14 +293,11 @@ public class ClaimSysController extends BaseController {
 						varList.add(pdIn);
 					}			
 				}				
-				mv.addObject("varList", varList);
+				map.put("varList", varList);
 			}			
 		}
-		mv.addObject("pd",pd);
-		mv.addObject("result", result);
-		mv.addObject("msg", "search");
-		mv.setViewName("ins/claimsys/search");
-		return mv;
+		map.put("result", result);
+		return AppUtil.returnObject(pd, map);
 	}
 	
 	/**去搜索页面
