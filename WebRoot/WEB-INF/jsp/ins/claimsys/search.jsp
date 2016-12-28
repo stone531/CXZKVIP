@@ -105,9 +105,10 @@
 					</div>
                 </div>
                 <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10" id="showErr">
-                    <button type="button" class="btn btn-sm-10 btn-success" onclick="goSearch()" >查询</button>
+                  <div class="col-sm-offset-2 col-sm-2">
+                    <button type="button" class="btn btn-sm-4 btn-success" onclick="goSearch()" >查询</button>
                   </div>
+				  <div class="col-sm-8" style="padding-left:1%;" id="showErr"></div>
                 </div>						
 			</form>
           </div>
@@ -391,7 +392,8 @@
           					sub += "<label>温馨提示：卡号密码不正确！</label>";
           				if(data.result == 3)
           					sub += "<label>温馨提示：您还尚未投保！</label>";
-          				$("#showErr").append(sub);	
+          				//$("#showErr").append(sub);
+						$("#showErr").html(sub);					
 					}else{
 						var subTable="";
 						subTable += "<div class=\"col-md-12\" style=\"border-top:groove ;border-color: beige; margin-top:30px;padding-left:10%;\">"
@@ -421,7 +423,8 @@
 							subTable += "<tr>";					
 						});
 						subTable += "</tbody></table></div></div>";
-						$("#showPolicy").append(subTable);						
+						//$("#showPolicy").append(subTable);
+						$("#showPolicy").html(subTable);
 					}
 				}
 			});

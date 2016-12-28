@@ -65,7 +65,6 @@
 										<c:otherwise>
 										<c:if test="${QX.edit == 1 }">
 										<a class="btn btn-mini btn-purple" onclick="editRights('${pd.ROLE_ID }');"><i class="icon-pencil"></i>组菜单权限</a>
-										<a class="btn btn-mini btn-purple" onclick="editOrg('${pd.ROLE_ID }');"><i class="icon-pencil"></i>组组织机构权限</a>
 										</c:if>
 										</c:otherwise>
 									</c:choose>
@@ -118,7 +117,6 @@
 										</c:if>
 										<c:if test="${QX.edit == 1 }">
 										<a class="btn btn-mini btn-purple" onclick="editRights('${var.ROLE_ID }');"><i class="icon-pencil"></i>菜单权限</a>
-										<a class="btn btn-mini btn-purple" onclick="editOrg('${var.ROLE_ID }');"><i class="icon-pencil"></i>组织权限</a>
 										<a class='btn btn-mini btn-info' title="编辑" onclick="editRole('${var.ROLE_ID }');"><i class='ace-icon fa fa-pencil-square-o bigger-130'></i></a>
 										</c:if>
 										<c:choose> 

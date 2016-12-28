@@ -34,6 +34,7 @@ import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
 import com.fh.util.PathUtil;
 import com.fh.service.ins.cardtype.CardTypeManager;
+import com.fh.service.ins.claimcompany.ClaimCompanyManager;
 
 /** 
  * 说明：服务卡类型
@@ -47,6 +48,8 @@ public class CardTypeController extends BaseController {
 	String menuUrl = "cardtype/list.do"; //菜单地址(权限用)
 	@Resource(name="cardtypeService")
 	private CardTypeManager cardtypeService;
+	@Resource(name="claimcompanyService")
+	private ClaimCompanyManager claimcompanyService;
 	
 	/**保存
 	 * @param
@@ -131,8 +134,11 @@ public class CardTypeController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		//列出所有保险公司
+		List<PageData> varOList = claimcompanyService.listAll(pd);
 		mv.setViewName("ins/cardtype/cardtype_edit");
 		mv.addObject("msg", "save");
+		mv.addObject("varList", varOList);
 		mv.addObject("pd", pd);
 		return mv;
 	}	
@@ -147,8 +153,11 @@ public class CardTypeController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = cardtypeService.findById(pd);	//根据ID读取
+		//列出所有保险公司
+		List<PageData> varOList = claimcompanyService.listAll(pd);
 		mv.setViewName("ins/cardtype/cardtype_edit");
 		mv.addObject("msg", "edit");
+		mv.addObject("varList", varOList);
 		mv.addObject("pd", pd);
 		return mv;
 	}	

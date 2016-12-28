@@ -34,6 +34,7 @@ import net.sf.json.JSONObject;
 
 import com.fh.service.ins.policy.PolicyManager;
 import com.fh.service.ins.cardinfo.CardInfoManager;
+import com.fh.service.ins.cardtype.CardTypeManager;
 import com.fh.service.ins.claimcompany.ClaimCompanyManager;
 import com.fh.controller.ins.usermanage.UserManageController;
 
@@ -53,6 +54,8 @@ public class ClaimSysController extends BaseController {
 	private PolicyManager policyService;
 	@Resource(name="cardinfoService")
 	private CardInfoManager cardinfoService;
+	@Resource(name="cardtypeService")
+	private CardTypeManager cardtypeService;
 	@Resource(name="claimcompanyService")
 	private ClaimCompanyManager claimcompanyService;
 
@@ -81,9 +84,25 @@ public class ClaimSysController extends BaseController {
 		//很据保单号查询是否已经报案
 		if(null == claimsysService.findByPolicyNo(pd)){
 			claimsysService.save(pd); 					//执行保存
-			//查询保险公司电话
-			pdRet.put("COMPANY_NAME", "中国平安");
+			//查询保险公司
+			PageData pdTemp = new PageData();
+			//根据保单查卡号
+			pdTemp.put("POLICY_ID", pd.getString("POLICYNO"));
+			pdTemp = policyService.findById(pdTemp);
+
+			//根据卡号查卡类型
+			pdTemp.put("CARDID", pdTemp.getString("CARDNO"));
+			pdTemp = cardinfoService.findByCardId(pdTemp);
+
+			//根据卡类型查保险公司
+			pdTemp.put("CARDTYPE_ID", pdTemp.getString("TYPEID"));
+			pdTemp = cardtypeService.findById(pdTemp);
+
+			String comPany = pdTemp.getString("COMPANYNAME");			
+			//根据报险公司查电话
+			pdRet.put("COMPANY_NAME", comPany);
 			pdRet = claimcompanyService.findByName(pdRet);
+
 			pdRet.put("IsSuccess", true);
 		}else{
 			pdRet.put("IsSuccess", false);
@@ -256,7 +275,6 @@ public class ClaimSysController extends BaseController {
 				//get username and password from mysql
 				String desId =pdmysql.getString("CARDID");				
 				String desPW = pdmysql.getString("PASSWORD");
-				System.out.println(srcId+":"+desId+"---"+srcPW+":"+desPW);
 				if(!srcId.equals(desId) || !srcPW.equals(desPW)){
 					result = 2;//卡号密码不正确
 				}
