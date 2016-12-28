@@ -164,7 +164,8 @@
                 <div class="form-group">
                   <input class="form-control" id="RePASS" name="RePASS" placeholder="确认新密码" type="password">
                 </div>
-                <a class="btn btn-primary" id="btn-pass-update">确认修改</a>
+                <a class="btn btn-primary" id="btn-pass-update">确认</a>
+                 <a class="btn btn-primary" id="btn-pass-cancel">取消</a>
               </form>
             </div>
             <div id="personal_info">
@@ -174,9 +175,12 @@
                  <div class="col-sm-2">
                    <label class="control-label">手机号</label>
                  </div>
-                 <div class="col-sm-10">
+                 <div class="col-sm-7">
                   <input class="form-control" id="MOBILE" name="MOBILE" value="${pd.MOBILE}" placeholder="手机号" readonly="readonly" type="text">
-                  </div>
+                 </div>
+                 <div class="col-sm-3">
+                  <a class="btn btn-primary" id="update-mobile">修改手机号</a>
+                 </div>
                 </div>
                  <div class="form-group">
                 <div class="col-sm-2">

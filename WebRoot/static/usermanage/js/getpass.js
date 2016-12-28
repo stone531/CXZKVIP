@@ -228,7 +228,6 @@ function mobile_update(){
 function mail_update(){
 	if(!validMailForm().form())
 		return;
-	
 	$.ajax({
         type: "POST",
         url: "/CXZKVIP/usermanage/register/pass/do_update",
@@ -269,13 +268,20 @@ function mobile_sendcode(){
 }
 
 function mail_sendcode(){
+	var sendMobile = "0";
 	if (mailSecond > 0) {
 		return;
 	}
+	if (document.getElementById("checked").checked) {
+		sendMobile = "1";
+	}else{
+		sendMobile = "0";
+	}
 	$.ajax({
 	        type: "GET",
+	        sync:false,
 	        url: "/CXZKVIP/usermanage/register/do_sendEmail",
-	        data: {EMAIL:$("#txtMail").val()},
+	        data: {EMAIL:$("#txtMail").val(),SENDMOBILE:sendMobile},
 	        dataType: "json",
 	        success: function(data){
 	                   if (data.IsSuccess){
@@ -283,7 +289,7 @@ function mail_sendcode(){
 	                	   mailSecond = 120;
 	                       updateSendMailStatus();
 	                   }else{
-	                	   $("#mailErrMsg").text(a.Message);
+	                	   $("#mailErrMsg").text(data.Message);
 	                   }
 	                 }
 	    });

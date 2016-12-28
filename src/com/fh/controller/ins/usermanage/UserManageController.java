@@ -214,6 +214,18 @@ public class UserManageController extends BaseController {
 		mv.setViewName("ins/usermanage/login_pass");
 		return mv;
 	}
+	/**
+	 * 修改手机号
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/personal/mobile/show")
+	public ModelAndView showUpMobile() throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		mv.setViewName("ins/usermanage/personal_mobile");
+		return mv;
+	}
+	
 	/*验证码判断
 	 * 
 	 */
@@ -323,9 +335,16 @@ public class UserManageController extends BaseController {
 		Session session = currentUser.getSession();
 		pd = this.getPageData();
 		String sMail = pd.getString("EMAIL");
-		//TODO:send sms interface
-		Random random = new Random();  
+		String isSendMail = pd.getString("SENDMOBILE");
 		String sRand = "";
+		
+		if (isSendMail.equals("1")) {
+			pd = usermanageService.getByEmail(pd);
+			sRand = sRand + "登陆用户名：" + pd.getString("MOBILE") + "	 邮箱验证码：";
+		}
+		
+		Random random = new Random();  
+		
 		for(int i = 0; i < 4; i++){  
 	        String rand = String.valueOf(random.nextInt(10));  
 	        sRand  += rand;  
@@ -444,6 +463,38 @@ public class UserManageController extends BaseController {
 				pd = new PageData();
 				pd.put("IsSuccess",0);	
 			}
+			
+		}else{
+			pd.put("IsSuccess",0);	
+		}
+		
+		Object js = JSONObject.fromObject(pd);
+		response.getWriter().write(js.toString());
+		response.getWriter().close();
+		return ;
+	}
+	
+	/**修改手机号
+	 * @param
+	 * @throws ExceptionsmsCode
+	 */
+	@RequestMapping(value="/register/mobile/do_update")
+	public void do_updateMobile(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		//logBefore(logger,Jurisdiction.getUsername()+"注册UserManage");
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return ;} //校验权限
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		String psmsCode = pd.getString("smsCode");
+		Subject currentUser = SecurityUtils.getSubject(); 
+		Session session = currentUser.getSession();
+		String smsCode = session.getAttribute("smsCode").toString();
+		
+		if (smsCode.equals(psmsCode)){
+			PageData upd = new PageData();
+			upd.put("USERMANAGE_ID", pd.getString("USERMANAGE_ID"));
+			upd.put("MOBILE",  pd.getString("MOBILE"));
+			usermanageService.updateMobile(upd);
+			pd.put("IsSuccess", 1);	
 			
 		}else{
 			pd.put("IsSuccess",0);	

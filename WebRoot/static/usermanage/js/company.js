@@ -5,6 +5,9 @@ $().ready(function(){
 			return;
 		$("#company-valid-form").submit();
 	});
+	$("#comp-cancel").click(function(){
+		window.location.href = "/CXZKVIP/usermanage/personal/show";
+	});
 	
 })
 

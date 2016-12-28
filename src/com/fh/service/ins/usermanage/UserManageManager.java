@@ -67,6 +67,7 @@ public interface UserManageManager{
 	public PageData getByNick(PageData pd)throws Exception;
 	public void updatePass(PageData pd)throws Exception;
 	public void updateScore(PageData pd)throws Exception;
+	public void updateMobile(PageData pd)throws Exception;
 	
 	
 }

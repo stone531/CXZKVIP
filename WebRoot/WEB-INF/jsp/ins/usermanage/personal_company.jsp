@@ -148,6 +148,7 @@
                 <input class="form-control" id="PIC3" name="PIC" placeholder="组织结构代码证" accept="image/*" type="file" >
               </div>
               <a class="btn btn-primary" id="comp-sub" type="submit">提交材料</a>
+              <a class="btn btn-primary" id="comp-cancel" >取消申请</a>
             </form>
           </div>
         </div>

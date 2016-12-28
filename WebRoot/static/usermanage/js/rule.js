@@ -35,6 +35,12 @@ $().ready(function(){
 		updatepass();
 	}
 	);
+	$("#btn-pass-cancel").click(function(){
+		window.location.href="/CXZKVIP/usermanage/personal/show?rand=" + Math.random();
+	});
+	$("#update-mobile").click(function(){
+		window.location.href="/CXZKVIP/usermanage/personal/mobile/show";
+	});
 });
 
 function showUpdatePass(){
@@ -91,6 +97,11 @@ function setCompnayReadOnly(){
 };
 
 function updatepass(){
+	
+	if ($("#PrePASS").val() == $("#PASS").val()){
+		alert("新密码与旧密码不能相同!");
+		return;
+	}
 	
 	var uid = getCookie('id');
 	

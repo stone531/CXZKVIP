@@ -18,6 +18,10 @@ $(function(){
 			loop: true
 		});
 			
+		 $("#mobile").on("click",function(){
+			 window.location.href="/CXZKVIP/usermanage/personal/show";
+		 });
+			
 		 $("#logout").on("click",function(){
 			 $.ajax({
 			        type: "POST",

@@ -221,4 +221,13 @@
 		where
 			USERMANAGE_ID = #{USERMANAGE_ID}
 	</update>
+	
+	<update id="updateMobile" parameterType="pd" >
+		update
+		<include refid="tableName"></include>
+		set
+		MOBILE = #{MOBILE}
+		where
+			USERMANAGE_ID = #{USERMANAGE_ID}
+	</update>
 </mapper>

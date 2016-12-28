@@ -129,5 +129,8 @@ public class UserManageService implements UserManageManager{
 	public void updateScore(PageData pd)throws Exception{
 		dao.update("UserManageMapper.updateScore", pd);
 	}
+	public void updateMobile(PageData pd)throws Exception{
+		dao.update("UserManageMapper.updateMobile", pd);
+	}
 }
 

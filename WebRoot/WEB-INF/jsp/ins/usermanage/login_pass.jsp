@@ -122,6 +122,18 @@
       <div class="container">
         <div class="error-msg" id="mailErrMsg" style="color:red"></div>
         <form role="form" id="mailForm">
+         <div class="row">
+         <div class="col-md-4">
+           <div class="form-group">
+                <div class="col-sm-offset-0 col-sm-12">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" id="checked">是否发送登陆手机号到邮箱</label>
+                  </div>
+           </div>
+         </div>
+        </div>
+        </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -135,7 +147,7 @@
               <input class="form-control" style=" z-index: 2;" id="txtMailCode" name="txtMailCode" placeholder="邮箱验证码" type="text">
             </div>
           </div>
-          <div class="col-md-2">
+           <div class="col-md-2">
             <a class="hz-button get-code-button" href="javascript:;" id="getMailCode">发送验证码</a>
           </div>
         </div>
