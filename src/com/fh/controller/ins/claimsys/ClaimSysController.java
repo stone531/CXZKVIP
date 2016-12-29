@@ -34,6 +34,7 @@ import net.sf.json.JSONObject;
 
 import com.fh.service.ins.policy.PolicyManager;
 import com.fh.service.ins.cardinfo.CardInfoManager;
+import com.fh.service.ins.cardtype.CardTypeManager;
 import com.fh.service.ins.claimcompany.ClaimCompanyManager;
 import com.fh.controller.ins.usermanage.UserManageController;
 
@@ -53,6 +54,8 @@ public class ClaimSysController extends BaseController {
 	private PolicyManager policyService;
 	@Resource(name="cardinfoService")
 	private CardInfoManager cardinfoService;
+	@Resource(name="cardtypeService")
+	private CardTypeManager cardtypeService;
 	@Resource(name="claimcompanyService")
 	private ClaimCompanyManager claimcompanyService;
 
@@ -81,9 +84,25 @@ public class ClaimSysController extends BaseController {
 		//很据保单号查询是否已经报案
 		if(null == claimsysService.findByPolicyNo(pd)){
 			claimsysService.save(pd); 					//执行保存
-			//查询保险公司电话
-			pdRet.put("COMPANY_NAME", "中国平安");
+			//查询保险公司
+			PageData pdTemp = new PageData();
+			//根据保单查卡号
+			pdTemp.put("POLICY_ID", pd.getString("POLICYNO"));
+			pdTemp = policyService.findById(pdTemp);
+
+			//根据卡号查卡类型
+			pdTemp.put("CARDID", pdTemp.getString("CARDNO"));
+			pdTemp = cardinfoService.findByCardId(pdTemp);
+
+			//根据卡类型查保险公司
+			pdTemp.put("CARDTYPE_ID", pdTemp.getString("TYPEID"));
+			pdTemp = cardtypeService.findById(pdTemp);
+
+			String comPany = pdTemp.getString("COMPANYNAME");			
+			//根据报险公司查电话
+			pdRet.put("COMPANY_NAME", comPany);
 			pdRet = claimcompanyService.findByName(pdRet);
+
 			pdRet.put("IsSuccess", true);
 		}else{
 			pdRet.put("IsSuccess", false);
@@ -230,54 +249,17 @@ public class ClaimSysController extends BaseController {
 		return mv;
 	}
 	
-	/**显示理赔进度
-	 * @param
-	 * @throws Exception
-	 */
-	/*
-	@RequestMapping(value="/searchState")
-	public ModelAndView searchState() throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"查询ClaimSys");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
-		ModelAndView mv = this.getModelAndView();
-		PageData pd = new PageData();
-		pd = this.getPageData();
-		System.out.println("-----------------------1111");
-		String policyNo = pd.getString("POLICYNO");
-		System.out.println(policyNo);
-		String CLAIMSSTATES = pd.getString("CLAIMSSTATES");
-		System.out.println(CLAIMSSTATES);
-		//根据卡号、密码获取保单号 我ia界提供接口
-		//String cardNo = pd.getString("CARDNO");	
-		//String cardPasswd = pd.getString("CARDPASSWD");	
-		//String policyNo="11111";
-					
-		//pd.put("POLICYNO", policyNo);
-		
-		pd = claimsysService.findStateByPolicyNo(pd);	//根据ID读取
-		String CLAIMSSTATES1 = pd.getString("CLAIMSSTATES");
-		System.out.println(CLAIMSSTATES1);
-		//pd.put("POLICYNO", "9999999");
-		//pd.put("CLAIMSSTATES", "1111111111111");
-		//System.out.println("-------------=="+pd.getString("POLICYNO"));
-		mv.setViewName("ins/claimsys/search");
-		//mv.addObject("msg", "searchState");
-		mv.addObject("pd", pd);
-		mv.addObject("msg", "success");
-		
-		return mv;
-	}*/
-	
 	/**搜索
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/search")
-	public ModelAndView search()throws Exception{
-		ModelAndView mv = this.getModelAndView();		
+	@RequestMapping(value="/searchResult")
+	@ResponseBody
+	public Object searchResult() throws Exception{	
 		//查询卡号密码
 		PageData pdmysql = new PageData();
 		PageData pd = new PageData();
+		Map<String,Object> map = new HashMap<String,Object>();
 		pd = this.getPageData();
 		String srcId =pd.getString("CARDID");
 		String srcPW =pd.getString("PASSWORD");
@@ -318,8 +300,10 @@ public class ClaimSysController extends BaseController {
 				for(int i=0;i<varListPN.size();i++){
 					PageData pdIn = new PageData();
 					pdIn.put("POLICYNO", varListPN.get(i).getString("POLICY_ID"));
+					pdIn.put("UPDATEFLAG", "0");
 					PageData pdOut = claimsysService.findStateByPolicyNo(pdIn);	//列出ClaimSys列表
 					if(pdOut != null){
+						claimsysService.changeUpdateFlag(pdIn);
 						pdOut.put("IsOrNo", "1");
 						varList.add(pdOut);
 					}else{
@@ -327,14 +311,11 @@ public class ClaimSysController extends BaseController {
 						varList.add(pdIn);
 					}			
 				}				
-				mv.addObject("varList", varList);
+				map.put("varList", varList);
 			}			
 		}
-		mv.addObject("pd",pd);
-		mv.addObject("result", result);
-		mv.addObject("msg", "search");
-		mv.setViewName("ins/claimsys/search");
-		return mv;
+		map.put("result", result);
+		return AppUtil.returnObject(pd, map);
 	}
 	
 	/**去搜索页面

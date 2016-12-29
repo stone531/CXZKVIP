@@ -74,14 +74,14 @@
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-8">
-			<form action="claimsys/${msg }.do" name="formSearch" id="formSearch" method="post" >
+			<form name="formSearch" id="formSearch">
                 <div class="panel-body" id="byCard">
 				    <div class="form-group">
                       <div class="col-sm-2">
                         <label for="CARDNO" class="control-label">卡号：</label>
                       </div>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="CARDID" name="CARDID" value="${pd.CARDID}" placeholder="请输入服务卡号">
+                        <input type="text" class="form-control" id="CARDID" name="CARDID" placeholder="请输入服务卡号">
                       </div>
 				    </div>
                     <div class="form-group">
@@ -89,7 +89,7 @@
                         <label for="CARDPASSWD" class="control-label" >密码：</label>
                       </div>
                       <div class="col-sm-9">
-                        <input type="password" class="form-control" id="PASSWORD" name="PASSWORD" value="${var.PASSWORD}" placeholder="请输入服务卡密码">
+                        <input type="password" class="form-control" id="PASSWORD" name="PASSWORD" placeholder="请输入服务卡密码">
                       </div>
                     </div>
 				</div>
@@ -100,23 +100,15 @@
                         <label for="PersonNo" class="control-label">身份证号：</label>
                       </div>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="IANTPAPERNO" name="IANTPAPERNO" placeholder="请输入被投保人身份证号" value="341225199008277732">
+                        <input type="text" class="form-control" id="IANTPAPERNO" name="IANTPAPERNO" placeholder="请输入被投保人身份证号">
                       </div>
 					</div>
                 </div>
                 <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <button type="button" class="btn btn-sm-10 btn-success" onclick="goSearch()" >查询</button>
-                    <c:if test="${result == 1 }">
-          				<label>	温馨提示：未查到卡信息！</label>
-				    </c:if> 
-		            <c:if test="${result == 2 }">               
-                      	<label>	温馨提示：卡号密码不正确！</label>
-				    </c:if>  
-		    	    <c:if test="${result == 3 }">               
-                      	<label>	温馨提示：您还尚未投保！</label>
-				    </c:if>
+                  <div class="col-sm-offset-2 col-sm-2">
+                    <button type="button" class="btn btn-sm-4 btn-success" onclick="goSearch()" >查询</button>
                   </div>
+				  <div class="col-sm-8" style="padding-left:1%;" id="showErr"></div>
                 </div>						
 			</form>
           </div>
@@ -167,50 +159,9 @@
 				</div>
 			</form>
         </div>		
-		
-        <!-- 开始循环 -->
-		<c:choose>
-        <c:when test="${not empty varList}">
         <div class="row" id="showPolicy">
-          <div class="col-md-12 " style="border-top:groove ;border-color: beige; margin-top:30px;padding-left:10%;">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>序号</th>
-                  <th>保单号</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                    <c:forEach items="${varList}" var="var" varStatus="vs">          
-                        <tr>
-                          <td class="center">${vs.index+1}</td>
-                          <td class="center"><a href="policy/detail?POLICY_ID=${var.POLICYNO}">${var.POLICYNO}</a></td>
-                          <td class="center">
-						  	<c:if test="${var.IsOrNo == 0 }">
-	                            <div class="hidden-sm hidden-xs btn-group">
-									<a class="btn btn-sm btn-success" onclick="goClaim('${var.POLICYNO}');">点击报险</a>
-								</div>
-							</c:if>
-							<c:if test="${var.IsOrNo == 1 }">
-                                <div class="hidden-sm hidden-xs btn-group">
-                                  <label class="control-label">${var.STATE_CONTENT}</label>
-                                </div>
-								<c:if test="${var.CLAIMSSTATES == 2 }">
-									<div class="hidden-sm hidden-xs btn-group">
-										<a class="btn btn-sm btn-warning" onclick="goCourierW('${var.POLICYNO}');">点我</a>
-									</div>
-								</c:if>	
-							</c:if>								
-                          </td>
-                        </tr>
-					</c:forEach>
-              </tbody>
-            </table>
-          </div>
         </div>
-        </c:when>
-		</c:choose>
+
       </div>
     </div>
 	
@@ -280,10 +231,8 @@
         	$("#byNo").hide();
         }
         
-        function searchByNo(){
-        
-        	liCard.setAttribute("class", "");
-        	
+        function searchByNo(){        
+        	liCard.setAttribute("class", "");       	
         	liNo.setAttribute("class", "active");
         	$("#searchtype").val("2");        	
         	$("#byNo").show();
@@ -303,6 +252,7 @@
     </script>
     <script type="text/javascript" src="static/js/jquery.tips.js"></script>
     <script type="text/javascript">
+
 	    function goCourierW(txt){
         	 	$("body").append("<div id='mask'></div>");
 			$("#mask").addClass("mask").fadeIn("slow");
@@ -425,7 +375,59 @@
 			    return false;
 				}				
 			}
-			$("#formSearch").submit();
+			//$("#formSearch").submit();
+			$.ajax({				
+				url: 'claimsys/searchResult.do?tm='+new Date().getTime(),    //请求的url地址
+                dataType: "json",   //返回格式为json
+                async: false, //请求是否异步，默认为异步，这也是ajax重要特性
+                data: $('#formSearch').serialize(),   //参数值
+				type: "POST",
+				cache: false,
+				success: function(data){
+					if(data.result != 0){
+						var sub="";
+						if(data.result == 1)
+          					sub += "<label>温馨提示：未查到卡信息！</label>";
+          				if(data.result == 2)
+          					sub += "<label>温馨提示：卡号密码不正确！</label>";
+          				if(data.result == 3)
+          					sub += "<label>温馨提示：您还尚未投保！</label>";
+          				//$("#showErr").append(sub);
+						$("#showErr").html(sub);					
+					}else{
+						var subTable="";
+						subTable += "<div class=\"col-md-12\" style=\"border-top:groove ;border-color: beige; margin-top:30px;padding-left:10%;\">"
+						subTable += "<table class=\"table\"><thead><tr><th>序号</th><th>保单号</th><th>操作</th></tr></thead><tbody>";
+			  
+						$.each(data.varList, function(i, list){
+							subTable += "<tr>";  
+							subTable += "<td class=\"center\">"+(i+1)+"</td>";
+							subTable += "<td class=\"center\"><a href=\"policy/detail?POLICY_ID="+list.POLICYNO+"\">"+list.POLICYNO+"</a></td>";
+							subTable += "<td class=\"center\">";
+							if (list.IsOrNo == 0){
+								subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";
+								subTable += "<a class=\"btn btn-sm btn-success\" onclick=\"goClaim(\'"+list.POLICYNO+"\')\">点击报险</a>";
+								subTable += "</div>";				
+							}
+							if (list.IsOrNo == 1){
+								subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";
+								subTable += "<label class=\"control-label\">"+list.STATE_CONTENT+"</label>";
+								subTable += "</div>";
+								if(list.CLAIMSSTATES == 2){
+									subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";
+									subTable += "<a class=\"btn btn-sm btn-warning\" onclick=\"goCourierW(\'"+list.POLICYNO+"\')\">点我</a>";
+									subTable += "</div>";	
+								}								
+							}                         							                           
+							subTable += "</td>";
+							subTable += "<tr>";					
+						});
+						subTable += "</tbody></table></div></div>";
+						//$("#showPolicy").append(subTable);
+						$("#showPolicy").html(subTable);
+					}
+				}
+			});
 		}
 		
 		function validateIdCard(idCard) {  

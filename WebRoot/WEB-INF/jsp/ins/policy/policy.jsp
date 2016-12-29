@@ -289,6 +289,7 @@
 
 						
 <!-- 确认信息栏 -->
+<!--  
  <div id="Form" style="display: none;" class="form-group middle" >				
 	    <div class="section">
       <div class="container">
@@ -377,7 +378,98 @@
         </div>
       </div>
     </div>			
-
+-->
+    <div id="Form" style="display: none;" class="form-group middle">
+      <div class="section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-md-4"></div>
+              <div class="col-md-4 text-center" style="background-color: aliceblue;border: groove;">
+                <h3 class="text-center  text-warning">
+                  <strong>信息确认单</strong>
+                </h3>
+                <form action="policy/${action}" name="Form" id="Form" method="post">
+                  <div style="margin-left:20%;">
+                    <h5 class="text-info text-justify">投保人姓名:</h5>
+                    <input type="text" name="IERNAME" id="IERNAME" maxlength="255"
+                    style="background: border-box;border:hidden;" class="" value="">
+                    <hr>
+                    <h5 class="text-info text-justify">投保人证件号码:</h5>
+                    <input type="text" name="IERPAPERNO" id="IERPAPERNO" maxlength="255"
+                    value="" style="background: border-box;border:hidden;" class="">
+                    <hr>
+                    <h5 class="text-info text-justify">投保人手机号:</h5>
+                    <input type="text" name="IERPHONE" id="IERPHONE" maxlength="255"
+                    value="" style="background: border-box;border:hidden;" class="">
+                    <hr>
+                    <h5 class="text-info text-justify">被保险人姓名:</h5>
+                    <input type="text" name="IANTNAME" id="IANTNAME" maxlength="255"
+                    value="李治" style="background: border-box;border:hidden;" class="">
+                    <hr>
+                    <h5 class="text-info text-justify">被保险人证件号码:</h5>
+                    <input type="text" name="IANTPAPERNO" id="IANTPAPERNO" maxlength="255"
+                    value="" style="background: border-box;border:hidden;" class="">
+                    <hr>
+                    <h5 class="text-info text-justify">被保险人职业:</h5>
+                    <input type="text" name="IANTPROFESSION" id="IANTPROFESSION"
+                    maxlength="255" value="" style="background: border-box;border:hidden;"
+                    class="">
+                    <hr>
+                    <h5 class="text-info text-justify">与被保险人关系:</h5>
+                    <input type="text" name="IANTRELATION" id="IANTRELATION"
+                    maxlength="255" value="" style="background: border-box;border:hidden;"
+                    class="">
+                    <hr>
+                    <h5 class="text-info text-justify">投保份数:</h5>
+                    <input type="text" name="IANTCOPY" id="IANTCOPY" maxlength="255"
+                    value="" style="background: border-box;border:hidden;" class="">
+                    <hr>
+                    <h5 class="text-info text-justify">被保险人年龄:</h5>
+                    <input type="text" name="IANAGE" id="IANAGE" maxlength="255"
+                    value="" style="background: border-box;border:hidden;" class="">
+                    <hr>
+                    <h5 class="text-info text-justify">受益人姓名:</h5>
+                    <input type="text" name="BENNAME" id="BENNAME" maxlength="255"
+                    value="" style="background: border-box;border:hidden;" class="">
+                    <hr>
+                    <h5 class="text-info text-justify">受益人证件号码:</h5>
+                    <input type="text" name="BENPAPERNO" id="BENPAPERNO" maxlength="255"
+                    value="" style="background: border-box;border:hidden;" class="">
+                    <hr>
+                    <h5 class="text-info text-justify">服务人员姓名:</h5>
+                    <input type="text" name="SVRNAME" id="SVRNAME" maxlength="255"
+                    value="" style="background: border-box;border:hidden;" class="">
+                    <hr>
+                    <h5 class="text-info text-justify">服务人员手机号码:</h5>
+                    <input type="text" name="SVRPHONE" id="SVRPHONE" maxlength="255"
+                    value="" style="background: border-box;border:hidden;" class="">
+                    <hr>
+                    <h5 class="text-info text-justify">是否短信提醒:</h5>
+                    <input type="text" name="ISSENDMESSAGE" id="ISSENDMESSAGE"
+                    maxlength="255" value="" style="background: border-box;border:hidden;"
+                    class="">
+                    <hr>
+                    <!--hide value-->
+                    <input type="text" name="CARDNO" id="CARDNO" maxlength="255" value="${cardno}"
+                    style="display:none;" class="text-right">
+                    <input type="text" name="CARDTYPE" id="CARDTYPE" maxlength="255" value="${cardtype}"
+                    style="display:none;" class="text-right">
+                    <input type="text" name="BUSINESSID" id="BUSINESSID" maxlength="255" value=""
+                    style="display:none;" class="text-right">
+                    <br>
+                    <br>
+                  </div>
+                  <button type="button" class="btn btn-success btn-lg" onclick="FormPrev();">返回</button>
+                  <button type="submit" class="btn btn-success btn-lg">提交</button>
+                </form>
+              </div>
+              <div class="col-md-4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 	
 
 
@@ -712,7 +804,7 @@
 			return false;
 			}
 			
-			alert($("#ismessage").val())
+			//alert($("#ismessage").val())
 			
 			$("#PolicyInfo").hide();
 			$("#SERVICETEXT").show();

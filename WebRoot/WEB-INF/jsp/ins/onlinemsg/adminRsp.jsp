@@ -21,6 +21,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4"></div>
+          <p align=left style="margin-left:10px;">回复当前用户消息:</p>
           <div class="col-md-8 text-right">		  
             <div class="row">
               <div class="col-md-12" >
