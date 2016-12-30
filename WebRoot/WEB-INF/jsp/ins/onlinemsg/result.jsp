@@ -29,7 +29,7 @@
           <div class="col-md-12">
             <ul class="breadcrumb">
               <li>
-                <a href="../../CXZKVIP//main/index">主页</a>
+                <a href="../../CXZKVIP//page/index">主页</a>
               </li>
               <li class="active">提示信息</li>
             </ul>

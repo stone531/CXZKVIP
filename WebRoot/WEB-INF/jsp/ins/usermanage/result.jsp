@@ -29,7 +29,7 @@
           <div class="col-md-12">
             <ul class="breadcrumb">
               <li>
-                <a href="../../main/index">主页</a>
+                <a href="../../page/index">主页</a>
               </li>
               <li>
                 <a href="../../usermanage/personal/show">个人中心</a>

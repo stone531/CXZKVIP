@@ -34,7 +34,7 @@
 			<ul>
 				<li class="head_navigation_link" style="border-right: 1.5px solid #7f868b;"><a href="claimsys/goSearch" target="kfz_center">进度查询</a></li>
 				<li class="head_navigation_link"><a href="claimsys/goAdd" target="kfz_center">在线报险</a></li>
-				<li class="head_navigation_link isIndex" style="border-right: 1.5px solid #7f868b;width: 16%;"><a href="main/index"  target="kfz_center">首页</a></li>
+				<li class="head_navigation_link isIndex" style="border-right: 1.5px solid #7f868b;width: 16%;"><a href="page/index"  target="kfz_center">首页</a></li>
 			</ul>
 		</div>
 		<div class="navbar_bottom_right">

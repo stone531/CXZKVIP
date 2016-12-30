@@ -39,7 +39,7 @@
 
 				<ul class="nav nav-list">
 					<li class="">
-						<a href="main/index">
+						<a href="page/index">
 							<i class="menu-icon fa fa-tachometer"></i>
 							<span class="menu-text">后台首页</span>
 						</a>

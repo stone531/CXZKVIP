@@ -184,7 +184,7 @@ public class UserManageController extends BaseController {
 	@RequestMapping(value="/index")
 	public ModelAndView showmain() throws Exception{
 		ModelAndView mv = this.getModelAndView();
-		mv.setViewName("ins/main/index");
+		mv.setViewName("ins/page/index");
 		return mv;
 	}
 	/**

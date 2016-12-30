@@ -167,7 +167,25 @@
 <div id=floater style="Z-INDEX: 100; RIGHT: 10px; VISIBILITY: visible; WIDTH: 100px; POSITION: fixed; TOP: 60%; left: 92%;" >   
 	<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=963396570&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:963396570:53" alt="点击这里给我发消息" title="点击这里给我发消息"></a>
 </div>
-    
+
+<div id=floater_news style="Z-INDEX: 100; RIGHT: 10px; VISIBILITY: visible; WIDTH: 100px; POSITION: fixed; TOP: 50%; left: 50%;" >  
+ <div class="modal fade"> 
+	 <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">提示</h4>
+          </div>
+          <div class="modal-body">
+            <p>One fine body...</p>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-default" data-dismiss="modal">关闭</a>
+          </div>
+        </div>
+      </div>
+     </div>
+</div>
     <div class="col-md-12 text-center">
       <hr>
     </div>

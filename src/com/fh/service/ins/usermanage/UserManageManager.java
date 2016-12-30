@@ -69,6 +69,5 @@ public interface UserManageManager{
 	public void updateScore(PageData pd)throws Exception;
 	public void updateMobile(PageData pd)throws Exception;
 	
-	
 }
 

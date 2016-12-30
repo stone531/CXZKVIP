@@ -138,6 +138,8 @@
 	           	/upmadd/**                  = anon
 	           	/userdata/**                = anon
 	           	/usermanage/**              = anon
+	           	/page/**                    = anon
+	           	/news/**                    = anon
 	           	/jsp/ins/**                 = anon
 	           	/jsp/ins/policy/**          = anon
 	           	/login_login	 			= anon

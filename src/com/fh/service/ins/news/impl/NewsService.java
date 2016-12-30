@@ -81,6 +81,7 @@ public class NewsService implements NewsManager{
 		dao.delete("NewsMapper.deleteAll", ArrayDATA_IDS);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<PageData> listformain(PageData pd) throws Exception{
 	    return (List<PageData>)dao.findForList("NewsMapper.listformain", pd);
 	}

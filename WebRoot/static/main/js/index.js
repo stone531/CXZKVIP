@@ -27,11 +27,11 @@ $(function(){
 			        type: "POST",
 			        async:false,
 			        url: "/CXZKVIP/usermanage/login/logout",
-			        complite:document.location.href="/CXZKVIP/main/index?rnd="+Math.random(),
+			        complite:document.location.href="/CXZKVIP/page/index?rnd="+Math.random(),
 			        dataType: "json",
 			        success: function(data){
 			                   if (data.IsSuccess == true){
-			                	   document.location.href="/CXZKVIP/main/index?rnd="+Math.random(); 
+			                	   document.location.href="/CXZKVIP/page/index?rnd="+Math.random(); 
 			                   }
 			                 }
 			    });

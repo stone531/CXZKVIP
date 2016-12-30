@@ -25,7 +25,7 @@ function loginhandler(){
         complete: function(){$("#btn_login").text("立即登陆");},
         success: function(data){
                    if (data.IsSuccess == 1){
-                	   window.location.href="/CXZKVIP/main/index?rnd="+Math.random(); 
+                	   window.location.href="/CXZKVIP/page/index?rnd="+Math.random(); 
                    }else if (data.IsSuccess == 3){
                 	   $("#memberErrMsg").text("验证码不正确");
                    }else if (data.IsSuccess == 2){

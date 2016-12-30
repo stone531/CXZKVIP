@@ -246,7 +246,7 @@
 	    	$("#successDiag").fadeOut("fast");
 	    	$("#mask").css({ display: 'none' });
 			if (1 == flag)
-				window.location.href="main/index"; 
+				window.location.href="page/index"; 
 	    });
 	    
 	    //关闭
@@ -254,7 +254,7 @@
 	       	$("#successDiag").fadeOut("fast");
 	       	$("#mask").css({ display: 'none' });
 			if (1 == flag)
-				window.location.href="main/index";
+				window.location.href="page/index";
 	    });	
 		
 		function validForm(){

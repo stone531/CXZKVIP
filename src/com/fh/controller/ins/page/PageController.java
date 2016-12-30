@@ -1,4 +1,4 @@
-package com.fh.controller.ins.main;
+package com.fh.controller.ins.page;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -45,8 +45,8 @@ import com.fh.service.ins.news.NewsManager;
 
 
 @Controller
-@RequestMapping(value="/mains")
-public class MainController extends BaseController {
+@RequestMapping(value="/page")
+public class PageController extends BaseController {
 	@Resource(name="newsService")
 	private NewsManager newsService;
 	
