@@ -37,29 +37,24 @@
           <div class="col-md-2">
             <div class="panel panel-danger">
               <div class="panel-heading">
-                <h3 class="panel-title text-muted">新闻</h3>
+                <a href="news/newslist"><h3 class="panel-title text-muted">新闻</h3></a>
               </div>
-              <div class="panel-body ">
-                <p class="text-muted">条目1</p>
-              </div>
-              <div class="panel-body">
-                <p class="text-muted">条目2</p>
-              </div>
-              <div class="panel-body">
-                <p class="text-muted">条目3</p>
-              </div>
-              <div class="panel-body">
-                <p class="text-muted">条目5</p>
-              </div>
-              <div class="panel-body">
-                <p class="text-muted">条目6</p>
-              </div>
-              <div class="panel-body">
-                <p class="text-muted">条目7</p>
-              </div>
-              <div class="panel-body">
-                <p class="text-muted">条目8</p>
-              </div>
+              
+              <c:choose>
+					<c:when test="${not empty varList}">
+						<c:forEach items="${varList}" var="var" varStatus="vs">
+							<div class="panel-body ">
+                				<a href = "news/show?NEWS_ID=${var.NEWS_ID}"><p class="text-muted">${var.NEWS_TITLE}</p></a>
+              				</div>
+								
+						</c:forEach>
+					</c:when>
+				<c:otherwise>
+					<div class="panel-body ">
+						<p class="text-muted">没有新闻</p>
+					</div>
+				</c:otherwise>
+			 </c:choose>
             </div>
           </div>
           <div class="col-md-7">

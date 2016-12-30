@@ -77,13 +77,20 @@
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select
-		<include refid="Field"></include>
+		a.NEWS_ID,	
+		a.NEWS_TITLE,	
+		a.NEWS_CONTENT,	
+		a.NEWS_STATUS,	
+		a.NEWS_DATE,	
+		a.NEWS_TITLE_SPARE,	
+		a.NEWS_REMARKS
 		from 
-		<include refid="tableName"></include>
+		INS_NEWS a
 		where 1=1
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
 				(
+				a.NEWS_TITLE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 				<!--	根据需求自己加检索条件
 					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 					 or 
@@ -99,6 +106,16 @@
 		<include refid="Field"></include>
 		from 
 		<include refid="tableName"></include>
+	</select>
+	
+	<!-- 列表-->
+	<select id="listformain" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		limit 10
+		
 	</select>
 	
 	<!-- 批量删除 -->

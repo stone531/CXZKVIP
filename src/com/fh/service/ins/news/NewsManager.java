@@ -54,5 +54,7 @@ public interface NewsManager{
 	 */
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception;
 	
+	public List<PageData> listformain(PageData pd) throws Exception;
+	
 }
 

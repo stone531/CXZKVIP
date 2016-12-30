@@ -38,6 +38,22 @@ public class NewsController extends BaseController {
 	@Resource(name="newsService")
 	private NewsManager newsService;
 	
+	
+	/**显示
+	 * @param
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/show")
+	public ModelAndView show() throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		pd = newsService.findById(pd);
+		mv.addObject("pd",pd);
+		mv.setViewName("ins/news/news_show");
+		return mv;
+	}
+	
 	/**保存
 	 * @param
 	 * @throws Exception
@@ -51,7 +67,6 @@ public class NewsController extends BaseController {
 		pd = this.getPageData();
 		pd.put("NEWS_ID", this.get32UUID());	//主键
 		pd.put("NEWS_DATE", new Date());
-		pd.put("NEWS_STATUS", 1);
 		newsService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -113,6 +128,30 @@ public class NewsController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		return mv;
+	}
+	
+	/**列表
+	 * @param page
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/newslist")
+	public ModelAndView client_list(Page page) throws Exception{
+		//logBefore(logger, Jurisdiction.getUsername()+"列表News");
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		String keywords = pd.getString("keywords");				//关键词检索条件
+		if(null != keywords && !"".equals(keywords)){
+			pd.put("keywords", keywords.trim());
+		}
+		page.setPd(pd);
+		List<PageData>	varList = newsService.listAll(pd);	//列出News列表
+		mv.setViewName("ins/news/client_news_list");
+		mv.addObject("varList", varList);
+		mv.addObject("pd", pd);
+		//mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
 		return mv;
 	}
 	

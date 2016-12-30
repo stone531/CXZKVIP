@@ -41,16 +41,24 @@ import com.fh.util.Const;
 import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
-import com.fh.service.ins.usermanage.UserManageManager;
+import com.fh.service.ins.news.NewsManager;
 
 
 @Controller
 @RequestMapping(value="/mains")
 public class MainController extends BaseController {
-	@RequestMapping(value="/indexs")
+	@Resource(name="newsService")
+	private NewsManager newsService;
+	
+	@RequestMapping(value="/index")
 	public ModelAndView showmain() throws Exception{
 		ModelAndView mv = this.getModelAndView();
-		mv.setViewName("ins/main/index");
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		List<PageData>	varList = newsService.listformain(pd);	//列出News列表
+		mv.setViewName("system/index/indexinfo");
+		mv.addObject("varList", varList);
+		mv.addObject("pd", pd);
 		return mv;
 	}
 }

@@ -1,8 +1,11 @@
 package com.fh.service.ins.news.impl;
 
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+
 import com.fh.dao.DaoSupport;
 import com.fh.entity.Page;
 import com.fh.util.PageData;
@@ -76,6 +79,10 @@ public class NewsService implements NewsManager{
 	 */
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
 		dao.delete("NewsMapper.deleteAll", ArrayDATA_IDS);
+	}
+	
+	public List<PageData> listformain(PageData pd) throws Exception{
+	    return (List<PageData>)dao.findForList("NewsMapper.listformain", pd);
 	}
 	
 }
