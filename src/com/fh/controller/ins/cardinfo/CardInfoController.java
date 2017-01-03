@@ -37,6 +37,7 @@ import com.fh.service.ins.cardinfo.CardInfoManager;
 import com.fh.service.ins.cardtype.CardTypeManager;
 import com.fh.service.ins.relation.RelationManager;
 import com.fh.service.ins.business.BusinessManager;
+import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 
  * 说明：服务卡
@@ -317,6 +318,7 @@ public class CardInfoController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		UserManageController.SetQX(mv);
 		return mv;
 	}
 	

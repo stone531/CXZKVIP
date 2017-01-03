@@ -27,6 +27,7 @@ import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
 import com.fh.service.ins.policy.PolicyManager;
 import com.fh.service.ins.cardinfo.CardInfoManager;
+import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 
  * 说明：保单系统
@@ -203,6 +204,7 @@ public class PolicyController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		UserManageController.SetQX(mv);
 		return mv;
 	}
 	

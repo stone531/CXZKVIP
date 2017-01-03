@@ -34,6 +34,7 @@ import com.fh.util.Jurisdiction;
 import com.fh.util.DateUtil;
 import com.fh.controller.ins.userdata.UserData;
 import com.fh.service.ins.onlinemsg.OnlinemsgManager;
+import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 
  * 说明：在线留言
@@ -336,6 +337,7 @@ public class OnlinemsgController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		UserManageController.SetQX(mv);
 		return mv;
 	}
 	

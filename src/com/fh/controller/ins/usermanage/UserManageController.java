@@ -55,6 +55,7 @@ import java.util.Properties;
 
 
 
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -1071,8 +1072,8 @@ public class UserManageController extends BaseController {
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page) throws Exception{
-		//logBefore(logger, Jurisdiction.getUsername()+"列表UserManage");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
+		logBefore(logger, Jurisdiction.getUsername()+"列表UserManage");
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
@@ -1085,9 +1086,16 @@ public class UserManageController extends BaseController {
 		mv.setViewName("ins/usermanage/usermanage_list");
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
+		
+		/*Map<String,Object> map = new HashMap<String,Object>();
+		map.put("cha", "1");
+		
+		mv.addObject("QX",map);*/
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		SetQX(mv);
 		return mv;
 	}
+	
 	
 	/**去新增页面
 	 * @param
@@ -1224,6 +1232,15 @@ public class UserManageController extends BaseController {
 			return null;
 		}
 		return UserManageController.setPDFromUD(user);
+	}
+	
+	public static void SetQX(ModelAndView mv){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("cha", "1");
+		map.put("add", "1");
+		map.put("del", "1");
+		map.put("edit", "1");
+		mv.addObject("QX",map);
 	}
 }
 

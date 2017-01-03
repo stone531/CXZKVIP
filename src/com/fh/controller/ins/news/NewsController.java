@@ -24,6 +24,7 @@ import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
 import com.fh.util.Tools;
 import com.fh.service.ins.news.NewsManager;
+import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 
  * 说明：新闻管理
@@ -127,6 +128,7 @@ public class NewsController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		UserManageController.SetQX(mv);
 		return mv;
 	}
 	

@@ -35,6 +35,7 @@ import com.fh.util.Jurisdiction;
 import com.fh.util.PathUtil;
 import com.fh.service.ins.cardtype.CardTypeManager;
 import com.fh.service.ins.claimcompany.ClaimCompanyManager;
+import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 
  * 说明：服务卡类型
@@ -122,6 +123,7 @@ public class CardTypeController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		UserManageController.SetQX(mv);
 		return mv;
 	}
 	
