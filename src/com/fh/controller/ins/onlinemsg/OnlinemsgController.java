@@ -51,7 +51,7 @@ public class OnlinemsgController extends BaseController {
 	@RequestMapping(value="/index")
 	public ModelAndView index() throws Exception{
 		System.out.println("onlinemsg index");
-		logBefore(logger, Jurisdiction.getUsername()+"列表OnlineMsg");
+		//logBefore(logger, Jurisdiction.getUsername()+"列表OnlineMsg");
 		ModelAndView mv = this.getModelAndView();	
 //-------------------------------------start-------
 
@@ -140,8 +140,8 @@ public class OnlinemsgController extends BaseController {
 	
 	@RequestMapping(value="/sendmsg")
 	public ModelAndView sendmsg() throws Exception{
-		System.out.println("sendmsg index");
-		logBefore(logger, Jurisdiction.getUsername()+"列表OnlineMsg");
+		//System.out.println("sendmsg index");
+		//logBefore(logger, Jurisdiction.getUsername()+"列表OnlineMsg");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd=this.getPageData();
@@ -200,7 +200,7 @@ public class OnlinemsgController extends BaseController {
 	@RequestMapping(value="/adminReplyMsg")
 	public ModelAndView adminReplyMsg() throws Exception{
 		System.out.println("##########adminReplyMsg index");
-		logBefore(logger, Jurisdiction.getUsername()+"列表OnlineMsg");
+		//logBefore(logger, Jurisdiction.getUsername()+"列表OnlineMsg");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		

@@ -43,10 +43,11 @@
               <c:choose>
 					<c:when test="${not empty varList}">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
+						 <c:if test = "${var.NEWS_STATUS == 1}">
 							<div class="panel-body ">
                 				<a href = "news/show?NEWS_ID=${var.NEWS_ID}"><p class="text-muted">${var.NEWS_TITLE}</p></a>
               				</div>
-								
+						 </c:if>
 						</c:forEach>
 					</c:when>
 				<c:otherwise>
@@ -168,23 +169,26 @@
 	<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=963396570&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:963396570:53" alt="点击这里给我发消息" title="点击这里给我发消息"></a>
 </div>
 
-<div id=floater_news style="Z-INDEX: 100; RIGHT: 10px; VISIBILITY: visible; WIDTH: 100px; POSITION: fixed; TOP: 50%; left: 50%;" >  
- <div class="modal fade"> 
-	 <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">提示</h4>
-          </div>
-          <div class="modal-body">
-            <p>One fine body...</p>
-          </div>
-          <div class="modal-footer">
-            <a class="btn btn-default" data-dismiss="modal">关闭</a>
-          </div>
-        </div>
-      </div>
-     </div>
+<div id="img" style="Z-INDEX: 100;position: absolute; left: 311; top: 815;visibility :hidden;" onmouseover="clearInterval(interval)" onmouseout="interval = setInterval('changePos()', delay)" align="middle">
+
+<div id="fdck">
+							<div class="btn-link btn-link btn-link btn-link panel panel-danger">
+              						<div class="panel-heading">
+                						<h8 class="panel-title"><span style="CURSOR:hand;font-weight:bold;" onclick="clearInterval(interval);img.style.visibility = 'hidden'">关闭</span></h8>
+             						</div>
+<c:choose>
+					<c:when test="${not empty varList}">
+						<c:forEach items="${varList}" var="var" varStatus="vs">
+							<c:if test = "${var.NEWS_STATUS == 2}">
+								<div class="panel-body ">
+                				<a style="color:red;" href = "news/show?NEWS_ID=${var.NEWS_ID}"><p class="text-muted">${var.NEWS_TITLE}</p></a>
+              					</div>
+							</c:if>							
+						</c:forEach>
+					</c:when>
+</c:choose>
+							</div>
+</div>
 </div>
     <div class="col-md-12 text-center">
       <hr>
@@ -338,7 +342,61 @@
     </div>
   <%@ include file="../../tail.jsp"%>
   
-  	<script type="text/javascript">		
+  	<script type="text/javascript">
+  	
+var xPos = 20;
+var yPos = document.body.clientHeight;
+var step = 1;
+var delay = 30;
+var height = 0;
+var Hoffset = 0;
+var Woffset = 0;
+var yon = 0;
+var xon = 0;
+var pause = true;
+var interval;
+img.style.top = yPos;
+function changePos() {
+width = document.body.clientWidth;
+height = document.body.clientHeight;
+Hoffset = img.offsetHeight;
+Woffset = img.offsetWidth;
+img.style.left = xPos + document.body.scrollLeft;
+img.style.top = yPos + document.body.scrollTop;
+if (yon) {
+yPos = yPos + step;
+}
+else {
+yPos = yPos - step;
+}
+if (yPos < 0) {
+yon = 1;
+yPos = 0;
+}
+if (yPos >= (height - Hoffset)) {
+yon = 0;
+yPos = (height - Hoffset);
+}
+if (xon) {
+xPos = xPos + step;
+}
+else {
+xPos = xPos - step;
+}
+if (xPos < 0) {
+xon = 1;
+xPos = 0;
+}
+if (xPos >= (width - Woffset)) {
+xon = 0;
+xPos = (width - Woffset);
+}
+}
+function start() {
+img.style.visibility = "visible";
+interval = setInterval('changePos()', delay);
+}
+start();	
 			function save(){
 				if($("#CARDID").val()==""){
 					$("#CARDID").tips({

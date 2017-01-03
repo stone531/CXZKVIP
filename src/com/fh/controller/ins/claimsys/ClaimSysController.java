@@ -367,8 +367,8 @@ public class ClaimSysController extends BaseController {
 	 */
 	@RequestMapping(value="/addCourier")
 	public void addCourier(PrintWriter out) throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"更新ClaimSys");
-		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return;} //校验权限
+		//logBefore(logger, Jurisdiction.getUsername()+"更新ClaimSys");
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return;} //校验权限
 
 		PageData pd = new PageData();
 		pd = this.getPageData();
@@ -393,8 +393,8 @@ public class ClaimSysController extends BaseController {
 	 */
 	@RequestMapping(value="/promptUpdate")
 	public void promptUpdate(PrintWriter out) throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"查询ClaimSys");
-		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return;} //校验权限
+		//logBefore(logger, Jurisdiction.getUsername()+"查询ClaimSys");
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return;} //校验权限
 		
 		PageData pdRet = new PageData();
 		//获取用户登录session

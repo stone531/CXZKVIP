@@ -72,8 +72,8 @@ public class CardInfoController extends BaseController {
 	 */
 	@RequestMapping(value="/verifycard")
 	public ModelAndView verifycard() throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"修改CardInfo");
-		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
+		//logBefore(logger, Jurisdiction.getUsername()+"修改CardInfo");
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		
 		//sql for cardinfo

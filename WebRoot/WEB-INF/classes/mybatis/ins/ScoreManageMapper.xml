@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="NewsMapper">
+<mapper namespace="ScoreManageMapper">
 	
 	<!--表名 -->
 	<sql id="tableName">
-		INS_NEWS
+		INS_SCOREMANAGE
 	</sql>
 	
 	<!-- 字段 -->
 	<sql id="Field">
-		NEWS_ID,	
-		NEWS_TITLE,	
-		NEWS_CONTENT,	
-		NEWS_STATUS,	
-		NEWS_DATE,	
-		NEWS_TITLE_SPARE,	
-		NEWS_REMARKS
+		SCORE_ID,	
+		SCORE_NAME,	
+		SCORE_VALUE,	
+		IS_OK,	
+		SCORE_REMARK,	
+		SCORE_EXT,	
+		SCOREMANAGE_ID
 	</sql>
 	
 	<!-- 字段值 -->
 	<sql id="FieldValue">
-		#{NEWS_ID},	
-		#{NEWS_TITLE},	
-		#{NEWS_CONTENT},	
-		#{NEWS_STATUS},	
-		#{NEWS_DATE},	
-		#{NEWS_TITLE_SPARE},	
-		#{NEWS_REMARKS}
+		#{SCORE_ID},	
+		#{SCORE_NAME},	
+		#{SCORE_VALUE},	
+		#{IS_OK},	
+		#{SCORE_REMARK},	
+		#{SCORE_EXT},	
+		#{SCOREMANAGE_ID}
 	</sql>
 	
 	<!-- 新增-->
@@ -45,7 +45,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			NEWS_ID = #{NEWS_ID}
+			SCOREMANAGE_ID = #{SCOREMANAGE_ID}
 	</delete>
 	
 	<!-- 修改 -->
@@ -53,15 +53,15 @@
 		update
 		<include refid="tableName"></include>
 		set 
-			NEWS_ID = #{NEWS_ID},
-			NEWS_TITLE = #{NEWS_TITLE},
-			NEWS_CONTENT = #{NEWS_CONTENT},
-			NEWS_STATUS = #{NEWS_STATUS},
-			NEWS_DATE = #{NEWS_DATE},
-			NEWS_TITLE_SPARE = #{NEWS_TITLE_SPARE},
-			NEWS_REMARKS = #{NEWS_REMARKS}
+			SCORE_ID = #{SCORE_ID},
+			SCORE_NAME = #{SCORE_NAME},
+			SCORE_VALUE = #{SCORE_VALUE},
+			IS_OK = #{IS_OK},
+			SCORE_REMARK = #{SCORE_REMARK},
+			SCORE_EXT = #{SCORE_EXT},
+		SCOREMANAGE_ID = SCOREMANAGE_ID
 		where 
-		NEWS_ID = #{NEWS_ID}
+		SCOREMANAGE_ID = #{SCOREMANAGE_ID}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -71,26 +71,19 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			NEWS_ID = #{NEWS_ID}
+			SCOREMANAGE_ID = #{SCOREMANAGE_ID}
 	</select>
 	
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select
-		a.NEWS_ID,	
-		a.NEWS_TITLE,	
-		a.NEWS_CONTENT,	
-		a.NEWS_STATUS,	
-		a.NEWS_DATE,	
-		a.NEWS_TITLE_SPARE,	
-		a.NEWS_REMARKS
+		<include refid="Field"></include>
 		from 
-		INS_NEWS a
+		<include refid="tableName"></include>
 		where 1=1
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
 				(
-				a.NEWS_TITLE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 				<!--	根据需求自己加检索条件
 					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 					 or 
@@ -108,31 +101,12 @@
 		<include refid="tableName"></include>
 	</select>
 	
-	<!-- 列表-->
-	<select id="listformain" parameterType="pd" resultType="pd">
-		select
-		<include refid="Field"></include>
-		from 
-		<include refid="tableName"></include>
-		limit 10
-	</select>
-	
-	<!-- 指定类型新闻 -->
-	<select id="listbystatus" parameterType="pd" resultType="pd">
-		select
-		<include refid="Field"></include>
-		from 
-		<include refid="tableName"></include>
-		where
-		NEWS_STATUS = #{NEWS_STATUS}
-	</select>
-	
 	<!-- 批量删除 -->
 	<delete id="deleteAll" parameterType="String">
 		delete from
 		<include refid="tableName"></include>
 		where 
-			NEWS_ID in
+			SCOREMANAGE_ID in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>

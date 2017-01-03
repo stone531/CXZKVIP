@@ -100,7 +100,6 @@ public class NewsController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd.put("NEWS_DATE", new Date());
-		pd.put("NEWS_STATUS", 1);
 		newsService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");

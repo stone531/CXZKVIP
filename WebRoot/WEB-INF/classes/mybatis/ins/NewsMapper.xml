@@ -117,6 +117,16 @@
 		limit 10
 	</select>
 	
+	<!-- 指定类型新闻 -->
+	<select id="listbystatus" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where
+		NEWS_STATUS = #{NEWS_STATUS}
+	</select>
+	
 	<!-- 批量删除 -->
 	<delete id="deleteAll" parameterType="String">
 		delete from

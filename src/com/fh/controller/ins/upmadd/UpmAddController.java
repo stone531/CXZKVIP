@@ -93,8 +93,8 @@ public class UpmAddController extends BaseController {
 	 */
 	@RequestMapping(value="/quaryall")
 	public ModelAndView quaryall() throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"修改UpmAdd");
-		if(!Jurisdiction.buttonJurisdiction(menuUrl, "quaryall")){return null;} //校验权限
+		//logBefore(logger, Jurisdiction.getUsername()+"修改UpmAdd");
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "quaryall")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();

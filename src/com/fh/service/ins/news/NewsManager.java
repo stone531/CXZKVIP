@@ -60,5 +60,7 @@ public interface NewsManager{
 	 */
 	public List<PageData> listformain(PageData pd) throws Exception;
 	
+	public List<PageData> listbystatus(PageData pd) throws Exception;
+	
 }
 

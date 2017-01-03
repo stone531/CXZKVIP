@@ -85,6 +85,9 @@ public class NewsService implements NewsManager{
 	public List<PageData> listformain(PageData pd) throws Exception{
 	    return (List<PageData>)dao.findForList("NewsMapper.listformain", pd);
 	}
-	
+	@SuppressWarnings("unchecked")
+	public List<PageData> listbystatus(PageData pd) throws Exception{
+		return (List<PageData>)dao.findForList("NewsMapper.listbystatus", pd);
+	}
 }
 
