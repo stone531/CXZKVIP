@@ -113,7 +113,7 @@
 		<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 			<property name="securityManager" ref="securityManager" />
 			
-			<property name="loginUrl" value="/" />
+			<property name="loginUrl" value="/" /> 
 			
 			<property name="successUrl" value="/main/index" />
 			
@@ -143,6 +143,7 @@
 	           	/jsp/ins/**                 = anon
 	           	/jsp/ins/policy/**          = anon
 	           	/login_login	 			= anon
+	           	/login_toLogin	 			= anon
 	           	/app**/** 					= anon
 	           	/weixin/** 					= anon
 	           	/**							= authc

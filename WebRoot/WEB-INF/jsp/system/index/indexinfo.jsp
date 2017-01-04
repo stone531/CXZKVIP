@@ -172,7 +172,7 @@
 <div id="img" style="Z-INDEX: 100;position: absolute; left: 311; top: 815;visibility :hidden;" onmouseover="clearInterval(interval)" onmouseout="interval = setInterval('changePos()', delay)" align="middle">
 
 <div id="fdck">
-							<div class="btn-link btn-link btn-link btn-link panel panel-danger">
+							<div class="btn-link btn-link btn-link btn-link panel panel-success">
               						<div class="panel-heading">
                 						<h8 class="panel-title"><span style="CURSOR:hand;font-weight:bold;" onclick="clearInterval(interval);img.style.visibility = 'hidden'">关闭</span></h8>
              						</div>

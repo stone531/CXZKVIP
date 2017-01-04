@@ -35,6 +35,7 @@
 								<td style="width:75px;text-align: right;padding-top: 13px;">用户类型:</td>
 								<td>
 								<select class="form-control"  id="USERTYPE" name="USERTYPE" title="是否通过申请">
+								      <option value="0">设为普通用户</option>
 									  <option value="1">通过企业申请</option>
                                       <option value="2">拒绝企业申请</option>
                           </select>

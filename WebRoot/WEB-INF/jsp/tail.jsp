@@ -10,9 +10,9 @@
 		<div class="footer_copy"><span></span></div>
 		<div class="contact_us">
 			<ul>
-				<li><a href="" style="margin: 0 10px;">关于我们</a>
+				<li><div style="margin: 0 10px;">关于我们</div>
 				</li><span style="color: #999999">|</span>
-				<li><a href="" style="margin-left: 10px;">联系我们</a></li>
+				<li><div  style="margin-left: 10px;">联系我们</div></li>
 			</ul>
 		</div>
 	</div>
