@@ -775,9 +775,13 @@ public class UserManageController extends BaseController {
 		pd.put("USERTYPE", USERTYPE);
 		pd.put("EMAIL", EMAIL);
 		pd.put("USERMANAGE_ID", USERMANAGE_ID);
+		pd.put("CARDID", CARDID);
+		pd.put("BANKCARD", BANKCARD);
+		pd.put("WECHAT", WECHAT);
 		
 		usermanageService.edit(pd);
 		
+		ResetSession(pd);
 		
 		mv.addObject("IsSuccess","1");
 		mv.setViewName("ins/usermanage/result");
@@ -828,6 +832,8 @@ public class UserManageController extends BaseController {
 		pd.put("USERMANAGE_ID", USERMANAGE_ID);
 		
 		usermanageService.edit(pd);
+		
+		ResetSession(pd);
 		
 		mv.addObject("IsSuccess","1");
 		mv.setViewName("ins/usermanage/result");
@@ -913,6 +919,21 @@ public class UserManageController extends BaseController {
 	
 	public int VerifySmsCode(){
 		return 0;
+	}
+	
+	public void ResetSession(PageData pd) throws Exception{
+		PageData rtpd = usermanageService.getByName(pd);
+		if (rtpd == null){
+			//用户不存在
+			return;
+		}
+
+			Subject currentUser = SecurityUtils.getSubject(); 
+			Session session = currentUser.getSession();
+			UserData user = new UserData();
+			user = this.setUDFromPD(rtpd);
+			session.setAttribute(Const.SESSION_USERDATA, user);
+			return;
 	}
 	
 	public UserData setUDFromPD(PageData pd) {

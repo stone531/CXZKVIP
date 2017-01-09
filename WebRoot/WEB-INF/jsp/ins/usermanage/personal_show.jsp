@@ -70,7 +70,7 @@
               </div>
             </div>
             <input id = "Comp-UserType"  value="${pd.USERTYPE}" style="display:none;"></input>
-            <div id="company-info">
+            <div id="company-info" style="display:none;">
             <form role="form" class="form-horizontal" id="company-valid-form">
               <div class="form-group">
               	<div class="col-sm-2">
@@ -153,8 +153,11 @@
               </div>
             </form>
           </div>
-            <div id="pass-update">
+            <div id="pass-update" style="display:none;">
               <form role="form" id="pass_form">
+              	<div class="form-group">
+                  <h5 style="color:red" id="upPassMsg"></h5>
+                </div>
                 <div class="form-group">
                   <input class="form-control" id="PrePASS" name="PrePASS"  placeholder="原密码" type="password">
                 </div>
@@ -168,7 +171,7 @@
                  <a class="btn btn-primary" id="btn-pass-cancel">取消</a>
               </form>
             </div>
-            <div id="personal_info">
+            <div id="personal_info" style="display:none;">
               
               <form  action="usermanage/personal/edit" method="post" role="form" class="form-horizontal" id="user_detail_info" enctype="multipart/form-data">
                 <div class="form-group">

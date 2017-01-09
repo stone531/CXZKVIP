@@ -99,7 +99,7 @@ function setCompnayReadOnly(){
 function updatepass(){
 	
 	if ($("#PrePASS").val() == $("#PASS").val()){
-		alert("新密码与旧密码不能相同!");
+		$("#upPassMsg").text("新密码与旧密码不能相同!");
 		return;
 	}
 	
@@ -120,7 +120,7 @@ function updatepass(){
                    if (data.IsSuccess == 1){
                 	   window.location.href="/CXZKVIP/usermanage/show/result?IsSuccess=1"; 
                    }else if (data.IsSuccess == 2){
-                	   $("#memberErrMsg").text("密码不正确");
+                	   $("#upPassMsg").text("密码不正确");
                    }
                  }
     });

@@ -8,20 +8,30 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
 import com.fh.util.AppUtil;
+import com.fh.util.Const;
+import com.fh.util.FileUpload;
 import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
+import com.fh.util.PathUtil;
 import com.fh.util.Tools;
 import com.fh.service.ins.news.NewsManager;
 import com.fh.controller.ins.usermanage.UserManageController;
@@ -156,6 +166,25 @@ public class NewsController extends BaseController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/upload")
+	public void news_upload(
+			@RequestParam(value="upfile",required=true) MultipartFile files,
+			PrintWriter out
+			) throws Exception{
+
+		String filePath = PathUtil.getClasspath() + Const.FILEPATHIMG;								//文件上传路径
+
+		String fileName =  FileUpload.fileUp(files, filePath, this.get32UUID());
+
+		System.out.println(fileName);
+		PageData rspd = new PageData();
+		rspd.put("state", true);
+		rspd.put("url", fileName);
+		Object js = JSONObject.fromObject(rspd);
+		out.write(js.toString());
+		out.close();
+		return;
+	}
 	/**去新增页面
 	 * @param
 	 * @throws Exception

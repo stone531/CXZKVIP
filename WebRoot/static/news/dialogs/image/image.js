@@ -187,6 +187,7 @@
             var me = this;
             try{
                 var json = eval('('+r+')');
+				alert(json);
                 Base.callback(me.editor, me.dialog, json.url, json.state);
             }catch (e){
                 var lang = me.editor.getLang('image');
