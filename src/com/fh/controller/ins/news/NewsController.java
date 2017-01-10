@@ -181,7 +181,6 @@ public class NewsController extends BaseController {
 		rspd.put("state", "SUCCESS");
 		rspd.put("url", fileName);
 		Object js = JSONObject.fromObject(rspd);
-		out.write(js.toString());
 		System.out.println(js.toString());
 		out.close();
 		return;
