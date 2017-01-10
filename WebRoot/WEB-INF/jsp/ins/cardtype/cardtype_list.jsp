@@ -272,7 +272,6 @@
 			});
 		});
 		function readfile(obj){
-			alert($("#excelform").attr("action"));
 			$("#excelform").submit();
 		}
 		
