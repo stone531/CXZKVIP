@@ -176,12 +176,13 @@ public class NewsController extends BaseController {
 
 		String fileName =  FileUpload.fileUp(files, filePath, this.get32UUID());
 
-		System.out.println(fileName);
+		
 		PageData rspd = new PageData();
-		rspd.put("state", true);
+		rspd.put("state", "SUCCESS");
 		rspd.put("url", fileName);
 		Object js = JSONObject.fromObject(rspd);
 		out.write(js.toString());
+		System.out.println(js.toString());
 		out.close();
 		return;
 	}

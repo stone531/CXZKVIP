@@ -208,9 +208,9 @@
 			 diag.Width = 700;
 			 diag.Height = 546;
 			 diag.CancelEvent = function(){ //关闭事件
-				 if('none' == diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display){
+				// if('none' == diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display){
 					 parent.location.href="<%=basePath%>department/listAllDepartment.do?DEPARTMENT_ID=${DEPARTMENT_ID}&dnowPage=${page.currentPage}";
-				}
+				//}
 				diag.close();
 			 };
 			 diag.show();
@@ -254,9 +254,9 @@
 			 diag.Width = 700;
 			 diag.Height = 546;
 			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+				 //if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 parent.location.href="<%=basePath%>department/listAllDepartment.do?DEPARTMENT_ID=${DEPARTMENT_ID}&dnowPage=${page.currentPage}";
-				}
+				//}
 				diag.close();
 			 };
 			 diag.show();

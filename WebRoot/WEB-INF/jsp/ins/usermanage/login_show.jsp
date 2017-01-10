@@ -21,6 +21,7 @@
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta http-equiv="Cache-Control" content="no-siteapp">
 	<%@ include file="../../ht.jsp"%>
+	<%@ include file="../../head.jsp"%>  
 
 	<script src="static/usermanage/js/jquery.min.js" type="text/javascript"></script>
     <script src="static/usermanage/js/jquery.base64.min.js" type="text/javascript"></script>
@@ -39,7 +40,7 @@
 <style id="placeholder__">.placeholder-wrap{position: relative;display: inline-block;}.placeholder-text{position: absolute; }.placeholder-input{position: relative;background-color: transparent; z-index: 1;}</style></head>
 <body>     
 
-	<%@ include file="../../head.jsp"%>   
+	 
     <!--  div class="login-register-header pt25 pb25">
     <div class="layout">
     <div class="inline-block header-text f24 pl20 ml20 ">

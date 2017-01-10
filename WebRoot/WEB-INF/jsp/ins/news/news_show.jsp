@@ -21,6 +21,8 @@
     rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
     rel="stylesheet" type="text/css">
+    <%@ include file="../../ht.jsp"%>
+	<%@ include file="../../head.jsp"%>
 </head>
 <body>
     <div class="section">
@@ -42,4 +44,5 @@
       <div class="container">${pd.NEWS_CONTENT}</div>
     </div>
 </body>
+
 </html>

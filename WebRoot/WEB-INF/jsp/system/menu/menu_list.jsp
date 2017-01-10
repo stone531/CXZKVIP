@@ -228,10 +228,10 @@
 			 diag.Width = 800;
 			 diag.Height = 380;
 			 diag.CancelEvent = function(){ //关闭事件
-				if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+				//if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					top.jzts(); 
 					setTimeout("location.reload()",100);
-				}
+				//}
 				diag.close();
 			 };
 			 diag.show();

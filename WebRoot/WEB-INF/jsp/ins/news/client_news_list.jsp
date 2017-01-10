@@ -18,6 +18,8 @@
 <%@ include file="../../system/index/top.jsp"%>
 <!-- 日期框 -->
 <link rel="stylesheet" href="static/ace/css/datepicker.css" />
+<%@ include file="../../ht.jsp"%>
+<%@ include file="../../head.jsp"%>
 </head>
 <body class="no-skin">
 
@@ -106,6 +108,7 @@
 	<!-- basic scripts -->
 	<!-- 页面底部js¨ -->
 	<%@ include file="../../system/index/foot.jsp"%>
+	
 	<!-- 删除时确认窗口 -->
 	<script src="static/ace/js/bootbox.js"></script>
 	<!-- ace scripts -->
@@ -222,9 +225,9 @@
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮 
 			 diag.CancelEvent = function(){ //关闭事件
-				// if(diag.innerFrame.contentWindow.document.getElementById('').style.display == 'none'){
-				//	 nextPage(${page.currentPage});
-				//}
+				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+					 nextPage(${page.currentPage});
+				}
 				diag.close();
 			 };
 			 diag.show();

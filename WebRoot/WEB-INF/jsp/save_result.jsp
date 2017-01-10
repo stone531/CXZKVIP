@@ -18,8 +18,15 @@
 
 </head>
 <body>
-	<div>
-			<h1>${msg}</h1>
-	</div>
+	<div id="zhongxin"></div>
+	<script type="text/javascript">
+		var msg = "${result}";
+		if(msg=="success" || msg==""){
+			document.getElementById('zhongxin').style.display = 'none';
+			top.Dialog.close();
+		}else{
+			top.Dialog.close();
+		}
+	</script>
 </body>
 </html>

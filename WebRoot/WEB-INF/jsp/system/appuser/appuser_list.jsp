@@ -335,14 +335,14 @@
 			 diag.Width = 600;
 			 diag.Height = 419;
 			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+				 //if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 if('${page.currentPage}' == '0'){
 						 top.jzts();
 						 setTimeout("self.location=self.location",100);
 					 }else{
 						 nextPage(${page.currentPage});
 					 }
-				}
+				//}
 				diag.close();
 			 };
 			 diag.show();
@@ -358,9 +358,9 @@
 			 diag.Width = 600;
 			 diag.Height = 419;
 			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+				// if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 nextPage(${page.currentPage});
-				}
+				//}
 				diag.close();
 			 };
 			 diag.show();

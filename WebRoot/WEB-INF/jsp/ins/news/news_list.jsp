@@ -275,14 +275,14 @@
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮
 			 diag.CancelEvent = function(){ //关闭事件
-				// if(diag.innerFrame.contentWindow.document.getElementById('').style.display == 'none'){
+				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 if('${page.currentPage}' == '0'){
 						 top.jzts();
 						 setTimeout("self.location=self.location",100);
 					 }else{
 						 nextPage(${page.currentPage});
 					 }
-				//}
+				}
 				diag.close();
 			 };
 			 diag.show();
@@ -314,9 +314,9 @@
 			 diag. ShowMaxButton = true;	//最大化按钮
 		     diag.ShowMinButton = true;		//最小化按钮 
 			 diag.CancelEvent = function(){ //关闭事件
-				 //if(diag.innerFrame.contentWindow.document.getElementById("zhongxin").style.display == 'none'){
+				 if(diag.innerFrame.contentWindow.document.getElementById("zhongxin").style.display == 'none'){
 					 nextPage(${page.currentPage});
-				//}
+				}
 				diag.close();
 			 };
 			 diag.show();

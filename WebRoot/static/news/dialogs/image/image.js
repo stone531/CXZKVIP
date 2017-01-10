@@ -153,6 +153,7 @@
             me.render(".edui-image-local", 1);
             me.config(".edui-image-upload1");
             me.submit();
+
             me.drag();
 
             $(".edui-image-upload1").hover(function () {
@@ -186,8 +187,11 @@
         uploadComplete: function(r){
             var me = this;
             try{
-                var json = eval('('+r+')');
-				alert(json);
+                //var json = eval('('+r+')');  
+				var reg = /<pre>(.+)<\/pre>/g;  
+				var result = r.match(reg);  
+				r = RegExp.$1; 
+				var json = eval('('+r+')');				
                 Base.callback(me.editor, me.dialog, json.url, json.state);
             }catch (e){
                 var lang = me.editor.getLang('image');
@@ -195,17 +199,13 @@
             }
         },
         submit: function (callback) {
-
             var me = this,
                 input = $( '<input style="filter: alpha(opacity=0);" class="edui-image-file" type="file" hidefocus="" name="upfile" accept="image/gif,image/jpeg,image/png,image/jpg,image/bmp">'),
                 input = input[0];
-
-            $(me.dialog).delegate( ".edui-image-file", "change", function ( e ) {
-
+				$(me.dialog).delegate( ".edui-image-file", "change", function ( e ) {
                 if ( !this.parentNode ) {
                     return;
                 }
-
                 $('<iframe name="up"  style="display: none"></iframe>').insertBefore(me.dialog).on('load', function(){
                     var r = this.contentWindow.document.body.innerHTML;
                     if(r == '')return;
@@ -214,7 +214,6 @@
                     $(this).remove();
 
                 });
-
                 $(this).parent()[0].submit();
                 Upload.updateInput( input );
                 me.toggleMask("Loading....");
@@ -224,6 +223,7 @@
 
             return me;
         },
+		
         //更新input
         updateInput: function ( inputField ) {
 
