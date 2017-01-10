@@ -229,6 +229,7 @@
         	$("#searchtype").val("1"); 
         	$("#byCard").show();
         	$("#byNo").hide();
+        	$("#showErr").html("");
         }
         
         function searchByNo(){        
@@ -237,6 +238,7 @@
         	$("#searchtype").val("2");        	
         	$("#byNo").show();
         	$("#byCard").hide();
+        	$("#showErr").html("");
         }
         $(function(){
 	        if($("#searchtype").val()=="1"){
@@ -393,7 +395,8 @@
           				if(data.result == 3)
           					sub += "<label>温馨提示：您还尚未投保！</label>";
           				//$("#showErr").append(sub);
-						$("#showErr").html(sub);					
+						$("#showErr").html(sub);
+						$("#showPolicy").html("");					
 					}else{
 						var subTable="";
 						subTable += "<div class=\"col-md-12\" style=\"border-top:groove ;border-color: beige; margin-top:30px;padding-left:10%;\">"
@@ -425,6 +428,7 @@
 						subTable += "</tbody></table></div></div>";
 						//$("#showPolicy").append(subTable);
 						$("#showPolicy").html(subTable);
+						$("#showErr").html("");
 					}
 				}
 			});

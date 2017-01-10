@@ -285,14 +285,14 @@
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
-				// if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+				if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 if('${page.currentPage}' == '0'){
 						 top.jzts();
 						 setTimeout("self.location=self.location",100);
 					 }else{
 						 nextPage(${page.currentPage});
 					 }
-				//}
+				}
 				diag.close();
 			 };
 			 diag.show();
@@ -314,21 +314,20 @@
 		
 		//修改
 		function edit(Id){
-			 window.location.href="<%=basePath%>claimsys/goEdit.do?CLAIMSYS_ID="+Id;
-			 //top.jzts();
-			 //var diag = new top.Dialog();
-			 //diag.Drag=true;
-			 //diag.Title ="编辑";
-			 //diag.URL = '<%=basePath%>claimsys/goEdit.do?CLAIMSYS_ID='+Id;
-			 //diag.Width = 450;
-			 //diag.Height = 355;
-			 //diag.CancelEvent = function(){ //关闭事件
-			 //	 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-			 //		 nextPage(${page.currentPage});
-			 //	}
-			 //	diag.close();
-			 //};
-			 //diag.show();
+			 top.jzts();
+			 var diag = new top.Dialog();
+			 diag.Drag=true;
+			 diag.Title ="编辑";
+			 diag.URL = '<%=basePath%>claimsys/goEdit.do?CLAIMSYS_ID='+Id;
+			 diag.Width = 550;
+			 diag.Height = 355;
+			 diag.CancelEvent = function(){ //关闭事件
+			 	 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+			 		 nextPage(${page.currentPage});
+			 	}
+			 	diag.close();
+			 };
+			 diag.show();
 		}
 		
 		//批量操作
