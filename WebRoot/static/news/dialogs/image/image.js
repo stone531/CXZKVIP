@@ -188,10 +188,10 @@
             var me = this;
             try{
                 //var json = eval('('+r+')');  
-				var reg = /<pre>(.+)<\/pre>/g;  
-				var result = r.match(reg);  
+				var reg = /<pre.+?>(.+)<\/pre>/g;  
+				r.match(reg);  
 				r = RegExp.$1; 
-				var json = eval('('+r+')');				
+				var json = eval('('+r+')');	
                 Base.callback(me.editor, me.dialog, json.url, json.state);
             }catch (e){
                 var lang = me.editor.getLang('image');
