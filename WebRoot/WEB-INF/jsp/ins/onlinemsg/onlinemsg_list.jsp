@@ -66,12 +66,12 @@
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
 									</th>
 									<th class="center" style="width:50px;">序号</th>
-									<th class="center">消息id</th>
+									<!--<th class="center">消息id</th>-->
 									<th class="center">用户id</th>
 									<th class="center">管理员id</th>
 									<th class="center">聊天内容</th>
 									<th class="center">操作时间</th>
-									<th class="center">回复msgid</th>
+									<!--<th class="center">回复msgid</th>-->
 									<th class="center">操作</th>
 								</tr>
 							</thead>
@@ -87,12 +87,12 @@
 												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.ONLINEMSG_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.MSGID}</td>
+											<!--<td class='center'>${var.MSGID}</td>-->
 											<td class='center'>${var.CLIENTUSER}</td>
 											<td class='center'>${var.ADMINUSER}</td>
 											<td class='center'>${var.CONTENT}</td>
 											<td class='center'>${var.OPTIME}</td>
-											<td class='center'>${var.REPLYID}</td>
+											<!--<td class='center'>${var.REPLYID}</td>-->
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
