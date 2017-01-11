@@ -36,10 +36,6 @@
 								</button>
 								<i class="ace-icon fa fa-check green"></i>
 								欢迎使用 惠泽保险后台管理 系统&nbsp;&nbsp;
-								<strong class="green">
-									&nbsp;官网网站：
-									<a href="http://" target="_blank"><small>(&nbsp;&nbsp;)</small></a>
-								</strong>
 							</div>
 							
 							
