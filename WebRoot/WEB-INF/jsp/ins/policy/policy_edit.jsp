@@ -36,12 +36,12 @@
         <div class="row">
           <div class="col-md-12">
             <div class="col-md-2"></div>
-            <div class="col-md-7">
+            <div id="zhongxin" class="col-md-7">
 			
 			<!--替换form表单-->
- 				<form action="policy/${msg }.do" name="Form" id="Form" method="post">
+ 				<form action="policy/${msg}.do" name="Form" id="Form" method="post">
 						<input type="hidden" name="POLICY_ID" id="POLICY_ID" value="${pd.POLICY_ID}"/>
-						<div id="zhongxin" style="padding-top: 13px;">
+						<div  style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">保单号:</td>
@@ -141,10 +141,11 @@
 						
 						<div id="zhongxin2" class="center" style="display:none"><br/><br/><br/><br/><br/><img src="static/images/jiazai.gif" /><br/><h4 class="lighter block green">提交中...</h4></div>						
 					</form>	
-					<div id="zhongxin2" class="center" style="display:none"><img src="static/images/jzx.gif" style="width: 50px;" /><br/><h4 class="lighter block green"></h4></div>
+
+            </div>
+  			<div id="zhongxin2" class="center" style="display:none"><img src="static/images/jzx.gif" style="width: 50px;" /><br/><h4 class="lighter block green"></h4></div>
 
  
-            </div>
             <div class="col-md-3"></div>
           </div>
         </div>
@@ -163,7 +164,7 @@
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
-		<script type="text/javascript">
+<script type="text/javascript">
 		$(top.hangge());
 		//保存
 		function save(){
@@ -347,48 +348,19 @@
 				$("#ISHASPOLICYNO").focus();
 			return false;
 			}
-			/*
-			if($("#CREATED").val()==""){
-				$("#CREATED").tips({
-					side:3,
-		            msg:'请输入投保时间',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#CREATED").focus();
-			return false;
-			}
-			if($("#UPDATED").val()==""){
-				$("#UPDATED").tips({
-					side:3,
-		            msg:'请输入保单生效时间',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#UPDATED").focus();
-			return false;
-			}
-			if($("#INVALID").val()==""){
-				$("#INVALID").tips({
-					side:3,
-		            msg:'请输入保单时效时间',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#INVALID").focus();
-			return false;
-			}
-			*/
+
+			
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();
+
 		}
 		
 		$(function() {
 			//日期框
 			$('.date-picker').datepicker({autoclose: true,todayHighlight: true});
 		});
-		</script>
+</script>
 		
 
 

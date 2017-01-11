@@ -179,7 +179,8 @@ public class PolicyController extends BaseController {
 		policyService.edit(pd);
 		mv.addObject("msg","success");
 		
-		mv.setViewName("ins/policy/policy_edit");
+		//mv.setViewName("ins/policy/policy_edit");
+		mv.setViewName("save_result");
 		return mv;
 	}
 	
