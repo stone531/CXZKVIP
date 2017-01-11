@@ -80,8 +80,8 @@
 		MAX(MSGID) AS MSGID
 		from 
 		<include refid="tableName"></include>
-		where 
-			CLIENTUSER = #{CLIENTUSER}
+		<!--where 
+			CLIENTUSER = #{CLIENTUSER} -->
 	</select>
 	
 	<!-- 通过ID获取数据 -->
