@@ -5,11 +5,11 @@ $(top.hangge());
 //发送
 function sendFhsms(){
 	
-	if($("#TYPE").val()=="1"){
-		$("#CONTENT").val(getContentTxt());
-	}else{
-		$("#CONTENT").val(getContent());
-	}
+	//if($("#TYPE").val()=="1"){
+		//$("#CONTENT").val(getContentTxt());
+	//}else{
+		//$("#CONTENT").val(getContent());
+	//}
 	if($("#USERNAME").val()==""){
 		$("#USERNAME").tips({
 			side:3,
@@ -20,7 +20,7 @@ function sendFhsms(){
 		$("#USERNAME").focus();
 		return false;
 	}
-	if($("#CONTENT").val()==""){
+	if($("#MYCONTENT").val()==""){
 		$("#nr").tips({
 			side:1,
             msg:'请输入内容',
@@ -32,7 +32,7 @@ function sendFhsms(){
 	$("#zhongxin").hide();
 	$("#zhongxin2").show();
 	var USERNAME = $("#USERNAME").val();
-	var CONTENT = $("#CONTENT").val();
+	var CONTENT = $("#MYCONTENT").val();
 	$.ajax({
 		type: "POST",
 		url: locat+'/fhsms/save.do?tm='+new Date().getTime(),

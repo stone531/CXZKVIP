@@ -167,6 +167,7 @@ public class OnlinemsgController extends BaseController {
 			pd.put("CLIENTUSER",  data.getMobile());	//主键
 			pd.put("CONTENT", pd.getString("LIUYAN"));	//主键
 			pd.put("OPTIME", DateUtil.getTime());	//主键
+			pd.put("ISREAD","0");
 			
 			System.out.println("sendmsg index   3");
 			PageData pdResult=new PageData();
@@ -193,7 +194,8 @@ public class OnlinemsgController extends BaseController {
 //---------------------------end
 		onlinemsgService.save(pd);
 		
-		mv.setViewName("save_result");
+		mv.addObject("IsSuccess","1");
+		mv.setViewName("ins/usermanage/result");
 		return mv;
 	}
 	
@@ -251,6 +253,7 @@ public class OnlinemsgController extends BaseController {
 			
 			pd.put("REPLYID", pdResult.get("MSGID").toString());	
 			pd.put("CLIENTUSER", pdResult.get("CLIENTUSER").toString());	
+			pd.put("ISREAD","1");
 		}	
 		else
 		{
@@ -322,7 +325,7 @@ public class OnlinemsgController extends BaseController {
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page) throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"列表Onlinemsg");
+		//logBefore(logger, Jurisdiction.getUsername()+"列表Onlinemsg");
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -381,6 +384,8 @@ public class OnlinemsgController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd.put("ISREAD", "1");
+		onlinemsgService.editstate(pd);
 		pd = onlinemsgService.findById(pd);	//根据ID读取
 		mv.setViewName("ins/onlinemsg/adminRsp");
 		

@@ -45,11 +45,11 @@
 								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastLoginStart" id="lastLoginStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
 								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastLoginEnd" name="lastLoginEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
 								<td style="vertical-align:top;padding-left:2px;">
-								 	<select class="chosen-select form-control" name="name" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+								 	<select class="chosen-select form-control" name="STATUS" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
 									<option value=""></option>
 									<option value="">全部</option>
-									<option value="">1</option>
-									<option value="">2</option>
+									<option value="0" <c:if test="${pd.STATUS == '0' }">selected</c:if>>未读</option>
+									<option value="1" <c:if test="${pd.STATUS == '1' }">selected</c:if>>已读</option>
 								  	</select>
 								</td>
 								<c:if test="${QX.cha == 1 }">
@@ -67,9 +67,10 @@
 									</th>
 									<th class="center" style="width:50px;">序号</th>
 									<!--<th class="center">消息id</th>-->
-									<th class="center">用户id</th>
-									<th class="center">管理员id</th>
+									<th class="center">用户</th>
+									<th class="center">管理员</th>
 									<th class="center">聊天内容</th>
+									<th class="center">状态</th>
 									<th class="center">操作时间</th>
 									<!--<th class="center">回复msgid</th>-->
 									<th class="center">操作</th>
@@ -91,6 +92,7 @@
 											<td class='center'>${var.CLIENTUSER}</td>
 											<td class='center'>${var.ADMINUSER}</td>
 											<td class='center'>${var.CONTENT}</td>
+											<td class='center'><c:if test="${var.ISREAD == '0' }"><span class="label label-important arrowed-in">未读</span></c:if><c:if test="${var.ISREAD == '1' }"><span class="label label-success arrowed">已读</span></c:if></td>
 											<td class='center'>${var.OPTIME}</td>
 											<!--<td class='center'>${var.REPLYID}</td>-->
 											<td class="center">
@@ -99,18 +101,21 @@
 												</c:if>
 												<div class="hidden-sm hidden-xs btn-group">
 													<c:if test="${QX.edit == 1 }">
+													<a class="btn btn-xs btn-success" title="回复" onclick="reply('${var.ONLINEMSG_ID}');">
+														<i class="ace-icon fa fa-minus-circle bigger-120" title="回复"></i>
+													</a>
+													</c:if>
+												
+													<c:if test="${QX.edit == 1 }">
 													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.ONLINEMSG_ID}');">
 														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
 													</a>
 													</c:if>
+
+													
 													<c:if test="${QX.del == 1 }">
 													<a class="btn btn-xs btn-danger" onclick="del('${var.ONLINEMSG_ID}');">
 														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
-													</a>
-													</c:if>
-													<c:if test="${QX.edit == 1 }">
-													<a class="btn btn-xs btn-success" title="回复" onclick="reply('${var.ONLINEMSG_ID}');">
-														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="回复"></i>
 													</a>
 													</c:if>
 												</div>
@@ -130,20 +135,20 @@
 																</a>
 															</li>
 															</c:if>
-															<c:if test="${QX.del == 1 }">
-															<li>
-																<a style="cursor:pointer;" onclick="del('${var.ONLINEMSG_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
-																	<span class="red">
-																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-															</c:if>
 															<c:if test="${QX.edit == 1 }">
 															<li>
 																<a style="cursor:pointer;" onclick="reply('${var.ONLINEMSG_ID}');" class="tooltip-success" data-rel="tooltip" title="回复">
 																	<span class="green">
 																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+																	</span>
+																</a>
+															</li>
+															</c:if>
+															<c:if test="${QX.del == 1 }">
+															<li>
+																<a style="cursor:pointer;" onclick="del('${var.ONLINEMSG_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
+																	<span class="red">
+																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																	</span>
 																</a>
 															</li>
@@ -173,10 +178,7 @@
 						<div class="page-header position-relative">
 						<table style="width:100%;">
 							<tr>
-								<td style="vertical-align:top;">
-									<c:if test="${QX.add == 1 }">
-									<a class="btn btn-sm btn-success" onclick="add();">新增</a>
-									</c:if>
+								<td style="vertical-align:top;">		
 									<c:if test="${QX.del == 1 }">
 									<a class="btn btn-sm btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120'></i></a>
 									</c:if>
@@ -318,9 +320,9 @@
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
-				 //if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 nextPage(${page.currentPage});
-				//}
+				}
 				diag.close();
 			 };
 			 diag.show();
@@ -335,13 +337,12 @@
 			 diag.URL = '<%=basePath%>onlinemsg/goReplyMsg.do?ONLINEMSG_ID='+Id;
 			 diag.Width = 800;
 			 diag.Height = 600;
-			  nextPage(${page.currentPage});
-			 //diag.CancelEvent = function(){ //关闭事件
-			//	 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-			//		 nextPage(${page.currentPage});
-			//	}
-			//	diag.close();
-			 //};
+			 diag.CancelEvent = function(){ //关闭事件
+				 // if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+					 nextPage(${page.currentPage});
+				//}
+				diag.close();
+			 };
 			 diag.show();
 		}
 		

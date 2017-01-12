@@ -415,13 +415,18 @@ public class CardInfoController extends BaseController {
 			 * var1 :EXPIRYTIME：有效时间
 			 * var2 :POLICYNO：保单号
 			 * var3:IANTNAME:被投保人姓名或者投保人姓名
-			 * var4:IANTPAPERNO:投保人数
+			 * var4:IANTPAPERNO:被保险人身份证号
 			 * var5:IANTPHONE：投保电话
 			 * var6:PASSWORD：密码
 			 * 
 			 */
 			for(int i=0;i<listPd.size();i++){
 				PageData pageData= new PageData();
+				if(cardinfoService.findByCardId(pd) == null ||cardinfoService.findByCardId(pd).equals("")){
+					mv.addObject("msg","卡号不能重复");
+					mv.setViewName("save_result");
+					return mv;
+				}
 				pageData.put("CARDID", listPd.get(i).getString("var0"));	//1
 				pageData.put("EXPIRYTIME", listPd.get(i).get("var1").toString());	//2
 				pageData.put("POLICYNO", listPd.get(i).get("var2").toString());	//3
@@ -461,7 +466,7 @@ public class CardInfoController extends BaseController {
 	 */
 	@RequestMapping(value="/downExcel")
 	public void downExcel(HttpServletResponse response)throws Exception{
-		FileDownload.fileDownload(response, PathUtil.getClasspath() + Const.FILEPATHFILE + "卡单录入模板.xls", "卡单录入模板.xls");
+		FileDownload.fileDownload(response, PathUtil.getClasspath() + Const.FILEPATHFILE + "卡录入模板.xls", "卡录入模板.xls");
 	}
 	
 	 /**导出到excel

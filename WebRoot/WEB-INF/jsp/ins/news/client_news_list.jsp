@@ -12,6 +12,7 @@
 <html lang="en">
 <head>
 <base href="<%=basePath%>">
+<script type="text/javascript" src="static/usermanage/js/jquery-1.11.1.js"></script>
 <!-- 下拉框 -->
 <link rel="stylesheet" href="static/ace/css/chosen.css" />
 <!-- jsp文件头和头部 -->
@@ -19,10 +20,10 @@
 <!-- 日期框 -->
 <link rel="stylesheet" href="static/ace/css/datepicker.css" />
 <%@ include file="../../ht.jsp"%>
-<%@ include file="../../head.jsp"%>
+
 </head>
 <body class="no-skin">
-
+	<%@ include file="../../head.jsp"%>
 	<!-- /section:basics/navbar.layout -->
 	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><div class="main-container" id="main-container">
 		<!-- /section:basics/sidebar -->

@@ -153,6 +153,9 @@
 				-->
 				)
 		</if>
+		<if test="pd.STATUS != null and pd.STATUS != ''"><!-- 状态检索 -->
+			and USERTYPE = #{pd.STATUS} 
+		</if>
 	</select>
 	
 	<!-- 列表(全部) -->

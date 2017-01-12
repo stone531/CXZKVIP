@@ -81,7 +81,7 @@
 		        <div class="row1" style="margin-left:2200px -400px;">
 		         <p align=left style="margin-left:10px;">请输入您的所有疑虑:</p>
 		          <div class="col-md-12 text-left" >		         
-		            <textarea id="LIUYAN" name="LIUYAN" class="form-contro50" rows="10" cols="10"></textarea>
+		            <textarea id="LIUYAN" name="LIUYAN" class="form-contro50" rows="10" cols="10" required></textarea>
 		          </div>
 		        </div>
 		        <br>
