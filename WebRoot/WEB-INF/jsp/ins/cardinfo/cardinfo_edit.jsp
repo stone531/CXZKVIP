@@ -27,7 +27,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 					
-					<form action="cardinfo/${msg}.do" name="Form" id="Form" method="post">
+					<form action="cardinfo/${msg }.do" name="Form" id="Form" method="post">
 						<input type="hidden" name="CARDINFO_ID" id="CARDINFO_ID" value="${pd.CARDINFO_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">

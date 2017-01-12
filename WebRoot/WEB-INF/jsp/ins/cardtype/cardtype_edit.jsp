@@ -56,27 +56,6 @@
 								<td><input type="text" name="PROFESSION" id="PROFESSION" value="${pd.PROFESSION}" maxlength="255" placeholder="这里输入限制使用的职业列表" title="限制使用的职业列表" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">公司名称:</td>
-								<td>
-									<select id="COMPANYNAME" name="COMPANYNAME" title="公司名称" style="width:98%;" >																				
-										<c:choose>
-								            <c:when test="${not empty varList}">
-								            	<c:forEach items="${varList}" var="var" varStatus="vs">
-								            	<option value="${var.COMPANY_NAME}">${var.COMPANY_NAME}</option>						
-								            	</c:forEach>
-								            </c:when>
-								            <c:otherwise>
-										        <option value="保险公司">保险公司</option>                                         
-								            </c:otherwise>
-										</c:choose>
-                                    </select>
-								</td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">服务内容:</td>
-								<td><input type="text" name="SERVICECONTEXT" id="SERVICECONTEXT" value="${pd.SERVICECONTEXT}" maxlength="255" placeholder="这里输入服务内容" title="服务内容" style="width:98%;"/></td>
-							</tr>
-							<tr>
 								<td style="text-align: center;" colspan="10">
 									<a class="btn btn-mini btn-primary" onclick="save();">保存</a>
 									<a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>

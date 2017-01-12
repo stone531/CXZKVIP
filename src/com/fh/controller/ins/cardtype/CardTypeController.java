@@ -34,8 +34,6 @@ import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
 import com.fh.util.PathUtil;
 import com.fh.service.ins.cardtype.CardTypeManager;
-import com.fh.service.ins.claimcompany.ClaimCompanyManager;
-import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 
  * 说明：服务卡类型
@@ -49,8 +47,6 @@ public class CardTypeController extends BaseController {
 	String menuUrl = "cardtype/list.do"; //菜单地址(权限用)
 	@Resource(name="cardtypeService")
 	private CardTypeManager cardtypeService;
-	@Resource(name="claimcompanyService")
-	private ClaimCompanyManager claimcompanyService;
 	
 	/**保存
 	 * @param
@@ -123,7 +119,6 @@ public class CardTypeController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
-		UserManageController.SetQX(mv);
 		return mv;
 	}
 	
@@ -136,11 +131,8 @@ public class CardTypeController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		//列出所有保险公司
-		List<PageData> varOList = claimcompanyService.listAll(pd);
 		mv.setViewName("ins/cardtype/cardtype_edit");
 		mv.addObject("msg", "save");
-		mv.addObject("varList", varOList);
 		mv.addObject("pd", pd);
 		return mv;
 	}	
@@ -155,11 +147,8 @@ public class CardTypeController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = cardtypeService.findById(pd);	//根据ID读取
-		//列出所有保险公司
-		List<PageData> varOList = claimcompanyService.listAll(pd);
 		mv.setViewName("ins/cardtype/cardtype_edit");
 		mv.addObject("msg", "edit");
-		mv.addObject("varList", varOList);
 		mv.addObject("pd", pd);
 		return mv;
 	}	
@@ -169,7 +158,7 @@ public class CardTypeController extends BaseController {
 	 */
 	@RequestMapping(value="/downExcel")
 	public void downExcel(HttpServletResponse response)throws Exception{
-		FileDownload.fileDownload(response, PathUtil.getClasspath() + Const.FILEPATHFILE + "卡录入模板.xls", "卡录入模板.xls");
+		FileDownload.fileDownload(response, PathUtil.getClasspath() + Const.FILEPATHFILE + "卡种录入模板.xls", "卡种录入模板.xls");
 	}
 	
 	 /**批量删除
@@ -203,16 +192,15 @@ public class CardTypeController extends BaseController {
 	 */
 	@RequestMapping(value="/readExcel")
 	public ModelAndView readExcel(
-			@RequestParam(value="excel",required=false) MultipartFile file
+			@RequestParam(value="cardtypeexcel",required=false) MultipartFile file
 			) throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		System.out.println(file);
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;}
 			String filePath = PathUtil.getClasspath() + Const.FILEPATHFILE;								//文件上传路径
-			String fileName =  FileUpload.fileUp(file, filePath, "userexcel");							//执行上传
+			String fileName =  FileUpload.fileUp(file, filePath, "cardtypeexcel");							//执行上传
 			
 			List<PageData> listPd = (List)ObjectExcelRead.readExcel(filePath,fileName, 2, 0, 0);	//执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
-			String isnum="^[0-9]*[1-9][0-9]*$";
 			/**
 			 * var0 :NAME:姓名
 			 * var1 :LIMITAMOUNT:限制金额
@@ -223,6 +211,7 @@ public class CardTypeController extends BaseController {
 			 */
 			for(int i=0;i<listPd.size();i++){
 				PageData pageData= new PageData();
+				
 				pageData.put("NAME", listPd.get(i).getString("var0"));	//1
 				if(isNumeric(listPd.get(i).get("var1").toString())){
 					pageData.put("LIMITAMOUNT", listPd.get(i).get("var1").toString());	//2
@@ -237,6 +226,7 @@ public class CardTypeController extends BaseController {
 				pageData.put("MAXAGE", listPd.get(i).get("var4").toString());	//5
 				}
 				pageData.put("PROFESSION", listPd.get(i).getString("var5"));	//6
+				pageData.put("CARDTYPE_ID", this.get32UUID());
 				cardtypeService.save(pageData);
 				}
 				
@@ -245,7 +235,8 @@ public class CardTypeController extends BaseController {
 			mv.addObject("msg","success");
 		
 		mv.setViewName("save_result");
-		return mv;
+		Page page=new Page();
+		return list(page);
 	}
 	public static boolean isNumeric(String str)
 	{
