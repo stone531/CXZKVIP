@@ -75,7 +75,6 @@ public class CardTypeService implements CardTypeManager{
 	public PageData findById(PageData pd)throws Exception{
 		return (PageData)dao.findForObject("CardTypeMapper.findById", pd);
 	}
-	
 	/**批量删除
 	 * @param ArrayDATA_IDS
 	 * @throws Exception
@@ -84,6 +83,7 @@ public class CardTypeService implements CardTypeManager{
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
 		dao.delete("CardTypeMapper.deleteAll", ArrayDATA_IDS);
 	}
+	
 	
 }
 

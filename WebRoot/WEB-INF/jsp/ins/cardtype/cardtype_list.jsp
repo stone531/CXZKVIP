@@ -55,7 +55,11 @@
 								<c:if test="${QX.cha == 1 }">
 								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
 								</c:if>
-								<td><a class="btn btn-sm btn-success" onclick="window.location.href='<%=basePath%>/cardtype/downExcel.do'">下载模版</a></td>
+								<td><a class="btn btn-sm btn-success" onclick="toExcel();">导出到EXCEL</a></td>
+								<td><a class="btn btn-sm btn-info" onclick="window.location.href='<%=basePath%>/cardtype/downExcel.do'">下载模版</a></td>
+								<td><input type="file" style="display: none;" name="cardtypeexcel" id="cardtypeexcel" onchange="readfile(this)">
+								<a class="btn btn-sm btn-success" onclick="readexecl()">从EXECL导入到数据库</a>
+								</td>
 							</tr>
 						</table>
 						</form>
@@ -74,8 +78,6 @@
 									<th class="center">最小使用年龄</th>
 									<th class="center">最大使用年龄</th>
 									<th class="center">限制使用的职业列表</th>
-									<th class="center">公司名称</th>
-									<th class="center">服务内容</th>
 									<th class="center">操作</th>
 								</tr>
 							</thead>
@@ -97,8 +99,6 @@
 											<td class='center'>${var.MINAGE}</td>
 											<td class='center'>${var.MAXAGE}</td>
 											<td class='center'>${var.PROFESSION}</td>
-											<td class='center'>${var.COMPANYNAME}</td>
-											<td class='center'>${var.SERVICECONTEXT}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
@@ -162,7 +162,7 @@
 							</c:choose>
 							</tbody>
 						</table>
-						<form  id="excelform" name="excelform" method="post" action="cardtype/readExcel.do" enctype="multipart/form-data">
+						
 						<div class="page-header position-relative">
 						
 						<table style="width:100%;">
@@ -175,16 +175,12 @@
 									<a class="btn btn-sm btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='ace-icon fa fa-trash-o bigger-120'></i></a>
 									</c:if>
 									<%-- <a class="btn btn-sm btn-success" onclick="window.location.href='<%=basePath%>/cardinfo/downExcel.do'">下载模版</a> --%>
-									
-									<input type="file" name="excel" id="excel" onchange="readfile(this)">
-									
 								</td>
 								<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
 							</tr>
 						</table>
 					
 						</div>
-							</form>
 						
 					
 						</div>
@@ -271,8 +267,13 @@
 				});
 			});
 		});
-		function readfile(obj){
-			$("#excelform").submit();
+		function readexecl(){
+			$("#cardtypeexcel").click();
+		}
+		function readfile(){
+			$("#Form").attr("action","cardtype/readExcel.do");
+			$("#Form").attr("enctype","multipart/form-data");
+			$("#Form").submit();
 		}
 		
 		//新增
@@ -285,14 +286,14 @@
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
-				// if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 if('${page.currentPage}' == '0'){
 						 top.jzts();
 						 setTimeout("self.location=self.location",100);
 					 }else{
 						 nextPage(${page.currentPage});
 					 }
-				//}
+				}
 				diag.close();
 			 };
 			 diag.show();
@@ -321,9 +322,9 @@
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
-				 //if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 nextPage(${page.currentPage});
-				//}
+				}
 				diag.close();
 			 };
 			 diag.show();
