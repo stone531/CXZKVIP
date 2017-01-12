@@ -118,6 +118,13 @@ public class PolicyController extends BaseController {
 		
 		System.out.println("policy/save:"+pd);
 		
+		//获取用户登录session
+		PageData pdSession = UserManageController.GetUserData();
+		
+		if(null != pdSession){
+			pd.put("USERID", pdSession.getString("USERMANAGE_ID"));
+		}
+		
 		String uuId=this.get32UUID();
 		
 		pd.put("POLICY_ID", uuId);	//主键
