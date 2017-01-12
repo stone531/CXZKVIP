@@ -14,7 +14,8 @@
 		ADMINUSER,	
 		CONTENT,	
 		OPTIME,	
-		REPLYID,	
+		REPLYID,
+		ISREAD,	
 		ONLINEMSG_ID
 	</sql>
 	
@@ -26,6 +27,7 @@
 		#{CONTENT},	
 		#{OPTIME},	
 		#{REPLYID},	
+		#{ISREAD},
 		#{ONLINEMSG_ID}
 	</sql>
 	
@@ -59,10 +61,22 @@
 			CONTENT = #{CONTENT},
 			OPTIME = #{OPTIME},
 			REPLYID = #{REPLYID},
+			ISREAD = #{ISREAD},
 		ONLINEMSG_ID = ONLINEMSG_ID
 		where 
 		ONLINEMSG_ID = #{ONLINEMSG_ID}
 	</update>
+	
+	<!-- 修改 -->
+	<update id="editstate" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+		ISREAD = #{ISREAD}
+		where 
+		ONLINEMSG_ID = #{ONLINEMSG_ID}
+	</update>
+	
 	
 	<!-- 通过ID获取数据 -->
 	<select id="findById" parameterType="pd" resultType="pd">
@@ -80,8 +94,8 @@
 		MAX(MSGID) AS MSGID
 		from 
 		<include refid="tableName"></include>
-		where 
-			CLIENTUSER = #{CLIENTUSER}
+		<!--where 
+			CLIENTUSER = #{CLIENTUSER} -->
 	</select>
 	
 	<!-- 通过ID获取数据 -->

@@ -1,6 +1,7 @@
 package com.fh.service.ins.onlinemsg;
 
 import java.util.List;
+
 import com.fh.entity.Page;
 import com.fh.util.PageData;
 
@@ -29,6 +30,8 @@ public interface OnlinemsgManager{
 	 * @throws Exception
 	 */
 	public void edit(PageData pd)throws Exception;
+	
+	public void editstate(PageData pd)throws Exception;
 	
 	/**列表
 	 * @param page

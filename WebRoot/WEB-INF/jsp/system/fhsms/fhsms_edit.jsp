@@ -54,7 +54,7 @@
 		</div>
 
 		<div id="zhongxin">
-		<textarea name="CONTENT" id="CONTENT" style="display:none" ></textarea>
+		
 		<input type="hidden" name="TYPE" id="TYPE" value="1"/>
 		<table style="width:98%;margin-top: 10px;margin-left: 9px;" >
 			<tr>
@@ -64,10 +64,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td style="padding-top: 3px;">
-					 <script id="editor" type="text/plain" style="width:643px;height:259px;"></script>
-				</td>
+			<td style="padding-top: 3px;">
+			<textarea name="MYCONTENT" id="MYCONTENT" style="width:643px;height:259px;"></textarea>
+			</td>
 			</tr>
+			<tr>
+				<td style="padding-top: 3px;">
+					 <script id="editor" type="text/plain" style="width:643px;height:259px;display:none"></script>
+				</td>
+			</tr>  
 			<tr>
 				<td style="text-align: center;padding-top: 15px;" id="nr">
 					<a class="btn btn-mini btn-primary" onclick="sendFhsms();">发送</a>
@@ -89,9 +94,9 @@
 	<!-- ace scripts -->
 	<script src="static/ace/js/ace/ace.js"></script>
 	<!-- 编辑框-->
-	<script type="text/javascript" charset="utf-8">window.UEDITOR_HOME_URL = "<%=path%>/plugins/ueditor/";</script>
+	<!-- <script type="text/javascript" charset="utf-8">window.UEDITOR_HOME_URL = "<%=path%>/plugins/ueditor/";</script>
 	<script type="text/javascript" charset="utf-8" src="plugins/ueditor/ueditor.config.js"></script>
-	<script type="text/javascript" charset="utf-8" src="plugins/ueditor/ueditor.all.js"></script>
+	<script type="text/javascript" charset="utf-8" src="plugins/ueditor/ueditor.all.js"></script> -->
 	<!-- 编辑框-->
 	<!--引入属于此页面的js -->
 	<script type="text/javascript" src="static/js/myjs/fhsms.js"></script>

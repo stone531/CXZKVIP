@@ -50,6 +50,11 @@ public class OnlinemsgService implements OnlinemsgManager{
 		dao.update("OnlinemsgMapper.edit", pd);
 	}
 	
+	@Override
+	public void editstate(PageData pd)throws Exception{
+		dao.update("OnlinemsgMapper.editstate",pd);
+	}
+	
 	/**列表
 	 * @param page
 	 * @throws Exception
