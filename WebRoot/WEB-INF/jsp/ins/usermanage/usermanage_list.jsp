@@ -46,11 +46,13 @@
 								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastLoginStart" id="lastLoginStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
 								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastLoginEnd" name="lastLoginEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
 								<td style="vertical-align:top;padding-left:2px;">
-								 	<select class="chosen-select form-control" name="name" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+								 	<select class="chosen-select form-control" name="STATUS" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
 									<option value=""></option>
 									<option value="">全部</option>
-									<option value="">1</option>
-									<option value="">2</option>
+									<option value="0" <c:if test="${pd.STATUS == '0' }">selected</c:if>>普通用户</option>
+									<option value="1" <c:if test="${pd.STATUS == '1' }">selected</c:if>>企业用户</option>
+									<option value="2" <c:if test="${pd.STATUS == '2' }">selected</c:if>>被拒绝企业申请</option>
+									<option value="3" <c:if test="${pd.STATUS == '3' }">selected</c:if>>企业用户申请中</option>
 								  	</select>
 								</td>
 								<c:if test="${QX.cha == 1 }">
