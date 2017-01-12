@@ -27,17 +27,45 @@
 				<div class="row">
 					<div class="col-xs-12">
 					
-					<form action="relation/${msg }.do" name="Form" id="Form" method="post">
+					<form action="relation/${msg}.do" name="Form" id="Form" method="post">
 						<input type="hidden" name="RELATION_ID" id="RELATION_ID" value="${pd.RELATION_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">卡类型:</td>
-								<td><input type="text" name="CARDTYPE" id="CARDTYPE" value="${pd.CARDTYPE}" maxlength="100" placeholder="这里输入卡类型" title="卡类型" style="width:98%;"/></td>
+								<td>
+								<!--  input type="text" name="CARDTYPE" id="CARDTYPE" value="${pd.CARDTYPE}" maxlength="100" placeholder="这里输入卡类型" title="卡类型" style="width:98%;"/ -->
+								<select id="CARDTYPE" name="CARDTYPE" title="卡类型" style="width:98%;" >																				
+										<c:choose>
+								            <c:when test="${not empty varListC}">
+								            	<c:forEach items="${varListC}" var="var" varStatus="vs">
+								            	<option value="${var.CARDTYPE_ID}">${var.NAME}</option>						
+								            	</c:forEach>
+								            </c:when>
+								            <c:otherwise>
+										        <option value="卡类型名">卡类型</option>                                         
+								            </c:otherwise>
+										</c:choose>
+                                    </select>
+								</td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">业务id:</td>
-								<td><input type="text" name="BUSINESSID" id="BUSINESSID" value="${pd.BUSINESSID}" maxlength="100" placeholder="这里输入业务id" title="业务id" style="width:98%;"/></td>
+								<td>
+								<!--  input type="text" name="BUSINESSID" id="BUSINESSID" value="${pd.BUSINESSID}" maxlength="100" placeholder="这里输入业务id" title="业务id" style="width:98%;"/ -->
+									<select id="BUSINESSID" name="BUSINESSID" title="险种" style="width:98%;" >																				
+										<c:choose>
+								            <c:when test="${not empty varListB}">
+								            	<c:forEach items="${varListB}" var="var" varStatus="vs">
+								            	<option value="${var.BUSINESS_ID}">${var.NAME}</option>						
+								            	</c:forEach>
+								            </c:when>
+								            <c:otherwise>
+										        <option value="险种">险种</option>                                         
+								            </c:otherwise>
+										</c:choose>
+                                    </select>
+								</td>
 							</tr>
 							<tr>
 								<td style="text-align: center;" colspan="10">

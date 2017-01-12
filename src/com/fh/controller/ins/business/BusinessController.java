@@ -23,6 +23,7 @@ import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
 import com.fh.service.ins.business.BusinessManager;
+import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 
  * 说明：保险业务
@@ -84,6 +85,7 @@ public class BusinessController extends BaseController {
 		businessService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
+		//UserManageController.SetQX(mv);
 		return mv;
 	}
 	
@@ -94,6 +96,7 @@ public class BusinessController extends BaseController {
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"列表Business");
+		
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -108,6 +111,7 @@ public class BusinessController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		UserManageController.SetQX(mv);
 		return mv;
 	}
 	

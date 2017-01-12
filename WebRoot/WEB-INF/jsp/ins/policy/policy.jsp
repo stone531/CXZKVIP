@@ -130,7 +130,7 @@
                   placeholder="被保险人证件号" onblur="paperNOBlur(this);">
                 </div>
                 <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人职业:</label>
+                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人职业:仅限${PROFESSIONS}</label>
                 </div>
                 <div class="col-sm-12">
                   <input type="text" id="iaprofession" maxlength="255" style="width:50%;"
@@ -153,7 +153,7 @@
                 </div>
                 <br>
                  <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保份数:</label>
+                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保份数:[不能大于${copies}份]</label>
                 </div>
                 <div class="col-sm-12">
                   <input type="text" id="iacopy" maxlength="32" style="width:50%;"  class="form-control"
@@ -793,7 +793,7 @@
 			}
 			
 			//limit份数
-			if($("#iacopy").val()>5){
+			if($("#iacopy").val()>${copies}){
 				$("#iacopy").tips({
 					side:3,
 		            msg:'超过卡种份数上限',

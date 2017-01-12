@@ -190,7 +190,11 @@ public class CardInfoController extends BaseController {
 			
 			mv.addObject("minage", pdcardtype.get("MINAGE").toString());
 			mv.addObject("maxage", pdcardtype.get("MAXAGE").toString());
-
+			
+			String limitamount=pdcardtype.get("LIMITAMOUNT").toString();
+			String amount=pdcardtype.get("AMOUNT").toString();
+			int copy=Integer.valueOf(limitamount).intValue()/Integer.valueOf(amount).intValue();			
+			mv.addObject("copies", copy);
 		
 			
 			//parse professions
@@ -251,7 +255,7 @@ public class CardInfoController extends BaseController {
 	 */
 	@RequestMapping(value="/save")
 	public ModelAndView save() throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"新增CardInfo");
+		//logBefore(logger, Jurisdiction.getUsername()+"新增CardInfo");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
