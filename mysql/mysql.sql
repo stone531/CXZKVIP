@@ -26,12 +26,13 @@ CREATE TABLE `ins_business` (
   `COMPANY` varchar(300) DEFAULT NULL,
   `COMPANYTEL` varchar(20) DEFAULT NULL,
   `STATE` int(11) DEFAULT NULL,
-  `CONTEXT` varchar(765) DEFAULT NULL
+  `CONTEXT` varchar(765) DEFAULT NULL,
+  `SERVERTEXT` varchar(1024) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `ins_business` */
 
-insert  into `ins_business`(`BUSINESS_ID`,`NAME`,`COMPANY`,`COMPANYTEL`,`STATE`,`CONTEXT`) values ('53f1df31d3d24e7c988416248d2a0761','意外险','平安','010-111111',1,'呜呜呜呜呜呜发电量附件啊发的说法'),('d4a680ee537e4a37af8c27e674611a60','车险','人寿','010-222222',1,'呜呜呜呜呜呜发电量附件啊发的说法');
+insert  into `ins_business`(`BUSINESS_ID`,`NAME`,`COMPANY`,`COMPANYTEL`,`STATE`,`CONTEXT`,`SERVERTEXT`) values ('53f1df31d3d24e7c988416248d2a0761','意外险','平安','010-111111',1,'呜呜呜呜呜呜发电量附件啊发的说法',NULL),('d4a680ee537e4a37af8c27e674611a60','车险','人寿','010-222222',1,'呜呜呜呜呜呜发电量附件啊发的说法',NULL);
 
 /*Table structure for table `ins_cardinfo` */
 
