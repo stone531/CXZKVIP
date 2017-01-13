@@ -70,7 +70,8 @@
 									<th class="center">业务所属公司</th>
 									<th class="center">公司电话</th>
 									<th class="center">业务状态</th>
-									<th class="center">具体内容</th>
+									<th class="center">服务条款</th>
+									<th class="center">备注</th>
 									<th class="center">操作</th>
 								</tr>
 							</thead>
@@ -89,7 +90,15 @@
 											<td class='center'>${var.NAME}</td>
 											<td class='center'>${var.COMPANY}</td>
 											<td class='center'>${var.COMPANYTEL}</td>
-											<td class='center'>${var.STATE}</td>
+											<td class='center'>
+											<c:if test="${var.STATE == 1 }">
+											启用
+											</c:if>
+											<c:if test="${var.STATE== 0 }">
+											禁用
+											</c:if>
+											</td>
+											<td class='center'>...</td>
 											<td class='center'>${var.CONTEXT}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
@@ -263,8 +272,8 @@
 			 diag.Drag=true;
 			 diag.Title ="新增";
 			 diag.URL = '<%=basePath%>business/goAdd.do';
-			 diag.Width = 450;
-			 diag.Height = 355;
+			 diag.Width = 1200;
+			 diag.Height = 800;
 			 diag.CancelEvent = function(){ //关闭事件
 				 //if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 if('${page.currentPage}' == '0'){
@@ -299,8 +308,8 @@
 			 diag.Drag=true;
 			 diag.Title ="编辑";
 			 diag.URL = '<%=basePath%>business/goEdit.do?BUSINESS_ID='+Id;
-			 diag.Width = 450;
-			 diag.Height = 355;
+			 diag.Width = 1200;
+			 diag.Height = 800;
 			 diag.CancelEvent = function(){ //关闭事件
 				 //if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 nextPage(${page.currentPage});

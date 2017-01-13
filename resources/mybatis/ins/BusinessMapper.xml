@@ -14,6 +14,7 @@
 		COMPANYTEL,	
 		STATE,	
 		CONTEXT,	
+		SERVERTEXT,
 		BUSINESS_ID
 	</sql>
 	
@@ -24,6 +25,7 @@
 		#{COMPANYTEL},
 		#{STATE},	
 		#{CONTEXT},	
+		#{SERVERTEXT},
 		#{BUSINESS_ID}
 	</sql>
 	
@@ -58,6 +60,7 @@
 			COMPANYTEL = #{COMPANYTEL},
 			STATE = #{STATE},
 			CONTEXT = #{CONTEXT},
+			SERVERTEXT = #{SERVERTEXT},
 		BUSINESS_ID = BUSINESS_ID
 		where 
 		BUSINESS_ID = #{BUSINESS_ID}

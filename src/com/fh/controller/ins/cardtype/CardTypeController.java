@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fh.controller.base.BaseController;
+import com.fh.controller.ins.usermanage.UserManageController;
 import com.fh.entity.Page;
 import com.fh.util.AppUtil;
 import com.fh.util.Const;
@@ -118,7 +119,7 @@ public class CardTypeController extends BaseController {
 		mv.setViewName("ins/cardtype/cardtype_list");
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
-		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		UserManageController.SetQX(mv);
 		return mv;
 	}
 	

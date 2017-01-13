@@ -16,6 +16,11 @@
 	<%@ include file="../../system/index/top.jsp"%>
 	<!-- 日期框 -->
 	<link rel="stylesheet" href="static/ace/css/datepicker.css" />
+	<link href="static/news/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="static/news/third-party/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="static/news/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="static/news/umeditor.js"></script>
+    <script type="text/javascript" src="static/news/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body class="no-skin">
 <!-- /section:basics/navbar.layout -->
@@ -45,10 +50,20 @@
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">业务状态:</td>
-								<td><input type="number" name="STATE" id="STATE" value="${pd.STATE}" maxlength="32" placeholder="这里输入业务状态" title="业务状态" style="width:98%;"/></td>
+								<td>
+								<select class="form-control"  id="STATE" name="STATE" title="业务状态">
+									  <option value=1>启用</option>
+                                      <option value=0>禁用</option>
+                          		   </select>
+								</td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">具体内容:</td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">服务条款:</td>
+								 <input type="text" name="SERVERTEXT" id="SERVERTEXT" style="display:none;"/>
+								 <script type="text/plain" id="myEditor" style="width:1000px;height:350px;">${pd.SERVERTEXT}</script>
+							</tr>
+							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">备注:</td>
 								<td><input type="text" name="CONTEXT" id="CONTEXT" value="${pd.CONTEXT}" maxlength="255" placeholder="这里输入具体内容" title="具体内容" style="width:98%;"/></td>
 							</tr>
 							<tr>
@@ -89,7 +104,12 @@
 		<script type="text/javascript">
 		$(top.hangge());
 		//保存
+		var um = UM.getEditor('myEditor');
+		 
 		function save(){
+		
+		$("#SERVERTEXT").val(UM.getEditor('myEditor').getContent());
+		
 			if($("#NAME").val()==""){
 				$("#NAME").tips({
 					side:3,
@@ -113,7 +133,7 @@
 			if($("#COMPANYTEL").val()==""){
 				$("#COMPANYTEL").tips({
 					side:3,
-		            msg:'请输入业务所属公司',
+		            msg:'请输入业务所属公司电话',
 		            bg:'#AE81FF',
 		            time:2
 		        });
@@ -130,14 +150,14 @@
 				$("#STATE").focus();
 			return false;
 			}
-			if($("#CONTEXT").val()==""){
-				$("#CONTEXT").tips({
+			if($("#SERVERTEXT").val()==""){
+				$("#SERVERTEXT").tips({
 					side:3,
-		            msg:'请输入具体内容',
+		            msg:'请输入条款内容',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#CONTEXT").focus();
+				$("#SERVERTEXT").focus();
 			return false;
 			}
 			$("#Form").submit();
