@@ -8,7 +8,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -16,13 +18,17 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
 import com.fh.util.AppUtil;
 import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
+import com.fh.service.ins.business.BusinessManager;
+import com.fh.service.ins.cardtype.CardTypeManager;
 import com.fh.service.ins.relation.RelationManager;
+import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 
  * 说明：卡类型与保险业务关系
@@ -37,6 +43,60 @@ public class RelationController extends BaseController {
 	@Resource(name="relationService")
 	private RelationManager relationService;
 	
+	@Resource(name="businessService")
+	private BusinessManager businessService;
+	@Resource(name="cardtypeService")
+	private CardTypeManager cardtypeService;
+	
+	Map<String, String> cardTypeMap = new HashMap<String, String>();
+	Map<String,String> businessMap = new HashMap<String, String>();
+	
+	
+	// get name from cache
+	public String getCartTypeName(String key) throws Exception{
+		System.out.println("getCartTypeName param key:"+key);
+		
+		if(cardTypeMap.containsKey(key)){
+			System.out.println("getCartTypeName from cache:"+cardTypeMap.get(key).toString());
+			return cardTypeMap.get(key).toString();
+		}
+		
+		PageData pdIn = new PageData();
+		PageData pdOut = new PageData();
+		
+		pdIn.put("CARDTYPE_ID", key);
+		pdOut=cardtypeService.findById(pdIn);
+		if (pdOut==null){
+			return "";
+		}
+		String name=pdOut.getString("NAME");
+		cardTypeMap.put(key, name);
+		System.out.println("getCartTypeName from mysql:"+name);
+		
+		return name;		
+	}
+	public String getBusinessName(String key) throws Exception{
+		System.out.println("getBusinessName param key:"+key);
+		
+		if( businessMap.containsKey(key)){
+			System.out.println("getBusinessName from cache:"+businessMap.get(key).toString());
+			return businessMap.get(key).toString();
+		}
+		PageData pdIn = new PageData();
+		PageData pdOut = new PageData();
+	
+		pdIn.put("BUSINESS_ID", key);
+		pdOut=businessService.findById(pdIn);
+		if (pdOut==null){
+			return "";
+		}
+		String name=pdOut.getString("NAME");
+		businessMap.put(key, name);
+		System.out.println("getBusinessName from mysql:"+name);
+		
+		return name;
+	}
+	
 	/**保存
 	 * @param
 	 * @throws Exception
@@ -48,6 +108,10 @@ public class RelationController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		
+		System.out.println("save BUSINESSID:"+pd.getString("BUSINESSID"));
+		System.out.println("save CARDTYPE:"+pd.getString("CARDTYPE"));
+		
 		pd.put("RELATION_ID", this.get32UUID());	//主键
 		relationService.save(pd);
 		mv.addObject("msg","success");
@@ -77,10 +141,11 @@ public class RelationController extends BaseController {
 	@RequestMapping(value="/edit")
 	public ModelAndView edit() throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"修改Relation");
-		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		
 		relationService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -104,10 +169,19 @@ public class RelationController extends BaseController {
 		}
 		page.setPd(pd);
 		List<PageData>	varList = relationService.list(page);	//列出Relation列表
+		for(int i=0;i<varList.size();i++){
+			PageData vpd = varList.get(i);
+			vpd.put("CARDTYPE", getCartTypeName(vpd.getString("CARDTYPE")));	//1
+			vpd.put("BUSINESSID", getBusinessName(vpd.getString("BUSINESSID")));	//2
+		}		
+		
+		
+		
 		mv.setViewName("ins/relation/relation_list");
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		UserManageController.SetQX(mv);
 		return mv;
 	}
 	
@@ -120,6 +194,17 @@ public class RelationController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+
+		List<PageData> varListC=cardtypeService.listAll(pd);
+		mv.addObject("varListC", varListC);
+		System.out.println(varListC);
+		
+		//relationService.edit(pd);
+		
+		List<PageData> varListB=businessService.listAll(pd);
+		mv.addObject("varListB", varListB);
+		System.out.println(varListB);
+		
 		mv.setViewName("ins/relation/relation_edit");
 		mv.addObject("msg", "save");
 		mv.addObject("pd", pd);
@@ -136,6 +221,26 @@ public class RelationController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = relationService.findById(pd);	//根据ID读取
+		
+		//System.out.println("111111111111111111111111");
+
+		System.out.println("get card type:"+pd.get("CARDTYPE").toString());
+				
+		List<PageData> varListC=cardtypeService.listAll(pd);
+		mv.addObject("varListC", varListC);
+		System.out.println(varListC);
+		
+		//relationService.edit(pd);
+		
+		List<PageData> varListB=businessService.listAll(pd);
+		mv.addObject("varListB", varListB);
+		System.out.println(varListB);
+		
+		//relationService.edit(pd);
+
+		//System.out.println("111111111111111111111111");
+		
+		
 		mv.setViewName("ins/relation/relation_edit");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
