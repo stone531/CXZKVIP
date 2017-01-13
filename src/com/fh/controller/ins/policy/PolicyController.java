@@ -91,7 +91,6 @@ public class PolicyController extends BaseController {
 		//生成电子签章。
 		
 		mv.addObject("CardNo", pd.getString("CARDNO"));
-		mv.addObject("CardType", pd.get("CARDTYPE").toString());
 		mv.addObject("Name", pd.getString("IANTNAME"));
 		mv.addObject("PaperNo", pd.getString("IANTPAPERNO"));
 		mv.addObject("IantPhone", pd.getString("IERPHONE"));
@@ -133,8 +132,6 @@ public class PolicyController extends BaseController {
 		pd.put("CREATED", DateUtil.getTime());
 		pd.put("INVALID", DateUtil.getAfterDayDate("365"));
 		
-		//冗余字段设计的冲突。暂为废字段。设为0
-		pd.put("CARDTYPE",0);
 		
 		//默认是身份证
 		pd.put("IERPAPERTYPE", 1);
@@ -152,7 +149,6 @@ public class PolicyController extends BaseController {
 		//生成电子签章。
 		
 		mv.addObject("CardNo", pd.getString("CARDNO"));
-		mv.addObject("CardType", pd.get("CARDTYPE").toString());
 		mv.addObject("Name", pd.getString("IANTNAME"));
 		mv.addObject("PaperNo", pd.getString("IANTPAPERNO"));
 		mv.addObject("IantPhone", pd.getString("IERPHONE"));
@@ -304,8 +300,8 @@ public class PolicyController extends BaseController {
 		List<String> titles = new ArrayList<String>();
 		titles.add("保单号");	//1
 		titles.add("服务卡号");	//2
-		titles.add("服务卡类型");	//3
-		titles.add("投保人姓名");	//4
+		titles.add("投保人姓名");	//3
+		titles.add("保险类型");	//4
 		titles.add("投保人证件类型");	//5
 		titles.add("投保人证件号码");	//6
 		titles.add("投保人手机号");	//7
@@ -330,8 +326,8 @@ public class PolicyController extends BaseController {
 			PageData vpd = new PageData();
 			vpd.put("var1", varOList.get(i).getString("POLICYNO"));	//1
 			vpd.put("var2", varOList.get(i).getString("CARDNO"));	//2
-			vpd.put("var3", varOList.get(i).get("CARDTYPE").toString());	//3
-			vpd.put("var4", varOList.get(i).getString("IERNAME"));	//4
+			vpd.put("var3", varOList.get(i).getString("IERNAME"));	//3
+			vpd.put("var4", varOList.get(i).get("BUSINESSID").toString());	//4
 			vpd.put("var5", varOList.get(i).get("IERPAPERTYPE").toString());	//5
 			vpd.put("var6", varOList.get(i).getString("IERPAPERNO"));	//6
 			vpd.put("var7", varOList.get(i).getString("IERPHONE"));	//7

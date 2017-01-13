@@ -39,8 +39,6 @@
             <ul class="list-group detailh4">
               <h5 class="text-muted">卡号</h5>
               <li class="list-group-item">${CardNo}</li>
-              <h5 class="text-muted">卡种</h5>
-              <li class="list-group-item">${CardType}</li>
               <h5 class="text-muted">姓名</h5>
               <li class="list-group-item">${Name}</li>
                <h5 class="text-muted">证件类型</h5>

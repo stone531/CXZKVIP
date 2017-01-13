@@ -361,8 +361,6 @@
                 </h5>
                  <input type="text" name="CARDNO" id="CARDNO" maxlength="255"
                   value="${cardno}" style="display:none;" class="text-right">
-                 <input type="text" name="CARDTYPE" id="CARDTYPE" maxlength="255"
-                  value="${cardtype}" style="display:none;" class="text-right">
                  <input type="text" name="BUSINESSID" id="BUSINESSID" maxlength="255"
                   value="" style="display:none;" class="text-right">
                 <br>
@@ -452,8 +450,6 @@
                     <hr>
                     <!--hide value-->
                     <input type="text" name="CARDNO" id="CARDNO" maxlength="255" value="${cardno}"
-                    style="display:none;" class="text-right">
-                    <input type="text" name="CARDTYPE" id="CARDTYPE" maxlength="255" value="${cardtype}"
                     style="display:none;" class="text-right">
                     <input type="text" name="BUSINESSID" id="BUSINESSID" maxlength="255" value=""
                     style="display:none;" class="text-right">

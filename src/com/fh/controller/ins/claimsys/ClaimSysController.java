@@ -34,7 +34,7 @@ import net.sf.json.JSONObject;
 
 import com.fh.service.ins.policy.PolicyManager;
 import com.fh.service.ins.cardinfo.CardInfoManager;
-import com.fh.service.ins.cardtype.CardTypeManager;
+import com.fh.service.ins.business.BusinessManager;
 import com.fh.service.ins.claimcompany.ClaimCompanyManager;
 import com.fh.controller.ins.usermanage.UserManageController;
 
@@ -54,10 +54,8 @@ public class ClaimSysController extends BaseController {
 	private PolicyManager policyService;
 	@Resource(name="cardinfoService")
 	private CardInfoManager cardinfoService;
-	@Resource(name="cardtypeService")
-	private CardTypeManager cardtypeService;
-	@Resource(name="claimcompanyService")
-	private ClaimCompanyManager claimcompanyService;
+	@Resource(name="businessService")
+	private BusinessManager businessService;
 
 	/**保存
 	 * @param
@@ -89,19 +87,10 @@ public class ClaimSysController extends BaseController {
 			//根据保单查卡号
 			pdTemp.put("POLICY_ID", pd.getString("POLICYNO"));
 			pdTemp = policyService.findById(pdTemp);
-
-			//根据卡号查卡类型
-			pdTemp.put("CARDID", pdTemp.getString("CARDNO"));
-			pdTemp = cardinfoService.findByCardId(pdTemp);
-
-			//根据卡类型查保险公司
-			pdTemp.put("CARDTYPE_ID", pdTemp.getString("TYPEID"));
-			pdTemp = cardtypeService.findById(pdTemp);
-
-			String comPany = pdTemp.getString("COMPANYNAME");			
+			
 			//根据报险公司查电话
-			pdRet.put("COMPANY_NAME", comPany);
-			pdRet = claimcompanyService.findByName(pdRet);
+			pdRet.put("BUSINESS_ID", pdTemp.getString("BUSINESSID"));
+			pdRet = businessService.findById(pdRet);
 
 			pdRet.put("IsSuccess", true);
 		}else{
@@ -299,16 +288,22 @@ public class ClaimSysController extends BaseController {
 			}else{
 				List<PageData> varList = new ArrayList<PageData>();
 				for(int i=0;i<varListPN.size();i++){
-					PageData pdIn = new PageData();
+					PageData pdIn = new PageData();					
+					//根据报险公司查电话
+					pdIn.put("BUSINESS_ID", varListPN.get(i).getString("BUSINESSID"));
+					PageData pdBuss = businessService.findById(pdIn);
 					pdIn.put("POLICYNO", varListPN.get(i).getString("POLICY_ID"));
 					pdIn.put("UPDATEFLAG", "0");
+					
 					PageData pdOut = claimsysService.findStateByPolicyNo(pdIn);	//列出ClaimSys列表
 					if(pdOut != null){
 						claimsysService.changeUpdateFlag(pdIn);
 						pdOut.put("IsOrNo", "1");
+						pdOut.put("COMPANYTEL", pdBuss.getString("COMPANYTEL"));
 						varList.add(pdOut);
 					}else{
 						pdIn.put("IsOrNo", "0");
+						pdIn.put("COMPANYTEL", pdBuss.getString("COMPANYTEL"));
 						varList.add(pdIn);
 					}			
 				}				

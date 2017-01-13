@@ -397,7 +397,7 @@
 						goCourierW(txt);
                     }
                     if (data.IsSuccess == true) { 
-                        var txt=  "保险公司："+data.COMPANY_NAME+"<br/>联系电话："+data.COMPANY_TEL+"<br/>";
+                        var txt=  "保险公司："+data.COMPANY+"<br/>联系电话："+data.COMPANYTEL+"<br/>";
 						flag = 1;
 						goCourierW(txt);
                         $("input").attr("value", "");
