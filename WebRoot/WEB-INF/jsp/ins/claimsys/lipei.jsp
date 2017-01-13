@@ -112,7 +112,7 @@
                     <div class="col-md-10">
                       <!--form class="form-horizontal" role="form"-->
                       <div class="form-group">
-                          <label for="OCCURTIME" class="col-sm-3 control-label">出现时间</label>
+                          <label for="OCCURTIME" class="col-sm-3 control-label">出险时间</label>
                           <div class="col-sm-6">
                             <input type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" id="OCCURTIME" name="OCCURTIME" placeholder="请选择出险时间">
                           </div>

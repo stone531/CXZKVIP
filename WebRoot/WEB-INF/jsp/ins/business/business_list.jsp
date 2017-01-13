@@ -68,6 +68,7 @@
 									<th class="center" style="width:50px;">序号</th>
 									<th class="center">具体业务名称</th>
 									<th class="center">业务所属公司</th>
+									<th class="center">公司电话</th>
 									<th class="center">业务状态</th>
 									<th class="center">具体内容</th>
 									<th class="center">操作</th>
@@ -87,6 +88,7 @@
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>${var.NAME}</td>
 											<td class='center'>${var.COMPANY}</td>
+											<td class='center'>${var.COMPANYTEL}</td>
 											<td class='center'>${var.STATE}</td>
 											<td class='center'>${var.CONTEXT}</td>
 											<td class="center">

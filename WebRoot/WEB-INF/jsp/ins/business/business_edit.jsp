@@ -40,6 +40,10 @@
 								<td><input type="text" name="COMPANY" id="COMPANY" value="${pd.COMPANY}" maxlength="100" placeholder="这里输入业务所属公司" title="业务所属公司" style="width:98%;"/></td>
 							</tr>
 							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">公司电话:</td>
+								<td><input type="text" name="COMPANYTEL" id="COMPANYTEL" value="${pd.COMPANYTEL}" maxlength="20" placeholder="这里输入公司电话" title="公司电话" style="width:98%;"/></td>
+							</tr>
+							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">业务状态:</td>
 								<td><input type="number" name="STATE" id="STATE" value="${pd.STATE}" maxlength="32" placeholder="这里输入业务状态" title="业务状态" style="width:98%;"/></td>
 							</tr>
@@ -104,6 +108,16 @@
 		            time:2
 		        });
 				$("#COMPANY").focus();
+			return false;
+			}
+			if($("#COMPANYTEL").val()==""){
+				$("#COMPANYTEL").tips({
+					side:3,
+		            msg:'请输入业务所属公司',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#COMPANYTEL").focus();
 			return false;
 			}
 			if($("#STATE").val()==""){
