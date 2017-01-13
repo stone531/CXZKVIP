@@ -35,7 +35,6 @@ import net.sf.json.JSONObject;
 import com.fh.service.ins.policy.PolicyManager;
 import com.fh.service.ins.cardinfo.CardInfoManager;
 import com.fh.service.ins.business.BusinessManager;
-import com.fh.service.ins.claimcompany.ClaimCompanyManager;
 import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 

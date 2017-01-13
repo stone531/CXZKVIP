@@ -223,18 +223,7 @@ public class CardInfoController extends BaseController {
 			
 			mv.addObject("varList", businesslist);
 			mv.addObject("businesslistSize", businesslist.size());
-					
-			String str="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n"
-					+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n"
-					+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n"
-					+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-					+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-					+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-					+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-					+ "aaaaaaaaaaaaaaaaaaaa"
-					+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-					+ "aaaaaaaaaaaaaa";
-			mv.addObject("servicetext",str);
+
 			mv.addObject("action", "save");
 			mv.setViewName("ins/policy/policy");
 		}else {

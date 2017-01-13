@@ -8,7 +8,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -16,6 +22,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
 import com.fh.util.AppUtil;
@@ -113,6 +120,32 @@ public class BusinessController extends BaseController {
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
 		UserManageController.SetQX(mv);
 		return mv;
+	}
+	
+	
+	/**获取服务条款
+	 * @param out
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/getServerText")
+	public void addCourier(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        response.setContentType("text/html");  
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+		PageData pd = new PageData();
+		pd = this.getPageData();		
+		
+		//很据保单号查询是否已经报案
+		PageData pdRet = businessService.findById(pd);
+		if(null == pdRet){
+			pd.put("IsSuccess", false);
+		}else{
+			pd.put("ServerText", pdRet.getString("SERVERTEXT"));
+			pd.put("IsSuccess", true);
+		}
+		JSONObject js = JSONObject.fromObject(pd);
+		out.write(js.toString());
+		out.close();
 	}
 	
 	/**去新增页面

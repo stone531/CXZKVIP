@@ -253,14 +253,14 @@
             <div class="section">
               <div class="container-fluid">
                 <div class="row">
-                  <div class="col-md-3"></div>
-                  <div class="col-md-6">
-                    <textarea class="form-control" cols="50" rows="25" readonly="readonly">${servicetext}</textarea>
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                    <div id="SERVERCONTENT" name="SERVERCONTENT" ></div>
                     <h5 class="text-center text-info">同意
                       <input type="checkbox" id="ACCEPTSERVICE" onclick="acceptService(this);">
                     </h5>
                   </div>
-                  <div class="col-md-3"></div>
+                  <div class="col-md-4"></div>
                 </div>
               </div>
             </div>
@@ -607,6 +607,21 @@
 			//alert(name);
 			document.getElementById("BUSINESSID").value=inp.value;
 			//alert(document.getElementById("BUSINESSID").value);
+			
+			$.ajax({
+                    url: '<%=basePath%>business/getServerText.do?BUSINESS_ID='+inp.value,   //请求的url地址
+                    dataType: "json",   //返回格式为json
+                    async: false, //请求是否异步，默认为异步，这也是ajax重要特性
+                    type: "POST",   //请求方式
+                    success: function(data) {
+                        if (data.IsSuccess == false) {
+                            alert("添加失败!");           
+                        }                
+                        if (data.IsSuccess == true) {
+                        	$("#SERVERCONTENT").html(data.ServerText);
+                        }
+                    }
+                });
 			return ;
 		}
 
