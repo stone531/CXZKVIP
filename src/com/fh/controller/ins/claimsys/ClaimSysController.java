@@ -65,8 +65,8 @@ public class ClaimSysController extends BaseController {
 	 */
 	@RequestMapping(value="/save")
 	public ModelAndView save(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"新增ClaimSys");
-		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
+		//logBefore(logger, Jurisdiction.getUsername()+"新增ClaimSys");
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
         response.setContentType("text/html");  
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();

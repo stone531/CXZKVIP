@@ -10,7 +10,8 @@
 	<!-- 字段 -->
 	<sql id="Field">
 		NAME,	
-		COMPANY,	
+		COMPANY,
+		COMPANYTEL,	
 		STATE,	
 		CONTEXT,	
 		BUSINESS_ID
@@ -20,6 +21,7 @@
 	<sql id="FieldValue">
 		#{NAME},	
 		#{COMPANY},	
+		#{COMPANYTEL},
 		#{STATE},	
 		#{CONTEXT},	
 		#{BUSINESS_ID}
@@ -53,6 +55,7 @@
 		set 
 			NAME = #{NAME},
 			COMPANY = #{COMPANY},
+			COMPANYTEL = #{COMPANYTEL},
 			STATE = #{STATE},
 			CONTEXT = #{CONTEXT},
 		BUSINESS_ID = BUSINESS_ID

@@ -187,8 +187,9 @@ public class BusinessController extends BaseController {
 		List<String> titles = new ArrayList<String>();
 		titles.add("具体业务名称");	//1
 		titles.add("业务所属公司");	//2
-		titles.add("业务状态");	//3
-		titles.add("具体内容");	//4
+		titles.add("公司电话");	//3
+		titles.add("业务状态");	//4
+		titles.add("具体内容");	//5
 		dataMap.put("titles", titles);
 		List<PageData> varOList = businessService.listAll(pd);
 		List<PageData> varList = new ArrayList<PageData>();
@@ -196,8 +197,9 @@ public class BusinessController extends BaseController {
 			PageData vpd = new PageData();
 			vpd.put("var1", varOList.get(i).getString("NAME"));	//1
 			vpd.put("var2", varOList.get(i).getString("COMPANY"));	//2
-			vpd.put("var3", varOList.get(i).get("STATE").toString());	//3
-			vpd.put("var4", varOList.get(i).getString("CONTEXT"));	//4
+			vpd.put("var3", varOList.get(i).getString("COMPANYTEL"));   //3
+			vpd.put("var4", varOList.get(i).get("STATE").toString());	//4
+			vpd.put("var5", varOList.get(i).getString("CONTEXT"));	//5
 			varList.add(vpd);
 		}
 		dataMap.put("varList", varList);
