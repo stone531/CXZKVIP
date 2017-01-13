@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
 import com.fh.util.AppUtil;
+import com.fh.util.DateUtil;
 import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
@@ -79,7 +80,7 @@ public class PolicyController extends BaseController {
 			mv.setViewName("error");
 			return mv;
 		}
-		
+		//System.out.println("policyno"+pd.getString("POLICYNO"));
 		if (pd.getString("POLICYNO")==null){
 			mv.addObject("display","none");
 		}else{
@@ -96,9 +97,9 @@ public class PolicyController extends BaseController {
 		mv.addObject("IantPhone", pd.getString("IERPHONE"));
 		mv.addObject("SvrName", pd.getString("SVRNAME"));
 		mv.addObject("SvrPhone", pd.getString("SVRPHONE"));
-		mv.addObject("CreateTime", "2016-16-10");
+		mv.addObject("CreateTime", pd.getString("CREATED"));
 		mv.addObject("PolicyNo", pd.getString("POLICYNO"));
-		mv.addObject("DataLine", pd.getString("2016-16-11"));
+		mv.addObject("DataLine", pd.getString("INVALID"));
 	
 		mv.setViewName("ins/policy/detail");
 		return mv;
@@ -110,7 +111,7 @@ public class PolicyController extends BaseController {
 	 */
 	@RequestMapping(value="/save")
 	public ModelAndView save() throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"新增Policy");
+		//logBefore(logger, Jurisdiction.getUsername()+"新增Policy");
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -128,11 +129,19 @@ public class PolicyController extends BaseController {
 		String uuId=this.get32UUID();
 		
 		pd.put("POLICY_ID", uuId);	//主键
-		pd.put("CARDTYPE",1);
+		
+		pd.put("CREATED", DateUtil.getTime());
+		pd.put("INVALID", DateUtil.getAfterDayDate("365"));
+		
+		//冗余字段设计的冲突。暂为废字段。设为0
+		pd.put("CARDTYPE",0);
+		
+		//默认是身份证
 		pd.put("IERPAPERTYPE", 1);
 		policyService.save(pd);
 		
 		PageData cardpd = new PageData();
+		//1：正常，2卡状态已经激活,无法再激活 3：卡类型有问题
 		cardpd.put("STATE", 2);
 		cardpd.put("CARDID",pd.getString("CARDNO"));
 
@@ -149,9 +158,16 @@ public class PolicyController extends BaseController {
 		mv.addObject("IantPhone", pd.getString("IERPHONE"));
 		mv.addObject("SvrName", pd.getString("SVRNAME"));
 		mv.addObject("SvrPhone", pd.getString("SVRPHONE"));
-		mv.addObject("CreateTime", "2016-16-10");
+		mv.addObject("CreateTime", pd.getString("CREATED"));
 		mv.addObject("PolicyNo", pd.getString("POLICYNO"));
-		mv.addObject("DataLine", pd.getString("2016-16-11"));
+		mv.addObject("DataLine", pd.getString("INVALID"));
+		
+		if (pd.getString("POLICYNO")==null){
+			mv.addObject("display","none");
+		}else{
+			mv.addObject("display", "block");
+		}
+		
 	
 		mv.setViewName("ins/policy/detail");
 		return mv;
