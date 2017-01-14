@@ -411,12 +411,17 @@ public class CardInfoController extends BaseController {
 			 */
 			for(int i=0;i<listPd.size();i++){
 				PageData pageData= new PageData();
-				if(cardinfoService.findByCardId(pd) == null ||cardinfoService.findByCardId(pd).equals("")){
+				pageData.put("CARDID", listPd.get(i).getString("var0"));
+	
+				if(cardinfoService.findByCardId(pageData) != null){
+					
 					mv.addObject("msg","卡号不能重复");
 					mv.setViewName("save_result");
 					return mv;
 				}
-				pageData.put("CARDID", listPd.get(i).getString("var0"));	//1
+				//PageData pageData= new PageData();
+				//pageData.put("CARDID", listPd.get(i).getString("var0"));	//1
+				
 				pageData.put("EXPIRYTIME", listPd.get(i).get("var1").toString());	//2
 				pageData.put("POLICYNO", listPd.get(i).get("var2").toString());	//3
 				pageData.put("IANTNAME", listPd.get(i).get("var3").toString());	//4
@@ -428,9 +433,10 @@ public class CardInfoController extends BaseController {
 				pageData.put("STATE", "1");
 				pageData.put("TYPEID", card_type);
 				pageData.put("CARDINFO_ID", this.get32UUID());
+				
 				cardinfoService.save(pageData);
 				}
-				
+			
 			/*存入数据库操作======================================*/
 			
 			mv.addObject("msg","success");
