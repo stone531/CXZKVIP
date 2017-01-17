@@ -2,7 +2,8 @@
 SQLyog 企业版 - MySQL GUI v8.14 
 MySQL - 5.7.11 : Database - cxzkvip
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -27,7 +28,7 @@ CREATE TABLE `ins_business` (
   `COMPANYTEL` varchar(20) DEFAULT NULL,
   `STATE` int(11) DEFAULT NULL,
   `CONTEXT` varchar(765) DEFAULT NULL,
-  `SERVERTEXT` varchar(1024) DEFAULT NULL
+  `SERVERTEXT` varchar(10240) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `ins_business` */
