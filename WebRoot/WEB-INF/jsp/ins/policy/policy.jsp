@@ -253,14 +253,14 @@
             <div class="section">
               <div class="container-fluid">
                 <div class="row">
-                  <div class="col-md-4"></div>
-                  <div class="col-md-4">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-8">
                     <div id="SERVERCONTENT" name="SERVERCONTENT" ></div>
                     <h5 class="text-center text-info">同意
                       <input type="checkbox" id="ACCEPTSERVICE" onclick="acceptService(this);">
                     </h5>
                   </div>
-                  <div class="col-md-4"></div>
+                  <div class="col-md-2"></div>
                 </div>
               </div>
             </div>

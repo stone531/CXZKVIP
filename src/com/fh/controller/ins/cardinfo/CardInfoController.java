@@ -201,7 +201,7 @@ public class CardInfoController extends BaseController {
 			String profession="";
 			String[] professions=pdcardtype.getString("PROFESSION").split(";");
 			for(int i=0;i<professions.length;i++){
-				//var professions=["警察","土匪","教师","学生"];
+				
 				String mate="";
 				if (i==0){
 					mate="[\""+professions[i]+"\""+",";
