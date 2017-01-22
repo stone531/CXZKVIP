@@ -185,7 +185,7 @@ public class CardInfoController extends BaseController {
 			if (pdcardtype==null){
 				mv.addObject("msg","获取卡类型异常，请联系管理员");
 				mv.addObject("display", "block");
-				mv.setViewName("ins/policy/fg/verifycard");
+				mv.setViewName("ins/policy/verifycard");
 				return mv;
 			}
 			

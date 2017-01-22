@@ -141,7 +141,7 @@
                         <div>
                           <a href="claimsys/fg/goSearch"><i class="fa fa-3x fa-apple fa-fw text-warning"></i></a>             
                           <h6>查询保单</h6>
-                          <a href="http://www.baidu.com"><i class="fa fa-3x fa-automobile fa-fw text-warning"></i></a>
+                          <a href="#"><i class="fa fa-3x fa-automobile fa-fw text-warning"></i></a>
                           <h6>单证下载</h6> 	
                         </div>
                       </div>

@@ -56,7 +56,7 @@ public class PolicyController extends BaseController {
 		//*************************************************************************************************************************************************
 		System.out.println("index");
 		ModelAndView mv = this.getModelAndView();
-		mv.addObject("action","cardinfo/verifycard");
+		mv.addObject("action","cardinfo/fg/verifycard");
 		mv.setViewName("ins/policy/verifycard");
 		mv.addObject("display", "none");
 		return mv;
