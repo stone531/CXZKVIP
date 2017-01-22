@@ -735,7 +735,7 @@ public class UserManageController extends BaseController {
 	/**
 	 * 结果显示页面
 	 */
-	@RequestMapping(value="/show/result")
+	@RequestMapping(value="/fg/show/result")
 	public ModelAndView result_show() throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -1107,13 +1107,8 @@ public class UserManageController extends BaseController {
 		mv.setViewName("ins/usermanage/usermanage_list");
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
-		
-		/*Map<String,Object> map = new HashMap<String,Object>();
-		map.put("cha", "1");
-		
-		mv.addObject("QX",map);*/
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
-		SetQX(mv);
+		//SetQX(mv);
 		return mv;
 	}
 	
@@ -1156,8 +1151,8 @@ public class UserManageController extends BaseController {
 	@RequestMapping(value="/deleteAll")
 	@ResponseBody
 	public Object deleteAll() throws Exception{
-		//logBefore(logger, Jurisdiction.getUsername()+"批量删除UserManage");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return null;} //校验权限
+		logBefore(logger, Jurisdiction.getUsername()+"批量删除UserManage");
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return null;} //校验权限
 		PageData pd = new PageData();		
 		Map<String,Object> map = new HashMap<String,Object>();
 		pd = this.getPageData();
@@ -1181,8 +1176,8 @@ public class UserManageController extends BaseController {
 	 */
 	@RequestMapping(value="/excel")
 	public ModelAndView exportExcel() throws Exception{
-		//logBefore(logger, Jurisdiction.getUsername()+"导出UserManage到excel");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;}
+		logBefore(logger, Jurisdiction.getUsername()+"导出UserManage到excel");
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;}
 		ModelAndView mv = new ModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();

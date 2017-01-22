@@ -49,7 +49,7 @@ public class OnlinemsgController extends BaseController {
 	@Resource(name="onlinemsgService")
 	private OnlinemsgManager onlinemsgService;
 	
-	@RequestMapping(value="/index")
+	@RequestMapping(value="/fg/index")
 	public ModelAndView index() throws Exception{
 		System.out.println("onlinemsg index");
 		//logBefore(logger, Jurisdiction.getUsername()+"列表OnlineMsg");
@@ -139,7 +139,7 @@ public class OnlinemsgController extends BaseController {
 		return user;
 	}
 	
-	@RequestMapping(value="/sendmsg")
+	@RequestMapping(value="/fg/sendmsg")
 	public ModelAndView sendmsg() throws Exception{
 		//System.out.println("sendmsg index");
 		//logBefore(logger, Jurisdiction.getUsername()+"列表OnlineMsg");
@@ -326,7 +326,7 @@ public class OnlinemsgController extends BaseController {
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page) throws Exception{
 		//logBefore(logger, Jurisdiction.getUsername()+"列表Onlinemsg");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
@@ -340,7 +340,7 @@ public class OnlinemsgController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
-		UserManageController.SetQX(mv);
+		//UserManageController.SetQX(mv);
 		return mv;
 	}
 	

@@ -37,7 +37,7 @@
           <div class="col-md-2">
             <div class="panel panel-danger">
               <div class="panel-heading">
-                <a href="news/newslist"><h3 class="panel-title text-muted">新闻</h3></a>
+                <a href="news/fg/newslist"><h3 class="panel-title text-muted">新闻</h3></a>
               </div>
               
               <c:choose>
@@ -45,7 +45,7 @@
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 						 <c:if test = "${var.NEWS_STATUS == 1}">
 							<div class="panel-body ">
-                				<a href = "news/show?NEWS_ID=${var.NEWS_ID}"><p class="text-muted">${var.NEWS_TITLE}</p></a>
+                				<a href = "news/fg/show?NEWS_ID=${var.NEWS_ID}"><p class="text-muted">${var.NEWS_TITLE}</p></a>
               				</div>
 						 </c:if>
 						</c:forEach>
@@ -152,7 +152,7 @@
                       <div class="row text-center">
                         <a href="usermanage/personal/show"><i class="fa fa-3x fa-angellist fa-fw text-warning"></i></a>
                         <h6>个人中心</h6>
-                        <a href="onlinemsg/index" target="view_window"><i class="fa fa-3x fa-camera fa-fw text-warning"></i></a>
+                        <a href="onlinemsg/fg/index" target="view_window"><i class="fa fa-3x fa-camera fa-fw text-warning"></i></a>
                         <h6>在线留言</h6>
                       </div>
                     </div>
@@ -182,7 +182,7 @@
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<c:if test = "${var.NEWS_STATUS == 2}">
 								<div class="panel-body ">
-                				<a style="color:red;" href = "news/show?NEWS_ID=${var.NEWS_ID}"><p class="text-muted">${var.NEWS_TITLE}</p></a>
+                				<a style="color:red;" href = "news/fg/show?NEWS_ID=${var.NEWS_ID}"><p class="text-muted">${var.NEWS_TITLE}</p></a>
               					</div>
 							</c:if>							
 						</c:forEach>

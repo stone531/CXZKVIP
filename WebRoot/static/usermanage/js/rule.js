@@ -118,7 +118,7 @@ function updatepass(){
         dataType: "json",
         success: function(data){
                    if (data.IsSuccess == 1){
-                	   window.location.href="/CXZKVIP/usermanage/show/result?IsSuccess=1"; 
+                	   window.location.href="/CXZKVIP/usermanage/fg/show/result?IsSuccess=1"; 
                    }else if (data.IsSuccess == 2){
                 	   $("#upPassMsg").text("密码不正确");
                    }

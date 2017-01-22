@@ -55,7 +55,7 @@
 										<tr>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>
-											  <a href = "news/show?NEWS_ID=${var.NEWS_ID}">${var.NEWS_TITLE}</a>
+											  <a href = "news/fg/show?NEWS_ID=${var.NEWS_ID}">${var.NEWS_TITLE}</a>
 											</td>
 											<td class='center'>
 											<c:if test = "${var.NEWS_STATUS == 1}">
