@@ -75,6 +75,7 @@
 											</select>
 											</td>
 										</tr>
+										<!--  暂时注掉  by zh
 										<tr>
 											<td style="width:79px;text-align: right;padding-top: 13px;">公司:</td>
 											<td id="gongsi">
@@ -97,6 +98,7 @@
 											</select>
 											</td>
 										</tr>
+										-->
 										</c:if>
 										<tr>
 											<td style="width:79px;text-align: right;padding-top: 13px;">备注:</td>

@@ -279,7 +279,7 @@ function add(){
 	 diag.Title ="新增";
 	 diag.URL = '<%=basePath%>user/goAddU.do';
 	 diag.Width = 469;
-	 diag.Height = 580;
+	 diag.Height = 470;
 	 diag.CancelEvent = function(){ //关闭事件
 		// if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 			 if('${page.currentPage}' == '0'){
@@ -302,7 +302,7 @@ function editUser(user_id){
 	 diag.Title ="资料";
 	 diag.URL = '<%=basePath%>user/goEditU.do?USER_ID='+user_id;
 	 diag.Width = 469;
-	 diag.Height = 580;
+	 diag.Height = 470;
 	 diag.CancelEvent = function(){ //关闭事件
 		 //if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 			nextPage(${page.currentPage});

@@ -118,7 +118,7 @@ public class BusinessController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
-		UserManageController.SetQX(mv);
+		//UserManageController.SetQX(mv);
 		return mv;
 	}
 	
