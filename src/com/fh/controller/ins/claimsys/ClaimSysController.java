@@ -60,7 +60,7 @@ public class ClaimSysController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/save")
+	@RequestMapping(value="/fg/save")
 	public ModelAndView save(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		//logBefore(logger, Jurisdiction.getUsername()+"新增ClaimSys");
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
@@ -198,7 +198,7 @@ public class ClaimSysController extends BaseController {
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
-		UserManageController.SetQX(mv);
+		//UserManageController.SetQX(mv);
 		return mv;
 	}
 	
@@ -206,7 +206,7 @@ public class ClaimSysController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/goAdd")
+	@RequestMapping(value="/fg/goAdd")
 	public ModelAndView goAdd()throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -242,7 +242,7 @@ public class ClaimSysController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/searchResult")
+	@RequestMapping(value="/fg/searchResult")
 	@ResponseBody
 	public Object searchResult() throws Exception{	
 		//查询卡号密码
@@ -317,7 +317,7 @@ public class ClaimSysController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/goSearch")
+	@RequestMapping(value="/fg/goSearch")
 	public ModelAndView goSearch()throws Exception{	
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -325,7 +325,7 @@ public class ClaimSysController extends BaseController {
 		pd.put("searchtype", "1");
 		//mv.setViewName("ins/claimsys/myclaim");
 		mv.setViewName("ins/claimsys/search");
-		mv.addObject("msg", "search");
+		//mv.addObject("msg", "search");
 		mv.addObject("pd", pd);
 		return mv;
 	}
@@ -360,7 +360,7 @@ public class ClaimSysController extends BaseController {
 	 * @param out
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/addCourier")
+	@RequestMapping(value="/fg/addCourier")
 	public void addCourier(PrintWriter out) throws Exception{
 		//logBefore(logger, Jurisdiction.getUsername()+"更新ClaimSys");
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return;} //校验权限
@@ -386,7 +386,7 @@ public class ClaimSysController extends BaseController {
 	 * @param out
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/promptUpdate")
+	@RequestMapping(value="/fg/promptUpdate")
 	public void promptUpdate(PrintWriter out) throws Exception{
 		//logBefore(logger, Jurisdiction.getUsername()+"查询ClaimSys");
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return;} //校验权限

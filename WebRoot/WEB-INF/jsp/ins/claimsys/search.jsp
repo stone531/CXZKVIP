@@ -249,7 +249,7 @@
         });
         //修改
         function goClaim(Id){
-        	 window.location.href="<%=basePath%>claimsys/goAdd.do?POLICYNO="+Id;
+        	 window.location.href="<%=basePath%>claimsys/fg/goAdd.do?POLICYNO="+Id;
         }
     </script>
     <script type="text/javascript" src="static/js/jquery.tips.js"></script>
@@ -299,7 +299,7 @@
 				}
 				//$("#CourierForm").submit();
                 $.ajax({
-                    url: "claimsys/addCourier.do",    //请求的url地址
+                    url: "claimsys/fg/addCourier.do",    //请求的url地址
                     dataType: "json",   //返回格式为json
                     async: false, //请求是否异步，默认为异步，这也是ajax重要特性
                     data: $('#CourierForm').serialize(),   //参数值
@@ -379,7 +379,7 @@
 			}
 			//$("#formSearch").submit();
 			$.ajax({				
-				url: 'claimsys/searchResult.do?tm='+new Date().getTime(),    //请求的url地址
+				url: 'claimsys/fg/searchResult.do?tm='+new Date().getTime(),    //请求的url地址
                 dataType: "json",   //返回格式为json
                 async: false, //请求是否异步，默认为异步，这也是ajax重要特性
                 data: $('#formSearch').serialize(),   //参数值

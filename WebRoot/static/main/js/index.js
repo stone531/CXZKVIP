@@ -117,7 +117,7 @@ $(function(){
 			            $.ajax({
 		                    type: "POST",
 		                    async:false,
-		                    url: "/CXZKVIP/claimsys/promptUpdate",
+		                    url: "/CXZKVIP/claimsys/fg/promptUpdate",
 		                    dataType: "json",
 		                    success: function(recMsg){
 		                        if (recMsg.IsPrompt == true){

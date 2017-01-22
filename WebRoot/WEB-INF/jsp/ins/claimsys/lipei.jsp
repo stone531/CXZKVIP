@@ -349,16 +349,6 @@
 			});	
 		}
 		
-		function showDialog(text){
-	        var diag = new Dialog();
-	        diag.Width = 400;
-	        diag.Height = 180;
-	        diag.Title = "请输入快递单号";
-	        diag.URL = "<%=basePath%>claimcompany/goAdd.do";
-			diag.OKEvent = function(){diag.close();};//点击确定后调用的方法
-			diag.show();
-		}
-		
 		$(document).ready(function() {
 			$(validForm());
 		});
@@ -382,7 +372,7 @@
 			if(!validForm().form())
 				return;
             $.ajax({
-                url: "claimsys/${msg }.do",    //请求的url地址
+                url: "claimsys/fg/${msg }.do",    //请求的url地址
                 dataType: "json",   //返回格式为json
                 async: false, //请求是否异步，默认为异步，这也是ajax重要特性
                 data: $('#claimForm').serialize(),   //参数值
