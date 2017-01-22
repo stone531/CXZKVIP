@@ -119,7 +119,7 @@
           </div>
           <div class="col-md-3">
             <div class="row" style="margin:2%;">
-              <form action="cardinfo/verifycard" name="Form" id="Form" method="post" class="center-block text-center">
+              <form action="cardinfo/fg/verifycard" name="Form" id="Form" method="post" class="center-block text-center">
                 <h3 class="form-signin-heading text-center text-warning">服务卡激活</h3>
                 <p class="center-block">
                   <input type="text" name="CARDID" id="CARDID" maxlength="255" class="form-control center-block" placeholder="输入服务卡号" title="服务卡号" style="width:100%;">

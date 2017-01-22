@@ -17,7 +17,7 @@
 		<div class="navbar_bottom">
 			<ul>
 				
-				<li class="head_navigation_link" style="border-right: 1.5px solid #7f868b;"><a href="policy/index" >服务卡激活</a></li>
+				<li class="head_navigation_link" style="border-right: 1.5px solid #7f868b;"><a href="policy/fg/index" >服务卡激活</a></li>
 				<li class="head_navigation_link isIndex" style="border-right: 1.5px solid #7f868b;width: 16%;"><a href="page/index">首页</a></li>
 			</ul>
 		</div>
