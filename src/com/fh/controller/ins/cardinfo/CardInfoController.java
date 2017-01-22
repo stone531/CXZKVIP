@@ -48,6 +48,7 @@ import com.fh.controller.ins.usermanage.UserManageController;
 @RequestMapping(value="/cardinfo")
 public class CardInfoController extends BaseController {
 	
+	
 	String menuUrl = "cardinfo/list.do"; //菜单地址(权限用)
 	//卡信息服务
 	@Resource(name="cardinfoService")
@@ -71,7 +72,7 @@ public class CardInfoController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/verifycard")
+	@RequestMapping(value="/fg/verifycard")
 	public ModelAndView verifycard() throws Exception{
 		//logBefore(logger, Jurisdiction.getUsername()+"修改CardInfo");
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限

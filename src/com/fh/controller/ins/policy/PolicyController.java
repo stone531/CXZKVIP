@@ -50,7 +50,7 @@ public class PolicyController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/index")
+	@RequestMapping(value="/fg/index")
 	public ModelAndView index() throws Exception{
 		
 		//*************************************************************************************************************************************************
@@ -66,7 +66,7 @@ public class PolicyController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/detail")
+	@RequestMapping(value="/fg/detail")
 	public ModelAndView detail() throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData param = new PageData();
