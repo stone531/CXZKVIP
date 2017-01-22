@@ -67,6 +67,9 @@ public class CardInfoController extends BaseController {
 	private CardTypeManager cardtypeservice;
 	
 	
+	Map<String, String> cardTypeMap = new HashMap<String, String>();
+	
+	
 	
 	/**修改
 	 * @param
@@ -291,13 +294,37 @@ public class CardInfoController extends BaseController {
 		return mv;
 	}
 	
+	
+	// get name from cache
+	public String getCartTypeName(String key) throws Exception{
+		System.out.println("getCartTypeName param key:"+key);
+		
+		if(cardTypeMap.containsKey(key)){
+			System.out.println("getCartTypeName from cache:"+cardTypeMap.get(key).toString());
+			return cardTypeMap.get(key).toString();
+		}
+		
+		PageData pdIn = new PageData();
+		PageData pdOut = new PageData();
+		
+		pdIn.put("CARDTYPE_ID", key);
+		pdOut=cardtypeservice.findById(pdIn);
+		if (pdOut==null){
+			return "";
+		}
+		String name=pdOut.getString("NAME");
+		cardTypeMap.put(key, name);
+		System.out.println("getCartTypeName from mysql:"+name);
+		
+		return name;		
+	}
 	/**列表
 	 * @param page
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page) throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"列表CardInfo");
+		//logBefore(logger, Jurisdiction.getUsername()+"列表CardInfo");
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -325,6 +352,9 @@ public class CardInfoController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		
+		List<PageData> varList=cardtypeservice.listAll(pd);
+		mv.addObject("varList", varList);
 		mv.setViewName("ins/cardinfo/cardinfo_edit");
 		mv.addObject("msg", "save");
 		mv.addObject("pd", pd);
@@ -341,9 +371,14 @@ public class CardInfoController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = cardinfoService.findById(pd);	//根据ID读取
-		mv.setViewName("ins/cardinfo/cardinfo_edit");
+		
+		List<PageData> varList=cardtypeservice.listAll(pd);
+		mv.addObject("varList", varList);
+		
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
+		
+		mv.setViewName("ins/cardinfo/cardinfo_edit");
 		return mv;
 	}	
 	

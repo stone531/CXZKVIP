@@ -10,6 +10,7 @@
 <html lang="en">
 	<head>
 	<base href="<%=basePath%>">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
 	<!-- 下拉框 -->
 	<link rel="stylesheet" href="static/ace/css/chosen.css" />
 	<!-- jsp文件头和头部 -->
@@ -60,7 +61,7 @@
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">服务条款:</td>
 								 <input type="text" name="SERVERTEXT" id="SERVERTEXT" style="display:none;"/>
-								 <script type="text/plain" id="myEditor" style="width:1000px;height:350px;">${pd.SERVERTEXT}</script>
+								 <script type="text/plain" id="myEditor" style="width:90%;height:30%;">${pd.SERVERTEXT}</script>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">备注:</td>

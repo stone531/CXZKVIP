@@ -41,7 +41,21 @@
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">卡类型:</td>
-								<td><input type="text" name="TYPEID" id="TYPEID" value="${pd.TYPEID}" maxlength="100" placeholder="这里输入卡类型" title="卡类型" style="width:98%;"/></td>
+								<td>
+								<!--  input type="text" name="TYPEID" id="TYPEID" value="${pd.TYPEID}" maxlength="100" placeholder="这里输入卡类型" title="卡类型" style="width:98%;"/-->
+								<select id="TYPEID" name="TYPEID" title="卡类型" style="width:98%;" >																				
+										<c:choose>
+								            <c:when test="${not empty varList}">
+								            	<c:forEach items="${varList}" var="var" varStatus="vs">
+								            	<option value="${var.CARDTYPE_ID}">${var.NAME}</option>						
+								            	</c:forEach>
+								            </c:when>
+								            <c:otherwise>
+										        <option value="卡类型名">卡类型</option>                                         
+								            </c:otherwise>
+										</c:choose>
+                                    </select>
+								</td>
 							</tr>
 							<!-- 
 							<tr>
