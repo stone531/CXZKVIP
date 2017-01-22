@@ -127,7 +127,7 @@ public class BusinessController extends BaseController {
 	 * @param out
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/getServerText")
+	@RequestMapping(value="/fg/getServerText")
 	public void addCourier(HttpServletRequest request, HttpServletResponse response) throws Exception{
         response.setContentType("text/html");  
         response.setCharacterEncoding("UTF-8");
