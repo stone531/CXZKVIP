@@ -117,7 +117,7 @@
 		<include refid="Field"></include>
 		from 
 		<include refid="tableName"></include>
-		limit 10
+		limit 5
 	</select>
 	
 	<!-- 指定类型新闻 -->

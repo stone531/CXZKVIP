@@ -8,6 +8,7 @@
 			+ path + "/";
 
 %>
+<!DOCTYPE HTML>
 <html>
 	<head>
 	<base href="<%=basePath%>">
@@ -71,13 +72,17 @@
 	<!-- Main -->
 	<script src="static/page/js/main.js"></script>
 	
+	<script src="static/main/js/index.js"></script>
+	
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
-	</head>
-	<body>
+	<%@ include file="../../ht.jsp"%>
+  	</head>
+  	<body>
+	<%@ include file="../../head.jsp"%>
 		
 	<div class="gtco-loader"></div>
 	
@@ -203,10 +208,10 @@
 				
 				<div class="gtco-tabs">
 					<ul class="gtco-tab-nav">
-						<li class="active"><a href="#" data-tab="1"><span class="icon visible-xs"><i class="icon-command"></i></span><span class="hidden-xs">儿童保险</span></a></li>
-						<li><a href="#" data-tab="2"><span class="icon visible-xs"><i class="icon-bar-graph"></i></span><span class="hidden-xs">老年保险</span></a></li>
-						<li><a href="#" data-tab="3"><span class="icon visible-xs"><i class="icon-bag"></i></span><span class="hidden-xs">旅游保险</span></a></li>
-						<li><a href="#" data-tab="4"><span class="icon visible-xs"><i class="icon-box"></i></span><span class="hidden-xs">汽车保险</span></a></li>
+						<li class="active"><a href="#" data-tab="1"><span class="icon visible-xs"><i class="icon-man"></i></span><span class="hidden-xs">儿童保险</span></a></li>
+						<li><a href="#" data-tab="2"><span class="icon visible-xs"><i class="icon-user-tie"></i></span><span class="hidden-xs">成人保险</span></a></li>
+						<li><a href="#" data-tab="3"><span class="icon visible-xs"><i class="icon-airplane"></i></span><span class="hidden-xs">旅游保险</span></a></li>
+						<li><a href="#" data-tab="4"><span class="icon visible-xs"><i class="icon-car"></i></span><span class="hidden-xs">汽车保险</span></a></li>
 					</ul>
 
 					<!-- Tabs -->
@@ -215,7 +220,7 @@
 						<div class="gtco-tab-content tab-content active" data-tab-content="1">
 							<div class="col-md-6">
 								<div class="icon icon-xlg">
-									<i class="icon-command"></i>
+									<i class="icon-man"></i>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -241,11 +246,11 @@
 						<div class="gtco-tab-content tab-content" data-tab-content="2">
 							<div class="col-md-6">
 								<div class="icon icon-xlg">
-									<i class="icon-bar-graph"></i>
+									<i class="icon-heart"></i>
 								</div>
 							</div>
 							<div class="col-md-6">
-								<h2>老年保险</h2>
+								<h2>成人保险</h2>
 								<p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis est.</p>
 
 								<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis molestias totam fugiat soluta accusantium omnis quod similique placeat at. Dolorum ducimus libero fuga molestiae asperiores obcaecati corporis sint illo facilis.</p>
@@ -267,7 +272,7 @@
 						<div class="gtco-tab-content tab-content" data-tab-content="3">
 							<div class="col-md-6">
 								<div class="icon icon-xlg">
-									<i class="icon-bag"></i>
+									<i class="icon-paper-plane"></i>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -292,7 +297,7 @@
 						<div class="gtco-tab-content tab-content" data-tab-content="4">
 							<div class="col-md-6">
 								<div class="icon icon-xlg">
-									<i class="icon-box"></i>
+									<i class="icon-stack"></i>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -332,20 +337,6 @@
 			<div class="row">
 				<div class="col-md-6">
 				
-				
-
-				</div>
-
-				<div class="col-md-6">
-					<div class="gtco-video gtco-bg" style="background-image: url(static/page/images/img_1.jpg); ">
-						<a href="#/channels/staffpicks/93951774" class="popup-vimeo"><i class="icon-video2"></i></a>
-						<div class="overlay"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
 				<c:choose>
 					<c:when test="${not empty varList}">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
@@ -374,6 +365,20 @@
 						</div>
 				</c:otherwise>
 				</c:choose>
+
+				</div>
+
+				<div class="col-md-6">
+					<div class="gtco-video gtco-bg" style="background-image: url(static/page/images/img_1.jpg); ">
+						<a href="#/channels/staffpicks/93951774" class="popup-vimeo"><i class="icon-video2"></i></a>
+						<div class="overlay"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+				
 	
 
 	<div id="gtco-testimonial">

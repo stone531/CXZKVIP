@@ -4,6 +4,9 @@
 	<link rel="stylesheet" href="static/ace/css/index.css">
 	<link rel="stylesheet" href="static/ace/css/swiper.min.css">
 	<link rel="stylesheet" href="static/ace/css/bootstrap.css">
+	<!--  
+	
+	 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="static/main/js/index.js"></script>
 	<script src="static/main/js/swiper.min.js"></script>
