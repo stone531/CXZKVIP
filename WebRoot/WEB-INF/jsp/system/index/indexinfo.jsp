@@ -9,421 +9,445 @@
 
 %>
 <html>
-<head >
-<base href="<%=basePath%>">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<head>
+	<base href="<%=basePath%>">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Oxygen &mdash; Free Website Template, Free HTML5 Template </title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	
 
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+	
 
-	<!--  script src="static/main/js/jquery.js"></script -->
-	<script src="static/main/js/index.js"></script>
-	<script src="static/main/js/swiper.min.js"></script>
-	<script type="text/javascript" src="static/js/jquery-1.7.2.js" ></script>
-	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
-	<%@ include file="../../ht.jsp"%>
-  </head><body>
- <%@ include file="../../head.jsp"%>
- 
- 
- 
-    <div class="section" style="margin-bottom:100px; ">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-2">
-            <div class="panel panel-danger">
-              <div class="panel-heading">
-                <a href="news/fg/newslist"><h3 class="panel-title text-muted">新闻</h3></a>
-              </div>
-              
-              <c:choose>
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'> -->
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="static/page/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="static/page/css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="static/page/css/bootstrap.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="static/page/css/magnific-popup.css">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="static/page/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="static/page/css/owl.theme.default.min.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="static/page/css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="static/page/js/modernizr-2.6.2.min.js"></script>
+	<!-- jQuery -->
+	<script src="static/page/js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="static/page/js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="static/page/js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="static/page/js/jquery.waypoints.min.js"></script>
+	<!-- Carousel -->
+	<script src="static/page/js/owl.carousel.min.js"></script>
+	<!-- countTo -->
+	<script src="static/page/js/jquery.countTo.js"></script>
+	<!-- Magnific Popup -->
+	<script src="static/page/js/jquery.magnific-popup.min.js"></script>
+	<script src="static/page/js/magnific-popup-options.js"></script>
+	<!-- Main -->
+	<script src="static/page/js/main.js"></script>
+	
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+		
+	<div class="gtco-loader"></div>
+	
+	<div id="page">
+
+	<header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(static/page/images/img_bg_1.jpg);">
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+							<h1>惠保永泽</h1>
+							<h2>传递爱心，传承文明</h2>
+							<p><a href="#" class="btn btn-default">在这里开启你的保险旅程</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	
+	<div id="gtco-features">
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-4 col-sm-4">
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon">
+							<i class="icon-eye"></i>
+						</span>
+						<h3>服务卡激活</h3>
+						<p></p>
+						<p><a href="policy/fg/index" class="btn btn-primary">开始</a></p>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4">
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon">
+							<i class="icon-command"></i>
+						</span>
+						<h3>保单查询</h3>
+						<p></p>
+						<p><a href="claimsys/fg/goSearch" class="btn btn-primary">开始</a></p>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4">
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon">
+							<i class="icon-power"></i>
+						</span>
+						<h3>在线留言</h3>
+						<p></p>
+						<p><a href="onlinemsg/fg/index" class="btn btn-primary">开始</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="gtco-counter" class="gtco-bg gtco-counter" style="background-image:url(static/page/images/img_bg_2.jpg);">
+		<div class="gtco-container">
+			<div class="row">
+				<div class="display-t">
+					<div class="display-tc">
+						<div class="col-md-3 col-sm-6 animate-box">
+							<div class="feature-center">
+								<span class="icon">
+									<i class="icon-eye"></i>
+								</span>
+
+								<span class="counter js-counter" data-from="0" data-to="22070" data-speed="5000" data-refresh-interval="50">1</span>
+								<span class="counter-label">浏览次数</span>
+
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 animate-box">
+							<div class="feature-center">
+								<span class="icon">
+									<i class="icon-anchor"></i>
+								</span>
+
+								<span class="counter js-counter" data-from="0" data-to="97" data-speed="5000" data-refresh-interval="50">1</span>
+								<span class="counter-label">单日投保</span>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 animate-box">
+							<div class="feature-center">
+								<span class="icon">
+									<i class="icon-briefcase"></i>
+								</span>
+								<span class="counter js-counter" data-from="0" data-to="402" data-speed="5000" data-refresh-interval="50">1</span>
+								<span class="counter-label">会员数量</span>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 animate-box">
+							<div class="feature-center">
+								<span class="icon">
+									<i class="icon-clock"></i>
+								</span>
+
+								<span class="counter js-counter" data-from="0" data-to="212023" data-speed="5000" data-refresh-interval="50">1</span>
+								<span class="counter-label">服务记录</span>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="gtco-services">
+		<div class="gtco-container">
+			
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<h2>保险产品</h2>
+					<p></p>
+				</div>
+			</div>
+
+			<div class="row animate-box">
+				
+				<div class="gtco-tabs">
+					<ul class="gtco-tab-nav">
+						<li class="active"><a href="#" data-tab="1"><span class="icon visible-xs"><i class="icon-command"></i></span><span class="hidden-xs">儿童保险</span></a></li>
+						<li><a href="#" data-tab="2"><span class="icon visible-xs"><i class="icon-bar-graph"></i></span><span class="hidden-xs">老年保险</span></a></li>
+						<li><a href="#" data-tab="3"><span class="icon visible-xs"><i class="icon-bag"></i></span><span class="hidden-xs">旅游保险</span></a></li>
+						<li><a href="#" data-tab="4"><span class="icon visible-xs"><i class="icon-box"></i></span><span class="hidden-xs">汽车保险</span></a></li>
+					</ul>
+
+					<!-- Tabs -->
+					<div class="gtco-tab-content-wrap">
+
+						<div class="gtco-tab-content tab-content active" data-tab-content="1">
+							<div class="col-md-6">
+								<div class="icon icon-xlg">
+									<i class="icon-command"></i>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<h2>儿童保险</h2>
+								<p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis est.</p>
+
+								<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis molestias totam fugiat soluta accusantium omnis quod similique placeat at. Dolorum ducimus libero fuga molestiae asperiores obcaecati corporis sint illo facilis.</p>
+
+								<div class="row">
+									<div class="col-md-6">
+										<h2 class="uppercase">Keep it simple</h2>
+										<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
+									</div>
+									<div class="col-md-6">
+										<h2 class="uppercase">Less is more</h2>
+										<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="gtco-tab-content tab-content" data-tab-content="2">
+							<div class="col-md-6">
+								<div class="icon icon-xlg">
+									<i class="icon-bar-graph"></i>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<h2>老年保险</h2>
+								<p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis est.</p>
+
+								<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis molestias totam fugiat soluta accusantium omnis quod similique placeat at. Dolorum ducimus libero fuga molestiae asperiores obcaecati corporis sint illo facilis.</p>
+
+								<div class="row">
+									<div class="col-md-6">
+										<h2 class="uppercase">Ready to use</h2>
+										<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
+									</div>
+									<div class="col-md-6">
+										<h2 class="uppercase">100% Satisfaction</h2>
+										<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="gtco-tab-content tab-content" data-tab-content="3">
+							<div class="col-md-6">
+								<div class="icon icon-xlg">
+									<i class="icon-bag"></i>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<h2>旅游保险</h2>
+								<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis molestias totam fugiat soluta accusantium omnis quod similique placeat at. Dolorum ducimus libero fuga molestiae asperiores obcaecati corporis sint illo facilis.</p>
+
+								<p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis est.</p>
+								<div class="row">
+									<div class="col-md-6">
+										<h2 class="uppercase">Easy to shop</h2>
+										<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
+									</div>
+									<div class="col-md-6">
+										<h2 class="uppercase">No credit card required</h2>
+										<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+
+						<div class="gtco-tab-content tab-content" data-tab-content="4">
+							<div class="col-md-6">
+								<div class="icon icon-xlg">
+									<i class="icon-box"></i>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<h2>汽车保险</h2>
+								<p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis est.</p>
+
+								<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis molestias totam fugiat soluta accusantium omnis quod similique placeat at. Dolorum ducimus libero fuga molestiae asperiores obcaecati corporis sint illo facilis.</p>
+
+								<div class="row">
+									<div class="col-md-6">
+										<h2 class="uppercase">Pixel perfect</h2>
+										<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
+									</div>
+									<div class="col-md-6">
+										<h2 class="uppercase">User Interface Expert</h2>
+										<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="gtco-features-2">
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<h2>新闻中心</h2>
+					<p></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+				
+				
+
+				</div>
+
+				<div class="col-md-6">
+					<div class="gtco-video gtco-bg" style="background-image: url(static/page/images/img_1.jpg); ">
+						<a href="#/channels/staffpicks/93951774" class="popup-vimeo"><i class="icon-video2"></i></a>
+						<div class="overlay"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+				<c:choose>
 					<c:when test="${not empty varList}">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 						 <c:if test = "${var.NEWS_STATUS == 1}">
-							<div class="panel-body ">
-                				<a href = "news/fg/show?NEWS_ID=${var.NEWS_ID}"><p class="text-muted">${var.NEWS_TITLE}</p></a>
-              				</div>
+						<div class="feature-left animate-box" data-animate-effect="fadeInLeft">
+							<span class="icon">
+								<i class="icon-check"></i>
+							</span>
+							<div class="feature-copy">
+								<a href = "news/fg/show?NEWS_ID=${var.NEWS_ID}"><h3>${var.NEWS_TITLE}</h3></a>
+								<p></p>
+							</div>
+						</div>
 						 </c:if>
 						</c:forEach>
 					</c:when>
 				<c:otherwise>
-					<div class="panel-body ">
-						<p class="text-muted">没有新闻</p>
-					</div>
-				</c:otherwise>
-			 </c:choose>
-            </div>
-          </div>
-          <div class="col-md-7">
-            <div class="row">
-              <div class="col-md-12">
-                <div id="fullcarousel-example" data-interval="false" class="carousel slide" data-ride="carousel">
-                  <div class="carousel-inner">
-                    <div class="item active">
-                      <img src="http://adcdn.pingan.com/ad/chanxian/ZHENGCHENGCHENG5071479282126928.jpg">
-                      <div class="carousel-caption">
-                        <h2>鸟</h2>
-                        <p>海鸥</p>
-                      </div>
-                    </div>
-                    <div class="item">
-                      <img src="http://adcdn.pingan.com/ad/chanxian/ZHENGCHENGCHENG5071479282168464.jpg">
-                      <div class="carousel-caption">
-                        <h2>Title</h2>
-                        <p>Description</p>
-                      </div>
-                    </div>
-                    <div class="item">
-                      <img src="http://adcdn.pingan.com/ad/chanxian/ZHENGCHENGCHENG5071475129822155.jpg">
-                      <div class="carousel-caption">
-                        <h2>Title</h2>
-                        <p>Description</p>
-                      </div>
-                    </div>
-                    <div class="item">
-                      <img src="http://adcdn.pingan.com/ad/chanxian/ZHENGCHENGCHENG5071475129865579.jpg">
-                      <div class="carousel-caption">
-                        <h2>Title</h2>
-                        <p>Description</p>
-                      </div>
-                    </div>
-                  </div>
-                  <a class="left carousel-control" href="#fullcarousel-example" data-slide="prev"><i class="fa fa-angle-left icon-prev"></i></a>
-                  <a class="right carousel-control" href="#fullcarousel-example" data-slide="next"><i class="fa fa-angle-right icon-next"></i></a>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12" style="margin-left:5%;">
-                <div class="section">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-md-2">
-                        <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/yy_a_02.jpg" class="img-responsive"></a>
-                      </div>
-                      <div class="col-md-2">
-                        <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/cc_a_yhk.jpg" class="img-responsive"></a>
-                      </div>
-                      <div class="col-md-2">
-                        <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/ly_a_03.jpg" class="img-responsive"></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="row" style="margin:2%;">
-              <form action="cardinfo/fg/verifycard" name="Form" id="Form" method="post" class="center-block text-center">
-                <h3 class="form-signin-heading text-center text-warning">服务卡激活</h3>
-                <p class="center-block">
-                  <input type="text" name="CARDID" id="CARDID" maxlength="255" class="form-control center-block" placeholder="输入服务卡号" title="服务卡号" style="width:100%;">
-                </p>
-                <p class="center-block">
-                  <input type="password" name="PASSWORD" id="PASSWORD" maxlength="255" class="form-control center-block" placeholder="输入密码" title="密码" style="width:100%;">
-                </p>
-                <button type="button" class="btn btn-block btn-sm btn-warning center-block" onclick="save();" style="width:50%;">确定</button>
-              </form>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <hr>
-                <h3 class="text-muted">快捷服务</h3>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="section">
-                      <div class="row text-center">
-                        <div>
-                          <a href="claimsys/fg/goSearch"><i class="fa fa-3x fa-apple fa-fw text-warning"></i></a>             
-                          <h6>查询保单</h6>
-                          <a href="#"><i class="fa fa-3x fa-automobile fa-fw text-warning"></i></a>
-                          <h6>单证下载</h6> 	
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="section">
-                      <div class="row text-center">
-                        <a href="usermanage/personal/show"><i class="fa fa-3x fa-angellist fa-fw text-warning"></i></a>
-                        <h6>个人中心</h6>
-                        <a href="onlinemsg/fg/index" target="view_window"><i class="fa fa-3x fa-camera fa-fw text-warning"></i></a>
-                        <h6>在线留言</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-<div id=floater style="Z-INDEX: 100; RIGHT: 10px; VISIBILITY: visible; WIDTH: 100px; POSITION: fixed; TOP: 60%; left: 92%;" >   
-	<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=963396570&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:963396570:53" alt="点击这里给我发消息" title="点击这里给我发消息"></a>
-</div>
-
-<div id="img" style="Z-INDEX: 100;position: absolute; left: 311; top: 815;visibility :hidden;" onmouseover="clearInterval(interval)" onmouseout="interval = setInterval('changePos()', delay)" align="middle">
-
-<div id="fdck">
-							<div class="btn-link btn-link btn-link btn-link panel panel-success">
-
-<c:choose>
-					<c:when test="${not empty varList}">
-						<div class="panel-heading">
-                			<h8 class="panel-title"><span style="CURSOR:hand;font-weight:bold;" onclick="clearInterval(interval);img.style.visibility = 'hidden'">关闭</span></h8>
-             			</div>
-						<c:forEach items="${varList}" var="var" varStatus="vs">
-							<c:if test = "${var.NEWS_STATUS == 2}">
-								<div class="panel-body ">
-                				<a style="color:red;" href = "news/fg/show?NEWS_ID=${var.NEWS_ID}"><p class="text-muted">${var.NEWS_TITLE}</p></a>
-              					</div>
-							</c:if>							
-						</c:forEach>
-					</c:when>
-</c:choose>
+					<div class="feature-left animate-box" data-animate-effect="fadeInLeft">
+							<span class="icon">
+								<i class="icon-check"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>暂时没有新闻</h3>
+								<p></p>
 							</div>
-</div>
-</div>
-    <div class="col-md-12 text-center">
-      <hr>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="btn-link panel panel-warning">
-              <div class="panel-heading">
-                <h1 class="panel-title text-danger">保险专题</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">
-            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_03.jpg" class="img-responsive"></a>
-            <h3 class="text-center text-danger">乐龄退休</h3>
-          </div>
-          <div class="col-md-3">
-            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_02.jpg" class="img-responsive"></a>
-            <h3 class="text-center text-danger">财产保障</h3>
-          </div>
-          <div class="col-md-3">
-            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_01.jpg" class="img-responsive"></a>
-            <h3 class="text-center text-danger">潇洒出行</h3>
-          </div>
-          <div class="col-md-3">
-            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_04.jpg" class="img-responsive"></a>
-            <h3 class="text-center text-danger">守护家庭</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="btn-link panel panel-info">
-              <div class="panel-heading">
-                <h1 class="panel-title text-danger">意外保险</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="well" style="margin-top:13%;">
-              <h3 contenteditable="true" class="text-muted">银行卡被盗？</h3>
-              <h3 contenteditable="true" class="text-muted">房屋遭受火灾？</h3>
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="section">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-4">
-                    <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/yy_a_01.jpg" class="img-responsive"></a>
-                  </div>
-                  <div class="col-md-2">
-                    <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/yy_a_02.jpg" class="img-responsive"></a>
-                  </div>
-                  <div class="col-md-2">
-                    <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/yy_a_03.jpg" class="img-responsive"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="btn-link panel panel-success">
-              <div class="panel-heading">
-                <h1 class="panel-title text-danger">财产保险</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="well" style="margin-top:10%;">
-              <h3 contenteditable="true" class="text-muted">家庭财产被盗</h3>
-              <h3 contenteditable="true" class="text-muted">再也不用担心了!</h3>
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="section">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-4">
-                    <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/cc_a_01.jpg" class="img-responsive"></a>
-                  </div>
-                  <div class="col-md-2">
-                    <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/cc_a_yhk.jpg" class="img-responsive"></a>
-                  </div>
-                  <div class="col-md-2">
-                    <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/cc_a_03.jpg" class="img-responsive"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section" style="margin-bottom:100px;">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="btn-link btn-link panel panel-info">
-              <div class="panel-heading">
-                <h1 class="panel-title text-danger">旅游保险</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="well" style="margin-top:10%;">
-              <h3 class="text-muted">为什么买旅行险？</h3>
-              <p class="text-muted">旅行中不仅有惊喜还有很多意想不到的状况。</p>
-              <p class="text-muted">旅行险保证旅途平安</p>
-              <p class="text-muted">提供救援服务,赔付医疗费用</p>
-            </div>
-          </div>
-          <div class="col-md-8" >
-            <div class="section">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-4">
-                    <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/ly_a_01.jpg" class="img-responsive"></a>
-                  </div>
-                  <div class="col-md-2">
-                    <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/ly_a_02.jpg" class="img-responsive"></a>
-                  </div>
-                  <div class="col-md-2">
-                    <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/ly_a_03.jpg" class="img-responsive"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  <%@ include file="../../tail.jsp"%>
-  
-  	<script type="text/javascript">
-  	
-var xPos = 20;
-var yPos = document.body.clientHeight;
-var step = 1;
-var delay = 30;
-var height = 0;
-var Hoffset = 0;
-var Woffset = 0;
-var yon = 0;
-var xon = 0;
-var pause = true;
-var interval;
-img.style.top = yPos;
-function changePos() {
-width = document.body.clientWidth;
-height = document.body.clientHeight;
-Hoffset = img.offsetHeight;
-Woffset = img.offsetWidth;
-img.style.left = xPos + document.body.scrollLeft;
-img.style.top = yPos + document.body.scrollTop;
-if (yon) {
-yPos = yPos + step;
-}
-else {
-yPos = yPos - step;
-}
-if (yPos < 0) {
-yon = 1;
-yPos = 0;
-}
-if (yPos >= (height - Hoffset)) {
-yon = 0;
-yPos = (height - Hoffset);
-}
-if (xon) {
-xPos = xPos + step;
-}
-else {
-xPos = xPos - step;
-}
-if (xPos < 0) {
-xon = 1;
-xPos = 0;
-}
-if (xPos >= (width - Woffset)) {
-xon = 0;
-xPos = (width - Woffset);
-}
-}
-function start() {
-img.style.visibility = "visible";
-interval = setInterval('changePos()', delay);
-}
-start();	
-			function save(){
-				if($("#CARDID").val()==""){
-					$("#CARDID").tips({
-						side:3,
-			            msg:'请输入服务卡号',
-			            bg:'#AE81FF',
-			            time:2
-			        });
-					$("#CARDID").focus();
-				return false;
-				}
-			
-				if($("#PASSWORD").val()==""){
-						$("#PASSWORD").tips({
-							side:3,
-				            msg:'请输入密码',
-				            bg:'#AE81FF',
-				            time:2
-				        });
-						$("#PASSWORD").focus();
-					return false;
-				}
-			
-				$("#Form").submit();
-			}
+						</div>
+				</c:otherwise>
+				</c:choose>
 	
-	</script>
 
-</body></html>
+	<div id="gtco-testimonial">
+		<div class="gtco-container">
+			<!-- <div class="row"> -->
+				<div class="row animate-box">
+					<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+						<h2>成功案例</h2>
+					</div>
+				</div>
+				<div class="row animate-box">
+					
+				
+					<div class="owl-carousel owl-carousel-fullwidth ">
+						<div class="item">
+							<div class="testimony-slide active text-center">
+								<figure>
+									<img src="static/page/images/person_1.jpg" alt="user">
+								</figure>
+								<span></span>
+								<blockquote>
+									<p>&ldquo;我们尊崇“踏实、拼搏、责任”的企业精神，并以诚信、共赢、开创经营理念，创造良好的办公环境，以全新的管理模式，完善的技术，周到的服务，卓越的品质为生存根本&rdquo;</p>
+								</blockquote>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimony-slide active text-center">
+								<figure>
+									<img src="static/page/images/person_2.jpg" alt="user">
+								</figure>
+								<span></span>
+								<blockquote>
+									<p>&ldquo;我们尊崇“踏实、拼搏、责任”的企业精神，并以诚信、共赢、开创经营理念，创造良好的办公环境，以全新的管理模式，完善的技术，周到的服务，卓越的品质为生存根本&rdquo;</p>
+								</blockquote>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimony-slide active text-center">
+								<figure>
+									<img src="static/page/images/person_3.jpg" alt="user">
+								</figure>
+								<span></span>
+								<blockquote>
+									<p>&ldquo;我们尊崇“踏实、拼搏、责任”的企业精神，并以诚信、共赢、开创经营理念，创造良好的办公环境，以全新的管理模式，完善的技术，周到的服务，卓越的品质为生存根本&rdquo;</p>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+				</div>
+			<!-- </div> -->
+		</div>
+	</div>
+
+
+	<footer id="gtco-footer" role="contentinfo">
+		<div class="gtco-container">
+
+			<div class="row copyright">
+				<div class="col-md-12">
+					<p class="pull-left">
+						<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small> 
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+
+	</body>
+</html>
+
