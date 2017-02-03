@@ -7,6 +7,7 @@
 %>
 <!DOCTYPE html>
 <html><head>
+	<base href="<%=basePath%>">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -29,7 +30,7 @@
           <div class="col-md-12">
             <ul class="breadcrumb">
               <li>
-                <a href="../../CXZKVIP//page/index">主页</a>
+                <a href="page/index">主页</a>
               </li>
               <li class="active">提示信息</li>
             </ul>
