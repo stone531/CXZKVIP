@@ -73,7 +73,7 @@
 									<th class="center">服务卡号</th>
 									<th class="center">卡的状态</th>
 									<th class="center">卡类型</th>
-									<th class="center">有效日期</th>
+									<!--  th class="center">有效日期</th-->
 									<th class="center">保单号</th>
 									<th class="center">被保险人姓名</th>
 									<th class="center">被保险人身份证号</th>
@@ -97,7 +97,7 @@
 											<td class='center'>${var.CARDID}</td>
 											<td class='center'>${var.STATE}</td>
 											<td class='center'>${var.TYPEID}</td>
-											<td class='center'>${var.EXPIRYTIME}</td>
+											<!--  td class='center'>${var.EXPIRYTIME}</td-->
 											<td class='center'>${var.POLICYNO}</td>
 											<td class='center'>${var.IANTNAME}</td>
 											<td class='center'>${var.IANTPAPERNO}</td>

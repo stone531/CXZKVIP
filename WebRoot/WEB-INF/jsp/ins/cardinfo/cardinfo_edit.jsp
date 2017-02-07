@@ -64,6 +64,8 @@
 							</tr>
 							<tr>
 							 -->
+							 
+							 <!--
 								<td style="width:75px;text-align: right;padding-top: 13px;">保单号:</td>
 								<td><input type="text" name="POLICYNO" id="POLICYNO" value="${pd.POLICYNO}" maxlength="255" placeholder="这里输入保单号" title="保单号" style="width:98%;"/></td>
 							</tr>
@@ -79,6 +81,9 @@
 								<td style="width:75px;text-align: right;padding-top: 13px;">被保险人手机号:</td>
 								<td><input type="text" name="IANTPHONE" id="IANTPHONE" value="${pd.IANTPHONE}" maxlength="255" placeholder="这里输入被保险人手机号" title="被保险人手机号" style="width:98%;"/></td>
 							</tr>
+							
+							-->
+							
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">密码:</td>
 								<td><input type="text" name="PASSWORD" id="PASSWORD" value="${pd.PASSWORD}" maxlength="255" placeholder="这里输入密码" title="密码" style="width:98%;"/></td>
