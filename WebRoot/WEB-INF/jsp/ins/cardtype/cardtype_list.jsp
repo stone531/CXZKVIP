@@ -56,9 +56,10 @@
 								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
 								</c:if>
 								<td><a class="btn btn-sm btn-success" onclick="toExcel();">导出到EXCEL</a></td>
-								<td><a class="btn btn-sm btn-info" onclick="window.location.href='<%=basePath%>/cardtype/downExcel.do'">下载模版</a></td>
-								<td><input type="file" style="display: none;" name="cardtypeexcel" id="cardtypeexcel" onchange="readfile(this)">
-								<a class="btn btn-sm btn-success" onclick="readexecl()">从EXECL导入到数据库</a>
+								
+								<td><input type="file" style="display: none;" name="cardtypeexcel" accept=".xls" id="cardtypeexcel" onchange="readfile(this)">
+								<a class="btn btn-sm btn-success" onclick="readexecl()">批量导入</a>
+								<td><a class="btn btn-sm btn-success" onclick="window.location.href='<%=basePath%>/cardtype/downExcel.do'">下载模版</a></td>
 								</td>
 							</tr>
 						</table>

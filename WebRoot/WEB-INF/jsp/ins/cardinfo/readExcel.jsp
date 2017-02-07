@@ -41,7 +41,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td><input type="file" name="cardexcel" id="cardexcel"/></td>
+								<td><input type="file" name="cardexcel" id="cardexcel" accept=".xls"/></td>
 							</tr>
 							<tr>
 								<td style="text-align: center;" colspan="10">

@@ -56,7 +56,7 @@
 								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
 								</c:if>
 								<td><a class="btn btn-sm btn-success" onclick="toExcel();">导出到EXCEL</a></td>
-								<td><a class="btn btn-sm btn-success" onclick="readExcel();">导入到数据库</a></td>
+								<td><a class="btn btn-sm btn-success" onclick="readExcel();">批量导入</a></td>
 								<td><a class="btn btn-sm btn-success" onclick="window.location.href='<%=basePath%>/cardinfo/downExcel.do'">下载模版</a></td>
 								
 							</tr>
@@ -277,14 +277,14 @@
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
-				 //if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 if('${page.currentPage}' == '0'){
 						 top.jzts();
 						 setTimeout("self.location=self.location",100);
 					 }else{
 						 nextPage(${page.currentPage});
 					 }
-				//}
+				}
 				diag.close();
 			 };
 			 diag.show();

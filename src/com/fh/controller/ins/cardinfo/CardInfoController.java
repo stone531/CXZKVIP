@@ -461,9 +461,9 @@ public class CardInfoController extends BaseController {
 				pageData.put("EXPIRYTIME", listPd.get(i).get("var1").toString());	//2
 				pageData.put("POLICYNO", listPd.get(i).get("var2").toString());	//3
 				pageData.put("IANTNAME", listPd.get(i).get("var3").toString());	//4
-				if(isNumeric(listPd.get(i).get("var4").toString())){
+				//if(isNumeric(listPd.get(i).get("var4").toString())){
 				pageData.put("IANTPAPERNO", listPd.get(i).get("var4").toString());	//5
-				}
+				//}
 				pageData.put("IANTPHONE", listPd.get(i).getString("var5"));	//6
 				pageData.put("PASSWORD", listPd.get(i).getString("var6"));	//6
 				pageData.put("STATE", "1");
