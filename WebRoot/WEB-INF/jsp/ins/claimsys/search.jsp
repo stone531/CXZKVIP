@@ -136,12 +136,23 @@
                         </div>
                         <div class="col-sm-6">
  						  <select class="form-control"  id="COURIERCOMPANY" name="COURIERCOMPANY" title="请选择快递公司">
+                            <option value="EMS">EMS</option>							
 							<option value="申通快递">申通快递</option>
                             <option value="顺丰速运">顺丰速运</option>
                             <option value="圆通速递">圆通速递</option>
                             <option value="韵达速递">韵达速递</option>
                             <option value="中通快递">中通快递</option>
                             <option value="天天快递">天天快递</option>
+                            <option value="百世快递">百世快递</option>
+                            <option value="宅急送">宅急送</option>
+                            <option value="全峰快递">全峰快递</option>
+                            <option value="德邦">德邦</option>
+                            <option value="包裹信件">包裹信件</option>
+                            <option value="中铁物流">中铁物流</option>
+                            <option value="AAE全球专递">AAE全球专递</option>
+                            <option value="安能物流">安能物流</option>
+                            <option value="Aramex">Aramex</option>
+                            <option value="百福东方">百福东方</option>
                           </select>
                         </div>
                     </div>
@@ -178,42 +189,42 @@
         </div>
         <div class="row" style="margin-top:2%;margin-left:8%;">
           <div class="col-md-1">
-            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_03.jpg" class="img-responsive"></a>
+            <a href="javascript:void(0);"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_03.jpg" class="img-responsive"></a>
             <h6 class="text-center text-danger">已报险</h6>
           </div>
           <div class="col-md-1">
-            <a href="#"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
+            <a href="javascript:void(0);"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
           </div>
           <div class="col-md-1">
-            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_02.jpg" class="img-responsive"></a>
+            <a href="javascript:void(0);"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_02.jpg" class="img-responsive"></a>
             <h6 class="text-center text-danger">预审</h6>
           </div>
           <div class="col-md-1">
-            <a href="#"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
+            <a href="javascript:void(0);"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
           </div>
           <div class="col-md-1">
-            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_01.jpg" class="img-responsive"></a>
+            <a href="javascript:void(0);"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_01.jpg" class="img-responsive"></a>
             <h6 class="text-center text-danger">待邮寄资料</h6>
           </div>
           <div class="col-md-1">
-            <a href="#"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
+            <a href="javascript:void(0);"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
           </div>
           <div class="col-md-1">
-            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_04.jpg" class="img-responsive"></a>
+            <a href="javascript:void(0);"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_04.jpg" class="img-responsive"></a>
             <h6 class="text-center text-danger">收到资料</h6>
           </div>
           <div class="col-md-1">
-            <a href="#"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
+            <a href="javascript:void(0);"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
           </div>
           <div class="col-md-1">
-            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_01.jpg" class="img-responsive"></a>
+            <a href="javascript:void(0);"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_01.jpg" class="img-responsive"></a>
             <h6 class="text-center text-danger">保险公司处理中</h6>
           </div>
           <div class="col-md-1">
-            <a href="#"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
+            <a href="javascript:void(0);"><img src="static/ace/img/claim/jiantou.jpg" class="img-responsive"></a>
           </div>
           <div class="col-md-1">
-            <a href="#"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_04.jpg" class="img-responsive"></a>
+            <a href="javascript:void(0);"><img src="http://pimg1.4008000000.com/app_images/baoxian/v10/index_new/tui_04.jpg" class="img-responsive"></a>
             <h6 class="text-center text-danger">理赔完毕</h6>
           </div>
         </div>
@@ -405,7 +416,7 @@
 						$.each(data.varList, function(i, list){
 							subTable += "<tr>";  
 							subTable += "<td class=\"center\">"+(i+1)+"</td>";
-							subTable += "<td class=\"center\"><a href=\"policy/detail?POLICY_ID="+list.POLICYNO+"\">"+list.POLICYNO+"</a></td>";
+							subTable += "<td class=\"center\"><a href=\"policy/fg/detail?POLICY_ID="+list.POLICYNO+"\">"+list.POLICYNO+"</a></td>";
 							subTable += "<td class=\"center\">"+list.COMPANYTEL+"</td>";
 							subTable += "<td class=\"center\">";
 							if (list.IsOrNo == 0){
@@ -414,13 +425,17 @@
 								subTable += "</div>";				
 							}
 							if (list.IsOrNo == 1){
-								subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";
-								subTable += "<label class=\"control-label\">"+list.STATE_CONTENT+"</label>";
-								subTable += "</div>";
 								if(list.CLAIMSSTATES == 2){
 									subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";
-									subTable += "<a class=\"btn btn-sm btn-warning\" onclick=\"goCourierW(\'"+list.POLICYNO+"\')\">点我</a>";
+								    subTable += "<label class=\"control-label\">"+list.STATE_CONTENT+"&nbsp;&nbsp;-->&nbsp;&nbsp;</label>";
+								    subTable += "</div>";
+									subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";
+									subTable += "<a class=\"btn btn-sm btn-warning\" onclick=\"goCourierW(\'"+list.POLICYNO+"\')\">单号</a>";
 									subTable += "</div>";	
+								} else {
+									subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";
+								    subTable += "<label class=\"control-label\">"+list.STATE_CONTENT+"</label>";
+								    subTable += "</div>";
 								}								
 							}                         							                           
 							subTable += "</td>";
