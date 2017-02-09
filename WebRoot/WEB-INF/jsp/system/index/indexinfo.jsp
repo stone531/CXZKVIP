@@ -66,29 +66,29 @@
                     <div class="item active">
                       <img src="http://adcdn.pingan.com/ad/chanxian/ZHENGCHENGCHENG5071479282126928.jpg">
                       <div class="carousel-caption">
-                        <h2>鸟</h2>
-                        <p>海鸥</p>
+                        <h2></h2>
+                        <p></p>
                       </div>
                     </div>
                     <div class="item">
                       <img src="http://adcdn.pingan.com/ad/chanxian/ZHENGCHENGCHENG5071479282168464.jpg">
                       <div class="carousel-caption">
-                        <h2>Title</h2>
-                        <p>Description</p>
+                        <h2></h2>
+                        <p></p>
                       </div>
                     </div>
                     <div class="item">
                       <img src="http://adcdn.pingan.com/ad/chanxian/ZHENGCHENGCHENG5071475129822155.jpg">
                       <div class="carousel-caption">
-                        <h2>Title</h2>
-                        <p>Description</p>
+                        <h2></h2>
+                        <p></p>
                       </div>
                     </div>
                     <div class="item">
                       <img src="http://adcdn.pingan.com/ad/chanxian/ZHENGCHENGCHENG5071475129865579.jpg">
                       <div class="carousel-caption">
-                        <h2>Title</h2>
-                        <p>Description</p>
+                        <h2></h2>
+                        <p></p>
                       </div>
                     </div>
                   </div>
@@ -165,7 +165,7 @@
       </div>
     </div>
     
-<div id=floater style="Z-INDEX: 100; RIGHT: 10px; VISIBILITY: visible; WIDTH: 100px; POSITION: fixed; TOP: 80%; left: 94%;" >   
+<div id=floater style="Z-INDEX: 100; RIGHT: 10px; VISIBILITY: visible; WIDTH: 100px; POSITION: fixed; TOP: 70%; left: 94%;" >   
 	<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2784168675&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:963396570:53" alt="点击这里给我发消息" title="点击这里给我发消息"></a>
 </div>
 
