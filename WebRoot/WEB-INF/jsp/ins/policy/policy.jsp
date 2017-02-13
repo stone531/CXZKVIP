@@ -387,7 +387,7 @@
                 <h3 class="text-center  text-warning">
                   <strong>信息确认单</strong>
                 </h3>
-                <form action="policy/${action}" name="Form" id="Form" method="post">
+                <form action="policy/fg/${action}" name="Form" id="Form" method="post">
                   <div style="margin-left:20%;">
                     <h5 class="text-info text-justify">投保人姓名:</h5>
                     <input type="text" name="IERNAME" id="IERNAME" maxlength="255"
