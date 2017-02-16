@@ -150,9 +150,8 @@
                     </div>
                 </div>
 				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-8">
+					<div class="col-sm-offset-3 col-sm-8">
 						<button type="button" class="btn btn-lg btn-success" onclick="mysubmit();">提交信息</button>
-						（提交成功后，我们将在1个工作日内与您取得联系）
 					</div>
 				</div>
 				<div class="col-sm-offset-2">

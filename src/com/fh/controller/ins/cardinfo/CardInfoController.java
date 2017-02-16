@@ -107,19 +107,19 @@ public class CardInfoController extends BaseController {
 			System.out.println("card state is Unavailable");
 			mv.addObject("msg","此服务卡无效");
 			mv.addObject("display", "block");
-			mv.setViewName("ins/policy/fg/verifycard");
+			mv.setViewName("ins/policy/verifycard");
 			return mv;
 		}else if(cardstate.equals("2")){
 			System.out.println("card state is Unavailable");
 			mv.addObject("msg","此卡已经被激活");
 			mv.addObject("display", "block");
-			mv.setViewName("ins/policy/fg/verifycard");
+			mv.setViewName("ins/policy/verifycard");
 			return mv;
 		}else if(!cardstate.equals("1")){
 			System.out.println("card state is Unavailable");
 			mv.addObject("msg","未知的卡错误");
 			mv.addObject("display", "block");
-			mv.setViewName("ins/policy/fg/verifycard");
+			mv.setViewName("ins/policy/verifycard");
 			return mv;			
 		}	
 		

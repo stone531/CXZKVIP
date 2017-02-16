@@ -108,7 +108,7 @@ public class PolicyController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/save")
+	@RequestMapping(value="/fg/save")
 	public ModelAndView save() throws Exception{
 		//logBefore(logger, Jurisdiction.getUsername()+"新增Policy");
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
