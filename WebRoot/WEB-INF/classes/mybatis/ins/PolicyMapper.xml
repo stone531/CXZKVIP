@@ -191,6 +191,15 @@
 		<include refid="tableName"></include>
 	</select>
 	
+	<!-- 列表(获取理赔排名列表) -->
+	<select id="getRankingList" parameterType="pd" resultType="pd">
+		select
+		SVRNAME,SVRPHONE, COUNT(*) AS COUNT
+		from 
+		<include refid="tableName"></include>
+		GROUP BY SVRPHONE HAVING COUNT(*) >0 ORDER BY COUNT(*) DESC
+	</select>
+	
 	<!-- 批量删除 -->
 	<delete id="deleteAll" parameterType="String">
 		delete from

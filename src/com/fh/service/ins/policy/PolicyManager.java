@@ -43,6 +43,12 @@ public interface PolicyManager{
 	 */
 	public List<PageData> listAll(PageData pd)throws Exception;
 	
+	/**获取理赔排名列表
+	 * @param pd
+	 * @throws Exception
+	 */
+	public List<PageData> getRankingList(PageData pd)throws Exception;
+	
 	/**通过id获取数据
 	 * @param pd
 	 * @throws Exception

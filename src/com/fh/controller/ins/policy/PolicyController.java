@@ -353,6 +353,34 @@ public class PolicyController extends BaseController {
 		return mv;
 	}
 	
+	/**保单激活率查询
+	 * @param
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/rankinglist")
+	public ModelAndView ranking() throws Exception{
+		System.out.println("POLICY_ID ############# 00");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd=this.getPageData();
+		
+		System.out.println("POLICY_ID ############# 11");
+		List<PageData>	varList=policyService.getRankingList(pd);
+		System.out.println("POLICY_ID ############# 220 :"+ varList);
+		mv.setViewName("ins/policy/policy_rankinglist");
+		mv.addObject("varList", varList);
+		mv.addObject("pd", pd);
+		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		System.out.println("POLICY_ID ############# 22");
+		
+		//System.out.println("policyno"+pd.getString("POLICYNO"));
+		//if (pd.getString("POLICYNO")==null){
+		//	mv.addObject("display","none");
+		//}else{
+		//	mv.addObject("display", "block");
+		return mv;
+		}
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder){
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
