@@ -165,12 +165,8 @@ function validForm(){
 				required:true,
 				rangelength:[15,18],
 				regex:/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
-			},
-			BANKCARD:{
-				required:true,
-				minlength:10,
-				regex:/[0-9]$/,
 			}
+			
 		},
 		messages: {
 			NICKNAME: {
@@ -189,11 +185,6 @@ function validForm(){
 				required:"请输入证件号",
 				rangelength:"长度不正确",
 				regex:"身份证格式不正确",
-			},
-			BANKCARD:{
-				required:"请输入银行卡号",
-				minlength:"长度不正确",
-				regex:"格式不正确",
 			}
 			
 		},
