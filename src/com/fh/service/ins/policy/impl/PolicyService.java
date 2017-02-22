@@ -70,6 +70,16 @@ public class PolicyService implements PolicyManager{
 		return (List<PageData>)dao.findForList("PolicyMapper.listAll", pd);
 	}
 	
+	/**获取理赔排名列表
+	 * @param page
+	 * @throws Exception
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<PageData> getRankingList(Page page)throws Exception{
+		return (List<PageData>)dao.findForList("PolicyMapper.getRankinglistPage", page);
+	}
+	
 	/**通过id获取数据
 	 * @param pd
 	 * @throws Exception

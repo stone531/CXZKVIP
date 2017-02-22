@@ -176,7 +176,7 @@ public class PolicyController extends BaseController {
 	@RequestMapping(value="/delete")
 	public void delete(PrintWriter out) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"删除Policy");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return;} //校验权限
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return;} //校验权限
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		policyService.delete(pd);
@@ -191,7 +191,7 @@ public class PolicyController extends BaseController {
 	@RequestMapping(value="/edit")
 	public ModelAndView edit() throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"修改Policy");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
@@ -210,7 +210,7 @@ public class PolicyController extends BaseController {
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"列表Policy");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
@@ -267,7 +267,7 @@ public class PolicyController extends BaseController {
 	@ResponseBody
 	public Object deleteAll() throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"批量删除Policy");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return null;} //校验权限
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return null;} //校验权限
 		PageData pd = new PageData();		
 		Map<String,Object> map = new HashMap<String,Object>();
 		pd = this.getPageData();
@@ -292,7 +292,7 @@ public class PolicyController extends BaseController {
 	@RequestMapping(value="/excel")
 	public ModelAndView exportExcel() throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"导出Policy到excel");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;}
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;}
 		ModelAndView mv = new ModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
@@ -352,6 +352,42 @@ public class PolicyController extends BaseController {
 		mv = new ModelAndView(erv,dataMap);
 		return mv;
 	}
+	
+	/**保单激活率查询
+	 * @param page
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/rankinglist")
+	public ModelAndView ranking(Page page) throws Exception{
+		logBefore(logger, Jurisdiction.getUsername()+"列表Policy");
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
+		//System.out.println("POLICY_ID ############# 00");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd=this.getPageData();
+		
+		String keywords = pd.getString("keywords");				//关键词检索条件
+		if(null != keywords && !"".equals(keywords)){
+			pd.put("keywords", keywords.trim());
+		}
+		page.setPd(pd);
+		
+		//System.out.println("POLICY_ID ############# 11");
+		List<PageData>	varList=policyService.getRankingList(page);
+		//System.out.println("POLICY_ID ############# 220 :"+ varList);
+		mv.setViewName("ins/policy/policy_rankinglist");
+		mv.addObject("varList", varList);
+		mv.addObject("pd", pd);
+		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		//System.out.println("POLICY_ID ############# 22");
+		
+		//System.out.println("policyno"+pd.getString("POLICYNO"));
+		//if (pd.getString("POLICYNO")==null){
+		//	mv.addObject("display","none");
+		//}else{
+		//	mv.addObject("display", "block");
+		return mv;
+		}
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder){

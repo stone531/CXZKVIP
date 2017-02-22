@@ -291,13 +291,15 @@ public class ClaimSysController extends BaseController {
 					//根据报险公司查电话
 					pdIn.put("BUSINESS_ID", varListPN.get(i).getString("BUSINESSID"));
 					PageData pdBuss = businessService.findById(pdIn);
-					pdIn.put("POLICYNO", varListPN.get(i).getString("POLICY_ID"));
+					pdIn.put("CARDNO", varListPN.get(i).getString("CARDNO"));
+					pdIn.put("POLICYNO", varListPN.get(i).getString("POLICYNO"));
 					pdIn.put("UPDATEFLAG", "0");
 					
 					PageData pdOut = claimsysService.findStateByPolicyNo(pdIn);	//列出ClaimSys列表
 					if(pdOut != null){
 						claimsysService.changeUpdateFlag(pdIn);
 						pdOut.put("IsOrNo", "1");
+						pdOut.put("CARDNO", varListPN.get(i).getString("CARDNO"));
 						pdOut.put("COMPANYTEL", pdBuss.getString("COMPANYTEL"));
 						varList.add(pdOut);
 					}else{

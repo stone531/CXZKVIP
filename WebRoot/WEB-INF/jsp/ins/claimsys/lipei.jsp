@@ -60,9 +60,9 @@
                   <div class="col-md-10">
                   <!--form class="form-horizontal" role="form"-->
                     <div class="form-group">
-                        <label for="POLICYNO" class="col-sm-3 control-label">保单号</label>
+                        <label for="POLICYNO" class="col-sm-3 control-label">服务卡号</label>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="POLICYNO" name="POLICYNO" readonly="readonly" placeholder="请输入保单号" value="${pd.POLICYNO}">
+                          <input type="text" class="form-control" id="POLICYNO" name="POLICYNO" readonly="readonly" placeholder="请输入服务卡号" value="${pd.POLICYNO}">
                         </div>
                         <div></div>
                     </div>
@@ -302,7 +302,7 @@
 				},
 				messages: {
 					POLICYNO: {
-						required: "请输入保单号",
+						required: "请输入服务卡号",
 						rangelength: "长度必须为5-50个字符",
 						regex:"不允许为汉字"
 					},
