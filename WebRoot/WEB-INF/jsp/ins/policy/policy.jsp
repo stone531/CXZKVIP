@@ -116,6 +116,13 @@
 	          </div>
               <div class="center-block form-group has-success" >
                 <div class="col-sm-12 text-left">
+                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">与投保人关系:</label>
+                </div>
+                <div class="col-sm-12">
+                  <input type="text" id="iarelation" maxlength="255" style="width:50%;"
+                  class="form-control" placeholder="与投保人关系">
+                </div>
+                <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人姓名:</label>
                 </div>
                 <div class="col-sm-12">
@@ -135,13 +142,6 @@
                 <div class="col-sm-12">
                   <input type="text" id="iaprofession" maxlength="255" style="width:50%;"
                   class="form-control" placeholder="被保险人职业">
-                </div>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">与被保险人关系:</label>
-                </div>
-                <div class="col-sm-12">
-                  <input type="text" id="iarelation" maxlength="255" style="width:50%;"
-                  class="form-control" placeholder="与被保险人关系">
                 </div>
                 <br>
                 <div class="col-sm-12 text-left">
@@ -401,6 +401,11 @@
                     <input type="text" name="IERPHONE" id="IERPHONE" maxlength="255"
                     value="" style="background: border-box;border:hidden;" class="">
                     <hr>
+                    <h5 class="text-info text-justify">与投保人关系:</h5>
+                    <input type="text" name="IANTRELATION" id="IANTRELATION"
+                    maxlength="255" value="" style="background: border-box;border:hidden;"
+                    class="">
+                    <hr>
                     <h5 class="text-info text-justify">被保险人姓名:</h5>
                     <input type="text" name="IANTNAME" id="IANTNAME" maxlength="255"
                     value="李治" style="background: border-box;border:hidden;" class="">
@@ -411,11 +416,6 @@
                     <hr>
                     <h5 class="text-info text-justify">被保险人职业:</h5>
                     <input type="text" name="IANTPROFESSION" id="IANTPROFESSION"
-                    maxlength="255" value="" style="background: border-box;border:hidden;"
-                    class="">
-                    <hr>
-                    <h5 class="text-info text-justify">与被保险人关系:</h5>
-                    <input type="text" name="IANTRELATION" id="IANTRELATION"
                     maxlength="255" value="" style="background: border-box;border:hidden;"
                     class="">
                     <hr>

@@ -78,7 +78,7 @@
                 <div class="panel-body" id="byCard">
 				    <div class="form-group">
                       <div class="col-sm-2">
-                        <label for="CARDNO" class="control-label">卡号：</label>
+                        <label for="CARDNO" class="control-label">服务卡号：</label>
                       </div>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" id="CARDID" name="CARDID" placeholder="请输入服务卡号">
@@ -410,18 +410,25 @@
 						$("#showPolicy").html("");					
 					}else{
 						var subTable="";
-						subTable += "<div class=\"col-md-12\" style=\"border-top:groove ;border-color: beige; margin-top:30px;padding-left:10%;\">"
-						subTable += "<table class=\"table\"><thead><tr><th>序号</th><th>保单号</th><th>报案电话</th><th>操作</th></tr></thead><tbody>";
+						subTable += "<div class=\"col-md-12\" style=\"border-top:groove ;border-color: beige; margin-top:30px;padding-left:2%;\">"
+						subTable += "<table class=\"table\"><thead><tr><th>序号</th><th>服务卡号</th><th>保单号</th><th>报案电话</th><th>操作</th></tr></thead><tbody>";
 			  
 						$.each(data.varList, function(i, list){
 							subTable += "<tr>";  
 							subTable += "<td class=\"center\">"+(i+1)+"</td>";
-							subTable += "<td class=\"center\"><a href=\"policy/fg/detail?POLICY_ID="+list.POLICYNO+"\">"+list.POLICYNO+"</a></td>";
+							subTable += "<td class=\"center\"><a href=\"policy/fg/detail?CARDNO="+list.CARDNO+"\">"+list.CARDNO+"</a></td>";
+							
+							if (list.POLICYNO == "" || list.POLICYNO == undefined || list.POLICYNO == null){
+								subTable += "<td class=\"center\">"+"无保单"+"</td>";
+							} else{
+								subTable += "<td class=\"center\">"+list.POLICYNO+"</td>";
+							}
+							
 							subTable += "<td class=\"center\">"+list.COMPANYTEL+"</td>";
 							subTable += "<td class=\"center\">";
 							if (list.IsOrNo == 0){
 								subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";
-								subTable += "<a class=\"btn btn-sm btn-success\" onclick=\"goClaim(\'"+list.POLICYNO+"\')\">点击报险</a>";
+								subTable += "<a class=\"btn btn-sm btn-success\" onclick=\"goClaim(\'"+list.CARDNO+"\')\">点击报险</a>";
 								subTable += "</div>";				
 							}
 							if (list.IsOrNo == 1){
@@ -430,7 +437,7 @@
 								    subTable += "<label class=\"control-label\">"+list.STATE_CONTENT+"&nbsp;&nbsp;-->&nbsp;&nbsp;</label>";
 								    subTable += "</div>";
 									subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";
-									subTable += "<a class=\"btn btn-sm btn-warning\" onclick=\"goCourierW(\'"+list.POLICYNO+"\')\">单号</a>";
+									subTable += "<a class=\"btn btn-sm btn-warning\" onclick=\"goCourierW(\'"+list.list.CARDNO+"\')\">单号</a>";
 									subTable += "</div>";	
 								} else {
 									subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";
