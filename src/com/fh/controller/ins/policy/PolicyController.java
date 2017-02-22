@@ -176,7 +176,7 @@ public class PolicyController extends BaseController {
 	@RequestMapping(value="/delete")
 	public void delete(PrintWriter out) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"删除Policy");
-		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return;} //校验权限
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return;} //校验权限
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		policyService.delete(pd);
@@ -354,26 +354,32 @@ public class PolicyController extends BaseController {
 	}
 	
 	/**保单激活率查询
-	 * @param
+	 * @param page
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/rankinglist")
-	public ModelAndView ranking() throws Exception{
+	public ModelAndView ranking(Page page) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"列表Policy");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
-		System.out.println("POLICY_ID ############# 00");
+		//System.out.println("POLICY_ID ############# 00");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd=this.getPageData();
 		
-		System.out.println("POLICY_ID ############# 11");
-		List<PageData>	varList=policyService.getRankingList(pd);
-		System.out.println("POLICY_ID ############# 220 :"+ varList);
+		String keywords = pd.getString("keywords");				//关键词检索条件
+		if(null != keywords && !"".equals(keywords)){
+			pd.put("keywords", keywords.trim());
+		}
+		page.setPd(pd);
+		
+		//System.out.println("POLICY_ID ############# 11");
+		List<PageData>	varList=policyService.getRankingList(page);
+		//System.out.println("POLICY_ID ############# 220 :"+ varList);
 		mv.setViewName("ins/policy/policy_rankinglist");
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
-		System.out.println("POLICY_ID ############# 22");
+		//System.out.println("POLICY_ID ############# 22");
 		
 		//System.out.println("policyno"+pd.getString("POLICYNO"));
 		//if (pd.getString("POLICYNO")==null){

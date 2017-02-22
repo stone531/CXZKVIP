@@ -192,12 +192,20 @@
 	</select>
 	
 	<!-- 列表(获取理赔排名列表) -->
-	<select id="getRankingList" parameterType="pd" resultType="pd">
+	<select id="getRankinglistPage" parameterType="page" resultType="pd">
 		select
 		SVRNAME,SVRPHONE, COUNT(*) AS COUNT
 		from 
 		<include refid="tableName"></include>
 		GROUP BY SVRPHONE HAVING COUNT(*) >0 ORDER BY COUNT(*) DESC
+		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+			and
+				(
+
+					IANTNAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					
+				)
+		</if>
 	</select>
 	
 	<!-- 批量删除 -->
