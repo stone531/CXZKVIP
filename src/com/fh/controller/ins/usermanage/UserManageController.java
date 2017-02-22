@@ -49,9 +49,15 @@ import com.fh.util.PathUtil;
 import com.fh.service.ins.usermanage.UserManageManager;
 import com.fh.controller.ins.userdata.UserData;
 
+
+import com.fh.controller.ins.workdata.WorkData;
+import com.fh.controller.ins.workssubdata.WorkSSubData;
+import com.fh.controller.ins.worksubdata.WorkSubData;
+
 import java.security.Security;
 import java.util.Properties;
  
+
 
 
 
@@ -65,7 +71,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
-
 
 
 
@@ -113,6 +118,29 @@ public class UserManageController extends BaseController {
 		out.write(js.toString());
 		out.close();
 		return;
+	}
+	
+	
+	@RequestMapping(value="/login/testjson")
+	public void testjson(PrintWriter out){
+		
+		WorkData wd = new WorkData();
+		WorkSubData wsd = new WorkSubData();
+		WorkSSubData wssd = new WorkSSubData();
+		
+		wssd.setN("wssd");
+		wsd.setN("wsd");
+		wd.setN("wd");
+		
+		wsd.setS(wssd);
+		wd.setS(wsd);
+		
+		
+		
+		JSONObject js  = JSONObject.fromObject(wd);
+		System.out.println(js);
+		out.write(js.toString());
+		out.close();
 	}
 	
 	@RequestMapping(value="/login/logout")
