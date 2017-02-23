@@ -58,9 +58,8 @@
 								<td><a class="btn btn-sm btn-success" onclick="toExcel();">导出到EXCEL</a></td>
 								
 								<td><input type="file" style="display: none;" name="cardtypeexcel" accept=".xls" id="cardtypeexcel" onchange="readfile(this)">
-								<a class="btn btn-sm btn-success" onclick="readexecl()">批量导入</a>
+								<a class="btn btn-sm btn-success" onclick="readexecl()">批量导入</a></td>
 								<td><a class="btn btn-sm btn-success" onclick="window.location.href='<%=basePath%>/cardtype/downExcel.do'">下载模版</a></td>
-								</td>
 							</tr>
 						</table>
 						</form>
