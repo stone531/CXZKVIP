@@ -55,6 +55,10 @@
 								<c:if test="${QX.cha == 1 }">
 								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
 								</c:if>
+								<td><a class="btn btn-sm btn-success" onclick="toExcel();">导出到EXCEL</a></td>								
+								<td><input type="file" style="display: none;" name="policyexcel" accept=".xls" id="policyexcel" onchange="readfile(this)">
+								<a class="btn btn-sm btn-success" onclick="readexecl()">批量导入</a></td>
+								<td><a class="btn btn-sm btn-success" onclick="window.location.href='<%=basePath%>/policy/downExcel.do'">下载模版</a></td>
 							</tr>
 						</table>
 						<!-- 检索  -->
@@ -285,6 +289,16 @@
 			});
 		});
 		
+		function readexecl(){
+			$("#policyexcel").click();
+		}
+		
+		function readfile(){
+			$("#Form").attr("action","policy/readExcel.do");
+			$("#Form").attr("enctype","multipart/form-data");
+			$("#Form").submit();
+		}	
+			
 		//新增
 		function add(){
 			 top.jzts();

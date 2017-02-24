@@ -90,18 +90,9 @@ public class UserController extends BaseController {
 		List<PageData>	userList = userService.listUsers(page);	//列出用户列表
 		pd.put("ROLE_ID", "1");
 		List<Role> roleList = roleService.listAllRolesByPId(pd);//列出所有系统用户角色
-		pd.put("PARENT_ID", "1");
-		page.setPd(pd);
-		List<PageData>	depList = departmentService.list(page);	//列出所属公司列表
-		//列出部门列表
-		pd.put("DICTIONARIES_ID", "604d57bf56ca4590859838db79780b86");					//上级ID
-		page.setPd(pd);
-		List<PageData>	dicList = dictionariesService.list(page);	//列出Dictionaries列表
 		mv.setViewName("system/user/user_list");
 		mv.addObject("userList", userList);
 		mv.addObject("roleList", roleList);
-		mv.addObject("depList", depList);
-		mv.addObject("dicList", dicList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
 		return mv;
