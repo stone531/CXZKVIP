@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="WorkerMapper">
+<mapper namespace="CompanyMapper">
 	
 	<!--表名 -->
 	<sql id="tableName">
-		INS_WORKER
+		INS_COMPANY
 	</sql>
 	
 	<!-- 字段 -->
 	<sql id="Field">
-		ID,	
-		NAME,	
-		WORKCLASS,	
-		PARENTID,	
-		EXT1,	
-		EXT2,	
-		WORKER_ID
+		COMPNAME,	
+		WORKJSON,	
+		COMPANY_ID
 	</sql>
 	
 	<!-- 字段值 -->
 	<sql id="FieldValue">
-		#{ID},	
-		#{NAME},	
-		#{WORKCLASS},	
-		#{PARENTID},	
-		#{EXT1},	
-		#{EXT2},	
-		#{WORKER_ID}
+		#{COMPNAME},	
+		#{WORKJSON},	
+		#{COMPANY_ID}
 	</sql>
 	
 	<!-- 新增-->
@@ -45,7 +37,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			WORKER_ID = #{WORKER_ID}
+			COMPANY_ID = #{COMPANY_ID}
 	</delete>
 	
 	<!-- 修改 -->
@@ -53,15 +45,21 @@
 		update
 		<include refid="tableName"></include>
 		set 
-			ID = #{ID},
-			NAME = #{NAME},
-			WORKCLASS = #{WORKCLASS},
-			PARENTID = #{PARENTID},
-			EXT1 = #{EXT1},
-			EXT2 = #{EXT2},
-		WORKER_ID = WORKER_ID
+			COMPNAME = #{COMPNAME},
+			WORKJSON = #{WORKJSON},
+		COMPANY_ID = COMPANY_ID
 		where 
-		WORKER_ID = #{WORKER_ID}
+		COMPANY_ID = #{COMPANY_ID}
+	</update>
+	
+	<update id="editjson" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			WORKJSON = #{WORKJSON},
+		COMPANY_ID = COMPANY_ID
+		where 
+		COMPANY_ID = #{COMPANY_ID}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -71,26 +69,35 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			WORKER_ID = #{WORKER_ID}
+			COMPANY_ID = #{COMPANY_ID}
 	</select>
 	
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
-		SELECT
-		a.ID,	
-		a.NAME,	
-		a.WORKCLASS,	
-		b.COMPNAME AS PARENTID,	
-		a.EXT1,	
-		a.EXT2,	
-		a.WORKER_ID
-		FROM 
-		INS_WORKER a,
-		INS_COMPANY b
-		WHERE 
-		b.COMPANY_ID = a.PARENTID
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where 1=1
+		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+				-->
+				)
+		</if>
 	</select>
-	
+	<select id="getworkjson" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include>
+		where
+		COMPANY_ID = #{COMPANY_ID}
+	</select>
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
 		select
@@ -104,7 +111,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			WORKER_ID in
+			COMPANY_ID in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>

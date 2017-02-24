@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import javax.annotation.Resource;
@@ -57,6 +58,7 @@ import com.fh.controller.ins.worksubdata.WorkSubData;
 import java.security.Security;
 import java.util.Properties;
  
+
 
 
 
@@ -124,6 +126,8 @@ public class UserManageController extends BaseController {
 	@RequestMapping(value="/login/testjson")
 	public void testjson(PrintWriter out){
 		
+		ArrayList<WorkData> array = new ArrayList<WorkData>();
+		 
 		WorkData wd = new WorkData();
 		WorkSubData wsd = new WorkSubData();
 		WorkSSubData wssd = new WorkSSubData();
@@ -135,9 +139,11 @@ public class UserManageController extends BaseController {
 		wsd.setS(wssd);
 		wd.setS(wsd);
 		
+		array.add(wd);
+		array.add(wd);
+		array.add(wd);
 		
-		
-		JSONObject js  = JSONObject.fromObject(wd);
+		JSONArray js  = JSONArray.fromObject(array);
 		System.out.println(js);
 		out.write(js.toString());
 		out.close();

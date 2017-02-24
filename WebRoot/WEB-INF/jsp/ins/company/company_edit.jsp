@@ -27,22 +27,15 @@
 				<div class="row">
 					<div class="col-xs-12">
 					
-					<form action="worker/${msg }.do" name="Form" id="Form" method="post">
-						<input type="hidden" name="WORKER_ID" id="WORKER_ID" value="${pd.WORKER_ID}"/>
+					<form action="company/${msg }.do" name="Form" id="Form" method="post">
+						<input type="hidden" name="COMPANY_ID" id="COMPANY_ID" value="${pd.COMPANY_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">职业编码:</td>
-								<td><input type="text" name="ID" id="ID" value="${pd.ID}" maxlength="255" placeholder="这里输入worker id" title="worker id" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">公司名称:</td>
+								<td><input type="text" name="COMPNAME" id="COMPNAME" value="${pd.COMPNAME}" maxlength="255" placeholder="这里输入公司名称" title="公司名称" style="width:98%;"/></td>
 							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">职业名称:</td>
-								<td><input type="text" name="NAME" id="NAME" value="${pd.NAME}" maxlength="255" placeholder="这里输入worker name" title="worker name" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">职业类别:</td>
-								<td><input type="text" name="WORKCLASS" id="WORKCLASS" value="${pd.WORKCLASS}" maxlength="255" placeholder="这里输入职业类别" title="职业类别" style="width:98%;"/></td>
-							</tr>
+							
 							<tr>
 								<td style="text-align: center;" colspan="10">
 									<a class="btn btn-mini btn-primary" onclick="save();">保存</a>
@@ -82,64 +75,24 @@
 		$(top.hangge());
 		//保存
 		function save(){
-			if($("#ID").val()==""){
-				$("#ID").tips({
+			if($("#COMPNAME").val()==""){
+				$("#COMPNAME").tips({
 					side:3,
-		            msg:'请输入worker id',
+		            msg:'请输入公司名称',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#ID").focus();
+				$("#COMPNAME").focus();
 			return false;
 			}
-			if($("#NAME").val()==""){
-				$("#NAME").tips({
+			if($("#WORKJSON").val()==""){
+				$("#WORKJSON").tips({
 					side:3,
-		            msg:'请输入worker name',
+		            msg:'请输入职业json数据',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#NAME").focus();
-			return false;
-			}
-			if($("#WORKCLASS").val()==""){
-				$("#WORKCLASS").tips({
-					side:3,
-		            msg:'请输入职业类别',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#WORKCLASS").focus();
-			return false;
-			}
-			if($("#PARENTID").val()==""){
-				$("#PARENTID").tips({
-					side:3,
-		            msg:'请输入父id',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#PARENTID").focus();
-			return false;
-			}
-			if($("#EXT1").val()==""){
-				$("#EXT1").tips({
-					side:3,
-		            msg:'请输入备用',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#EXT1").focus();
-			return false;
-			}
-			if($("#EXT2").val()==""){
-				$("#EXT2").tips({
-					side:3,
-		            msg:'请输入备用',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#EXT2").focus();
+				$("#WORKJSON").focus();
 			return false;
 			}
 			$("#Form").submit();

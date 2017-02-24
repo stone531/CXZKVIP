@@ -31,7 +31,7 @@
 						<div class="col-xs-12">
 							
 						<!-- 检索  -->
-						<form action="worker/list.do" method="post" name="Form" id="Form">
+						<form action="company/list.do" method="post" name="Form" id="Form">
 						<table style="margin-top:5px;">
 							<tr>
 								<td>
@@ -55,7 +55,6 @@
 								<c:if test="${QX.cha == 1 }">
 								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
 								</c:if>
-								<td><a class="btn btn-sm btn-success" onclick="readExcel();">批量导入</a></td>
 							</tr>
 						</table>
 						<!-- 检索  -->
@@ -67,10 +66,8 @@
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
 									</th>
 									<th class="center" style="width:50px;">序号</th>
-									<th class="center">职业编码</th>
-									<th class="center">职业名称</th>
-									<th class="center">职业类别</th>
-									<th class="center">所属公司</th>
+									<th class="center">公司名称</th>
+									<th class="center">职业json数据</th>
 									<th class="center">操作</th>
 								</tr>
 							</thead>
@@ -83,25 +80,23 @@
 									<c:forEach items="${varList}" var="var" varStatus="vs">
 										<tr>
 											<td class='center'>
-												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.WORKER_ID}" class="ace" /><span class="lbl"></span></label>
+												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.COMPANY_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.ID}</td>
-											<td class='center'>${var.NAME}</td>
-											<td class='center'>${var.WORKCLASS}</td>
-											<td class='center'>${var.PARENTID}</td>
+											<td class='center'>${var.COMPNAME}</td>
+											<td class='center'>${var.WORKJSON}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
 												</c:if>
 												<div class="hidden-sm hidden-xs btn-group">
 													<c:if test="${QX.edit == 1 }">
-													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.WORKER_ID}');">
+													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.COMPANY_ID}');">
 														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
 													</a>
 													</c:if>
 													<c:if test="${QX.del == 1 }">
-													<a class="btn btn-xs btn-danger" onclick="del('${var.WORKER_ID}');">
+													<a class="btn btn-xs btn-danger" onclick="del('${var.COMPANY_ID}');">
 														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
 													</a>
 													</c:if>
@@ -115,7 +110,7 @@
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 															<c:if test="${QX.edit == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="edit('${var.WORKER_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
+																<a style="cursor:pointer;" onclick="edit('${var.COMPANY_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
 																	<span class="green">
 																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																	</span>
@@ -124,7 +119,7 @@
 															</c:if>
 															<c:if test="${QX.del == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="del('${var.WORKER_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
+																<a style="cursor:pointer;" onclick="del('${var.COMPANY_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
 																	<span class="red">
 																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																	</span>
@@ -167,10 +162,9 @@
 								<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
 							</tr>
 						</table>
-						
-						
 						</div>
 						</form>
+					
 						</div>
 						<!-- /.col -->
 					</div>
@@ -179,6 +173,19 @@
 				<!-- /.page-content -->
 			</div>
 		</div>
+		
+<fieldset id="work_filed">
+    <legend>选择职业</legend>
+      <select class="province" data-first-title="选择">
+        <option value="">请选择</option>
+      </select>
+      <select class="city" data-first-title="选择">
+        <option value="">请选择</option>
+      </select>
+      <select class="area" data-first-title="选择">
+        <option value="">请选择</option>
+      </select>
+</fieldset>
 		<!-- /.main-content -->
 
 		<!-- 返回顶部 -->
@@ -202,6 +209,9 @@
 	<script src="static/ace/js/date-time/bootstrap-datepicker.js"></script>
 	<!--提示框-->
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
+	
+	<script src="static/worker/jquery.cxselect.js"></script>
+	
 	<script type="text/javascript">
 		$(top.hangge());//关闭加载状态
 		//检索
@@ -262,7 +272,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="新增";
-			 diag.URL = '<%=basePath%>worker/goAdd.do';
+			 diag.URL = '<%=basePath%>company/goAdd.do';
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
@@ -284,7 +294,7 @@
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
-					var url = "<%=basePath%>worker/delete.do?WORKER_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>company/delete.do?COMPANY_ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						nextPage(${page.currentPage});
 					});
@@ -298,7 +308,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>worker/goEdit.do?WORKER_ID='+Id;
+			 diag.URL = '<%=basePath%>company/goEdit.do?COMPANY_ID='+Id;
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
@@ -339,7 +349,7 @@
 							top.jzts();
 							$.ajax({
 								type: "POST",
-								url: '<%=basePath%>worker/deleteAll.do?tm='+new Date().getTime(),
+								url: '<%=basePath%>company/deleteAll.do?tm='+new Date().getTime(),
 						    	data: {DATA_IDS:str},
 								dataType:'json',
 								//beforeSend: validateData,
@@ -358,30 +368,14 @@
 		
 		//导出excel
 		function toExcel(){
-			window.location.href='<%=basePath%>worker/excel.do';
+			window.location.href='<%=basePath%>company/excel.do';
 		}
 		
-		function readExcel(){
-			 top.jzts();
-			 var diag = new top.Dialog();
-			 diag.Drag=true;
-			 diag.Title ="新增";
-			 diag.URL = '<%=basePath%>worker/goreadExcel.do';
-			 diag.Width = 450;
-			 diag.Height = 355;
-			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-					 if('${page.currentPage}' == '0'){
-						 top.jzts();
-						 setTimeout("self.location=self.location",100);
-					 }else{
-						 nextPage(${page.currentPage});
-					 }
-				}
-				diag.close();
-			 };
-			 diag.show();
-		}
+		$.cxSelect.defaults.url = '<%=basePath%>company/fg/getworkjson';
+		$('#work_filed').cxSelect({
+    	selects: ['province', 'city', 'area'],
+    	emptyStyle: 'none'
+  });
 	</script>
 
 
