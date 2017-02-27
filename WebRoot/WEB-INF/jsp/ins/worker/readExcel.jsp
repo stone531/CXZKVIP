@@ -41,6 +41,7 @@
 								</td>
 							</tr>
 							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">选择文件:</td>
 								<td><input type="file" name="workerexcel" id="workerexcel" accept=".xls"/></td>
 							</tr>
 							<tr>
