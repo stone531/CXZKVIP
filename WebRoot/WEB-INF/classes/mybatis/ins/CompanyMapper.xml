@@ -9,14 +9,16 @@
 	
 	<!-- 字段 -->
 	<sql id="Field">
-		COMPNAME,	
+		COMPNAME,
+		COMPTEL,	
 		WORKJSON,	
 		COMPANY_ID
 	</sql>
 	
 	<!-- 字段值 -->
 	<sql id="FieldValue">
-		#{COMPNAME},	
+		#{COMPNAME},
+		#{COMPTEL},	
 		#{WORKJSON},	
 		#{COMPANY_ID}
 	</sql>
@@ -46,6 +48,7 @@
 		<include refid="tableName"></include>
 		set 
 			COMPNAME = #{COMPNAME},
+			COMPTEL = #{COMPTEL},
 			WORKJSON = #{WORKJSON},
 		COMPANY_ID = COMPANY_ID
 		where 

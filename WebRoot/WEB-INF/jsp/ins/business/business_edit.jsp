@@ -43,11 +43,20 @@
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">业务所属公司:</td>
-								<td><input type="text" name="COMPANY" id="COMPANY" value="${pd.COMPANY}" maxlength="100" placeholder="这里输入业务所属公司" title="业务所属公司" style="width:98%;"/></td>
-							</tr>
-							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">公司电话:</td>
-								<td><input type="text" name="COMPANYTEL" id="COMPANYTEL" value="${pd.COMPANYTEL}" maxlength="20" placeholder="这里输入公司电话" title="公司电话" style="width:98%;"/></td>
+								<td>
+								<select id="COMPANYID" name="COMPANYID" title="业务所属公司" style="width:98%;" >																				
+										<c:choose>
+								            <c:when test="${not empty varListComp}">
+								            	<c:forEach items="${varListComp}" var="var" varStatus="vs">
+								            	<option value="${var.COMPANY_ID}">${var.COMPNAME}</option>						
+								            	</c:forEach>
+								            </c:when>
+								            <c:otherwise>
+										        <option value="卡类型名">卡类型</option>                                         
+								            </c:otherwise>
+										</c:choose>
+                                    </select>
+								</td>							
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">业务状态:</td>
@@ -121,24 +130,14 @@
 				$("#NAME").focus();
 			return false;
 			}
-			if($("#COMPANY").val()==""){
-				$("#COMPANY").tips({
+			if($("#COMPANYID").val()==""){
+				$("#COMPANYID").tips({
 					side:3,
 		            msg:'请输入业务所属公司',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#COMPANY").focus();
-			return false;
-			}
-			if($("#COMPANYTEL").val()==""){
-				$("#COMPANYTEL").tips({
-					side:3,
-		            msg:'请输入业务所属公司电话',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#COMPANYTEL").focus();
+				$("#COMPANYID").focus();
 			return false;
 			}
 			if($("#STATE").val()==""){

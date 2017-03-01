@@ -67,6 +67,7 @@
 									</th>
 									<th class="center" style="width:50px;">序号</th>
 									<th class="center">公司名称</th>
+									<th class="center">公司电话</th>
 									<th class="center">职业json数据</th>
 									<th class="center">操作</th>
 								</tr>
@@ -84,6 +85,7 @@
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>${var.COMPNAME}</td>
+											<td class='center'>${var.COMPTEL}</td>
 											<td class='center'>${var.WORKJSON}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">

@@ -83,6 +83,10 @@
 							</tr>
 							
 							-->
+							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">服务人员姓名:</td>
+								<td><input type="text" name="SVRNAME" id="SVRNAME" value="${pd.SVRNAME}" maxlength="255" placeholder="这里输入服务人员姓名" title="服务人员姓名" style="width:98%;"/></td>
+							</tr>
 							
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">密码:</td>
@@ -167,44 +171,14 @@
 				$("#EXPIRYTIME").focus();
 			return false;
 			}
-			if($("#POLICYNO").val()==""){
-				$("#POLICYNO").tips({
-					side:3,
-		            msg:'请输入保单号',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#POLICYNO").focus();
-			return false;
-			}
-			if($("#IANTNAME").val()==""){
-				$("#IANTNAME").tips({
+			if($("#SVRNAME").val()==""){
+				$("#SVRNAME").tips({
 					side:3,
 		            msg:'请输入被保险人姓名',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#IANTNAME").focus();
-			return false;
-			}
-			if($("#IANTPAPERNO").val()==""){
-				$("#IANTPAPERNO").tips({
-					side:3,
-		            msg:'请输入被保险人身份证号',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#IANTPAPERNO").focus();
-			return false;
-			}
-			if($("#IANTPHONE").val()==""){
-				$("#IANTPHONE").tips({
-					side:3,
-		            msg:'请输入被保险人手机号',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#IANTPHONE").focus();
+				$("#SVRNAME").focus();
 			return false;
 			}
 			if($("#PASSWORD").val()==""){

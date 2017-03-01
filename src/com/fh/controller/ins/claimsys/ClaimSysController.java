@@ -35,6 +35,7 @@ import net.sf.json.JSONObject;
 import com.fh.service.ins.policy.PolicyManager;
 import com.fh.service.ins.cardinfo.CardInfoManager;
 import com.fh.service.ins.business.BusinessManager;
+import com.fh.service.ins.company.CompanyManager;
 import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 
@@ -54,7 +55,9 @@ public class ClaimSysController extends BaseController {
 	@Resource(name="cardinfoService")
 	private CardInfoManager cardinfoService;
 	@Resource(name="businessService")
-	private BusinessManager businessService;
+	private BusinessManager businessService;	
+	@Resource(name="companyService")
+	private CompanyManager companyService;
 
 	/**保存
 	 * @param
@@ -83,14 +86,16 @@ public class ClaimSysController extends BaseController {
 			claimsysService.save(pd); 					//执行保存
 			//查询保险公司
 			PageData pdTemp = new PageData();
-			//根据保单查卡号
-			pdTemp.put("POLICY_ID", pd.getString("POLICYNO"));
-			pdTemp = policyService.findById(pdTemp);
-			
-			//根据报险公司查电话
-			pdRet.put("BUSINESS_ID", pdTemp.getString("BUSINESSID"));
-			pdRet = businessService.findById(pdRet);
-
+			//根据保单查卡号			
+			pdTemp.put("CARDNO", pd.getString("POLICYNO"));
+			List<PageData> varListPN = policyService.findByCardId(pdTemp);
+			if(varListPN.size() == 1){
+				PageData pdTemp1 = varListPN.get(0);
+				pdTemp1.put("BUSINESS_ID", pdTemp1.getString("BUSINESSID"));
+				PageData pdBuss = businessService.findById(pdTemp1);
+				pdTemp1.put("COMPANY_ID", pdBuss.getString("COMPANYID"));
+				pdRet = companyService.findById(pdTemp1);				
+			}
 			pdRet.put("IsSuccess", true);
 		}else{
 			pdRet.put("IsSuccess", false);
@@ -291,6 +296,8 @@ public class ClaimSysController extends BaseController {
 					//根据报险公司查电话
 					pdIn.put("BUSINESS_ID", varListPN.get(i).getString("BUSINESSID"));
 					PageData pdBuss = businessService.findById(pdIn);
+					pdIn.put("COMPANY_ID", pdBuss.getString("COMPANYID"));
+					PageData pdCompany = companyService.findById(pdIn);
 					pdIn.put("CARDNO", varListPN.get(i).getString("CARDNO"));
 					pdIn.put("POLICYNO", varListPN.get(i).getString("POLICYNO"));
 					pdIn.put("UPDATEFLAG", "0");
@@ -300,11 +307,11 @@ public class ClaimSysController extends BaseController {
 						claimsysService.changeUpdateFlag(pdIn);
 						pdOut.put("IsOrNo", "1");
 						pdOut.put("CARDNO", varListPN.get(i).getString("CARDNO"));
-						pdOut.put("COMPANYTEL", pdBuss.getString("COMPANYTEL"));
+						pdOut.put("COMPTEL", pdCompany.getString("COMPTEL"));
 						varList.add(pdOut);
 					}else{
 						pdIn.put("IsOrNo", "0");
-						pdIn.put("COMPANYTEL", pdBuss.getString("COMPANYTEL"));
+						pdIn.put("COMPTEL", pdCompany.getString("COMPTEL"));
 						varList.add(pdIn);
 					}			
 				}				

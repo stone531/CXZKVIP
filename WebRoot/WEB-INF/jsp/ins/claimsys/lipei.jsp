@@ -261,7 +261,7 @@
 				rules:{
 					POLICYNO: {
 						required:true,
-						rangelength:[5,50],
+						rangelength:[1,50],
 						regex:/[^\u4e00-\u9fa5]/g
 					},
 					INFORNAME: {
@@ -303,7 +303,7 @@
 				messages: {
 					POLICYNO: {
 						required: "请输入服务卡号",
-						rangelength: "长度必须为5-50个字符",
+						rangelength: "长度必须为1-50个字符",
 						regex:"不允许为汉字"
 					},
 					INFORNAME: {
@@ -386,7 +386,7 @@
 						goCourierW(txt);
                     }
                     if (data.IsSuccess == true) { 
-                        var txt=  "保险公司："+data.COMPANY+"<br/>联系电话："+data.COMPANYTEL+"<br/>";
+                        var txt=  "保险公司："+data.COMPNAME+"<br/>联系电话："+data.COMPTEL+"<br/>";
 						flag = 1;
 						goCourierW(txt);
                         $("input").attr("value", "");

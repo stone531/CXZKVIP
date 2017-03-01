@@ -411,14 +411,12 @@ public class PolicyController extends BaseController {
 		titles.add("服务卡号");	//2
 		titles.add("投保人姓名");	//3
 		titles.add("保险类型");	//4
-		titles.add("投保人证件类型");	//5
 		titles.add("投保人证件号码");	//6
 		titles.add("投保人手机号");	//7
 		titles.add("被保险人姓名");	//8
 		titles.add("被保险人证件号码");	//9
 		titles.add("被保险人职业");	//10
 		titles.add("与被保险人关系");	//11
-		titles.add("被保险人年龄");	//12
 		titles.add("受益人姓名");	//13
 		titles.add("受益人证件号码");	//14
 		titles.add("服务人员姓名");	//15
@@ -437,24 +435,22 @@ public class PolicyController extends BaseController {
 			vpd.put("var1", varOList.get(i).getString("POLICYNO"));	//1
 			vpd.put("var2", varOList.get(i).getString("CARDNO"));	//2
 			vpd.put("var3", varOList.get(i).getString("IERNAME"));	//3
-			vpd.put("var4", varOList.get(i).get("BUSINESSID").toString());	//4
-			vpd.put("var5", varOList.get(i).get("IERPAPERTYPE").toString());	//5
-			vpd.put("var6", varOList.get(i).getString("IERPAPERNO"));	//6
-			vpd.put("var7", varOList.get(i).getString("IERPHONE"));	//7
-			vpd.put("var8", varOList.get(i).getString("IANTNAME"));	//8
-			vpd.put("var9", varOList.get(i).getString("IANTPAPERNO"));	//9
-			vpd.put("var10", varOList.get(i).getString("IANTPROFESSION"));	//10
-			vpd.put("var11", varOList.get(i).getString("IANTRELATION"));	//11
-			vpd.put("var12", varOList.get(i).get("IANAGE").toString());	//12
-			vpd.put("var13", varOList.get(i).getString("BENNAME"));	//13
-			vpd.put("var14", varOList.get(i).getString("BENPAPERNO"));	//14
-			vpd.put("var15", varOList.get(i).getString("SVRNAME"));	//15
-			vpd.put("var16", varOList.get(i).getString("SVRPHONE"));	//16
-			vpd.put("var17", varOList.get(i).getString("ISSENDMESSAGE"));	//17
-			vpd.put("var18", varOList.get(i).getString("ISHASPOLICYNO"));	//18
-			vpd.put("var19", varOList.get(i).getString("CREATED"));	//19
-			vpd.put("var20", varOList.get(i).getString("UPDATED"));	//20
-			vpd.put("var21", varOList.get(i).getString("INVALID"));	//21
+			vpd.put("var4", varOList.get(i).getString("BUSINESSID"));	//4
+			vpd.put("var5", varOList.get(i).getString("IERPAPERNO"));	//6
+			vpd.put("var6", varOList.get(i).getString("IERPHONE"));	//7
+			vpd.put("var7", varOList.get(i).getString("IANTNAME"));	//8
+			vpd.put("var8", varOList.get(i).getString("IANTPAPERNO"));	//9
+			vpd.put("var9", varOList.get(i).getString("IANTPROFESSION"));	//10
+			vpd.put("var10", varOList.get(i).getString("IANTRELATION"));	//11
+			vpd.put("var11", varOList.get(i).getString("BENNAME"));	//13
+			vpd.put("var12", varOList.get(i).getString("BENPAPERNO"));	//14
+			vpd.put("var13", varOList.get(i).getString("SVRNAME"));	//15
+			vpd.put("var14", varOList.get(i).getString("SVRPHONE"));	//16
+			vpd.put("var15", varOList.get(i).getString("ISSENDMESSAGE"));	//17
+			vpd.put("var16", varOList.get(i).getString("ISHASPOLICYNO"));	//18
+			vpd.put("var17", varOList.get(i).getString("CREATED"));	//19
+			vpd.put("var18", varOList.get(i).getString("UPDATED"));	//20
+			vpd.put("var19", varOList.get(i).getString("INVALID"));	//21
 			varList.add(vpd);
 		}
 		dataMap.put("varList", varList);

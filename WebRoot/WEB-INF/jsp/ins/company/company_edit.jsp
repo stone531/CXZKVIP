@@ -35,7 +35,10 @@
 								<td style="width:75px;text-align: right;padding-top: 13px;">公司名称:</td>
 								<td><input type="text" name="COMPNAME" id="COMPNAME" value="${pd.COMPNAME}" maxlength="255" placeholder="这里输入公司名称" title="公司名称" style="width:98%;"/></td>
 							</tr>
-							
+							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">公司电话:</td>
+								<td><input type="text" name="COMPTEL" id="COMPTEL" value="${pd.COMPTEL}" maxlength="20" placeholder="这里输入公司电话" title="公司电话" style="width:98%;"/></td>
+							</tr>							
 							<tr>
 								<td style="text-align: center;" colspan="10">
 									<a class="btn btn-mini btn-primary" onclick="save();">保存</a>
@@ -83,6 +86,16 @@
 		            time:2
 		        });
 				$("#COMPNAME").focus();
+			return false;
+			}
+			if($("#COMPTEL").val()==""){
+				$("#COMPTEL").tips({
+					side:3,
+		            msg:'请输入业务所属公司电话',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#COMPTEL").focus();
 			return false;
 			}
 			if($("#WORKJSON").val()==""){

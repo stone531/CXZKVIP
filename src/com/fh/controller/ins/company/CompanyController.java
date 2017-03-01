@@ -187,14 +187,16 @@ public class CompanyController extends BaseController {
 		Map<String,Object> dataMap = new HashMap<String,Object>();
 		List<String> titles = new ArrayList<String>();
 		titles.add("公司名称");	//1
-		titles.add("职业json数据");	//2
+		titles.add("公司电话");	//2
+		titles.add("职业json数据");	//3
 		dataMap.put("titles", titles);
 		List<PageData> varOList = companyService.listAll(pd);
 		List<PageData> varList = new ArrayList<PageData>();
 		for(int i=0;i<varOList.size();i++){
 			PageData vpd = new PageData();
 			vpd.put("var1", varOList.get(i).getString("COMPNAME"));	//1
-			vpd.put("var2", varOList.get(i).getString("WORKJSON"));	//2
+			vpd.put("var2", varOList.get(i).getString("COMPTEL"));	//2
+			vpd.put("var3", varOList.get(i).getString("WORKJSON"));	//3
 			varList.add(vpd);
 		}
 		dataMap.put("varList", varList);

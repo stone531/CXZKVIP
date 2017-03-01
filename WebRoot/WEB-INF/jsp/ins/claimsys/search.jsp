@@ -424,7 +424,7 @@
 								subTable += "<td class=\"center\">"+list.POLICYNO+"</td>";
 							}
 							
-							subTable += "<td class=\"center\">"+list.COMPANYTEL+"</td>";
+							subTable += "<td class=\"center\">"+list.COMPTEL+"</td>";
 							subTable += "<td class=\"center\">";
 							if (list.IsOrNo == 0){
 								subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";

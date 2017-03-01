@@ -437,34 +437,24 @@ public class CardInfoController extends BaseController {
 			List<PageData> listPd = (List)ObjectExcelRead.readExcel(filePath,fileName, 2, 0, 0);	//执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
 			/**
 			 * var0 :CARDID:卡号
-			 * var1 :EXPIRYTIME：有效时间
-			 * var2 :POLICYNO：保单号
-			 * var3:IANTNAME:被投保人姓名或者投保人姓名
-			 * var4:IANTPAPERNO:被保险人身份证号
-			 * var5:IANTPHONE：投保电话
-			 * var6:PASSWORD：密码
-			 * 
+			 * var1:PASSWORD：密码
+			 * var2 :EXPIRYTIME：有效时间
+			 * var3:IANTNAME:服务人员姓名
 			 */
 			for(int i=0;i<listPd.size();i++){
 				PageData pageData= new PageData();
-				pageData.put("CARDID", listPd.get(i).getString("var0"));
+				pageData.put("CARDID", listPd.get(i).getString("var0")); //1
 	
 				if(cardinfoService.findByCardId(pageData) != null){
 					mv.addObject("msg","卡号:"+listPd.get(i).getString("var0")+"已导入!");
 					mv.setViewName("save_result");
 					return mv;
 				}
-				//PageData pageData= new PageData();
-				//pageData.put("CARDID", listPd.get(i).getString("var0"));	//1
-				
-				pageData.put("EXPIRYTIME", listPd.get(i).get("var1").toString());	//2
-				pageData.put("POLICYNO", listPd.get(i).get("var2").toString());	//3
-				pageData.put("IANTNAME", listPd.get(i).get("var3").toString());	//4
-				//if(isNumeric(listPd.get(i).get("var4").toString())){
-				pageData.put("IANTPAPERNO", listPd.get(i).get("var4").toString());	//5
-				//}
-				pageData.put("IANTPHONE", listPd.get(i).getString("var5"));	//6
-				pageData.put("PASSWORD", listPd.get(i).getString("var6"));	//6
+			
+				pageData.put("PASSWORD", listPd.get(i).get("var1").toString());	//2
+				pageData.put("EXPIRYTIME", listPd.get(i).get("var2").toString());	//3
+				pageData.put("SVRNAME", listPd.get(i).get("var3").toString());	//4
+
 				pageData.put("STATE", "1");
 				pageData.put("TYPEID", card_type);
 				pageData.put("CARDINFO_ID", this.get32UUID());
@@ -516,11 +506,8 @@ public class CardInfoController extends BaseController {
 		titles.add("卡的状态");	//2
 		titles.add("卡类型");	//3
 		titles.add("有效日期");	//4
-		titles.add("保单号");	//5
-		titles.add("被保险人姓名");	//6
-		titles.add("被保险人身份证号");	//7
-		titles.add("被保险人手机号");	//8
-		titles.add("密码");	//9
+		titles.add("服务人员姓名");	//5
+		titles.add("密码");	//6
 		dataMap.put("titles", titles);
 		List<PageData> varOList = cardinfoService.listAll(pd);
 		List<PageData> varList = new ArrayList<PageData>();
@@ -530,11 +517,8 @@ public class CardInfoController extends BaseController {
 			vpd.put("var2", varOList.get(i).get("STATE").toString());	//2
 			vpd.put("var3", varOList.get(i).getString("TYPEID"));	//3
 			vpd.put("var4", varOList.get(i).getString("EXPIRYTIME"));	//4
-			vpd.put("var5", varOList.get(i).getString("POLICYNO"));	//5
-			vpd.put("var6", varOList.get(i).getString("IANTNAME"));	//6
-			vpd.put("var7", varOList.get(i).getString("IANTPAPERNO"));	//7
-			vpd.put("var8", varOList.get(i).getString("IANTPHONE"));	//8
-			vpd.put("var9", varOList.get(i).getString("PASSWORD"));	//9
+			vpd.put("var5", varOList.get(i).getString("SVRNAME"));	//5
+			vpd.put("var6", varOList.get(i).getString("PASSWORD"));	//6
 			varList.add(vpd);
 		}
 		dataMap.put("varList", varList);
