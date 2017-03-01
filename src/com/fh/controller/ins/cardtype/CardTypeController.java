@@ -193,51 +193,45 @@ public class CardTypeController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/readExcel")
-	public ModelAndView readExcel(
+	public ModelAndView readExcel(Page page,
 			@RequestParam(value="cardtypeexcel",required=false) MultipartFile file
 			) throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		System.out.println(file);
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;}
-			String filePath = PathUtil.getClasspath() + Const.FILEPATHFILE;								//文件上传路径
-			String fileName =  FileUpload.fileUp(file, filePath, "cardtypeexcel");							//执行上传
+		String filePath = PathUtil.getClasspath() + Const.FILEPATHFILE;								//文件上传路径
+		String fileName =  FileUpload.fileUp(file, filePath, "cardtypeexcel");							//执行上传
 			
-			List<PageData> listPd = (List)ObjectExcelRead.readExcel(filePath,fileName, 2, 0, 0);	//执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
-			/**
-			 * var0 :NAME:姓名
-			 * var1 :LIMITAMOUNT:限制金额
-			 * var2 :AMOUNT:面值
-			 * var3 :MINAGE：最小年纪
-			 * var4 :MAXAGE：最大使用年龄
-			 * var5:PROFESSION:限制使用的职业列表
-			 */
-			for(int i=0;i<listPd.size();i++){
-				PageData pageData= new PageData();
+		List<PageData> listPd = (List)ObjectExcelRead.readExcel(filePath,fileName, 2, 0, 0);	//执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
+		/**
+		* var0 :NAME:姓名
+		* var1 :LIMITAMOUNT:限制金额
+		* var2 :AMOUNT:面值
+		* var3 :MINAGE：最小年纪
+		* var4 :MAXAGE：最大使用年龄
+		* var5:PROFESSION:限制使用的职业列表
+		*/
+		for(int i=0;i<listPd.size();i++){
+			PageData pageData= new PageData();
 				
-				pageData.put("NAME", listPd.get(i).getString("var0"));	//1
-				if(isNumeric(listPd.get(i).get("var1").toString())){
-					pageData.put("LIMITAMOUNT", listPd.get(i).get("var1").toString());	//2
-				}
-				if(isNumeric(listPd.get(i).get("var2").toString())){
+			pageData.put("NAME", listPd.get(i).getString("var0"));	//1
+			if(isNumeric(listPd.get(i).get("var1").toString())){
+				pageData.put("LIMITAMOUNT", listPd.get(i).get("var1").toString());	//2
+			}
+			if(isNumeric(listPd.get(i).get("var2").toString())){
 				pageData.put("AMOUNT", listPd.get(i).get("var2").toString());	//3
-				}
-				if(isNumeric(listPd.get(i).get("var3").toString())){
+			}
+			if(isNumeric(listPd.get(i).get("var3").toString())){
 				pageData.put("MINAGE", listPd.get(i).get("var3").toString());	//4
-				}
-				if(isNumeric(listPd.get(i).get("var4").toString())){
+			}
+			if(isNumeric(listPd.get(i).get("var4").toString())){
 				pageData.put("MAXAGE", listPd.get(i).get("var4").toString());	//5
-				}
-				pageData.put("PROFESSION", listPd.get(i).getString("var5"));	//6
-				pageData.put("CARDTYPE_ID", this.get32UUID());
-				cardtypeService.save(pageData);
-				}
-				
-			/*存入数据库操作======================================*/
+			}
+			pageData.put("PROFESSION", listPd.get(i).getString("var5"));	//6
+			pageData.put("CARDTYPE_ID", this.get32UUID());
+			cardtypeService.save(pageData);
+		}
 			
-			mv.addObject("msg","success");
-		
-		mv.setViewName("save_result");
-		Page page=new Page();
 		return list(page);
 	}
 	public static boolean isNumeric(String str)

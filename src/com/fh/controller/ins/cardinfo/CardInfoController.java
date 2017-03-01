@@ -450,8 +450,7 @@ public class CardInfoController extends BaseController {
 				pageData.put("CARDID", listPd.get(i).getString("var0"));
 	
 				if(cardinfoService.findByCardId(pageData) != null){
-					
-					mv.addObject("msg","卡号不能重复");
+					mv.addObject("msg","卡号:"+listPd.get(i).getString("var0")+"已导入!");
 					mv.setViewName("save_result");
 					return mv;
 				}

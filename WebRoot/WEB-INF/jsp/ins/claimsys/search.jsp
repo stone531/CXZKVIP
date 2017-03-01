@@ -400,11 +400,11 @@
 					if(data.result != 0){
 						var sub="";
 						if(data.result == 1)
-          					sub += "<label>温馨提示：未查到卡信息！</label>";
+          					sub += "<label>温馨提示：未查到卡信息,请联系服务人员！</label>";
           				if(data.result == 2)
           					sub += "<label>温馨提示：卡号密码不正确！</label>";
           				if(data.result == 3)
-          					sub += "<label>温馨提示：您还尚未投保！</label>";
+          					sub += "<label>温馨提示：您还尚未投保,请联系服务人员！</label>";
           				//$("#showErr").append(sub);
 						$("#showErr").html(sub);
 						$("#showPolicy").html("");					

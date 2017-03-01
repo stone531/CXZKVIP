@@ -36,6 +36,7 @@ import com.fh.util.Jurisdiction;
 import com.fh.util.PathUtil;
 import com.fh.service.ins.policy.PolicyManager;
 import com.fh.service.ins.cardinfo.CardInfoManager;
+import com.fh.service.ins.business.BusinessManager;
 import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 
@@ -53,6 +54,9 @@ public class PolicyController extends BaseController {
 	
 	@Resource(name="cardinfoService")
 	private CardInfoManager cardinfoService;
+	
+	@Resource(name="businessService")
+	private BusinessManager businessService;
 	
 	/**保存
 	 * @param
@@ -309,85 +313,73 @@ public class PolicyController extends BaseController {
 		return AppUtil.returnObject(pd, map);
 	}
 	
+	@RequestMapping(value="goreadExcel")
+	public ModelAndView goreadExcel() throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		List<PageData> varList=businessService.listAll(pd);
+		mv.setViewName("ins/policy/readExcel");
+		mv.addObject("msg", "readExcel");
+		mv.addObject("varList",varList);
+		mv.addObject("pd", pd);
+		return mv;
+	}
+	
 	/**导入
 	 * @param
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/readExcel")
 	public ModelAndView readExcel(
-			@RequestParam(value="policyexcel",required=false) MultipartFile file
-			) throws Exception{
+			@RequestParam(value="policyexcel",required=false) MultipartFile file,@RequestParam(value="policy_type") String policy_type
+			) throws Exception{	
 		ModelAndView mv = this.getModelAndView();
 		System.out.println(file);
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;}
-			String filePath = PathUtil.getClasspath() + Const.FILEPATHFILE;								//文件上传路径
-			String fileName =  FileUpload.fileUp(file, filePath, "policyexcel");							//执行上传
+		String filePath = PathUtil.getClasspath() + Const.FILEPATHFILE;								//文件上传路径
+		String fileName =  FileUpload.fileUp(file, filePath, "policyexcel");							//执行上传
 			
-			List<PageData> listPd = (List)ObjectExcelRead.readExcel(filePath,fileName, 2, 0, 0);	//执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
-			/**
-			 * var0 :POLICYNO:保单号
-			 * var1 :CARDNO:服务卡号
-			 * var2 :IERNAME:投保人姓名
-			 * var3 :BUSINESSID：保险类型
-			 * var4 :IERPAPERTYPE：投保人证件类型
-			 * var5:IERPAPERNO:投保人证件号码
-			 * var6 :IERPHONE:投保人手机号
-			 * var7 :IANTNAME:被保险人姓名
-			 * var8 :IANTPAPERNO:被保险人证件号码
-			 * var9 :IANTPROFESSION：被保险人职业
-			 * var10 :IANTRELATION：与被保险人关系
-			 * var11:IANAGE:被保险人年龄
-			 * var12 :BENNAME:受益人姓名
-			 * var13 :BENPAPERNO:受益人证件号码
-			 * var14 :SVRNAME:服务人员姓名
-			 * var15 :SVRPHONE：服务人员手机号码
-			 * var16 :ISSENDMESSAGE：是否发送短信
-			 * var17:ISHASPOLICYNO:是否已经生成保单号
-			 * var18 :CREATED:投保时间
-			 * var19 :UPDATED：保单生效时间
-			 * var20 :INVALID：保单时效时间
-			 */
-			for(int i=0;i<listPd.size();i++){
-				PageData pageData= new PageData();
-				
-				pageData.put("POLICYNO", listPd.get(i).getString("var0"));	//1
-				pageData.put("CARDNO", listPd.get(i).getString("var1"));	//2
-				pageData.put("IERNAME", listPd.get(i).getString("var2"));	//3
-				pageData.put("BUSINESSID", listPd.get(i).getString("var3"));	//4
-				pageData.put("IERPAPERTYPE", listPd.get(i).getString("var4"));	//5
-				pageData.put("IERPAPERNO", listPd.get(i).getString("var5"));	//6
-				pageData.put("IERPHONE", listPd.get(i).getString("var6"));	//7
-				pageData.put("IANTNAME", listPd.get(i).getString("var7"));	//8
-				pageData.put("IANTPAPERNO", listPd.get(i).getString("var8"));	//9
-				pageData.put("IANTPROFESSION", listPd.get(i).getString("var9"));	//10
-				pageData.put("IANTRELATION", listPd.get(i).getString("var10"));	//11
-				
-				if(isNumeric(listPd.get(i).get("var11").toString())){
-				pageData.put("IANAGE", listPd.get(i).get("var11").toString());	//12
-				}
+		List<PageData> listPd = (List)ObjectExcelRead.readExcel(filePath,fileName, 2, 0, 0);	//执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
+		/**
+		* var0 :CARDNO:服务卡号
+	    * var1 :IERPHONE:投保人手机号
+		* var2 :IANTNAME:被保险人姓名
+		* var3 :IANTPAPERNO:被保险人证件号码
+		* var4 :SVRNAME:服务人员姓名
+		* var5 :SVRPHONE：服务人员手机号码
+		* var6 :CREATED:投保时间
+		* var7 :POLICYNO:保单号
+		*/			
+		for(int i=0;i<listPd.size();i++){
+			PageData pageData= new PageData();
+			pageData.put("CARDNO", listPd.get(i).getString("var0"));	//1
+			List<PageData>	varListPN = new ArrayList<PageData>();
+			varListPN = policyService.findByCardId(pageData);
+			if(varListPN.size() != 0){
+				mv.addObject("msg","该卡号:"+listPd.get(i).getString("var0")+"已投保!");
+				mv.setViewName("save_result");
+				return mv;
+			}
 
-				pageData.put("BENNAME", listPd.get(i).getString("var12"));	//13
-				pageData.put("BENPAPERNO", listPd.get(i).getString("var13"));	//14
-				pageData.put("SVRNAME", listPd.get(i).getString("var14"));	//15
-				pageData.put("SVRPHONE", listPd.get(i).getString("var15"));	//16
-				pageData.put("ISSENDMESSAGE", listPd.get(i).getString("var16"));	//17
-				pageData.put("ISHASPOLICYNO", listPd.get(i).getString("var17"));	//18
-				pageData.put("CREATED", listPd.get(i).getString("var18"));	//19
-				pageData.put("UPDATED", listPd.get(i).getString("var19"));	//20
-				pageData.put("INVALID", listPd.get(i).getString("var20"));	//21
+			pageData.put("IERPHONE", listPd.get(i).getString("var1"));	//2
+			pageData.put("IANTNAME", listPd.get(i).getString("var2"));	//3
+			pageData.put("IANTPAPERNO", listPd.get(i).getString("var3"));	//4				
+			pageData.put("SVRNAME", listPd.get(i).getString("var4"));	//5
+			pageData.put("SVRPHONE", listPd.get(i).getString("var5"));	//6
+			pageData.put("CREATED", listPd.get(i).get("var6").toString());	//7
+			pageData.put("POLICYNO", listPd.get(i).getString("var7"));	//8
 				
-				pageData.put("POLICY_ID", this.get32UUID());	//主键
+			pageData.put("IERPAPERTYPE", "1");
+			pageData.put("BUSINESSID", policy_type);
+			pageData.put("POLICY_ID", this.get32UUID());	//主键
 				
-				policyService.save(pageData);
-				}
-				
-			/*存入数据库操作======================================*/
-			
-			mv.addObject("msg","success");
+			policyService.save(pageData);
+		}
+		mv.addObject("msg","success");
 		
 		mv.setViewName("save_result");
-		Page page=new Page();
-		return list(page);
+		return mv;
 	}
 	
 	public static boolean isNumeric(String str)
@@ -436,6 +428,7 @@ public class PolicyController extends BaseController {
 		titles.add("投保时间");	//19
 		titles.add("保单生效时间");	//20
 		titles.add("保单时效时间");	//21
+		//
 		dataMap.put("titles", titles);
 		List<PageData> varOList = policyService.listAll(pd);
 		List<PageData> varList = new ArrayList<PageData>();
