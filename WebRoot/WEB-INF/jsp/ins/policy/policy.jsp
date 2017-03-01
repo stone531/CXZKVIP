@@ -10,7 +10,6 @@
 			+ path + "/";
 %>
 
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,6 +17,7 @@
 		<script src="static/main/js/index.js"></script>
 		<script type="text/javascript" src="static/js/jquery-1.7.2.js" ></script>
 		<script type="text/javascript" src="static/js/jquery.tips.js"></script>
+		<script src="static/worker/jquery.cxselect.js"></script>
 		 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">		
 		
 		
@@ -137,11 +137,22 @@
                   placeholder="被保险人证件号" onblur="paperNOBlur(this);">
                 </div>
                 <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人职业:仅限${PROFESSIONS}</label>
+                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人职业:</label>                
                 </div>
                 <div class="col-sm-12">
-                  <input type="text" id="iaprofession" maxlength="255" style="width:50%;"
-                  class="form-control" placeholder="被保险人职业">
+                  <!--  input type="text" id="iaprofession" maxlength="255" style="width:50%;"
+                  class="form-control" placeholder="被保险人职业" -->
+                  			<fieldset id="work_filed" class="control-label hidden-md hidden-sm">
+							      <select class="province" data-first-title="选择">
+							        <option value="">请选择</option>
+							      </select>
+							      <select class="city" data-first-title="选择">
+							        <option value="">请选择</option>
+							      </select>
+							      <select class="area" data-first-title="选择">
+							        <option value="">请选择</option>
+							      </select>
+							</fieldset>
                 </div>
                 <br>
                 <div class="col-sm-12 text-left">
@@ -477,6 +488,11 @@
 <!--javascript 脚本分割线********************************************************************************************************************  -->			
 <script type="text/javascript">
 
+	$.cxSelect.defaults.url = '<%=basePath%>company/fg/getworkjson';
+	
+	$('#work_filed').cxSelect({selects: ['province', 'city', 'area'],emptyStyle: 'none' });
+	
+
 		//馋看数组是否包含指定的元素
 		function contains(a, obj) {
 		    for (var i = 0; i < a.length; i++) {
@@ -787,6 +803,7 @@
 				return false;
 			}
 			
+			/*
 			//limit 职业
 			var professions=${PROFESSIONS};
 			//["警察","土匪","教师","学生"];
@@ -802,6 +819,7 @@
 				$("#iaprofession").focus();
 				return false;
 			}
+			*/
 			
 			//limit份数
 			if($("#iacopy").val()>${copies}){
@@ -890,6 +908,7 @@
 			$("#Form").hide();
 			return false;
 		}
+		
 </script>	
 
 	
