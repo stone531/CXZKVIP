@@ -478,20 +478,11 @@ public class PolicyController extends BaseController {
 		}
 		page.setPd(pd);
 		
-		//System.out.println("POLICY_ID ############# 11");
 		List<PageData>	varList=policyService.getRankingList(page);
-		//System.out.println("POLICY_ID ############# 220 :"+ varList);
 		mv.setViewName("ins/policy/policy_rankinglist");
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
-		//System.out.println("POLICY_ID ############# 22");
-		
-		//System.out.println("policyno"+pd.getString("POLICYNO"));
-		//if (pd.getString("POLICYNO")==null){
-		//	mv.addObject("display","none");
-		//}else{
-		//	mv.addObject("display", "block");
 		return mv;
 		}
 	
