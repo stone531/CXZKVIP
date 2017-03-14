@@ -116,12 +116,11 @@
 	          </div>
               <div class="center-block form-group has-success" >
                 <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">与投保人关系:</label>
+                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">与投保人关系:&nbsp;&nbsp;</label>
+                  <input type="checkbox" id="iarelation" value="其他"onclick="isOneSelf(this);">
+                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">本人</label>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="iarelation" maxlength="255" style="width:50%;"
-                  class="form-control" placeholder="与投保人关系">
-                </div>
+
                 <div class="col-sm-12 text-left">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人姓名:</label>
                 </div>
@@ -182,16 +181,8 @@
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">受益人姓名:</label>
                 </div>
                 <div class="col-sm-12">
-                  <input type="text" id="bname" maxlength="255" style="width:50%; " class="form-control"
+                  <input type="text" id="bname" maxlength="255" style="width:50%; " value="法定受益人" disabled="disabled" class="form-control"
                   placeholder="受益人姓名">
-                </div>
-                <br>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">受益人证件号码:</label>
-                </div>
-                <div class="col-sm-12">
-                  <input type="text" id="bpaperno" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="受益人证件号">
                 </div>
                 <br>
                 <div class="col-sm-12 text-left">
@@ -354,10 +345,6 @@
                   <input type="text" name="BENNAME" id="BENNAME" maxlength="255" value="${pd.BENNAME}"
                   style="background: border-box;border:hidden;" class="text-right">
                 </h5>
-                <h5 class="text-info text-justify">受益人证件号码:
-                  <input type="text" name="BENPAPERNO" id="BENPAPERNO" maxlength="255"
-                  value="${pd.BENPAPERNO}" style="background: border-box;border:hidden;" class="text-right">
-                </h5>
                 <h5 class="text-info text-justify">服务人员姓名:
                   <input type="text" name="SVRNAME" id="SVRNAME" maxlength="255"
                   value="${pd.SVRNAME}" style="background: border-box;border:hidden;" class="text-right">
@@ -440,10 +427,6 @@
                     <hr>
                     <h5 class="text-info text-justify">受益人姓名:</h5>
                     <input type="text" name="BENNAME" id="BENNAME" maxlength="255"
-                    value="" style="background: border-box;border:hidden;" class="">
-                    <hr>
-                    <h5 class="text-info text-justify">受益人证件号码:</h5>
-                    <input type="text" name="BENPAPERNO" id="BENPAPERNO" maxlength="255"
                     value="" style="background: border-box;border:hidden;" class="">
                     <hr>
                     <h5 class="text-info text-justify">服务人员姓名:</h5>
@@ -645,6 +628,20 @@
 			return 
 		}
 		
+		function isOneSelf(param){
+			if (param.checked){
+				document.getElementById("iarelation").value= "本人";
+				document.getElementById("ianame").value= $("#iename").val();
+				document.getElementById("iapaperno").value= $("#iepaperno").val();
+				var idNo = document.getElementById("iapaperno");
+				paperNOBlur(idNo);		
+			}else{
+				document.getElementById("iarelation").value= "其他";
+			}
+			 
+			return 
+		}
+		
 		function bussinessnext(){
 			$("#PolicyInfo").show();
 			$("#business").hide();
@@ -781,16 +778,6 @@
 				$("#bname").focus();
 			return false;
 			}
-			if($("#bpaperno").val()==""){
-				$("#bpaperno").tips({
-					side:3,
-		            msg:'请输入受益人身份证号',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#bpaperno").focus();
-			return false;
-			}
 			if($("#sname").val()==""){
 				$("#sname").tips({
 					side:3,
@@ -913,9 +900,6 @@
 			
 			var benname=$("#bname").val();
 			document.getElementById("BENNAME").value= benname;
-			
-			var benpagerno=$("#bpaperno").val();
-			document.getElementById("BENPAPERNO").value= benpagerno;
 	
 			var svrname=$("#sname").val()
 			document.getElementById("SVRNAME").value= svrname;
