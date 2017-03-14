@@ -56,6 +56,7 @@
 								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
 								</c:if>
 								<td><a class="btn btn-sm btn-success" onclick="readExcel();">批量导入</a></td>
+								<td><a class="btn btn-sm btn-success" onclick="window.location.href='<%=basePath%>/worker/downExcel.do'">下载模版</a></td>
 							</tr>
 						</table>
 						<!-- 检索  -->

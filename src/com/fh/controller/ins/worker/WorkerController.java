@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -31,6 +32,7 @@ import com.fh.controller.ins.worksubdata.WorkSubData;
 import com.fh.entity.Page;
 import com.fh.util.AppUtil;
 import com.fh.util.Const;
+import com.fh.util.FileDownload;
 import com.fh.util.FileUpload;
 import com.fh.util.ObjectExcelRead;
 import com.fh.util.ObjectExcelView;
@@ -158,7 +160,16 @@ public class WorkerController extends BaseController {
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
 		return mv;
-	}	
+	}
+	
+	/**下载模版
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/downExcel")
+	public void downExcel(HttpServletResponse response)throws Exception{
+		FileDownload.fileDownload(response, PathUtil.getClasspath() + Const.FILEPATHFILE + "职业录入模板.xls", "职业录入模板.xls");
+	}
 	
 	 /**批量删除
 	 * @param
