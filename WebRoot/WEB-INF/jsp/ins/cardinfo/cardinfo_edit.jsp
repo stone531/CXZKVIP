@@ -37,12 +37,19 @@
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">卡的状态:</td>
-								<td><input type="number" name="STATE" id="STATE" value="${pd.STATE}" maxlength="32" placeholder="这里输入卡的状态" title="卡的状态" style="width:98%;"/></td>
+								<td>
+								<!-- input type="number" name="STATE" id="STATE" value="${pd.STATE}" maxlength="32" placeholder="这里输入卡的状态" title="卡的状态" style="width:98%;"/-->
+								<select id="STATE" name="STATE" title="卡的状态" style="width:98%;">
+									  <option value="1">未激活</option>
+                                      <option value="2">已激活</option>
+                                      <option value="3">卡无效</option>
+                          		</select>
+                          		</td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">卡类型:</td>
 								<td>
-								<!--  input type="text" name="TYPEID" id="TYPEID" value="${pd.TYPEID}" maxlength="100" placeholder="这里输入卡类型" title="卡类型" style="width:98%;"/-->
+								<!-- input type="text" name="TYPEID" id="TYPEID" value="${pd.TYPEID}" maxlength="100" placeholder="这里输入卡类型" title="卡类型" style="width:98%;"/-->
 								<select id="TYPEID" name="TYPEID" title="卡类型" style="width:98%;" >																				
 										<c:choose>
 								            <c:when test="${not empty varList}">
@@ -174,7 +181,7 @@
 			if($("#SVRNAME").val()==""){
 				$("#SVRNAME").tips({
 					side:3,
-		            msg:'请输入被保险人姓名',
+		            msg:'请输入服务人员姓名',
 		            bg:'#AE81FF',
 		            time:2
 		        });

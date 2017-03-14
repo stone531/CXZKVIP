@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -240,6 +242,38 @@ public class CardInfoController extends BaseController {
 		
 		//mv.setViewName("ins/cardinfo/cardinfo_edit");	
 		return mv;
+	}
+	
+	/*服务人员是否匹配
+	 * @param
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/fg/hasSvrName")
+	public void hasSvrName(PrintWriter out) throws Exception{
+		//logBefore(logger,Jurisdiction.getUsername()+"SvrName");
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return;} //校验权限
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		String svrName = pd.getString("SVRNAME");
+		
+		PageData rtpd = cardinfoService.findByCardId(pd);
+		PageData jspd = new PageData();
+		
+		if(rtpd != null){
+			String svrNamesql = rtpd.getString("SVRNAME");
+			if(null != svrNamesql && !"".equals(svrNamesql) && svrName.equals(svrNamesql)){
+				jspd.put("IsSuccess", true);
+			} else{
+				jspd.put("IsSuccess", false);
+			}
+		} else{
+			jspd.put("IsSuccess", false);
+		}
+
+		Object js = JSONObject.fromObject(jspd);
+		out.write(js.toString());
+		out.close();
+		return ;
 	}
 	
 	/**保存

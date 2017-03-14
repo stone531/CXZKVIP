@@ -199,7 +199,7 @@
                 </div>
                 <div class="col-sm-12">
                   <input type="text" id="sname" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="服务人员姓名">
+                  placeholder="服务人员姓名" onblur="snameNOBlur(this);">
                 </div>
                 <br>
                 <div class="col-sm-12 text-left">
@@ -524,6 +524,34 @@
 
 		}
 		
+		function snameNOBlur(param){
+			if ($("#sname").val() == '') {
+				return;
+			}
+			$.ajax({
+        		type: "POST",
+        		url: '<%=basePath%>cardinfo/fg/hasSvrName.do',
+       			data: {CARDID:$("#CARDNO").val(), SVRNAME:$("#sname").val()},
+        		dataType: "json",
+        		success: function(data){
+                   if (data.IsSuccess){
+                   }else{
+                	  if (param.id=="sname"){
+						$("#sname").tips({
+							side:3,
+			            	msg:'服务人员不匹配',
+			            	bg:'#AE81FF',
+			            	time:2
+			        		});						
+						}
+						$("#sname").val('');
+						$("#sname").focus();	
+						return
+                   }
+                }
+   			});		
+		}
+		
 		function paperNOBlur(param){
 			//alert(param.value);
 			if (!validateIdCard(param.value)) {
@@ -535,16 +563,19 @@
 			            msg:'证件号码无效',
 			            bg:'#AE81FF',
 			            time:2
-			        });						
+			        });	
+			        $("#iapaperno").val('');
+			        $("#iapaperno").focus();					
 				}else if(param.id=="iepaperno"){
 					$("#iepaperno").tips({
 						side:3,
 			            msg:'证件号码无效',
 			            bg:'#AE81FF',
 			            time:2
-			        });						
-				}
-				
+			        });	
+			        $("#iepaperno").val('');
+			        $("#iepaperno").focus();				
+				}			
 			
 				return
 			}
