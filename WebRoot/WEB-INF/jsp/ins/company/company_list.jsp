@@ -175,7 +175,7 @@
 				<!-- /.page-content -->
 			</div>
 		</div>
-		
+<!--		
 <fieldset id="work_filed">
     <legend>选择职业</legend>
       <select class="province" data-first-title="选择">
@@ -188,6 +188,7 @@
         <option value="">请选择</option>
       </select>
 </fieldset>
+-->
 		<!-- /.main-content -->
 
 		<!-- 返回顶部 -->
