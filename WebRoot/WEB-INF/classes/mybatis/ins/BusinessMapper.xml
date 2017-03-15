@@ -76,10 +76,16 @@
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select
-		<include refid="Field"></include>
+		a.NAME,	
+		b.COMPNAME as COMPANYID,	
+		a.STATE,	
+		a.CONTEXT,	
+		a.SERVERTEXT,
+		a.BUSINESS_ID
 		from 
-		<include refid="tableName"></include>
-		where 1=1
+		INS_BUSINESS a,
+		INS_COMPANY b
+		where 1=1 and b.COMPANY_ID = a.COMPANYID
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
 				(

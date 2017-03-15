@@ -144,10 +144,7 @@ public class BusinessController extends BaseController {
 		}
 		page.setPd(pd);
 		List<PageData>	varList = businessService.list(page);	//列出Business列表
-		for(int i=0;i<varList.size();i++){
-			PageData vpd = varList.get(i);
-			vpd.put("COMPANYID", getCompName(vpd.getString("COMPANYID")));
-		}
+		
 		mv.setViewName("ins/business/business_list");
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
