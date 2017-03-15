@@ -56,7 +56,6 @@
 			ID = #{ID},
 			NAME = #{NAME},
 			WORKCLASS = #{WORKCLASS},
-			PARENTID = #{PARENTID},
 			EXT1 = #{EXT1},
 			EXT2 = #{EXT2},
 		WORKER_ID = WORKER_ID
