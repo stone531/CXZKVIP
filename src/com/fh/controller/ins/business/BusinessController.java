@@ -30,6 +30,7 @@ import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
 import com.fh.service.ins.business.BusinessManager;
+import com.fh.service.ins.company.CompanyManager;
 import com.fh.controller.ins.usermanage.UserManageController;
 
 /** 
@@ -44,6 +45,35 @@ public class BusinessController extends BaseController {
 	String menuUrl = "business/list.do"; //菜单地址(权限用)
 	@Resource(name="businessService")
 	private BusinessManager businessService;
+	
+	@Resource(name="companyService")
+	private CompanyManager companyService;
+	
+	Map<String, String> compNameMap = new HashMap<String, String>();
+	
+	// get name from cache
+	public String getCompName(String key) throws Exception{
+		System.out.println("getCompName param key:"+key);
+		
+		if(compNameMap.containsKey(key)){
+			System.out.println("getCompName from cache:"+compNameMap.get(key).toString());
+			return compNameMap.get(key).toString();
+		}
+		
+		PageData pdIn = new PageData();
+		PageData pdOut = new PageData();
+		
+		pdIn.put("COMOANY_ID", key);
+		pdOut=companyService.findById(pdIn);
+		if (pdOut==null){
+			return "";
+		}
+		String name=pdOut.getString("COMPNAME");
+		compNameMap.put(key, name);
+		System.out.println("getCompName from mysql:"+name);
+		
+		return name;		
+	}
 	
 	/**保存
 	 * @param
@@ -114,6 +144,10 @@ public class BusinessController extends BaseController {
 		}
 		page.setPd(pd);
 		List<PageData>	varList = businessService.list(page);	//列出Business列表
+		for(int i=0;i<varList.size();i++){
+			PageData vpd = varList.get(i);
+			vpd.put("COMPANYID", getCompName(vpd.getString("COMPANYID")));
+		}
 		mv.setViewName("ins/business/business_list");
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
@@ -157,6 +191,11 @@ public class BusinessController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		
+		List<PageData> varListComp=companyService.listAll(pd);
+		mv.addObject("varListComp", varListComp);
+		System.out.println(varListComp);
+		
 		mv.setViewName("ins/business/business_edit");
 		mv.addObject("msg", "save");
 		mv.addObject("pd", pd);
@@ -173,6 +212,11 @@ public class BusinessController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd = businessService.findById(pd);	//根据ID读取
+		
+		List<PageData> varListComp=companyService.listAll(pd);
+		mv.addObject("varListComp", varListComp);
+		System.out.println(varListComp);
+		
 		mv.setViewName("ins/business/business_edit");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
@@ -220,19 +264,17 @@ public class BusinessController extends BaseController {
 		List<String> titles = new ArrayList<String>();
 		titles.add("具体业务名称");	//1
 		titles.add("业务所属公司");	//2
-		titles.add("公司电话");	//3
-		titles.add("业务状态");	//4
-		titles.add("具体内容");	//5
+		titles.add("业务状态");	//3
+		titles.add("具体内容");	//4
 		dataMap.put("titles", titles);
 		List<PageData> varOList = businessService.listAll(pd);
 		List<PageData> varList = new ArrayList<PageData>();
 		for(int i=0;i<varOList.size();i++){
 			PageData vpd = new PageData();
 			vpd.put("var1", varOList.get(i).getString("NAME"));	//1
-			vpd.put("var2", varOList.get(i).getString("COMPANY"));	//2
-			vpd.put("var3", varOList.get(i).getString("COMPANYTEL"));   //3
-			vpd.put("var4", varOList.get(i).get("STATE").toString());	//4
-			vpd.put("var5", varOList.get(i).getString("CONTEXT"));	//5
+			vpd.put("var2", varOList.get(i).getString("COMPANYID"));	//2
+			vpd.put("var3", varOList.get(i).get("STATE").toString());	//3
+			vpd.put("var4", varOList.get(i).getString("CONTEXT"));	//4
 			varList.add(vpd);
 		}
 		dataMap.put("varList", varList);

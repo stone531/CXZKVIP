@@ -197,15 +197,15 @@
 		SVRNAME,SVRPHONE, COUNT(*) AS COUNT
 		from 
 		<include refid="tableName"></include>
-		GROUP BY SVRPHONE HAVING COUNT(*) >0 ORDER BY COUNT(*) DESC
+		where 1=1
 		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
 			and
 				(
-
-					IANTNAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					SVRNAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 					
 				)
 		</if>
+		GROUP BY SVRPHONE HAVING COUNT(*) >0 ORDER BY COUNT(*) DESC
 	</select>
 	
 	<!-- 批量删除 -->

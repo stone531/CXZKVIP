@@ -27,22 +27,26 @@
 				<div class="row">
 					<div class="col-xs-12">
 					
-					<form action="company/${msg }.do" name="Form" id="Form" method="post">
-						<input type="hidden" name="COMPANY_ID" id="COMPANY_ID" value="${pd.COMPANY_ID}"/>
+					<form action="policy/${msg }.do" name="Form" id="Form" method="post" enctype="multipart/form-data">
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">公司名称:</td>
-								<td><input type="text" name="COMPNAME" id="COMPNAME" value="${pd.COMPNAME}" maxlength="255" placeholder="这里输入公司名称" title="公司名称" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">保险类型:</td>
+								<td><select id="policy_type" name="policy_type">
+								<option value="-1">请选择</option>
+								<c:forEach items="${varList}" var="var" varStatus="vs">
+									<option value="${var.BUSINESS_ID}">${var.NAME}</option>
+								</c:forEach>
+								</select>
+								</td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">公司电话:</td>
-								<td><input type="text" name="COMPTEL" id="COMPTEL" value="${pd.COMPTEL}" maxlength="20" placeholder="这里输入公司电话" title="公司电话" style="width:98%;"/></td>
-							</tr>							
+								<td><input type="file" name="policyexcel" id="policyexcel" accept=".xls"/></td>
+							</tr>
 							<tr>
 								<td style="text-align: center;" colspan="10">
-									<a class="btn btn-mini btn-primary" onclick="save();">保存</a>
-									<a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>
+									<a class="btn btn-mini btn-primary" onclick="save();">提交</a>
+									<a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">关闭</a>
 								</td>
 							</tr>
 						</table>
@@ -78,34 +82,14 @@
 		$(top.hangge());
 		//保存
 		function save(){
-			if($("#COMPNAME").val()==""){
-				$("#COMPNAME").tips({
+			if($("#policy_type").val()=="-1"){
+				$("#policy_type").tips({
 					side:3,
-		            msg:'请输入公司名称',
+		            msg:'请选择保险类型',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#COMPNAME").focus();
-			return false;
-			}
-			if($("#COMPTEL").val()==""){
-				$("#COMPTEL").tips({
-					side:3,
-		            msg:'请输入业务所属公司电话',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#COMPTEL").focus();
-			return false;
-			}
-			if($("#WORKJSON").val()==""){
-				$("#WORKJSON").tips({
-					side:3,
-		            msg:'请输入职业json数据',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#WORKJSON").focus();
+				$("#policy_type").focus();
 			return false;
 			}
 			$("#Form").submit();

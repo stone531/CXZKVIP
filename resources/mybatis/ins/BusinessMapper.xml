@@ -10,8 +10,7 @@
 	<!-- 字段 -->
 	<sql id="Field">
 		NAME,	
-		COMPANY,
-		COMPANYTEL,	
+		COMPANYID,	
 		STATE,	
 		CONTEXT,	
 		SERVERTEXT,
@@ -21,8 +20,7 @@
 	<!-- 字段值 -->
 	<sql id="FieldValue">
 		#{NAME},	
-		#{COMPANY},	
-		#{COMPANYTEL},
+		#{COMPANYID},	
 		#{STATE},	
 		#{CONTEXT},	
 		#{SERVERTEXT},
@@ -56,8 +54,7 @@
 		<include refid="tableName"></include>
 		set 
 			NAME = #{NAME},
-			COMPANY = #{COMPANY},
-			COMPANYTEL = #{COMPANYTEL},
+			COMPANYID = #{COMPANYID},
 			STATE = #{STATE},
 			CONTEXT = #{CONTEXT},
 			SERVERTEXT = #{SERVERTEXT},

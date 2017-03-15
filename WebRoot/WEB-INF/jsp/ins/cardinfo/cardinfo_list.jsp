@@ -74,10 +74,7 @@
 									<th class="center">卡的状态</th>
 									<th class="center">卡类型</th>
 									<!--  th class="center">有效日期</th-->
-									<th class="center">保单号</th>
-									<th class="center">被保险人姓名</th>
-									<th class="center">被保险人身份证号</th>
-									<th class="center">被保险人手机号</th>
+									<th class="center">服务人员姓名</th>
 									<th class="center">密码</th>
 									<th class="center">操作</th>
 								</tr>
@@ -98,10 +95,7 @@
 											<td class='center'>${var.STATE}</td>
 											<td class='center'>${var.TYPEID}</td>
 											<!--  td class='center'>${var.EXPIRYTIME}</td-->
-											<td class='center'>${var.POLICYNO}</td>
-											<td class='center'>${var.IANTNAME}</td>
-											<td class='center'>${var.IANTPAPERNO}</td>
-											<td class='center'>${var.IANTPHONE}</td>
+											<td class='center'>${var.SVRNAME}</td>
 											<td class='center'>${var.PASSWORD}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
