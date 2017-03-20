@@ -92,7 +92,15 @@
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>${var.CARDID}</td>
-											<td class='center'>${var.STATE}</td>
+											<c:if test="${var.STATE == 1}">
+												<td class='center'>未激活</td>
+											</c:if>
+											<c:if test="${var.STATE == 2}">
+												<td class='center'>已激活</td>
+											</c:if>
+											<c:if test="${var.STATE == 3}">
+												<td class='center'>卡无效</td>
+											</c:if>
 											<td class='center'>${var.TYPEID}</td>
 											<!--  td class='center'>${var.EXPIRYTIME}</td-->
 											<td class='center'>${var.SVRNAME}</td>

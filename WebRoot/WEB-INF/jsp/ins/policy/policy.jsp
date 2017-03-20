@@ -630,11 +630,17 @@
 			if (param.checked){
 				document.getElementById("iarelation").value= "本人";
 				document.getElementById("ianame").value= $("#iename").val();
+				document.getElementById("ianame").readOnly=true;
 				document.getElementById("iapaperno").value= $("#iepaperno").val();
+				document.getElementById("ianame").readOnly=true;
 				var idNo = document.getElementById("iapaperno");
 				paperNOBlur(idNo);		
 			}else{
 				document.getElementById("iarelation").value= "其他";
+				document.getElementById("ianame").value= "";
+				document.getElementById("ianame").readOnly=false;
+				document.getElementById("iapaperno").value= "";
+				document.getElementById("iapaperno").readOnly=false;
 			}
 			 
 			return 

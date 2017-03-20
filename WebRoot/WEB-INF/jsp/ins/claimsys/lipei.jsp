@@ -74,24 +74,18 @@
                         <div></div>
                     </div>
                     <div class="form-group">
-                        <label for="RELATION" class="col-sm-3 control-label">与出险人关系</label>
-                        <div class="col-sm-6">
-						  <select class="form-control"  id="RELATION" name="RELATION" title="请选择您与出险人的关系">
-									  <option value="1">本人</option>
-                                      <option value="2">配偶</option>
-                                      <option value="3">子女</option>
-                                      <option value="4">父母</option>
-                                      <option value="5">亲属</option>
-                                      <option value="6">其它</option>
-                          </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="CLAIMERTEL" class="col-sm-3 control-label">联系电话</label>
                         <div class="col-sm-6">
                           <input type="text" class="form-control" id="CLAIMERTEL" name="CLAIMERTEL" placeholder="建议填写您的手机号码，以便及时取得联系">
                         </div>
                         <div></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="RELATION" class="col-sm-3 control-label">与出险人关系</label>
+                        <div class="col-sm-6">
+                          <input type="checkbox" id="RELATION" value="其他" class="col-sm-1" style="margin-top:3%" onclick="isOneSelf(this);">
+                  		  <label for="RELATION" class="col-sm-2 control-label">本人</label>
+                        </div>
                     </div>
                     <div class="form-group">
                           <label for="EMAIL" class="col-sm-3 control-label">Email</label>
@@ -234,6 +228,25 @@
     </div>
 	<script type="text/javascript">
 	    var flag = 0;
+	    function isOneSelf(param){
+	    	if ($("#INFORNAME").val() == '') {
+				return;
+			}
+	    	var idName = document.getElementById("POLICYNAME");
+
+			if (param.checked){
+				document.getElementById("RELATION").value= "本人";
+				idName.value= $("#INFORNAME").val();
+				idName.readOnly=true;					
+			}else{
+				document.getElementById("RELATION").value= "其他";
+				idName.value= "";
+				idName.readOnly=false;
+			}
+			 
+			return 
+		};
+		
 	    function goCourierW(txt){
            	 	$("body").append("<div id='mask'></div>");
 	       		$("#mask").addClass("mask").fadeIn("slow");
