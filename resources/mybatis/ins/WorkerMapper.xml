@@ -96,6 +96,8 @@
 		<include refid="Field"></include>
 		from 
 		<include refid="tableName"></include>
+		where
+			PARENTID = #{PARENTID}
 	</select>
 	
 	<!-- 批量删除 -->

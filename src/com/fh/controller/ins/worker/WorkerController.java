@@ -280,7 +280,7 @@ public class WorkerController extends BaseController {
 		//获取bussinessid
 		String businessid=request.getParameter("businessid");
 		System.out.println("businessid:"+businessid);
-		String professions_limit=null;
+		String professions_limit=null,companyid=null;
 		
 		//获取保险可用的大类目
 		if(businessid!=null && !businessid.equals("")){
@@ -290,12 +290,14 @@ public class WorkerController extends BaseController {
 			PageData p_out = businessService.findById(p_In);
 			if (p_out!=null){
 				professions_limit=p_out.getString("PROFESSION_LIMIT");
+				companyid=p_out.getString("COMPANYID");
 				System.out.println("professions:"+professions_limit);				
 			}
 					
 		}
 		
 		//获取所有的职业
+		pd.put("PARENTID", companyid);
 		List<PageData> professions=workerService.listAll(pd);
 		List<JobData> jobList = new ArrayList<JobData>();
 		System.out.println(professions);
