@@ -77,7 +77,6 @@
 									<th class="center">卡种的面值</th>
 									<th class="center">最小使用年龄</th>
 									<th class="center">最大使用年龄</th>
-									<th class="center">限制使用的职业列表</th>
 									<th class="center">操作</th>
 								</tr>
 							</thead>
@@ -98,7 +97,6 @@
 											<td class='center'>${var.AMOUNT}</td>
 											<td class='center'>${var.MINAGE}</td>
 											<td class='center'>${var.MAXAGE}</td>
-											<td class='center'>${var.PROFESSION}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
