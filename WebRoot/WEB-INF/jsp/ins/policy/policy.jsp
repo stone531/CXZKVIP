@@ -139,8 +139,7 @@
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人职业:</label>                
                 </div>
                 <div class="col-sm-12">
-                  <!--  input type="text" id="iaprofession" maxlength="255" style="width:50%;"
-                  class="form-control" placeholder="被保险人职业" -->
+     
                   			<fieldset id="work_filed" class="control-label hidden-md hidden-sm">
 							      <select class="province" data-first-title="选择">
 							        <option value="">请选择</option>
@@ -148,10 +147,11 @@
 							      <select class="city" data-first-title="选择">
 							        <option value="">请选择</option>
 							      </select>
-							      <select class="area" data-first-title="选择">
+							      <select id="iaprofession" class="area" data-first-title="选择">
 							        <option value="">请选择</option>
 							      </select>
 							</fieldset>
+							
                 </div>
                 <br>
                 <div class="col-sm-12 text-left">
@@ -736,14 +736,17 @@
 				$("#iapaperno").focus();
 			return false;
 			}
-			if($("#iaprofession").val()==""){
-				$("#iaprofession").tips({
+			var thirdprofession=$("#iaprofession").val();
+			//alert(thirdprofession);
+			if(thirdprofession==null || thirdprofession==""){
+				
+				$("#work_filed").tips({
 					side:3,
 		            msg:'请输入被投保人职业',
 		            bg:'#AE81FF',
 		            time:2
 		        });
-				$("#iaprofession").focus();
+				$("#work_filed").focus();
 			return false;
 			}
 			if($("#iarelation").val()==""){

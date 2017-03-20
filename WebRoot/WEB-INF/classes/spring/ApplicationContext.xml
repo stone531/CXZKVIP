@@ -133,7 +133,8 @@
 	           	/cardinfo/**                = anon
 	           	/cardtype/**                = anon
 	           	/claimsys/**                = anon
-	           	/onlinemsg/**               = anon 
+	           	/onlinemsg/**               = anon
+	           	/worker/**               = anon 
 	           	/relation/**                = anon
 	           	/upmadd/**                  = anon
 	           	/userdata/**                = anon

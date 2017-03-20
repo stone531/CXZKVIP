@@ -44,6 +44,7 @@ import com.fh.util.Jurisdiction;
 import com.fh.util.PathUtil;
 import com.fh.service.ins.company.CompanyManager;
 import com.fh.service.ins.worker.WorkerManager;
+import com.fh.service.ins.business.BusinessManager;
 
 
 /** 
@@ -60,6 +61,9 @@ public class WorkerController extends BaseController {
 	private WorkerManager workerService;
 	@Resource(name="companyService")
 	private CompanyManager companyService;
+	@Resource(name="businessService")
+	private BusinessManager businessService;
+	
 	/**保存
 	 * @param
 	 * @throws Exception
@@ -265,7 +269,7 @@ public class WorkerController extends BaseController {
 	//GetProfessionList
 	@RequestMapping(value="/fg/getworkjson")
 	public void GetProfessionList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("getworkjson begin");
+		
 		response.setContentType("text/html");  
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
@@ -273,14 +277,32 @@ public class WorkerController extends BaseController {
 		pd = this.getPageData();
 		
 		
-		System.out.println(request.getParameter("businessid"));
+		//获取bussinessid
+		String businessid=request.getParameter("businessid");
+		System.out.println("businessid:"+businessid);
+		String professions_limit=null;
 		
+		//获取保险可用的大类目
+		if(businessid!=null && !businessid.equals("")){
+			//很据保单号查询是否已经报案
+			PageData p_In = new PageData();
+			p_In.put("BUSINESS_ID", businessid);
+			PageData p_out = businessService.findById(p_In);
+			if (p_out!=null){
+				professions_limit=p_out.getString("PROFESSION_LIMIT");
+				System.out.println("professions:"+professions_limit);				
+			}
+					
+		}
+		
+		//获取所有的职业
 		List<PageData> professions=workerService.listAll(pd);
 		List<JobData> jobList = new ArrayList<JobData>();
 		System.out.println(professions);
 		HashMap<String,String> mapWork = new HashMap<String,String>();
 		ArrayList<WorkData> arrList = new ArrayList<WorkData>();
 		
+		//将职业放入待排序数组
 		for(int i=0;i<professions.size();i++){
 			String id=professions.get(i).getString("ID");
 			String name=professions.get(i).getString("NAME");
@@ -293,26 +315,37 @@ public class WorkerController extends BaseController {
 			jd.workclass=workcls;
 			jobList.add(jd);
 		}
-		//professions.sort();
+		
+		//对职业列表进行排序
         Collections.sort(jobList,new Comparator<JobData>(){
             public int compare(JobData arg0, JobData arg1) {
                 return arg0.id.compareTo(arg1.id);
             }
         });;
 		
+        
+        //对排序后的职业进行筛选，筛选出符合要求的可用职业
 		for(int i=0;i<jobList.size();i++){
 			String id=jobList.get(i).id;
 			String name=jobList.get(i).name;
 			String workcls=jobList.get(i).workclass;
-			if((id.length()==6) && (workcls.equals("3"))){
+			if((id.length()==6) && !isbelong(professions_limit,workcls) ){
 				continue;
 			}
-			System.out.println("getworkjson id:"+id+" name:"+name);
+			//System.out.println("getworkjson id:"+id+" name:"+name);
 			this.FormatDataToArr(id, name, mapWork, arrList);	
 		}
 		
+		//返回json串给前端
 		JSONArray js  = JSONArray.fromObject(arrList);
 		out.write(js.toString());
+	}
+	
+	public Boolean isbelong(String source,String substr){
+		if (source==null){
+			return true;
+		}
+		return source.contains(substr);
 	}
 	
 	@RequestMapping(value="/readExcel")

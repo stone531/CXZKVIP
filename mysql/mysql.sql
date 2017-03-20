@@ -1,6 +1,6 @@
 /*
-SQLyog 企业版 - MySQL GUI v8.14 
-MySQL - 5.7.11 : Database - cxzkvip
+SQLyog Ultimate v11.24 (64 bit)
+MySQL - 5.6.33 : Database - cxzkvip
 *********************************************************************
 */
 
@@ -25,13 +25,14 @@ CREATE TABLE `ins_business` (
   `NAME` varchar(300) DEFAULT NULL,
   `COMPANYID` varchar(300) DEFAULT NULL,
   `STATE` int(11) DEFAULT NULL,
+  `PROFESSION_LIMIT` varchar(300) DEFAULT NULL,
   `CONTEXT` varchar(765) DEFAULT NULL,
   `SERVERTEXT` varchar(10240) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `ins_business` */
 
-insert  into `ins_business`(`BUSINESS_ID`,`NAME`,`COMPANYID`,`STATE`,`CONTEXT`,`SERVERTEXT`) values ('53f1df31d3d24e7c988416248d2a0761','意外险','21aeca2e15014a168b3d67b53f122c54',1,'时光越走越远，我们也跟着岁月一路前行。一路匆忙一路风景，一路漫漫的欣赏那惜日残缺的风景。与那昨日留痕，时光终步时光虽浅。','<p><span style=\"color: rgb(79, 93, 65); font-family: Simsun; font-size: 14px; white-space: normal; line-height: 35px;\">&nbsp; &nbsp;流年路过沧海，终究是一段漫长的红尘。红尘中，那些走过的相遇。那些历过的曾经，那些埋过的岁月。那些散场的过客，终究曾经一场。渐渐地消失在流年的路上，最后一曲终别成为天涯过客。无影无踪渐行渐远，你曾说过冬天的执着。会路过那最感人的画面，成为一路刻苦路过的雪花。依然停留在那最美的天空，只待执着的脚步路过这沧海的誓言。留下朝朝暮暮的曾经，一切还是那当初的模样。<br/>&nbsp; &nbsp;流水的季节，落花的寒冬，</span><span style=\"color: rgb(79, 93, 65); font-family: Simsun; font-size: 14px; white-space: normal; line-height: 35px;\">执着一场。终是一段美丽的曾经。也是一段刻苦的画面，执着的人懂得付出懂得伪装自己。懂得不被别人发现自己的难过，执着的人一般很少说话。一切都是用行动证明，走在喧嚣的马路上看着行色匆匆的人们。我告诉自己他们是为了生活，活在忙碌。落叶划过眼帘突然意识到秋天已经快要临近，一路的时间一路的秋凉。一路的执着走到这里，似乎在也没有执着的影子。曾经一幕检起那个说要走到最后，然而誓言过后。却发现早己曲终人散。</span></p>'),('d4a680ee537e4a37af8c27e674611a60','车险','21aeca2e15014a168b3d67b53f122c54',1,'执着痴心流年渐远，自惜的执着。路过这苍白的岁月一份知心，一份懂得也是人生中最简单的幸福。也是最难遇见的幸福，年华中。有人等了一辈子却只等来一句，对不起。缘分的天空是如此难遇。','<p><span style=\"color: rgb(79, 93, 65); font-family: Simsun; font-size: 14px; white-space: normal; line-height: 35px;\">&nbsp; &nbsp;执着的路。走走停停，那些熟悉的背景。从最初的相知到陌路，漫长的路就像坐公交望着窗口眨眼即远逝的场景。我们只是能凭记忆去尝试着想起，一点什么却终究拼凑不出完整。就像离别与重逢一样，离别过一过一次的人生。与没有离别过一次，有着完全不一样的珍意。执着拼尽所有的感情，都用完的那一刻才深知。自始自终我都是一个人，一个人默默走完这一切。一个人从岁月走到流年，再从流年走到祝福的天涯。经历过沧海桑田仿佛时间的终点一下子，到了岁月的尽头。仿佛执着的刻苦就此埋葬，仿佛时间路过这里。再也没有了声音。</span><br/><span style=\"color: rgb(79, 93, 65); font-family: Simsun; font-size: 14px; white-space: normal; line-height: 35px;\">&nbsp; &nbsp;当执着路过最深的流年，当执着遇上流年。那份执着的坚持，那份流年的过往。终会在人生的旅途埋藏一站，然后继续前行继续流浪。流浪那个原本最初的自己，很多时候我们一路带着自己默默的赶路。一路经过身边余留的风，渐渐地就在时光中懂得了一份淡然。执着相遇流年落暮一份相遇。一份执着。这便是人生的旅途，最好的相遇。一份陪伴一份天涯年的执着，这便是守候的最好流年。年华中，走过一走程又一程的风景。离别经历一次又一次，离别似乎。看清了迷离的岁月懂得那份来之不易的相守，风雨陪伴我们。一路走过前进的路。执着始终在最初的彼此，只待流年。划过这最初的执着。</span></p>'),('e2c48e2679bf4046a625751c3d9e6723','平安意外险','21aeca2e15014a168b3d67b53f122c54',1,'给老人一份关心，多一份陪护。','<p>该项目适应于16-55周岁，身体健康，独立法人。</p>');
+insert  into `ins_business`(`BUSINESS_ID`,`NAME`,`COMPANYID`,`STATE`,`PROFESSION_LIMIT`,`CONTEXT`,`SERVERTEXT`) values ('53f1df31d3d24e7c988416248d2a0761','挖煤','21aeca2e15014a168b3d67b53f122c54',1,'1;2;3','时光越走越远，我们也跟着岁月一路前行。一路匆忙一路风景，一路漫漫的欣赏那惜日残缺的风景。与那昨日留痕，时光终步时光虽浅。','<p><span style=\"color: rgb(79, 93, 65); font-family: Simsun; font-size: 14px; white-space: normal; line-height: 35px;\">&nbsp; &nbsp;流年路过沧海，终究是一段漫长的红尘。红尘中，那些走过的相遇。那些历过的曾经，那些埋过的岁月。那些散场的过客，终究曾经一场。渐渐地消失在流年的路上，最后一曲终别成为天涯过客。无影无踪渐行渐远，你曾说过冬天的执着。会路过那最感人的画面，成为一路刻苦路过的雪花。依然停留在那最美的天空，只待执着的脚步路过这沧海的誓言。留下朝朝暮暮的曾经，一切还是那当初的模样。<br/>&nbsp; &nbsp;流水的季节，落花的寒冬，</span><span style=\"color: rgb(79, 93, 65); font-family: Simsun; font-size: 14px; white-space: normal; line-height: 35px;\">执着一场。终是一段美丽的曾经。也是一段刻苦的画面，执着的人懂得付出懂得伪装自己。懂得不被别人发现自己的难过，执着的人一般很少说话。一切都是用行动证明，走在喧嚣的马路上看着行色匆匆的人们。我告诉自己他们是为了生活，活在忙碌。落叶划过眼帘突然意识到秋天已经快要临近，一路的时间一路的秋凉。一路的执着走到这里，似乎在也没有执着的影子。曾经一幕检起那个说要走到最后，然而誓言过后。却发现早己曲终人散。</span></p>'),('d4a680ee537e4a37af8c27e674611a60','车险','21aeca2e15014a168b3d67b53f122c54',1,'1;2;3','执着痴心流年渐远，自惜的执着。路过这苍白的岁月一份知心，一份懂得也是人生中最简单的幸福。也是最难遇见的幸福，年华中。有人等了一辈子却只等来一句，对不起。缘分的天空是如此难遇。','<p><span style=\"color: rgb(79, 93, 65); font-family: Simsun; font-size: 14px; white-space: normal; line-height: 35px;\">&nbsp; &nbsp;执着的路。走走停停，那些熟悉的背景。从最初的相知到陌路，漫长的路就像坐公交望着窗口眨眼即远逝的场景。我们只是能凭记忆去尝试着想起，一点什么却终究拼凑不出完整。就像离别与重逢一样，离别过一过一次的人生。与没有离别过一次，有着完全不一样的珍意。执着拼尽所有的感情，都用完的那一刻才深知。自始自终我都是一个人，一个人默默走完这一切。一个人从岁月走到流年，再从流年走到祝福的天涯。经历过沧海桑田仿佛时间的终点一下子，到了岁月的尽头。仿佛执着的刻苦就此埋葬，仿佛时间路过这里。再也没有了声音。</span><br/><span style=\"color: rgb(79, 93, 65); font-family: Simsun; font-size: 14px; white-space: normal; line-height: 35px;\">&nbsp; &nbsp;当执着路过最深的流年，当执着遇上流年。那份执着的坚持，那份流年的过往。终会在人生的旅途埋藏一站，然后继续前行继续流浪。流浪那个原本最初的自己，很多时候我们一路带着自己默默的赶路。一路经过身边余留的风，渐渐地就在时光中懂得了一份淡然。执着相遇流年落暮一份相遇。一份执着。这便是人生的旅途，最好的相遇。一份陪伴一份天涯年的执着，这便是守候的最好流年。年华中，走过一走程又一程的风景。离别经历一次又一次，离别似乎。看清了迷离的岁月懂得那份来之不易的相守，风雨陪伴我们。一路走过前进的路。执着始终在最初的彼此，只待流年。划过这最初的执着。</span></p>'),('e2c48e2679bf4046a625751c3d9e6723','平安意外险','21aeca2e15014a168b3d67b53f122c54',1,'1;2;3','给老人一份关心，多一份陪护。','<p>该项目适应于16-55周岁，身体健康，独立法人。</p>');
 
 /*Table structure for table `ins_cardinfo` */
 
@@ -323,7 +324,7 @@ CREATE TABLE `ins_worker` (
 
 /*Data for the table `ins_worker` */
 
-insert  into `ins_worker`(`WORKER_ID`,`ID`,`NAME`,`WORKCLASS`,`PARENTID`,`EXT1`,`EXT2`) values ('126926abcd8c46939e0c4a74ea56a4d0','0002','工厂','1','21aeca2e15014a168b3d67b53f122c54',NULL,NULL),('2e5a2d60661d448c8bf2cd933d98a000','010101',' 农业管理人员（不亲自作业1','1',NULL,NULL,NULL),('4f9e2f5d6276441192c86f682e628038','000101','内勤工作人员','1','21aeca2e15014a168b3d67b53f122c54',NULL,NULL),('9cb94bf459ba4870825371c6fd2a5b38','000102','一般机关外勤工作人员（不含工商、税务、海关、城管等特定国家机关行政执法人员）、司机','1','21aeca2e15014a168b3d67b53f122c54',NULL,NULL),('ccc0653d94b54d5cbf2a0419c8c9c46f','0101','农业','1','21aeca2e15014a168b3d67b53f122c54',NULL,NULL),('d041cccff7074e7381aa76892895f409','00','一般职业','1','21aeca2e15014a168b3d67b53f122c54',NULL,NULL),('d9aa9852b97540a19de2dd137e7c8bdc','0001','机关、团体、公司','2','21aeca2e15014a168b3d67b53f122c54',NULL,NULL),('e00ccd6496af42c3afca766b6de912a5','01','农牧业','1','21aeca2e15014a168b3d67b53f122c54',NULL,NULL);
+insert  into `ins_worker`(`WORKER_ID`,`ID`,`NAME`,`WORKCLASS`,`PARENTID`,`EXT1`,`EXT2`) values ('126926abcd8c46939e0c4a74ea56a4d0','0002','工厂','1','21aeca2e15014a168b3d67b53f122c54',NULL,NULL),('2e5a2d60661d448c8bf2cd933d98a000','010101',' 农业管理人员（不亲自作业1','1',NULL,NULL,NULL),('4f9e2f5d6276441192c86f682e628038','000101','内勤工作人员','1','21aeca2e15014a168b3d67b53f122c54',NULL,NULL),('9cb94bf459ba4870825371c6fd2a5b38','000102','一般机关外勤工作人员（不含工商、税务、海关、城管等特定国家机关行政执法人员）、司机','4','21aeca2e15014a168b3d67b53f122c54',NULL,NULL),('ccc0653d94b54d5cbf2a0419c8c9c46f','0101','农业','1','21aeca2e15014a168b3d67b53f122c54',NULL,NULL),('d041cccff7074e7381aa76892895f409','00','一般职业','1','21aeca2e15014a168b3d67b53f122c54',NULL,NULL),('d9aa9852b97540a19de2dd137e7c8bdc','0001','机关、团体、公司','2','21aeca2e15014a168b3d67b53f122c54',NULL,NULL),('e00ccd6496af42c3afca766b6de912a5','01','农牧业','1','21aeca2e15014a168b3d67b53f122c54',NULL,NULL);
 
 /*Table structure for table `member_activity_all` */
 
@@ -674,7 +675,7 @@ CREATE TABLE `sys_user` (
 
 /*Data for the table `sys_user` */
 
-insert  into `sys_user`(`USER_ID`,`USERNAME`,`PASSWORD`,`NAME`,`RIGHTS`,`ROLE_ID`,`LAST_LOGIN`,`IP`,`STATUS`,`BZ`,`SKIN`,`EMAIL`,`NUMBER`,`PHONE`,`BIANMA`,`DEPARTMENT_ID`,`SEX`) values ('1','admin','de41b7fb99201d8334c23c014db35ecd92df81bc','系统管理员','1133671055321055258374707980945218933803269864762743594642571294','1','2017-03-01 19:16:50','127.0.0.1','0','最高统治者','default','QQ313596790@main.com','admin','18788888888',NULL,NULL,'WOMAN');
+insert  into `sys_user`(`USER_ID`,`USERNAME`,`PASSWORD`,`NAME`,`RIGHTS`,`ROLE_ID`,`LAST_LOGIN`,`IP`,`STATUS`,`BZ`,`SKIN`,`EMAIL`,`NUMBER`,`PHONE`,`BIANMA`,`DEPARTMENT_ID`,`SEX`) values ('1','admin','de41b7fb99201d8334c23c014db35ecd92df81bc','系统管理员','1133671055321055258374707980945218933803269864762743594642571294','1','2017-03-20 17:02:30','0:0:0:0:0:0:0:1','0','最高统治者','default','QQ313596790@main.com','admin','18788888888',NULL,NULL,'WOMAN');
 
 /*Table structure for table `tb_pictures` */
 
