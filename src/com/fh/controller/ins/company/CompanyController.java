@@ -28,6 +28,7 @@ import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
 import com.fh.service.ins.company.CompanyManager;
+import com.fh.service.ins.worker.WorkerManager;
 
 /** 
  * 说明：保险公司职业
@@ -41,6 +42,8 @@ public class CompanyController extends BaseController {
 	String menuUrl = "company/list.do"; //菜单地址(权限用)
 	@Resource(name="companyService")
 	private CompanyManager companyService;
+	@Resource(name="workerService")
+	private WorkerManager workerService;
 	
 	/**保存
 	 * @param

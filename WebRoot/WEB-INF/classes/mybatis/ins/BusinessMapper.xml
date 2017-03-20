@@ -14,7 +14,8 @@
 		STATE,	
 		CONTEXT,	
 		SERVERTEXT,
-		BUSINESS_ID
+		BUSINESS_ID,
+		PROFESSION_LIMIT
 	</sql>
 	
 	<!-- 字段值 -->
@@ -24,7 +25,8 @@
 		#{STATE},	
 		#{CONTEXT},	
 		#{SERVERTEXT},
-		#{BUSINESS_ID}
+		#{BUSINESS_ID},
+		#{PROFESSION_LIMIT}
 	</sql>
 	
 	<!-- 新增-->
@@ -58,7 +60,8 @@
 			STATE = #{STATE},
 			CONTEXT = #{CONTEXT},
 			SERVERTEXT = #{SERVERTEXT},
-		BUSINESS_ID = BUSINESS_ID
+			PROFESSION_LIMIT = #{PROFESSION_LIMIT},
+			BUSINESS_ID = BUSINESS_ID
 		where 
 		BUSINESS_ID = #{BUSINESS_ID}
 	</update>
@@ -81,7 +84,8 @@
 		a.STATE,	
 		a.CONTEXT,	
 		a.SERVERTEXT,
-		a.BUSINESS_ID
+		a.BUSINESS_ID,
+		a.PROFESSION_LIMIT
 		from 
 		INS_BUSINESS a,
 		INS_COMPANY b

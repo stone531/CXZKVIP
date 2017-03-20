@@ -471,9 +471,7 @@
 <!--javascript 脚本分割线********************************************************************************************************************  -->			
 <script type="text/javascript">
 
-	$.cxSelect.defaults.url = '<%=basePath%>company/fg/getworkjson';
-	
-	$('#work_filed').cxSelect({selects: ['province', 'city', 'area'],emptyStyle: 'none' });
+
 	
 
 		//馋看数组是否包含指定的元素
@@ -647,6 +645,11 @@
 			$("#business").hide();
 			divId="businessid"+curbusinessId;
 			var inp=document.getElementById(divId);
+			
+			$.cxSelect.defaults.url = '<%=basePath%>worker/fg/getworkjson?businessid='+inp.value;
+			
+			$('#work_filed').cxSelect({selects: ['province', 'city', 'area'],emptyStyle: 'none' });
+			
 			//var name = inp.value;
 			//alert(name);
 			document.getElementById("BUSINESSID").value=inp.value;

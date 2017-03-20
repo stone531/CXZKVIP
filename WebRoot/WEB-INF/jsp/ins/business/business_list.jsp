@@ -70,6 +70,7 @@
 									<th class="center">具体业务名称</th>
 									<th class="center">业务所属公司</th>
 									<th class="center">业务状态</th>
+									<th class="center">可投职业类别</th>
 									<th class="center">服务条款</th>
 									<th class="center">备注</th>
 									<th class="center">操作</th>
@@ -97,6 +98,7 @@
 											禁用
 											</c:if>
 											</td>
+											<td class='center'>${var.PROFESSION_LIMIT}</td>
 											<td class='center'>...</td>
 											<td class='center'>${var.CONTEXT}</td>
 											<td class="center">

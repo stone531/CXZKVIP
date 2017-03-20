@@ -33,7 +33,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 					
-					<form action="business/${msg }.do" name="Form" id="Form" method="post">
+					<form action="business/${msg}.do" name="Form" id="Form" method="post">
 						<input type="hidden" name="BUSINESS_ID" id="BUSINESS_ID" value="${pd.BUSINESS_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
@@ -66,6 +66,10 @@
                                       <option value=0>禁用</option>
                           		   </select>
 								</td>
+							</tr>
+							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">可用职业类别:</td>
+								<td><input type="text" name="PROFESSION_LIMIT" id="PROFESSION_LIMIT" value="${pd.PROFESSION_LIMIT}" maxlength="100" placeholder="这里添加或者删除可投的职业类别(多个类别之间分割分号)" title="具体业务名称" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">服务条款:</td>

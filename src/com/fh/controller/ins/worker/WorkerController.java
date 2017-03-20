@@ -4,12 +4,15 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
@@ -252,6 +255,64 @@ public class WorkerController extends BaseController {
 		mv.addObject("varList",varList);
 		mv.addObject("pd", pd);
 		return mv;
+	}
+	public class JobData{
+		public String id;
+		public String name;
+		public String workclass;
+	}
+	
+	//GetProfessionList
+	@RequestMapping(value="/fg/getworkjson")
+	public void GetProfessionList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("getworkjson begin");
+		response.setContentType("text/html");  
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		
+		
+		System.out.println(request.getParameter("businessid"));
+		
+		List<PageData> professions=workerService.listAll(pd);
+		List<JobData> jobList = new ArrayList<JobData>();
+		System.out.println(professions);
+		HashMap<String,String> mapWork = new HashMap<String,String>();
+		ArrayList<WorkData> arrList = new ArrayList<WorkData>();
+		
+		for(int i=0;i<professions.size();i++){
+			String id=professions.get(i).getString("ID");
+			String name=professions.get(i).getString("NAME");
+			String workcls=professions.get(i).getString("WORKCLASS");
+			mapWork.put(id,name);
+			
+			JobData jd=new JobData();
+			jd.id=id;
+			jd.name=name;	
+			jd.workclass=workcls;
+			jobList.add(jd);
+		}
+		//professions.sort();
+        Collections.sort(jobList,new Comparator<JobData>(){
+            public int compare(JobData arg0, JobData arg1) {
+                return arg0.id.compareTo(arg1.id);
+            }
+        });;
+		
+		for(int i=0;i<jobList.size();i++){
+			String id=jobList.get(i).id;
+			String name=jobList.get(i).name;
+			String workcls=jobList.get(i).workclass;
+			if((id.length()==6) && (workcls.equals("3"))){
+				continue;
+			}
+			System.out.println("getworkjson id:"+id+" name:"+name);
+			this.FormatDataToArr(id, name, mapWork, arrList);	
+		}
+		
+		JSONArray js  = JSONArray.fromObject(arrList);
+		out.write(js.toString());
 	}
 	
 	@RequestMapping(value="/readExcel")
