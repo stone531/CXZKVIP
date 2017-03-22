@@ -69,13 +69,13 @@ public class Page {
 			sb.append("	<ul class=\"pagination pull-right no-margin\">\n");
 			if(currentPage==1){
 				sb.append("	<li><a>共<font color=red>"+totalResult+"</font>条</a></li>\n");
-				sb.append("	<li><input type=\"number\" value=\"\" id=\"toGoPage\" style=\"width:50px;text-align:center;float:left\" placeholder=\"页码\"/></li>\n");
+				sb.append("	<li><input type=\"number\" min=\"0\" value=\"\" id=\"toGoPage\" style=\"width:50px;text-align:center;float:left\" placeholder=\"页码\"/></li>\n");
 				sb.append("	<li style=\"cursor:pointer;\"><a onclick=\"toTZ();\"  class=\"btn btn-mini btn-success\">跳转</a></li>\n");
 				sb.append("	<li><a>首页</a></li>\n");
 				sb.append("	<li><a>上页</a></li>\n");
 			}else{
 				sb.append("	<li><a>共<font color=red>"+totalResult+"</font>条</a></li>\n");
-				sb.append("	<li><input type=\"number\" value=\"\" id=\"toGoPage\" style=\"width:50px;text-align:center;float:left\" placeholder=\"页码\"/></li>\n");
+				sb.append("	<li><input type=\"number\" min=\"0\" value=\"\" id=\"toGoPage\" style=\"width:50px;text-align:center;float:left\" placeholder=\"页码\"/></li>\n");
 				sb.append("	<li style=\"cursor:pointer;\"><a onclick=\"toTZ();\"  class=\"btn btn-mini btn-success\">跳转</a></li>\n");
 				sb.append("	<li style=\"cursor:pointer;\"><a onclick=\"nextPage(1)\">首页</a></li>\n");
 				sb.append("	<li style=\"cursor:pointer;\"><a onclick=\"nextPage("+(currentPage-1)+")\">上页</a></li>\n");

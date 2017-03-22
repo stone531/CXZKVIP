@@ -93,6 +93,16 @@
 				$("#cmpy_type").focus();
 			return false;
 			}
+			if($("#workerexcel").val()==""){
+				$("#workerexcel").tips({
+					side:3,
+		            msg:'请选择文件',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#workerexcel").focus();
+			return false;
+			}
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();

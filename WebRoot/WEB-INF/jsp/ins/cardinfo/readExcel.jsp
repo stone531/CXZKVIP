@@ -92,6 +92,16 @@
 				$("#card_type").focus();
 			return false;
 			}
+			if($("#cardexcel").val()==""){
+				$("#cardexcel").tips({
+					side:3,
+		            msg:'请选择文件',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#cardexcel").focus();
+			return false;
+			}
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();

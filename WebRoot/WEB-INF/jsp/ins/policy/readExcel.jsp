@@ -92,6 +92,16 @@
 				$("#policy_type").focus();
 			return false;
 			}
+			if($("#policyexcel").val()==""){
+				$("#policyexcel").tips({
+					side:3,
+		            msg:'请选择文件',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#policyexcel").focus();
+			return false;
+			}
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();
