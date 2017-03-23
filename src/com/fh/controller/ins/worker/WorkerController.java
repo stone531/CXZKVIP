@@ -368,8 +368,8 @@ public class WorkerController extends BaseController {
 			 * var2 :WORKCLASS：职业类别
 			 * var3 :PARENTID：保险公司
 			 */
-			HashMap<String,String> mapWork = new HashMap<String,String>();
-			ArrayList<WorkData> arrList = new ArrayList<WorkData>();
+			//HashMap<String,String> mapWork = new HashMap<String,String>();
+			//ArrayList<WorkData> arrList = new ArrayList<WorkData>();
 			
 			for(int i=0;i<listPd.size();i++){
 				
@@ -385,20 +385,20 @@ public class WorkerController extends BaseController {
 		
 				pageData.put("WORKER_ID", this.get32UUID());
 				
-				mapWork.put(listPd.get(i).getString("var0"),listPd.get(i).getString("var1"));
+				//mapWork.put(listPd.get(i).getString("var0"),listPd.get(i).getString("var1"));
 				
-				this.FormatDataToArr(listPd.get(i).getString("var0"), listPd.get(i).getString("var1"), mapWork, arrList);
+				//this.FormatDataToArr(listPd.get(i).getString("var0"), listPd.get(i).getString("var1"), mapWork, arrList);
 				
 				workerService.save(pageData);
 				
 				}
 			
-			JSONArray js  = JSONArray.fromObject(arrList);
+			//JSONArray js  = JSONArray.fromObject(arrList);
 
-			PageData cmpPd = new PageData();
-			cmpPd.put("COMPANY_ID", companyId);
-			cmpPd.put("WORKJSON", js.toString());
-			companyService.editjson(cmpPd);
+			//PageData cmpPd = new PageData();
+			//cmpPd.put("COMPANY_ID", companyId);
+			//cmpPd.put("WORKJSON", js.toString());
+			//companyService.editjson(cmpPd);
 				
 			/*存入数据库操作======================================*/
 			
