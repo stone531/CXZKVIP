@@ -1,6 +1,7 @@
 package com.fh.controller.ins.business;
 
 import java.io.PrintWriter;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,15 +21,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
 import com.fh.util.AppUtil;
+import com.fh.util.Const;
+import com.fh.util.FileUpload;
 import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
 import com.fh.util.Jurisdiction;
+import com.fh.util.PathUtil;
 import com.fh.service.ins.business.BusinessManager;
 import com.fh.service.ins.company.CompanyManager;
 import com.fh.controller.ins.usermanage.UserManageController;
@@ -80,13 +86,32 @@ public class BusinessController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/save")
-	public ModelAndView save() throws Exception{
+	public ModelAndView save(
+			@RequestParam(value="CLAIMTEXT",required=false) MultipartFile file,
+			@RequestParam(value="NAME") String NAME,
+			@RequestParam(value="COMPANYID") String COMPANYID,
+			@RequestParam(value="STATE") String STATE,
+			@RequestParam(value="CONTEXT") String CONTEXT,
+			@RequestParam(value="SERVERTEXT") String SERVERTEXT,
+			@RequestParam(value="PROFESSION_LIMIT") String PROFESSION_LIMIT
+			) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"新增Business");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
+		String filePath = PathUtil.getClasspath() + Const.FILEPATHTEXT;		//保险条款上传路径
+		String realname = file.getOriginalFilename().substring(0,file.getOriginalFilename().lastIndexOf("."));
+		String fileName =  FileUpload.fileUp(file, filePath, realname);	//执行上传
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
-		pd = this.getPageData();
+		
+		pd.put("NAME", NAME);
+		pd.put("COMPANYID",COMPANYID);
+		pd.put("STATE", STATE);
+		pd.put("CONTEXT",CONTEXT);
+		pd.put("CLAIMTEXT", Const.FILEPATHTEXT+fileName);
+		pd.put("SERVERTEXT", SERVERTEXT);
+		pd.put("PROFESSION_LIMIT", PROFESSION_LIMIT);
 		pd.put("BUSINESS_ID", this.get32UUID());	//主键
+		
 		businessService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -113,12 +138,33 @@ public class BusinessController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/edit")
-	public ModelAndView edit() throws Exception{
+	public ModelAndView edit(
+			@RequestParam(value="CLAIMTEXT",required=false) MultipartFile file,
+			@RequestParam(value="NAME") String NAME,
+			@RequestParam(value="COMPANYID") String COMPANYID,
+			@RequestParam(value="STATE") String STATE,
+			@RequestParam(value="CONTEXT") String CONTEXT,
+			@RequestParam(value="SERVERTEXT") String SERVERTEXT,
+			@RequestParam(value="BUSINESS_ID") String BUSINESS_ID,
+			@RequestParam(value="PROFESSION_LIMIT") String PROFESSION_LIMIT
+			) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"修改Business");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
+		String filePath = PathUtil.getClasspath() + Const.FILEPATHTEXT;		//保险条款上传路径
+		String realname = file.getOriginalFilename().substring(0,file.getOriginalFilename().lastIndexOf("."));
+		String fileName =  FileUpload.fileUp(file, filePath, realname);	//执行上传
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
-		pd = this.getPageData();
+
+		pd.put("NAME", NAME);
+		pd.put("COMPANYID",COMPANYID);
+		pd.put("STATE", STATE);
+		pd.put("CONTEXT",CONTEXT);
+		pd.put("CLAIMTEXT", Const.FILEPATHTEXT+fileName);
+		pd.put("SERVERTEXT", SERVERTEXT);
+		pd.put("BUSINESS_ID", BUSINESS_ID);
+		pd.put("PROFESSION_LIMIT", PROFESSION_LIMIT);
+
 		businessService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -172,6 +218,7 @@ public class BusinessController extends BaseController {
 			pd.put("IsSuccess", false);
 		}else{
 			pd.put("ServerText", pdRet.getString("SERVERTEXT"));
+			pd.put("ClaimText", pdRet.getString("CLAIMTEXT"));
 			pd.put("IsSuccess", true);
 		}
 		JSONObject js = JSONObject.fromObject(pd);

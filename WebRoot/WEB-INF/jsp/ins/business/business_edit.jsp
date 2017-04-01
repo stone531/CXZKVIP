@@ -33,7 +33,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 					
-					<form action="business/${msg}.do" name="Form" id="Form" method="post">
+					<form action="business/${msg}.do" name="Form" id="Form" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="BUSINESS_ID" id="BUSINESS_ID" value="${pd.BUSINESS_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
@@ -70,6 +70,10 @@
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">可用职业类别:</td>
 								<td><input type="text" name="PROFESSION_LIMIT" id="PROFESSION_LIMIT" value="${pd.PROFESSION_LIMIT}" maxlength="100" placeholder="这里添加或者删除可投的职业类别(多个类别之间分割分号)" title="具体业务名称" style="width:98%;"/></td>
+							</tr>
+							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">保险条款:</td>
+								<td><input type="file" name="CLAIMTEXT" id="CLAIMTEXT" accept=".pdf" placeholder="请导入保险条款" /></td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">服务条款:</td>
@@ -152,6 +156,26 @@
 		            time:2
 		        });
 				$("#STATE").focus();
+			return false;
+			}
+			if($("#PROFESSION_LIMIT").val()==""){
+				$("#PROFESSION_LIMIT").tips({
+					side:3,
+		            msg:'请输入可用职业列表',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#PROFESSION_LIMIT").focus();
+			return false;
+			}
+			if($("#CLAIMTEXT").val()==""){
+				$("#CLAIMTEXT").tips({
+					side:3,
+		            msg:'请导入保险条款',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#CLAIMTEXT").focus();
 			return false;
 			}
 			if($("#SERVERTEXT").val()==""){

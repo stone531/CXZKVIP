@@ -141,13 +141,13 @@
                 <div class="col-sm-12">
      
                   			<fieldset id="work_filed" class="control-label hidden-md hidden-sm">
-							      <select class="province" data-first-title="选择">
+							      <select class="province" data-first-title="选择" style="height:30px;">
 							        <option value="">请选择</option>
 							      </select>
-							      <select class="city" data-first-title="选择">
+							      <select class="city" data-first-title="选择" style="height:30px;">
 							        <option value="">请选择</option>
 							      </select>
-							      <select id="iaprofession" class="area" data-first-title="选择">
+							      <select id="iaprofession" class="area" data-first-title="选择" style="height:30px;">
 							        <option value="">请选择</option>
 							      </select>
 							</fieldset>
@@ -258,8 +258,14 @@
                   <div class="col-md-2"></div>
                   <div class="col-md-8">
                     <div id="SERVERCONTENT" name="SERVERCONTENT" ></div>
+                    <br>
+                    <div>
+                      <h5 class="text-left text-info">保险条款</h5>
+                      <div id="claimtext" class="col-sm-offset-2"></div>
+                    </div>
+                    <br>
                     <h5 class="text-center text-info">同意
-                      <input type="checkbox" id="ACCEPTSERVICE" onclick="acceptService(this);">
+                      <input type="checkbox" id="ACCEPTSERVICE" disabled="disabled" onclick="acceptService(this);">
                     </h5>
                   </div>
                   <div class="col-md-2"></div>
@@ -471,9 +477,6 @@
 <!--javascript 脚本分割线********************************************************************************************************************  -->			
 <script type="text/javascript">
 
-
-	
-
 		//馋看数组是否包含指定的元素
 		function contains(a, obj) {
 		    for (var i = 0; i < a.length; i++) {
@@ -646,6 +649,21 @@
 			return 
 		}
 		
+		function addWeb(param) {
+			var ds=document.getElementById("claimtext");
+			var a=document.createElement("a");
+			a.setAttribute("href",'<%=basePath%>'+param); 
+			a.setAttribute("target","_blank");
+
+			var name = param.substring(param.lastIndexOf("/")+1);
+			a.appendChild(document.createTextNode(name));  
+			//var div=document.createElement("div");
+			ds.appendChild(a);
+			$('#claimtext a').click( function() {
+				$('#ACCEPTSERVICE').attr("disabled",false);
+			});
+		}
+		
 		function bussinessnext(){
 			$("#PolicyInfo").show();
 			$("#business").hide();
@@ -672,6 +690,7 @@
                         }                
                         if (data.IsSuccess == true) {
                         	$("#SERVERCONTENT").html(data.ServerText);
+                        	addWeb(data.ClaimText);
                         }
                     }
                 });

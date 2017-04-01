@@ -204,6 +204,7 @@ public class CardInfoController extends BaseController {
 		
 			
 			//parse professions
+			/*
 			String profession="";
 			String[] professions=pdcardtype.getString("PROFESSION").split(";");
 			for(int i=0;i<professions.length;i++){
@@ -226,7 +227,7 @@ public class CardInfoController extends BaseController {
 			mv.addObject("PROFESSIONS", profession);
 			
 			System.out.println(businesslist.size());
-			
+			*/
 			mv.addObject("varList", businesslist);
 			mv.addObject("businesslistSize", businesslist.size());
 
