@@ -140,7 +140,9 @@
                 </div>
 
                 <div class="col-sm-12 text-left" style="margin-top:1%;">
-                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">被保险人职业:</label>  
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">被保险人职业:</label> 
+                  <input style="margin-left:2%;" type="checkbox" id="ischildren" value="儿童" onclick="isChildrenChecked(this);">
+                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">儿童</label> 
                   <div class="col-sm-6">                 
                     <fieldset id="work_filed" class="hidden-md hidden-sm">
 				  	   <select class="province" data-first-title="选择" style="height:30px;">
@@ -152,7 +154,11 @@
 				  	   <select id="iaprofession" class="area" data-first-title="选择" style="height:30px;">
 				  	     <option value="">请选择</option>
 				  	   </select>
-				  	<fieldset>				  			
+				  	</fieldset>	
+				  	<select id="child_select"  class="form-control" style="display: none;">
+					    <option value ="学龄前儿童" selected="selected">学龄前儿童</option>
+					    <option value ="学生">学生</option>
+				    </select>			  			
                   </div>				  
                 </div>
 
@@ -486,6 +492,7 @@
 
 <!--javascript 脚本分割线********************************************************************************************************************  -->			
 <script type="text/javascript">
+		
 
 		//馋看数组是否包含指定的元素
 		function contains(a, obj) {
@@ -766,6 +773,12 @@
 			return false;
 			}
 			var thirdprofession=$("#iaprofession").val();
+			
+			var child= document.getElementById("ischildren");
+			if(child.checked){
+				thirdprofession=$('#child_select option:selected').val();
+			}
+			
 			//alert(thirdprofession);
 			if(thirdprofession==null || thirdprofession==""){
 				
@@ -927,7 +940,12 @@
 			var iantpaperno=$("#iapaperno").val();
 			document.getElementById("IANTPAPERNO").value= iantpaperno;
 				
+
 			var iantprofession=$("#iaprofession").val();
+			var child= document.getElementById("ischildren");
+			if(child.checked){
+				iantprofession=$('#child_select option:selected').val();
+			}
 			document.getElementById("IANTPROFESSION").value= iantprofession;
 		
 			var iantrelation= $("#iarelation").val()
@@ -963,6 +981,16 @@
 			$("#SERVICETEXT").show();
 			$("#Form").hide();
 			return false;
+		}
+		
+		function isChildrenChecked(child){
+			if(child.checked){
+				document.getElementById("work_filed").style.display="none";
+				$("#child_select").show();
+			}else{
+				document.getElementById("work_filed").style.display="block";
+				$("#child_select").hide();
+			}
 		}
 		
 </script>	
