@@ -356,6 +356,8 @@
 					}
 				},
                 errorPlacement:function(error,element){
+                    //error.addClass( "help-block" );
+                    //element.parents( ".col-sm-6" ).addClass( "has-feedback" );
                     error.appendTo(element.parent().next());
                 }
 			});	

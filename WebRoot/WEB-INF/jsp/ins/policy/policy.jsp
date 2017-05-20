@@ -87,137 +87,147 @@
       <div class="section ">
         <div class="container">
           <div class="row">
-            <div class="col-md-12" style="margin-left:24%;">
-              <div class=" form-group  has-warning" >
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保人姓名:</label>
+            <div class="col-md-12" style="">   
+              <div class="form-horizontal has-warning has-feedback" >
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">投保人姓名:</label>
+                  <div class="col-sm-6">
+                    <input type="text" maxlength="255" id="iename" class="form-control"
+                    placeholder="投保人姓名">
+                   </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" maxlength="255" style="width:50%;" id="iename" class="form-control"
-                  placeholder="投保人姓名">
+
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">投保人身份证号:</label>
+				  <div class="col-sm-6">
+                    <input type="text" maxlength="255" id="iepaperno" class="form-control"
+                    placeholder="投保人身份证号" onblur="paperNOBlur(this);">
+                  </div>
                 </div>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保人身份证号:</label>
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">投保人手机号:</label>
+				  <div class="col-sm-6">
+                    <input type="text" maxlength="255" id="iephone" class="form-control"
+                    placeholder="投保人手机号">
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" maxlength="255" style="width:50%;" id="iepaperno" class="form-control"
-                  placeholder="投保人身份证号" onblur="paperNOBlur(this);">
-                </div>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保人手机号:</label>
-                </div>
-                <div class="col-sm-12">
-                  <input type="text" maxlength="255" style="width:50%;" id="iephone" class="form-control"
-                  placeholder="投保人手机号">
-                </div>
+
               </div>
-	          <div class="col-md-6" style="margin-left:0.5%;">
+	          <div class="col-md-8" style="margin-left:20%;">
 	            <hr>
 	          </div>
-              <div class="center-block form-group has-success" >
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">与投保人关系:&nbsp;&nbsp;</label>
-                  <input type="checkbox" id="iarelation" value="其他"onclick="isOneSelf(this);">
+              <div class="form-horizontal has-success" >
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">与投保人关系:&nbsp;&nbsp;</label>
+                  <input style="margin-left:2%;" type="checkbox" id="iarelation" value="其他"onclick="isOneSelf(this);">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">本人</label>
                 </div>
 
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人姓名:</label>
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">被保险人姓名:</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="ianame" maxlength="255" class="form-control"
+                    placeholder="被保险人姓名">
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="ianame" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="被保险人姓名">
+
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">被保险人证件号:</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="iapaperno" maxlength="255" class="form-control"
+                    placeholder="被保险人证件号" onblur="paperNOBlur(this);">
+                  </div>
                 </div>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人证件号:</label>
+
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">被保险人职业:</label>  
+                  <div class="col-sm-6">                 
+                    <fieldset id="work_filed" class="hidden-md hidden-sm">
+				  	   <select class="province" data-first-title="选择" style="height:30px;">
+				  	     <option value="">请选择</option>
+				  	   </select>
+				  	   <select class="city" data-first-title="选择" style="height:30px;">
+				  	     <option value="">请选择</option>
+				  	   </select>
+				  	   <select id="iaprofession" class="area" data-first-title="选择" style="height:30px;">
+				  	     <option value="">请选择</option>
+				  	   </select>
+				  	<fieldset>				  			
+                  </div>				  
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="iapaperno" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="被保险人证件号" onblur="paperNOBlur(this);">
-                </div>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人职业:</label>                
-                </div>
-                <div class="col-sm-12">
-     
-                  			<fieldset id="work_filed" class="control-label hidden-md hidden-sm">
-							      <select class="province" data-first-title="选择" style="height:30px;">
-							        <option value="">请选择</option>
-							      </select>
-							      <select class="city" data-first-title="选择" style="height:30px;">
-							        <option value="">请选择</option>
-							      </select>
-							      <select id="iaprofession" class="area" data-first-title="选择" style="height:30px;">
-							        <option value="">请选择</option>
-							      </select>
-							</fieldset>
-							
-                </div>
+
                 <br>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人年龄:</label>
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">被保险人年龄:</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="iaage" maxlength="32" disabled="disabled" class="form-control"
+                    placeholder="被保险人年龄" >
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="iaage" maxlength="32" style="width:50%;" disabled="disabled" class="form-control"
-                  placeholder="被保险人年龄" >
-                </div>
+
                 <br>
-                 <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保份数:[不能大于${copies}份]</label>
-                </div>
-                <div class="col-sm-12">
-                  <input type="text" id="iacopy" maxlength="32" style="width:50%;"  class="form-control"
-                  placeholder="份数" >
+                 <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">投保份数:[<= ${copies}份]</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="iacopy" maxlength="32"  class="form-control"
+                    placeholder="份数" >
+                  </div>
                 </div>
                 <br>
               </div>
               
-              <div class="col-md-6" style="margin-left:0.5%;">
+              <div class="col-md-8" style="margin-left:20%;">
 	            <hr>
 	          </div>
 	          
-              <div class="center-block  form-group has-warning" >
+              <div class="form-horizontal has-warning" >
                 <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">受益人姓名:</label>
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">受益人姓名:</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="bname" maxlength="255" value="法定受益人" disabled="disabled" class="form-control"
+                    placeholder="受益人姓名">
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="bname" maxlength="255" style="width:50%; " value="法定受益人" disabled="disabled" class="form-control"
-                  placeholder="受益人姓名">
-                </div>
+
                 <br>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">服务人员姓名:</label>
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">服务人员姓名:</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="sname" maxlength="255" class="form-control"
+                    placeholder="服务人员姓名">
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="sname" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="服务人员姓名" onblur="snameNOBlur(this);">
-                </div>
+
                 <br>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">服务人员手机号:</label>
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">服务人员手机号:</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="sphone" maxlength="255" class="form-control"
+                    placeholder="服务人员手机号">
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="sphone" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="服务人员手机号">
-                </div>
+
                 <br>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">是否发送短信:</label>
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">是否发送短信:</label>
+				  <div class="col-sm-6">
+                    <!-- input type="text" id="ismessage" maxlength="255" style="width:50%;" class="form-control"
+                    placeholder="是否发送短信"-->
+                    <select id="ismessage" maxlength="255" class="form-control">
+				    <option value ="是">是</option>
+				    <option value ="否" selected="selected">否</option>
+				    </select>
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <!-- input type="text" id="ismessage" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="是否发送短信"-->
-                  <select id="ismessage" maxlength="255" style="width:50%;" class="form-control">
-				  <option value ="是">是</option>
-				  <option value ="否" selected="selected">否</option>
-				</select>
-                </div>
+
               </div>
             </div>
           </div>
         </div>
       </div>
-      <hr>
+	  <div class="col-md-8" style="margin-left:20%;">
+	    <hr>
+	  </div>
       <div class="section">
         <div class="container">
           <div class="row">

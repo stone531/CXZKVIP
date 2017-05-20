@@ -52,7 +52,7 @@
 								            	</c:forEach>
 								            </c:when>
 								            <c:otherwise>
-										        <option value="卡类型名">卡类型</option>                                         
+										        <option value="尚未录入">尚未录入</option>                                         
 								            </c:otherwise>
 										</c:choose>
                                     </select>

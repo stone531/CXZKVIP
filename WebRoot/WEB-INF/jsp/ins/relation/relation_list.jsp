@@ -67,7 +67,7 @@
 									</th>
 									<th class="center" style="width:50px;">序号</th>
 									<th class="center">卡类型</th>
-									<th class="center">险种</th>
+									<th class="center">保险类型</th>
 									<th class="center">操作</th>
 								</tr>
 							</thead>

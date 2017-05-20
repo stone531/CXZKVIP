@@ -43,14 +43,14 @@
 								            	</c:forEach>
 								            </c:when>
 								            <c:otherwise>
-										        <option value="卡类型名">卡类型</option>                                         
+										        <option value="尚未录入">尚未录入</option>                                         
 								            </c:otherwise>
 										</c:choose>
                                     </select>
 								</td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">业务id:</td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">保险类型:</td>
 								<td>
 								<!--  input type="text" name="BUSINESSID" id="BUSINESSID" value="${pd.BUSINESSID}" maxlength="100" placeholder="这里输入业务id" title="业务id" style="width:98%;"/ -->
 									<select id="BUSINESSID" name="BUSINESSID" title="险种" style="width:98%;" >																				
@@ -61,7 +61,7 @@
 								            	</c:forEach>
 								            </c:when>
 								            <c:otherwise>
-										        <option value="险种">险种</option>                                         
+										        <option value="尚未录入">尚未录入</option>                                         
 								            </c:otherwise>
 										</c:choose>
                                     </select>
