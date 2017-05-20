@@ -332,7 +332,6 @@ public class ClaimSysController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd.put("searchtype", "1");
-		//mv.setViewName("ins/claimsys/myclaim");
 		mv.setViewName("ins/claimsys/search");
 		//mv.addObject("msg", "search");
 		mv.addObject("pd", pd);

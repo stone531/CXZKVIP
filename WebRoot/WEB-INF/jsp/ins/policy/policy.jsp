@@ -140,7 +140,7 @@
                 </div>
 
                 <div class="col-sm-12 text-left" style="margin-top:1%;">
-                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">被保险人职业:</label> 
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">被保险人职业:<a href="worker/fg/goSearchwork" target="_blank" >(职业查询)</a></label> 
                   <input style="margin-left:2%;" type="checkbox" id="ischildren" value="儿童" onclick="isChildrenChecked(this);">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">儿童</label> 
                   <div class="col-sm-6">                 

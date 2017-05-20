@@ -42,6 +42,12 @@ public interface WorkerManager{
 	 */
 	public List<PageData> listAll(PageData pd)throws Exception;
 	
+	/**搜索职业
+	 * @param pd
+	 * @throws Exception
+	 */
+	public List<PageData> searchAllWork(PageData pd)throws Exception;
+	
 	/**通过id获取数据
 	 * @param pd
 	 * @throws Exception
