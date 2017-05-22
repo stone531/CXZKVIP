@@ -81,6 +81,58 @@
       </div>	         		
           		
   
+  <!-- 告知协议条款 -->						
+<div id="NOTICETEXT" style="display: none;" class="middle">	
+	 <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="text-center text-info">告知书</h3>
+          </div>
+        </div>
+      </div>
+    </div>		
+    
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-8">
+                    <div id="NOTICECONTENT" name="NOTICECONTENT" ></div>
+                    <h5 class="text-center text-info">完全符合
+                      <input type="checkbox" id="ACCEPTSERVICE" onclick="acceptNotice(this);">
+                    </h5>
+                  </div>
+                  <div class="col-md-2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <br/>
+    <br/>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 text-right">
+            <a class="btn btn-success btn-lg" onclick="NOTICEprev();">上一步</a>
+          </div>
+          <div class="col-md-6">
+            <a class="btn btn-success btn-lg" disabled="disabled" onclick="NOTICEnext();"
+            id="noticetextNext">下一步</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>    	
+  
   
   <!-- 投保信息清单 -->	        		
    <div id="PolicyInfo" class="middle" style="display: none;padding-top:4%;">
@@ -615,12 +667,22 @@
       		return age;
 
 		}
-
+		
+		function acceptNotice(param){
+			if (param.checked){
+				$('#noticetextNext').attr("disabled",false);
+			}else {
+				$('#noticetextNext').attr("disabled",true);
+			}
+			 
+			return 
+		}
+		
 		function acceptService(param){
 			if (param.checked){
-				$('#servicetextNext').attr("disabled",false);
+				$('#NOTICEnext').attr("disabled",false);
 			}else {
-				$('#servicetextNext').attr("disabled",true);
+				$('#NOTICEnext').attr("disabled",true);
 			}
 			 
 			return 
@@ -646,8 +708,15 @@
 			return 
 		}
 		
-		function bussinessnext(){
+		function noticenext(){
+			$("#NOTICETEXT").hide();
 			$("#PolicyInfo").show();
+			
+			return ;
+		}
+		
+		function bussinessnext(){
+			$("#NOTICETEXT").show();
 			$("#business").hide();
 			divId="businessid"+curbusinessId;
 			var inp=document.getElementById(divId);
@@ -660,7 +729,20 @@
 			//alert(name);
 			document.getElementById("BUSINESSID").value=inp.value;
 			//alert(document.getElementById("BUSINESSID").value);
-			
+			$.ajax({
+                    url: '<%=basePath%>business/fg/getNoticeText.do?BUSINESS_ID='+inp.value,   //请求的url地址
+                    dataType: "json",   //返回格式为json
+                    async: false, //请求是否异步，默认为异步，这也是ajax重要特性
+                    type: "POST",   //请求方式
+                    success: function(data) {
+                        if (data.IsSuccess == false) {
+                            alert("添加失败!");           
+                        }                
+                        if (data.IsSuccess == true) {
+                        	$("#NOTICECONTENT").html(data.NoticText);
+                        }
+                    }
+                });
 			$.ajax({
                     url: '<%=basePath%>business/fg/getServerText.do?BUSINESS_ID='+inp.value,   //请求的url地址
                     dataType: "json",   //返回格式为json
@@ -681,7 +763,7 @@
 		
 		function PolicyInfoprev(){
 			$("#PolicyInfo").hide();
-			$("#business").show();	
+			$("#NOTICETEXT").show();	
 		}	
 		function PolicyInfonext(){
 			
@@ -878,6 +960,16 @@
 			return ;
 		}
 		
+		function NOTICEprev() {
+			$("#business").show();
+			$("#NOTICETEXT").hide();
+			return;
+		}
+		
+		function NOTICEnext(){
+			$("#PolicyInfo").show();
+			$("#NOTICETEXT").hide();
+		}
 		
 		function SERVICETEXTnext(){
 			

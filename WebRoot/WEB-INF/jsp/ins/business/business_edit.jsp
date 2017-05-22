@@ -72,6 +72,11 @@
 								<td><input type="text" name="PROFESSION_LIMIT" id="PROFESSION_LIMIT" value="${pd.PROFESSION_LIMIT}" maxlength="100" placeholder="这里添加或者删除可投的职业类别(多个类别之间分割分号)" title="具体业务名称" style="width:98%;"/></td>
 							</tr>
 							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">告知书:</td>
+								 <input type="text" name="NOTICE" id="NOTICE" style="display:none;"/>
+								 <script type="text/plain" id="myNEditor" style="width:90%;height:30%;">${pd.NOTICE}</script>
+							</tr>
+							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">服务条款:</td>
 								 <input type="text" name="SERVERTEXT" id="SERVERTEXT" style="display:none;"/>
 								 <script type="text/plain" id="myEditor" style="width:90%;height:30%;">${pd.SERVERTEXT}</script>
@@ -119,10 +124,12 @@
 		$(top.hangge());
 		//保存
 		var um = UM.getEditor('myEditor');
+		var umn = UM.getEditor('myNEditor');
 		 
 		function save(){
 		
-		$("#SERVERTEXT").val(UM.getEditor('myEditor').getContent());
+		$("#SERVERTEXT").val(um.getContent());
+		$("#NOTICE").val(umn.getContent());
 		
 			if($("#NAME").val()==""){
 				$("#NAME").tips({
@@ -162,6 +169,16 @@
 		            time:2
 		        });
 				$("#SERVERTEXT").focus();
+			return false;
+			}
+			if($("#NOTICE").val()==""){
+				$("#NOTICE").tips({
+					side:3,
+		            msg:'请输入条款内容',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#NOTICE").focus();
 			return false;
 			}
 			$("#Form").submit();
