@@ -71,7 +71,6 @@
 									<th class="center" style="width:50px;">序号</th>
 									<th class="center">保单号</th>
 									<th class="center">服务卡号</th>
-									<th class="center">服务卡类型</th>
 									<th class="center">投保人姓名</th>
 									<th class="center">投保人证件类型</th>
 									<th class="center">投保人证件号码</th>
@@ -107,7 +106,6 @@
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>${var.POLICYNO}</td>
 											<td class='center'>${var.CARDNO}</td>
-											<td class='center'>${var.CARDTYPE}</td>
 											<td class='center'>${var.IERNAME}</td>
 											<td class='center'>${var.IERPAPERTYPE}</td>
 											<td class='center'>${var.IERPAPERNO}</td>

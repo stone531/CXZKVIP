@@ -67,6 +67,16 @@ public class WorkerService implements WorkerManager{
 		return (List<PageData>)dao.findForList("WorkerMapper.listAll", pd);
 	}
 	
+	/**搜索职业
+	 * @param pd
+	 * @throws Exception
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<PageData> searchAllWork(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("WorkerMapper.searchAllWork", pd);
+	}
+	
 	/**通过id获取数据
 	 * @param pd
 	 * @throws Exception

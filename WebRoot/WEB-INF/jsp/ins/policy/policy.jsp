@@ -81,7 +81,7 @@
       </div>	         		
           		
   
-  <!-- 告知协议条款 -->						
+ <!-- 告知协议条款 -->						
 <div id="NOTICETEXT" style="display: none;" class="middle">	
 	 <div class="section">
       <div class="container">
@@ -104,7 +104,7 @@
                   <div class="col-md-8">
                     <div id="NOTICECONTENT" name="NOTICECONTENT" ></div>
                     <h5 class="text-center text-info">完全符合
-                      <input type="checkbox" id="ACCEPTSERVICE" onclick="acceptNotice(this);">
+                      <input type="checkbox" id="ACCEPTNOTICE" onclick="acceptNotice(this);">
                     </h5>
                   </div>
                   <div class="col-md-2"></div>
@@ -133,143 +133,158 @@
     </div>
 </div>    	
   
-  
   <!-- 投保信息清单 -->	        		
    <div id="PolicyInfo" class="middle" style="display: none;padding-top:4%;">
       <div class="section ">
         <div class="container">
           <div class="row">
-            <div class="col-md-12" style="margin-left:24%;">
-              <div class=" form-group  has-warning" >
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保人姓名:</label>
+            <div class="col-md-12" style="">   
+              <div class="form-horizontal has-warning has-feedback" >
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">投保人姓名:</label>
+                  <div class="col-sm-6">
+                    <input type="text" maxlength="255" id="iename" class="form-control"
+                    placeholder="投保人姓名">
+                   </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" maxlength="255" style="width:50%;" id="iename" class="form-control"
-                  placeholder="投保人姓名">
+
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">投保人身份证号:</label>
+				  <div class="col-sm-6">
+                    <input type="text" maxlength="255" id="iepaperno" class="form-control"
+                    placeholder="投保人身份证号" onblur="paperNOBlur(this);">
+                  </div>
                 </div>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保人身份证号:</label>
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">投保人手机号:</label>
+				  <div class="col-sm-6">
+                    <input type="text" maxlength="255" id="iephone" class="form-control"
+                    placeholder="投保人手机号">
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" maxlength="255" style="width:50%;" id="iepaperno" class="form-control"
-                  placeholder="投保人身份证号" onblur="paperNOBlur(this);">
-                </div>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保人手机号:</label>
-                </div>
-                <div class="col-sm-12">
-                  <input type="text" maxlength="255" style="width:50%;" id="iephone" class="form-control"
-                  placeholder="投保人手机号">
-                </div>
+
               </div>
-	          <div class="col-md-6" style="margin-left:0.5%;">
+	          <div class="col-md-8" style="margin-left:20%;">
 	            <hr>
 	          </div>
-              <div class="center-block form-group has-success" >
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">与投保人关系:&nbsp;&nbsp;</label>
-                  <input type="checkbox" id="iarelation" value="其他"onclick="isOneSelf(this);">
+              <div class="form-horizontal has-success" >
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">与投保人关系:&nbsp;&nbsp;</label>
+                  <input style="margin-left:2%;" type="checkbox" id="iarelation" value="其他"onclick="isOneSelf(this);">
                   <label for="inputEmail3" class="control-label hidden-md hidden-sm">本人</label>
                 </div>
 
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人姓名:</label>
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">被保险人姓名:</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="ianame" maxlength="255" class="form-control"
+                    placeholder="被保险人姓名">
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="ianame" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="被保险人姓名">
+
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">被保险人证件号:</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="iapaperno" maxlength="255" class="form-control"
+                    placeholder="被保险人证件号" onblur="paperNOBlur(this);">
+                  </div>
                 </div>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人证件号:</label>
+
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">被保险人职业:<a href="worker/fg/goSearchwork" target="_blank" >(职业查询)</a></label> 
+                  <input style="margin-left:2%;" type="checkbox" id="ischildren" value="儿童" onclick="isChildrenChecked(this);">
+                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">儿童</label> 
+                  <div class="col-sm-6">                 
+                    <fieldset id="work_filed" class="hidden-md hidden-sm">
+				  	   <select class="province" data-first-title="选择" style="height:30px;">
+				  	     <option value="">请选择</option>
+				  	   </select>
+				  	   <select class="city" data-first-title="选择" style="height:30px;">
+				  	     <option value="">请选择</option>
+				  	   </select>
+				  	   <select id="iaprofession" class="area" data-first-title="选择" style="height:30px;">
+				  	     <option value="">请选择</option>
+				  	   </select>
+				  	</fieldset>	
+				  	<select id="child_select"  class="form-control" style="display: none;">
+					    <option value ="学龄前儿童" selected="selected">学龄前儿童</option>
+					    <option value ="学生">学生</option>
+				    </select>			  			
+                  </div>				  
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="iapaperno" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="被保险人证件号" onblur="paperNOBlur(this);">
-                </div>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人职业:</label>                
-                </div>
-                <div class="col-sm-12">
-     
-                  			<fieldset id="work_filed" class="control-label hidden-md hidden-sm">
-							      <select class="province" data-first-title="选择">
-							        <option value="">请选择</option>
-							      </select>
-							      <select class="city" data-first-title="选择">
-							        <option value="">请选择</option>
-							      </select>
-							      <select id="iaprofession" class="area" data-first-title="选择">
-							        <option value="">请选择</option>
-							      </select>
-							</fieldset>
-							
-                </div>
+
                 <br>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">被保险人年龄:</label>
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">被保险人年龄:</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="iaage" maxlength="32" disabled="disabled" class="form-control"
+                    placeholder="被保险人年龄" >
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="iaage" maxlength="32" style="width:50%;" disabled="disabled" class="form-control"
-                  placeholder="被保险人年龄" >
-                </div>
+
                 <br>
-                 <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">投保份数:[不能大于${copies}份]</label>
-                </div>
-                <div class="col-sm-12">
-                  <input type="text" id="iacopy" maxlength="32" style="width:50%;"  class="form-control"
-                  placeholder="份数" >
+                 <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">投保份数:[<= ${copies}份]</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="iacopy" maxlength="32"  class="form-control"
+                    placeholder="份数" >
+                  </div>
                 </div>
                 <br>
               </div>
               
-              <div class="col-md-6" style="margin-left:0.5%;">
+              <div class="col-md-8" style="margin-left:20%;">
 	            <hr>
 	          </div>
 	          
-              <div class="center-block  form-group has-warning" >
+              <div class="form-horizontal has-warning" >
                 <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">受益人姓名:</label>
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">受益人姓名:</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="bname" maxlength="255" value="法定受益人" disabled="disabled" class="form-control"
+                    placeholder="受益人姓名">
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="bname" maxlength="255" style="width:50%; " value="法定受益人" disabled="disabled" class="form-control"
-                  placeholder="受益人姓名">
-                </div>
+
                 <br>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">服务人员姓名:</label>
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">服务人员姓名:</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="sname" maxlength="255" class="form-control"
+                    placeholder="服务人员姓名">
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="sname" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="服务人员姓名" onblur="snameNOBlur(this);">
-                </div>
+
                 <br>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">服务人员手机号:</label>
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">服务人员手机号:</label>
+				  <div class="col-sm-6">
+                    <input type="text" id="sphone" maxlength="255" class="form-control"
+                    placeholder="服务人员手机号">
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <input type="text" id="sphone" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="服务人员手机号">
-                </div>
+
                 <br>
-                <div class="col-sm-12 text-left">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">是否发送短信:</label>
+                <div class="col-sm-12 text-left" style="margin-top:1%;">
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">是否发送短信:</label>
+				  <div class="col-sm-6">
+                    <!-- input type="text" id="ismessage" maxlength="255" style="width:50%;" class="form-control"
+                    placeholder="是否发送短信"-->
+                    <select id="ismessage" maxlength="255" class="form-control">
+				    <option value ="是">是</option>
+				    <option value ="否" selected="selected">否</option>
+				    </select>
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  <!-- input type="text" id="ismessage" maxlength="255" style="width:50%;" class="form-control"
-                  placeholder="是否发送短信"-->
-                  <select id="ismessage" maxlength="255" style="width:50%;" class="form-control">
-				  <option value ="是">是</option>
-				  <option value ="否" selected="selected">否</option>
-				</select>
-                </div>
+
               </div>
             </div>
           </div>
         </div>
       </div>
-      <hr>
+	  <div class="col-md-8" style="margin-left:20%;">
+	    <hr>
+	  </div>
       <div class="section">
         <div class="container">
           <div class="row">
@@ -310,8 +325,14 @@
                   <div class="col-md-2"></div>
                   <div class="col-md-8">
                     <div id="SERVERCONTENT" name="SERVERCONTENT" ></div>
+                    <br>
+                    <div>
+                      <h5 class="text-left text-info">保险条款</h5>
+                      <div id="claimtext" class="col-sm-offset-2"></div>
+                    </div>
+                    <br>
                     <h5 class="text-center text-info">同意
-                      <input type="checkbox" id="ACCEPTSERVICE" onclick="acceptService(this);">
+                      <input type="checkbox" id="ACCEPTSERVICE" disabled="disabled" onclick="acceptService(this);">
                     </h5>
                   </div>
                   <div class="col-md-2"></div>
@@ -522,9 +543,7 @@
 
 <!--javascript 脚本分割线********************************************************************************************************************  -->			
 <script type="text/javascript">
-
-
-	
+		
 
 		//馋看数组是否包含指定的元素
 		function contains(a, obj) {
@@ -667,7 +686,7 @@
       		return age;
 
 		}
-		
+
 		function acceptNotice(param){
 			if (param.checked){
 				$('#noticetextNext').attr("disabled",false);
@@ -677,12 +696,11 @@
 			 
 			return 
 		}
-		
 		function acceptService(param){
 			if (param.checked){
-				$('#NOTICEnext').attr("disabled",false);
+				$('#servicetextNext').attr("disabled",false);
 			}else {
-				$('#NOTICEnext').attr("disabled",true);
+				$('#servicetextNext').attr("disabled",true);
 			}
 			 
 			return 
@@ -708,11 +726,19 @@
 			return 
 		}
 		
-		function noticenext(){
-			$("#NOTICETEXT").hide();
-			$("#PolicyInfo").show();
-			
-			return ;
+		function addWeb(param) {
+			var ds=document.getElementById("claimtext");
+			var a=document.createElement("a");
+			a.setAttribute("href",'<%=basePath%>'+param); 
+			a.setAttribute("target","_blank");
+
+			var name = param.substring(param.lastIndexOf("/")+1);
+			a.appendChild(document.createTextNode(name));  
+			//var div=document.createElement("div");
+			ds.appendChild(a);
+			$('#claimtext a').click( function() {
+				$('#ACCEPTSERVICE').attr("disabled",false);
+			});
 		}
 		
 		function bussinessnext(){
@@ -742,7 +768,7 @@
                         	$("#NOTICECONTENT").html(data.NoticText);
                         }
                     }
-                });
+                  });
 			$.ajax({
                     url: '<%=basePath%>business/fg/getServerText.do?BUSINESS_ID='+inp.value,   //请求的url地址
                     dataType: "json",   //返回格式为json
@@ -754,9 +780,11 @@
                         }                
                         if (data.IsSuccess == true) {
                         	$("#SERVERCONTENT").html(data.ServerText);
+                        	addWeb(data.ClaimText);
                         }
                     }
                 });
+	
 			return ;
 		}
 
@@ -819,6 +847,12 @@
 			return false;
 			}
 			var thirdprofession=$("#iaprofession").val();
+			
+			var child= document.getElementById("ischildren");
+			if(child.checked){
+				thirdprofession=$('#child_select option:selected').val();
+			}
+			
 			//alert(thirdprofession);
 			if(thirdprofession==null || thirdprofession==""){
 				
@@ -949,6 +983,8 @@
 			
 			$("#PolicyInfo").hide();
 			$("#SERVICETEXT").show();
+			
+	
 			return ;
 
 
@@ -990,7 +1026,12 @@
 			var iantpaperno=$("#iapaperno").val();
 			document.getElementById("IANTPAPERNO").value= iantpaperno;
 				
+
 			var iantprofession=$("#iaprofession").val();
+			var child= document.getElementById("ischildren");
+			if(child.checked){
+				iantprofession=$('#child_select option:selected').val();
+			}
 			document.getElementById("IANTPROFESSION").value= iantprofession;
 		
 			var iantrelation= $("#iarelation").val()
@@ -1026,6 +1067,16 @@
 			$("#SERVICETEXT").show();
 			$("#Form").hide();
 			return false;
+		}
+		
+		function isChildrenChecked(child){
+			if(child.checked){
+				document.getElementById("work_filed").style.display="none";
+				$("#child_select").show();
+			}else{
+				document.getElementById("work_filed").style.display="block";
+				$("#child_select").hide();
+			}
 		}
 		
 </script>	

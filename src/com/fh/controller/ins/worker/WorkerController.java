@@ -64,6 +64,10 @@ public class WorkerController extends BaseController {
 	@Resource(name="businessService")
 	private BusinessManager businessService;
 	
+	
+	String selfCompanyId;
+	HashMap<String,String> mapWork = new HashMap<String,String>();
+	
 	/**保存
 	 * @param
 	 * @throws Exception
@@ -295,13 +299,13 @@ public class WorkerController extends BaseController {
 			}
 					
 		}
-		
+		selfCompanyId=companyid;
 		//获取所有的职业
 		pd.put("PARENTID", companyid);
 		List<PageData> professions=workerService.listAll(pd);
 		List<JobData> jobList = new ArrayList<JobData>();
 		System.out.println(professions);
-		HashMap<String,String> mapWork = new HashMap<String,String>();
+		
 		ArrayList<WorkData> arrList = new ArrayList<WorkData>();
 		
 		//将职业放入待排序数组
@@ -323,7 +327,7 @@ public class WorkerController extends BaseController {
             public int compare(JobData arg0, JobData arg1) {
                 return arg0.id.compareTo(arg1.id);
             }
-        });;
+        });
 		
         
         //对排序后的职业进行筛选，筛选出符合要求的可用职业
@@ -348,6 +352,80 @@ public class WorkerController extends BaseController {
 			return true;
 		}
 		return source.contains(substr);
+	}
+	
+	/**搜索
+	 * @param
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/fg/searchWork")
+	@ResponseBody
+	public Object searchWork() throws Exception{
+		//获取bussinessid
+		/*
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		String businessid=pd.getString("businessid");
+
+		String professions_limit=null,companyid=null;
+		
+		//获取保险可用的大类目
+		if(businessid!=null && !businessid.equals("")){
+			//很据保单号查询是否已经报案
+			PageData p_In = new PageData();
+			p_In.put("BUSINESS_ID", businessid);
+			PageData p_out = businessService.findById(p_In);
+			if (p_out!=null){
+				professions_limit=p_out.getString("PROFESSION_LIMIT");
+				companyid=p_out.getString("COMPANYID");
+				System.out.println("professions:"+professions_limit);				
+			}					
+		}
+		*/
+		//获取所有的职业
+		Map<String,Object> map = new HashMap<String,Object>();
+		int nResult = 0;
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		selfCompanyId= new String("00f54515227d415da5e75d7d29304ccb");
+		pd.put("PARENTID", selfCompanyId);
+		List<PageData> professions=workerService.searchAllWork(pd);
+
+		List<PageData> varList = new ArrayList<PageData>();
+		
+		if(professions.size()==0){
+			nResult = 1; //没有职业
+		}
+
+		for(int i=0;i<professions.size();i++){
+			String id=professions.get(i).getString("ID");
+			String name=professions.get(i).getString("NAME");
+			if(id.length()!=6)
+				continue;
+			
+			PageData pageData = new PageData();			
+			this.ParseData(id, name, mapWork,pageData);
+			pageData.put("selfName", name);
+			varList.add(pageData);					
+		}
+		map.put("varList", varList);
+	    map.put("result", nResult);
+	    return AppUtil.returnObject(pd, map);
+	}
+	
+	/**去搜索页面
+	 * @param
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/fg/goSearchwork")
+	public ModelAndView goSearch()throws Exception{	
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		mv.setViewName("ins/policy/searchwork");
+		//mv.addObject("msg", "search");
+		mv.addObject("pd", pd);
+		return mv;
 	}
 	
 	@RequestMapping(value="/readExcel")
