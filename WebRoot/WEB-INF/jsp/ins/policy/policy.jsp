@@ -169,9 +169,18 @@
 	          </div>
               <div class="form-horizontal has-success" >
                 <div class="col-sm-12 text-left" style="margin-top:1%;">
-                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">与投保人关系:&nbsp;&nbsp;</label>
-                  <input style="margin-left:2%;" type="checkbox" id="iarelation" value="其他"onclick="isOneSelf(this);">
-                  <label for="inputEmail3" class="control-label hidden-md hidden-sm">本人</label>
+                  <label for="inputEmail3" class="col-sm-4 control-label hidden-md hidden-sm">与投保人关系:</label>
+                  <div class="col-sm-6">
+				    <select class="form-control"  id="iarelation" name="iarelation" title="请选择您与出险人的关系" onchange="relationChange()">
+					    <option value="">请选择</option>
+					    <option value="本人">本人</option>					  
+                        <option value="配偶">配偶</option>
+                        <option value="子女">子女</option>
+                        <option value="父母">父母</option>
+                        <option value="亲属">亲属</option>
+                        <option value="其它">其它</option>
+                     </select>
+                  </div>
                 </div>
 
                 <div class="col-sm-12 text-left" style="margin-top:1%;">
@@ -706,17 +715,16 @@
 			return 
 		}
 		
-		function isOneSelf(param){
-			if (param.checked){
-				document.getElementById("iarelation").value= "本人";
+		function relationChange(){
+			var rel = document.getElementById("iarelation").value;
+			if (rel == "本人"){
 				document.getElementById("ianame").value= $("#iename").val();
 				document.getElementById("ianame").readOnly=true;
 				document.getElementById("iapaperno").value= $("#iepaperno").val();
-				document.getElementById("ianame").readOnly=true;
+				document.getElementById("iapaperno").readOnly=true;
 				var idNo = document.getElementById("iapaperno");
 				paperNOBlur(idNo);		
 			}else{
-				document.getElementById("iarelation").value= "其他";
 				document.getElementById("ianame").value= "";
 				document.getElementById("ianame").readOnly=false;
 				document.getElementById("iapaperno").value= "";
@@ -724,6 +732,7 @@
 			}
 			 
 			return 
+			
 		}
 		
 		function addWeb(param) {

@@ -403,7 +403,8 @@ public class WorkerController extends BaseController {
 			if(id.length()!=6)
 				continue;
 			
-			PageData pageData = new PageData();			
+			PageData pageData = new PageData();	
+			pageData.put("workClass", professions.get(i).getString("WORKCLASS"));
 			this.ParseData(id, name, mapWork,pageData);
 			pageData.put("selfName", name);
 			varList.add(pageData);					
