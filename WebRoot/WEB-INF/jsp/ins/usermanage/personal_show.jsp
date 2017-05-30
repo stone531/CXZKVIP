@@ -55,10 +55,10 @@
          <div class="col-md-10" ><h4 class="text-danger text-left" id="memberErrMsg"></h4></div>
           <div class="col-md-2">
             <ul class="list-group">
-              <li class="list-group-item" id="li-info">
+              <li class="list-group-item" id="li-info" style="cursor: pointer;">
                 <a>账户信息</a>
               </li>
-              <li class="list-group-item" id="li-pass">
+              <li class="list-group-item" id="li-pass" style="cursor: pointer;">
                 <a>修改密码</a>
               </li>
             </ul>
@@ -185,7 +185,7 @@
                   <a class="btn btn-primary" id="update-mobile">修改手机号</a>
                  </div>
                 </div>
-                 <div class="form-group">
+                 <div class="form-group" style="display:none;">
                 <div class="col-sm-2">
                    <label class="control-label">用户积分</label>
                  </div>

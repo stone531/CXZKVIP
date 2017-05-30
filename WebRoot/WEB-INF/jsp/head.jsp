@@ -28,8 +28,8 @@
 				<li><a href="usermanage/register/show">注册</a></li><span>&nbsp;&nbsp;</span>
 			</ul>
 			<ul class="welcom" style="display:none;padding-bottom:2%;margin-top:-5%;">
-				<li><a id="mobile"></a></span></li>
-				<li><a id="logout">退出</a></li>
+				<li><a id="mobile" style="cursor: pointer;"></a></span></li>
+				<li><a id="logout" style="cursor: pointer;">退出</a></li>
 			</ul>
 			<ul id="REMIND" style="display:none;margin-top:5%;">
 				<li><marquee id="REMINDMSG" style="color:red; font-size:small"></marquee></li>

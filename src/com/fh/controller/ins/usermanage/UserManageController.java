@@ -372,6 +372,7 @@ public class UserManageController extends BaseController {
 		String sMail = pd.getString("EMAIL");
 		String isSendMail = pd.getString("SENDMOBILE");
 		String sRand = "";
+		String myRand = "";
 		
 		if (isSendMail.equals("1")) {
 			pd = usermanageService.getByEmail(pd);
@@ -382,6 +383,7 @@ public class UserManageController extends BaseController {
 		
 		for(int i = 0; i < 4; i++){  
 	        String rand = String.valueOf(random.nextInt(10));  
+	        myRand += rand;
 	        sRand  += rand;  
 		}
 		 // 创建Properties 类用于记录邮箱的一些属性
@@ -430,7 +432,8 @@ public class UserManageController extends BaseController {
         Transport.send(message);
 		
 		
-		session.setAttribute("smsCode", sRand);
+		session.setAttribute("smsCode", myRand);
+		
 		pd.put("IsSuccess", true);
 		
 		Object js = JSONObject.fromObject(pd);
