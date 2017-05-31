@@ -299,18 +299,20 @@ public class ClaimSysController extends BaseController {
 					pdIn.put("COMPANY_ID", pdBuss.getString("COMPANYID"));
 					PageData pdCompany = companyService.findById(pdIn);
 					pdIn.put("CARDNO", varListPN.get(i).getString("CARDNO"));
-					pdIn.put("POLICYNO", varListPN.get(i).getString("POLICYNO"));
+					pdIn.put("POLICYNO", varListPN.get(i).getString("CARDNO"));
 					pdIn.put("UPDATEFLAG", "0");
-					
 					PageData pdOut = claimsysService.findStateByPolicyNo(pdIn);	//列出ClaimSys列表
 					if(pdOut != null){
 						claimsysService.changeUpdateFlag(pdIn);
 						pdOut.put("IsOrNo", "1");
 						pdOut.put("CARDNO", varListPN.get(i).getString("CARDNO"));
+						pdOut.put("POLICYNO", varListPN.get(i).getString("POLICYNO"));
 						pdOut.put("COMPTEL", pdCompany.getString("COMPTEL"));
 						varList.add(pdOut);
 					}else{
 						pdIn.put("IsOrNo", "0");
+						pdIn.put("CARDNO", varListPN.get(i).getString("CARDNO"));
+						pdIn.put("POLICYNO", varListPN.get(i).getString("POLICYNO"));
 						pdIn.put("COMPTEL", pdCompany.getString("COMPTEL"));
 						varList.add(pdIn);
 					}			

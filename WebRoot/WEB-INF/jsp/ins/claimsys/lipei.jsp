@@ -83,9 +83,17 @@
                     <div class="form-group">
                         <label for="RELATION" class="col-sm-3 control-label">与出险人关系</label>
                         <div class="col-sm-6">
-                          <input type="checkbox" id="RELATION" value="其他" class="col-sm-1" style="margin-top:3%" onclick="isOneSelf(this);">
-                  		  <label for="RELATION" class="col-sm-2 control-label">本人</label>
+						  <select class="form-control"  id="RELATION" name="RELATION" title="请选择您与出险人的关系" onchange="relationChange()" >
+					         <option value="">请选择</option>
+					         <option value="本人">本人</option>					  
+                             <option value="配偶">配偶</option>
+                             <option value="子女">子女</option>
+                             <option value="父母">父母</option>
+                             <option value="亲属">亲属</option>
+                             <option value="其它">其它</option>
+                          </select>
                         </div>
+                        <div></div>
                     </div>
                     <div class="form-group">
                           <label for="EMAIL" class="col-sm-3 control-label">Email</label>
@@ -228,23 +236,22 @@
     </div>
 	<script type="text/javascript">
 	    var flag = 0;
-	    function isOneSelf(param){
-	    	if ($("#INFORNAME").val() == '') {
-				return;
-			}
-	    	var idName = document.getElementById("POLICYNAME");
-
-			if (param.checked){
-				document.getElementById("RELATION").value= "本人";
-				idName.value= $("#INFORNAME").val();
-				idName.readOnly=true;					
+	
+		function relationChange(){
+			var rel = document.getElementById("RELATION").value;
+			if (rel == "本人"){
+				document.getElementById("POLICYNAME").value= $("#INFORNAME").val();
+				document.getElementById("POLICYNAME").readOnly=true;
+				document.getElementById("POLICERTEL").value= $("#CLAIMERTEL").val();
+				document.getElementById("POLICERTEL").readOnly=true;	
 			}else{
-				document.getElementById("RELATION").value= "其他";
-				idName.value= "";
-				idName.readOnly=false;
+				document.getElementById("POLICYNAME").value= "";
+				document.getElementById("POLICYNAME").readOnly=false;
+				document.getElementById("POLICERTEL").value= "";
+				document.getElementById("POLICERTEL").readOnly=false;
 			}
 			 
-			return 
+			return 			
 		};
 		
 	    function goCourierW(txt){
@@ -287,6 +294,9 @@
 						rangelength:[5,20],
 						regex:/[0-9\-－—]/g
 					},
+					RELATION: {
+						required:true
+					},
                     EMAIL: {
 						required:true,
                         email:true
@@ -328,6 +338,9 @@
 						required: "建议填写您的手机号码",
 						rangelength: "长度必须为5-20个字符",
 						regex:"只能为数字及破折号"
+					},
+					RELATION: {
+						required: "请选择关系"
 					},
                     EMAIL: {
 						required: "请输入电子邮箱",
