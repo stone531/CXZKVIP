@@ -416,7 +416,7 @@ public class ClaimSysController extends BaseController {
 				int nUpdate = 0;
 				for(int i=0;i<varListPN.size();i++){
 					PageData pdIn = new PageData();
-					pdIn.put("POLICYNO", varListPN.get(i).getString("POLICY_ID"));
+					pdIn.put("POLICYNO", varListPN.get(i).getString("CARDNO"));
 					pdIn.put("UPDATEFLAG", 1);
 					PageData pdOut = claimsysService.findUpdateFlag(pdIn);	//查询是否更新
 					if(pdOut != null){
