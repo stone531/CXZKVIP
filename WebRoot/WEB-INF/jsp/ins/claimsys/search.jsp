@@ -437,7 +437,7 @@
 								    subTable += "<label class=\"control-label\">"+list.STATE_CONTENT+"&nbsp;&nbsp;-->&nbsp;&nbsp;</label>";
 								    subTable += "</div>";
 									subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";
-									subTable += "<a class=\"btn btn-sm btn-warning\" onclick=\"goCourierW(\'"+list.list.CARDNO+"\')\">单号</a>";
+									subTable += "<a class=\"btn btn-sm btn-warning\" onclick=\"goCourierW(\'"+list.CARDNO+"\')\">单号</a>";
 									subTable += "</div>";	
 								} else {
 									subTable += "<div class=\"hidden-sm hidden-xs btn-group\">";
